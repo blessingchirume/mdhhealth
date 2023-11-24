@@ -6,19 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
     public function up()
     {
-        Schema::create('price_groups', function (Blueprint $table) {
+        Schema::create('package_items', function (Blueprint $table) {
             $table->id();
-            $table->string('item_id');
-            $table->string('package_id');
-            $table->string('price');
             $table->timestamps();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
     public function down()
     {
-        Schema::dropIfExists('price_groups');
+        Schema::dropIfExists('package_items');
     }
 };

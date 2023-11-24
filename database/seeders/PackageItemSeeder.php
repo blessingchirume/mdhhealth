@@ -2,13 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Item;
-use App\Models\Package;
-use App\Models\PriceGroup;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PriceGroupSeeder extends Seeder
+class PackageItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +14,6 @@ class PriceGroupSeeder extends Seeder
      */
     public function run()
     {
-        $count = pow(Item::all()->count(), Package::all()->count());
-        PriceGroup::factory()->count(100)->create();
+        //
     }
 }

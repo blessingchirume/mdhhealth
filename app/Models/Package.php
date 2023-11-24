@@ -23,4 +23,8 @@ class Package extends Model
     {
         return $this->hasMany(PatientMedicalAidEntry::class);
     }
+
+    public function items() {
+        return $this->hasMany(PriceGroup::class);
+    }
 }

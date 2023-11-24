@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\patient;
 use App\Http\Requests\StorepatientRequest;
 use App\Http\Requests\UpdatepatientRequest;
+use App\Models\Designation;
 use App\Models\NextOfKeen;
 use App\Models\PatientMedicalAidEntry;
 use Illuminate\Http\Request;
@@ -68,7 +69,8 @@ class PatientController extends Controller
 
     public function show(patient $patient)
     {
-        return view('layouts.patients.show', compact('patient'));
+        $designations = Designation::all();
+        return view('layouts.patients.show', compact('patient', 'designations'));
     }
 
     public function edit(patient $patient)

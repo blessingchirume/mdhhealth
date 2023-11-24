@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\MedicalAidController;
 use App\Http\Controllers\PatientController;
+use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,6 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/medicalaid')->group(function () {
         Route::get('/', [MedicalAidController::class, 'index'])->name('medicalaid.index');
         Route::post('/', [MedicalAidController::class, 'store'])->name('medicalaid.store');
+    });
+
+    Route::prefix('/designation')->group(function () {
+        Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
+        Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
     });
 
 

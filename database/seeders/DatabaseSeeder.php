@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PriceGroup;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,10 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class, 
             TankSeeder::class,
             PartnerSeeder::class,
-            PackageSeeder::class
+            PackageSeeder::class,
+            DesignationSeeder::class,
+            PriceGroupSeeder::class,
+            ItemSeeder::class
         ]);
     }
 }

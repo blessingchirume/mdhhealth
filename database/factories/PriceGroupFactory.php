@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
+use App\Models\Package;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +18,12 @@ class PriceGroupFactory extends Factory
      */
     public function definition()
     {
+        $item = rand(1, Item::all()->count());
+        $package = rand(1, Package::all()->count());
         return [
-            //
+           'item_id' => $item,
+           'package_id' => $package,
+           'price' => rand(111,999)
         ];
     }
 }
