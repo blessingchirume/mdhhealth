@@ -27,4 +27,8 @@ class Package extends Model
     public function items() {
         return $this->hasMany(PriceGroup::class);
     }
+
+    public function ItemPrice($itemCode) {
+        return $this->hasMany(PriceGroup::class)->where('id', 1)->first();
+    }
 }
