@@ -76,7 +76,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <textarea class="form-control" name="address" type="text" placeholder="Address" value="{{ $patient->address }}" required></textarea>
+                                            <textarea class="form-control" name="address" type="text" placeholder="Address" required>{{ $patient->address }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="address">Address</label>
-                                                <textarea class="form-control" name="next_of_keen_address" type="text" placeholder="Address" value="{{ $patient->nextofkeen->next_of_keen_address }}" required></textarea>
+                                                <textarea class="form-control" name="next_of_keen_address" type="text" placeholder="Address" required>{{ $patient->nextofkeen->next_of_keen_address }}</textarea>
                                             </div>
                                         </div>
                                     </div>

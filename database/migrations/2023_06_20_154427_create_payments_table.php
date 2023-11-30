@@ -16,17 +16,14 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('episode_id');
-            $table->string('payment_method_id');
+            // $table->string('payment_method_id');
             $table->string('amount');
+            $table->string('balance');
+            $table->string('date');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('payments');

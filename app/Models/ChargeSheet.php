@@ -11,10 +11,10 @@ class ChargeSheet extends Model
     protected $guarded = [];
 
     public function items() {
-        return $this->hasMany(Item::class);
+        return $this->belongsToMany(Item::class, 'chargesheet_items', 'charge_sheet_id', 'item_id');
     }
 
     public function episode(){
-        return $this->belongsTo(Episode::class);
+        return $this->belongsToMany(Episode::class);
     }
 }

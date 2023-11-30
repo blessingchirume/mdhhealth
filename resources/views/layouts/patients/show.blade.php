@@ -20,6 +20,9 @@
                             <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Episodes</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" id="custom-content-below-home-tab" data-toggle="pill" href="#patient-details-acruals" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Acruals</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" id="custom-content-below-messages-tab" data-toggle="pill" href="#custom-content-below-messages" role="tab" aria-controls="custom-content-below-messages" aria-selected="false">Update</a>
                         </li>
                     </ul>
@@ -55,6 +58,47 @@
                                                 <td>{{ $value->date }}</td>
                                                 <td>{{ $value->attendee }}</td>
                                                 <td>{{ $value->ward }}</td>
+                                                <td>
+                                                    <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
+                                                    <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
+                                                    <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-trash m-2"></i></a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="patient-details-acruals" role="tabpanel" aria-labelledby="patient-details-acruals-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="float-right btn-group btn-group-sm">
+                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                            <i class="fa fa-plus"></i> Generate
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <table id="table1" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Episode Code</th>
+                                                <th>Base Amount</th>
+                                                <th>Amount Due</th>
+                                                <th>Days Overdue</th>
+                                                <th>Created</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($patient->acruals as $value)
+                                            <tr>
+                                                <td>{{ $value->episode_code }}</td>
+                                                <td>{{ number_format($value->base_amount, 2) }}</td>
+                                                <td>{{ number_format($value->amount_due, 2) }}</td>
+                                                <td>{{ now()->diffInDays(Carbon::parse($value->date)) }}</td>
+                                                <td>{{ $value->created_at }}</td>
                                                 <td>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>

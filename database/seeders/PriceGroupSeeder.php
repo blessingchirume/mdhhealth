@@ -17,7 +17,7 @@ class PriceGroupSeeder extends Seeder
      */
     public function run()
     {
-        $count = pow(Item::all()->count(), Package::all()->count());
-        PriceGroup::factory()->count(100)->create();
+        PriceGroup::factory()->count(5
+        )->create();
     }
 }

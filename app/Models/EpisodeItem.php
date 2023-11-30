@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Designation extends Model
+class EpisodeItem extends Model
 {
     use HasFactory;
 
-    public function users() {
-        return $this->hasMany(User::class);
-    }
+    protected $fillable = [
+        'episode_id',
+        'item_id',
+        'qunatity'
+    ];
 }

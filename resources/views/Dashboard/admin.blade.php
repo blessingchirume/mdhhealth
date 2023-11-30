@@ -24,7 +24,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Patients</span>
                         <span class="info-box-number">
-                            5
+                            {{ $analytics['patients'] }}
                         </span>
                     </div>
 
@@ -37,7 +37,7 @@
                     <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-gas-pump"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Departments</span>
-                        <span class="info-box-number">10</span>
+                        <span class="info-box-number">{{ $analytics['departments'] }}</span>
                     </div>
 
                 </div>
@@ -51,7 +51,7 @@
                     <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Partners</span>
-                        <span class="info-box-number">3</span>
+                        <span class="info-box-number">{{ $analytics['partners'] }}</span>
                     </div>
 
                 </div>
@@ -62,7 +62,7 @@
                     <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
                     <div class="info-box-content">
                         <span class="info-box-text">Users</span>
-                        <span class="info-box-number">10</span>
+                        <span class="info-box-number">{{ $analytics['users'] }}</span>
                     </div>
 
                 </div>
@@ -103,8 +103,8 @@
                             <div class="col-sm-4 col-6">
                                 <div class="description-block border-right">
                                     <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                                    <h5 class="description-header">$35,210.43</h5>
-                                    <span class="description-text">TOTAL REVENUE</span>
+                                    <h5 class="description-header">${{ $analytics['revenue'] }}</h5>
+                                    <span class="description-text">TOTAL EPISODE REVENUE</span>
                                 </div>
 
                             </div>
@@ -112,8 +112,8 @@
                             <div class="col-sm-4 col-6">
                                 <div class="description-block border-right">
                                     <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                                    <h5 class="description-header">$10,390.90</h5>
-                                    <span class="description-text">TOTAL PURCHASES</span>
+                                    <h5 class="description-header">${{ $analytics['payments'] }}</h5>
+                                    <span class="description-text">TOTAL PAYMENTS</span>
                                 </div>
 
                             </div>
@@ -121,8 +121,8 @@
                             <div class="col-sm-4 col-6">
                                 <div class="description-block border-right">
                                     <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                                    <h5 class="description-header">$24,813.53</h5>
-                                    <span class="description-text">TOTAL PROFIT</span>
+                                    <h5 class="description-header">${{ $analytics['acruals'] }}</h5>
+                                    <span class="description-text">TOTAL EPISODE ACRUALS</span>
                                 </div>
 
                             </div>

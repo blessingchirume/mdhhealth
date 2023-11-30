@@ -1,19 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">{{ __('Medical Partners') }}</h1>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            </div>
+        </div>
+    </div>
 </div>
-<!-- /.content-header -->
-
-<!-- Main content -->
 <div class="content">
     <div class="container-fluid">
         <div class="row">
@@ -31,22 +27,26 @@
                             <table id="table1" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Provider</th>
                                         <th>Description</th>
-
+                                        <th>Created</th>
+                                        <th>Updated</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($collection as $value)
+                                    @foreach($collection as $index => $value)
                                     <tr>
-                                        <td>{{ $value->provider_code }}</td>
-                                        <td>{{ $value->provider_name }}</td>
-
+                                        <td>{{ $index + 1}}</td>
+                                        <td>{{ $value->code }}</td>
+                                        <td>{{ $value->name }}</td>
+                                        <td>{{ $value->created_at }}</td>
+                                        <td>{{ $value->updated_at }}</td>
                                         <td>
-                                            <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success"></i></a>
-                                            <a href="{{ route('patient.show', $value)}}"><i class="fa fa-edit primary"></i></a>
-                                            <a href="{{ route('patient.show', $value)}}"><i class="fa fa-trash"></i></a>
+                                            <a href="{{ route('medicalaid.show', $value)}}"><i class="fa fa-eye success"></i></a>
+                                            <a href="{{ route('medicalaid.show', $value)}}"><i class="fa fa-edit primary"></i></a>
+                                            <a href="{{ route('medicalaid.show', $value)}}"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -57,10 +57,8 @@
                 </section>
             </div>
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
 </div>
-<!-- /.content -->
 
 <div class="modal lg fade" id="pump-reading">
     <div class="modal-dialog">
@@ -77,14 +75,14 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="name">Name</label>
+                                <label for="name">Provider Code</label>
                                 <input class="form-control" name="code" type="text" placeholder="code" required>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="surname">Surname</label>
+                                <label for="surname">Provider Name</label>
                                 <input class="form-control" name="name" type="text" placeholder="name" required>
                             </div>
                         </div>

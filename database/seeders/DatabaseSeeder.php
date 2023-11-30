@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             PackageSeeder::class,
             DesignationSeeder::class,
             PriceGroupSeeder::class,
-            ItemSeeder::class
+            ItemSeeder::class,
+            PaymentSeeder::class,
         ]);
     }
 }

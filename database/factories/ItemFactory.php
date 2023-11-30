@@ -21,7 +21,7 @@ class ItemFactory extends Factory
             'item_code' => 'MDHI'. rand(1111, 9999),
             'item_description' => '5mg Paracetamol Satchet',
             'item_group' => 'Medical Supplies',
-            'charge_sheet_id' => 1
+            'base_price' => rand(111, 999)
         ];
     }
 }

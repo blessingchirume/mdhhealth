@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('item_id');
             $table->string('package_id');
             $table->string('price');
+            // $table->primary(['item_id', 'package_id']);
             $table->timestamps();
         });
     }

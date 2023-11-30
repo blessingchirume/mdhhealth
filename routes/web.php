@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\MedicalAidController;
+use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PaymentController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -53,12 +56,17 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/episode')->group(function () {
             Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
             Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
+            Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
+            Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
         });
     });
 
     Route::prefix('/medicalaid')->group(function () {
-        Route::get('/', [MedicalAidController::class, 'index'])->name('medicalaid.index');
-        Route::post('/', [MedicalAidController::class, 'store'])->name('medicalaid.store');
+        Route::get('/', [PartnerController::class, 'index'])->name('medicalaid.index');
+        Route::get('/{partner}', [PartnerController::class, 'show'])->name('medicalaid.show');
+        Route::post('/associate-package/{partner}', [PartnerController::class, 'associatePackage'])->name('medicalaid.associate-package');
+        Route::post('/', [PartnerController::class, 'store'])->name('medicalaid.store');
+        Route::post('/{partner}', [PartnerController::class, 'update'])->name('medicalaid.update');
     });
 
     Route::prefix('/designation')->group(function () {
@@ -66,6 +74,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
     });
 
+    Route::prefix('/payment')->group(function () {
+        Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
+        Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
+    });
 
     Route::get(
         'tank-reading',
@@ -98,13 +110,9 @@ Route::middleware('auth')->group(function () {
         [\App\Http\Controllers\BranchController::class, 'show']
     )->name('branch.show');
 
-    Route::get(
-        'item',
-        function () {
-            return view('layouts.items.index');
-        }
-    )->name('item.index');
-
+    Route::prefix('/item')->group(function () {
+        Route::get('/', [ItemController::class, 'index'])->name('item.index');
+    });
     Route::get(
         'reciept',
         function () {

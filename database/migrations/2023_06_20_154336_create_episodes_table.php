@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('patient_type');
             $table->string('date');
             $table->string('attendee');
+            $table->double('base_amount')->default(0.00);
+            $table->double('amount_due')->default(0.00);
             $table->string('ward');
             $table->timestamps();
         });

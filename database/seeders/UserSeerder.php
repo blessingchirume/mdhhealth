@@ -22,6 +22,7 @@ class UserSeerder extends Seeder
             'email' => 'chirume37@gmail.com',
             'role_id' => 1,
             'branch_id' => 1,
+            'designation_id' => 1,
             'password' => Hash::make('12345678')
         ]);
         $user = User::create([
@@ -30,6 +31,7 @@ class UserSeerder extends Seeder
             'email' => 'chirume27@gmail.com',
             'role_id' => 2,
             'branch_id' => 2,
+            'designation_id' => 2,
             'password' => Hash::make('12345678')
         ]);
     }

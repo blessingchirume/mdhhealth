@@ -2,83 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Partner;
 use App\Http\Requests\StorePartnerRequest;
+use App\Http\Requests\StorePaymentRequest;
+use App\Models\Package;
+use App\Models\Partner;
 use App\Http\Requests\UpdatePartnerRequest;
+use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $collection = Partner::all();
+        return view('layouts.medicalaid.index', compact('collection'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StorePartnerRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StorePartnerRequest $request)
+    public function store(StorePartnerRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $request->validate(['code' => 'required', 'name' => 'required']);
+        $data = ['code' => $request->code, 'name' => $request->name ];
+        try {
+            Partner::create($data)->save();
+            return redirect()->route('medicalaid.index')->with('success', 'Provider added successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->route('medicalaid.index')->with('error', $th->getMessage());
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
+    protected function associatePackage(Request $request, Partner $partner)
+    {
+        $package = Package::create([
+            'partner_id' => $partner->id,
+            'name' => $request->code
+        ]);
+        try {
+            return redirect()->route('medicalaid.show', $partner)->with('success', 'Package created successfully!');
+        }catch (\Exception $th){
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
     public function show(Partner $partner)
     {
-        //
+        return view('layouts.medicalaid.show', compact('partner'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Partner $partner)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePartnerRequest  $request
-     * @param  \App\Models\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePartnerRequest $request, Partner $partner)
+    public function update(Request $request, Partner $partner)
     {
-        //
+        try {
+            $partner->update($request->all());
+            return redirect()->route('medicalaid.show', $partner)->with('success', 'Provider details updated successfully');
+        }catch (\Exception $th){
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Partner  $partner
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Partner $partner)
     {
         //

@@ -29,6 +29,7 @@
                         <table id="table1" class="table data-table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Item Code</th>
                                     <th>Item Description</th>
                                     <th>Type</th>
@@ -36,25 +37,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($collection as $index => $value)
                                 <tr>
-                                    <td>PCT101</td>
-                                    <td>Paracetamol 50mg</td>
-                                    <td>tablet</td>
+                                    <td>{{ $index  + 1 }}</td>
+                                    <td>{{ $value->item_code }}</td>
+                                    <td>{{ $value->item_description }}</td>
+                                    <td>{{ $value->item_group }}</td>
                                     <td>actions[view, edit, delete]</td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
-
                     <div class="card-footer clearfix">
                     </div>
                 </div>
 
             </div>
         </div>
-        <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
 </div>
-<!-- /.content -->
 @endsection

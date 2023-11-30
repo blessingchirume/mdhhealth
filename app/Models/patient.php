@@ -21,4 +21,8 @@ class patient extends Model
     public function nextofkeen() {
         return $this->hasOne(NextOfKeen::class);
     }
+
+    public function acruals() {
+        return $this->episodes()->where('amount_due', '>', 0);
+    }
 }

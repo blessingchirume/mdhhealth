@@ -9,6 +9,10 @@ class Package extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'partner_id',
+        'name'
+    ];
     public function partner()
     {
         return $this->belongsTo(Partner::class);
@@ -28,7 +32,7 @@ class Package extends Model
         return $this->hasMany(PriceGroup::class);
     }
 
-    public function ItemPrice($itemCode) {
-        return $this->hasMany(PriceGroup::class)->where('item_code', $itemCode)->first();
+    public function itemPrice($itemCode, $packageId) {
+        return $this->hasMany(PriceGroup::class)->where(['item_id' => $itemCode, 'package_id' => $packageId])->first();
     }
 }

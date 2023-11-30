@@ -52,6 +52,8 @@
                                         <td>
                                             <center> 
                                                 <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success"></i></a>
+                                                <a href="{{ route('patient.edit', $value)}}"><i class="fa fa-edit success"></i></a>
+
                                             </center>
                                         </td>
                                     </tr>
