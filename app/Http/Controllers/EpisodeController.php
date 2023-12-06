@@ -14,6 +14,7 @@ use App\Models\Payment;
 use App\Models\Vital;
 use App\Models\VitalGroup;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
@@ -85,6 +86,7 @@ class EpisodeController extends Controller
         try {
             $note = Note::create([
                 'episode_id' => $episode->id,
+                'user_id' => Auth::user()->name,
                 'comment' => $request->comment
             ]);
             return redirect()->back()->with('success', 'comment added successfully!');
@@ -95,7 +97,6 @@ class EpisodeController extends Controller
 
     public function createItem(Request $request, Episode $episode)
     {
-        // dd($request->quantity);
         try {
 
             $episode->items()->attach($request->item_id, ['quantity' => (int)$request->quantity]);

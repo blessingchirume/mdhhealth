@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->string('episode_id');
+            $table->string('user_id');
             $table->string('comment');
             $table->timestamps();
         });

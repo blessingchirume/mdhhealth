@@ -115,6 +115,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/item')->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('item.index');
+        Route::post('/create-price-list', [ItemController::class, 'generatePriceList'])->name('item.create-price-list');
+        Route::get('/{item}', [ItemController::class, 'show'])->name('item.show');
     });
     Route::get(
         'reciept',

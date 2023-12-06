@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\ItemGroup;
+use App\Models\GroupItem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ItemGroupSeeder extends Seeder
+class GroupItemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,11 @@ class ItemGroupSeeder extends Seeder
      */
     public function run()
     {
-        ItemGroup::create([
+        GroupItem::create([
             'name' => 'Medical Supplies'
         ]);
 
-        ItemGroup::create([
+        GroupItem::create([
             'name' => 'Medical Procedures'
         ]);
     }

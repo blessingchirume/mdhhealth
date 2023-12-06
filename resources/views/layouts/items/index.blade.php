@@ -18,12 +18,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-
-                <div class="alert alert-info">
-                    Sample table page
-                </div>
-
                 <div class="card">
+                    <div class="card-header">
+                        <div class="float-right btn-group btn-group-sm">
+                            <button type="button" data-toggle="modal" data-target="#generate-price-list-modal" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Generate
+                            </button>
+                        </div>
+                    </div>
                     <div class="card-body p-0">
 
                         <table id="table1" class="table data-table table-bordered">
@@ -33,7 +35,14 @@
                                     <th>Item Code</th>
                                     <th>Item Description</th>
                                     <th>Type</th>
-                                    <th>Action</th>
+                                    <th>SI Unit</th>
+                                    <th>Price Unit</th>
+                                    <th>Base Price</th>
+                                    <th>
+                                        <center>
+                                            Action
+                                        </center>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,8 +51,16 @@
                                     <td>{{ $index  + 1 }}</td>
                                     <td>{{ $value->item_code }}</td>
                                     <td>{{ $value->item_description }}</td>
-                                    <td>{{ $value->item_group }}</td>
-                                    <td>actions[view, edit, delete]</td>
+                                    <td>{{ $value->group->name }}</td>
+                                    <td>{{ $value->si_unit }}</td>
+                                    <td>{{ $value->price_unit }}</td>
+                                    <td>{{ $value->base_price }}</td>
+                                    <td>
+                                        <center>
+                                            <a href="{{ route('item.show', $value)}}"><i class="fa fa-eye success mr-4"></i></a>
+                                            <a href="#"><i class="fa fa-edit success"></i></a>
+                                        </center>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -53,6 +70,30 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal lg fade" id="generate-price-list-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add new item</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="create-item-form" method="post" action="{{ route('item.create-price-list', 1) }}">
+                    {{ csrf_field() }}
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="form-group pull-right">
+                    <button onclick="$('#create-item-form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
+                </div>
             </div>
         </div>
     </div>
