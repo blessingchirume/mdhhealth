@@ -5,9 +5,23 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-12">
                 <h1 class="m-0">{{ $episode->episode_code }}</h1>
-            </div><!-- /.col -->
+                <div class="float-right btn-group btn-group-sm">
+                    <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-secondary">
+                        <i class="fa fa-eye"></i> View charge sheet
+                    </a>
+
+                    <a data-toggle="modal" data-target="#add-payment-modal" class="btn btn-success">
+                        <i class="fa fa-money-bill-alt"></i> Make Payment
+                    </a>
+
+                    <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-warning">
+                        <i class="fa fa-unlock"></i> Dischage Patient
+                    </a>
+                </div>
+            </div>
+
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
@@ -23,7 +37,7 @@
                         <div class="card-header">
                             <h4 class="float-left">Vitals</h4>
                             <div class="float-right btn-group btn-group-sm">
-                                <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                <button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </button>
                             </div>
@@ -85,8 +99,8 @@
                                                 <td>{{ $value->item_description }}</td>
                                                 <td>{{ $value->item_group }}</td>
                                                 <td>{{ $value->pivot->quantity }}</td>
-                                                <td>123</td>
-                                                {{--<td>{{ $episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price }}</td>--}}
+
+                                                <td>{{ $episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price }}</td>
                                                 <td>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
@@ -161,7 +175,7 @@
                             <div class="tab-pane active" id="timeline">
                                 <div class="timeline timeline-inverse">
                                     <div class="time-label">
-                                        <span class="bg-danger">
+                                        <span class="">
                                             {{ $episode->date }}
                                         </span>
                                     </div>
@@ -170,14 +184,14 @@
                                         <i class="fas fa-edit bg-secondary"></i>
                                         <div class="timeline-item">
                                             <span class="time"><i class="far fa-clock"></i> 12:05</span>
-                                            <h3 class="timeline-header"><a href="#">Dr maenzanise</a> Laboritory</h3>
+                                            <h3 class="timeline-header"><a href="#">{{ Auth::user()->name }} {{ Auth::user()->surname }}</a> {{ Auth::user()->designation->name }}</h3>
                                             <div class="timeline-body">
-                                               {{ $value->comment }}
+                                                {{ $value->comment }}
                                             </div>
-                                            <div class="timeline-footer">
+                                            {{--<div class="timeline-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                            </div>
+                                            </div>--}}
                                         </div>
                                     </div>
                                     @endforeach
@@ -219,7 +233,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="name">Quantity</label>
-                                <input name="quantity" class="form-control multiple" style="padding: 6px 12px !important; width: 100% !important"/>
+                                <input name="quantity" class="form-control multiple" style="padding: 6px 12px !important; width: 100% !important" />
                             </div>
                         </div>
                     </div>
@@ -244,60 +258,36 @@
             </div>
             <div class="modal-body">
 
-                <form id="episode_form" method="post" action="">
+                <form id="episode-vital-form" method="post" action="{{ route('episode.create-vital', $episode) }}">
                     {{ csrf_field() }}
-
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Ward</label>
-                                <select name="ward" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="ward_1" selected="selected">Ward 1</option>
-                                    <option value="ward_2" selected="selected">Ward 2</option>
-                                    <option value="ward_3" selected="selected">Ward 3</option>
+                                <label for="name">Vital</label>
+                                <select name="vital_name" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                    @foreach($vitalGroups as $index => $value)
+                                    <option value="{{ $value->name }}" selected="selected">{{ $value->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Attendee</label>
-                                <select name="attendee" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="Blessing Chirume" selected="selected">Blessing Chirume</option>
-                                    <option value="Evelyn Jeke" selected="selected">Evelyn Jeke</option>
-                                    <option value="Tendai Chidawanyika" selected="selected">Tendai Chidawanyika</option>
-                                </select>
+                                <label for="name">Value</label>
+                                <input name="vital_value" class="form-control" style="padding: 6px 12px !important; width: 100% !important" />
                             </div>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Patient Group</label>
-                                <select name="patient_type" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="Casualty" selected="selected">Casualty</option>
-                                    <option value="Laboratory" selected="selected">Laboratory</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
                 </form>
             </div>
-
             <div class="card-footer">
                 <div class="form-group pull-right">
-                    <button onclick="$('#episode_form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
+                    <button onclick="$('#episode-vital-form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 <div class="modal lg fade" id="add-note-modal">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -314,7 +304,7 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="name">Note</label>
-                                <textarea name="comment" class="form-control multiple" style="padding: 6px 12px !important; width: 100% !important"></textarea>                               
+                                <textarea name="comment" class="form-control multiple" style="padding: 6px 12px !important; width: 100% !important"></textarea>
                             </div>
                         </div>
                     </div>
@@ -323,6 +313,42 @@
             <div class="card-footer">
                 <div class="form-group pull-right">
                     <button onclick="$('#add_note_form').submit()" class="btn btn-secondary float-right mr-2">submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal lg fade" id="add-payment-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ $episode->episode_code }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="episode-payment-form" method="post" action="{{ route('episode.create-payment', $episode) }}">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Amount</label>
+                                <input name="amount" class="form-control" style="padding: 6px 12px !important; width: 100% !important" />
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Date of payment</label>
+                                <input type="date" name="date" class="form-control" style="padding: 6px 12px !important; width: 100% !important" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="form-group pull-right">
+                    <button onclick="$('#episode-payment-form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
                 </div>
             </div>
         </div>

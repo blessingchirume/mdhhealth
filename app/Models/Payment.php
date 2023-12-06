@@ -9,7 +9,15 @@ class Payment extends Model
 {
     use HasFactory;
 
-    public function episode() {
+    protected $fillable = [
+        'episode_id',
+        'amount',
+        'balance',
+        'date'
+    ];
+
+    public function episode()
+    {
         return $this->belongsTo(Episode::class);
     }
 }

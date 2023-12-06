@@ -30,4 +30,8 @@ class Episode extends Model
     public function patient() {
         return $this->belongsTo(patient::class);
     }
+
+    public function designations() {
+        return $this->hasMany(Designation::class);
+    }
 }

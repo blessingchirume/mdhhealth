@@ -33,10 +33,23 @@ class HomeController extends Controller
         // check user company
         // persist company
 
-        // if(Auth::user()->role->name == 'system admin')
-        // {
-        //     return view('dashboard.admin');
-        // }
+        if(Auth::user()->role->name == 'system admin')
+        {
+            $revenue = Episode::all()->sum('base_amount');
+            $payment = Payment::all()->sum('amount');
+            $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');
+    
+            $analytics = [
+                'patients' => patient::all()->count(),
+                'partners' => Partner::all()->count(),
+                'departments' => Designation::all()->count(),
+                'users' => User::all()->count(),
+                'revenue' => $revenue,
+                'payments' => $payment,
+                'acruals' => $acruals
+            ];
+            return view('dashboard.admin', compact('analytics'));
+        }
 
         $revenue = Episode::all()->sum('base_amount');
         $payment = Payment::all()->sum('amount');
@@ -50,8 +63,8 @@ class HomeController extends Controller
             'revenue' => $revenue,
             'payments' => $payment,
             'acruals' => $acruals
-
         ];
-        return view('dashboard.admin', compact('analytics'));
+   
+        return view('layouts.designation.statistics', compact('analytics'));
     }
 }

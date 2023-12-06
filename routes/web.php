@@ -58,6 +58,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
             Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
             Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
+            Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
+            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
+            Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
         });
     });
 

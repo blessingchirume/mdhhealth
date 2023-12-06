@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">{{ __('Items') }}</h1>
+                <h1 class="m-0">{{ __('Payments') }}</h1>
             </div>
         </div>
     </div>
@@ -14,11 +14,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-
-                <div class="alert alert-info">
-                    Sample table page
-                </div>
                 <div class="card">
+                    <div class="card-header">
+                        <div class="float-right btn-group btn-group-sm">
+                            <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Generate
+                            </button>
+                        </div>
+                    </div>
                     <div class="card-body p-0">
                         <table id="table1" class="table data-table table-bordered">
                             <thead>
@@ -51,6 +54,86 @@
                     </div>
                     <div class="card-footer clearfix">
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal lg fade" id="add-payment-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Episode number</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="episode_form" method="post" action="{{ route('payment.store') }}">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Designation</label>
+                                <select name="ward" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                    @foreach($designations as $index => $designation)
+                                    <option value="{{ $designation->id }}" selected="selected">{{ $designation->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Patient</label>
+                                <select name="patient_id" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                    @foreach($patients as $index => $value)
+                                    <option value="{{ $value->patient_id }}" selected="selected">{{ $value->name }} {{ $value->surname }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Patient Group</label>
+                                <select name="patient_type" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                    <option value="InPatient" selected="selected">In Patient</option>
+                                    <option value="OutPatient" selected="selected">Out Patient</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Payment Method</label>
+                                <select name="" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                    <option value="Cash" selected="selected">Cash</option>
+                                    <option value="Medical_aid">Medica Aid</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Amount</label>
+                                <input class="form-control" name="amount" type="number" placeholder="Date of birth" required>
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Date</label>
+                                <input class="form-control" name="date" type="date" required>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="form-group pull-right">
+                    <button onclick="$('#episode_form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
                 </div>
             </div>
         </div>

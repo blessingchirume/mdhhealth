@@ -7,6 +7,7 @@ use App\Http\Requests\StorepatientRequest;
 use App\Http\Requests\UpdatepatientRequest;
 use App\Models\Designation;
 use App\Models\NextOfKeen;
+use App\Models\Package;
 use App\Models\PatientMedicalAidEntry;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -22,7 +23,8 @@ class PatientController extends Controller
 
     public function create()
     {
-        return view('layouts.patients.create');
+        $packages = Package::all();
+        return view('layouts.patients.create', compact('packages'));
     }
 
     public function store(Request $request)

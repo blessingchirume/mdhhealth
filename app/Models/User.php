@@ -55,5 +55,9 @@ class User extends Authenticatable
         return $this->belongsTo(branch::class);
     }
 
+    public function designation(){
+        return $this->belongsTo(Designation::class);
+    }
+
    
 }

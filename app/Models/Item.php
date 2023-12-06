@@ -16,7 +16,7 @@ class Item extends Model
 
     public function episodes()
     {
-        return $this->belongsToMany(Episode::class, 'episode_items', 'item_id', 'episode_id');
+        return $this->belongsToMany(Episode::class, 'episode_items', 'item_id', 'episode_id')->withPivot('quantity');
     }
 }
 

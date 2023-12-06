@@ -100,13 +100,17 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="name">Medical Aid Provider</label>
-                                            <input class="form-control" name="medical_aid_provider" type="text" placeholder="patient name" required>
+                                            <input class="form-control" name="medical_aid_provider" type="text" placeholder="Provider" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="surname">Plan</label>
-                                            <input class="form-control" name="package_id" type="text" placeholder="patient surname" required>
+                                            <select name="package_id" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                                @foreach($packages as $index => $value)
+                                                <option value="{{ $value->id }}" selected="selected">{{ $value->partner->name }} - {{ $value->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -114,13 +118,13 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="dob">Member Name</label>
-                                            <input class="form-control" name="member_name" type="text" placeholder="Date of birth" required>
+                                            <input class="form-control" name="member_name" type="text" placeholder="Member name" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label for="gender">Policy Number</label>
-                                            <input class="form-control" name="policy_number" type="text" placeholder="Gender" required>
+                                            <input class="form-control" name="policy_number" type="text" placeholder="Policy Number" required>
                                         </div>
                                     </div>
                                 </div>
@@ -142,14 +146,14 @@
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="name">Name</label>
-                                                <input class="form-control" name="next_of_keen_name" type="text" placeholder="patient name" required>
+                                                <input class="form-control" name="next_of_keen_name" type="text" placeholder="name" required>
                                             </div>
                                         </div>
 
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="surname">Surname</label>
-                                                <input class="form-control" name="next_of_keen_surname" type="text" placeholder="patient surname" required>
+                                                <input class="form-control" name="next_of_keen_surname" type="text" placeholder="surname" required>
 
                                             </div>
                                         </div>
