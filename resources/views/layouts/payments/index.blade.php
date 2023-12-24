@@ -17,19 +17,23 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right btn-group btn-group-sm">
+                            @can(App\constants\PermisionConstants::createPayment)
                             <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Generate
                             </button>
                         </div>
+                        @endcan
                     </div>
                     <div class="card-body p-0">
                         <table id="table1" class="table data-table table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
+                                    <th>Patient</th>
                                     <th>Episode</th>
                                     <th>Amount</th>
                                     <th>Balance</th>
+                                    <th>Narration</th>
                                     <th>Date</th>
                                     <th>Created</th>
                                     <th>Updated</th>
@@ -40,13 +44,17 @@
                                 @foreach($collection as $index => $value)
                                 <tr>
                                     <td>{{ $index  + 1 }}</td>
+                                    <td>{{ $value->episode->patient->name }} {{ $value->episode->patient->surname }}</td>
                                     <td>{{ $value->episode->episode_code }}</td>
                                     <td>${{ $value->amount }}</td>
                                     <td>${{ $value->balance }}</td>
+                                    <td>{{ $value->narration }}</td>
                                     <td>{{ $value->date }}</td>
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
+                                    @can(App\constants\PermisionConstants::viewPayment)
                                     <td>actions[view, edit, delete]</td>
+                                    @endcan
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -124,11 +132,19 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="name">Date</label>
-                                <input class="form-control" name="date" type="date" required>
+                                <label for="name">Narration</label>
+                                <input class="form-control" name="narration" type="text" placeholder="Payment narration" required>
                             </div>
                         </div>
                     </div>
+                    {{--<div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Narration</label>
+                                <input class="form-control" name="narration" type="text" placeholder="Payment narration" required>
+                            </div>
+                        </div>
+                    </div>--}}
                 </form>
             </div>
             <div class="card-footer">

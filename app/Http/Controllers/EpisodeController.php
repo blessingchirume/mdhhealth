@@ -223,7 +223,7 @@ class EpisodeController extends Controller
                 'episode_id' => $episode->id,
                 'amount' => $request->amount,
                 'balance' => 0,
-                'date' => $request->date
+                'date' => date('Y-m-d')
             ]);
             return redirect()->back()->with('success', 'payment created successfully');
         } catch (\Throwable $th) {

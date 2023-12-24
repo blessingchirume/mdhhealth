@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('patient_id');
             $table->string('package_id');
+            $table->string('suffix_number');
             $table->string('member_name');
             $table->string('policy_number');         
             $table->timestamps();

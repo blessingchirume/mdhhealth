@@ -3,7 +3,8 @@ import Popper from '@popperjs/core/dist/umd/popper.js';
 import jQuery from 'jquery';
 import axios from 'axios';
 import 'bootstrap';
-
+import select2 from 'select2';
+select2();
 window._ = lodash;
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support

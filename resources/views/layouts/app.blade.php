@@ -12,51 +12,16 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"> -->
+    @livewireStyles
     @yield('styles')
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition">
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-                </li>
-                @if(Auth::user()->role->name == 'system user')
-                <li class="nav-item">
-                    <button data-toggle="modal" data-target="#sync" type="button" class="btn btn-primary">
-                         Sync Transactions
-                    </button>
-                </li>
-                @endif
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                        {{ Auth::user()->name }} {{ Auth::user()->surname }}
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                        <a href="{{ route('profile.show') }}" class="dropdown-item">
-                            <i class="mr-2 fas fa-file"></i>
-                            {{ __('My profile') }}
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
-                                <i class="mr-2 fas fa-sign-out-alt"></i>
-                                {{ __('Log Out') }}
-                            </a>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+        @include('nav')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
@@ -66,12 +31,11 @@
                 <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
             </a>
-
             @include('layouts.navigation')
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper p-8">
             @include('layouts.partials.alert')
             @yield('content')
         </div>
@@ -102,6 +66,24 @@
     @vite('resources/js/app.js')
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
+    <!-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" defer></script> -->
+    <script type="module">
+        $(function() {
+            $(".js-example-basic-single").select2();
+            $("#table1").DataTable({
+                "scrollY": "400px",
+                "lengthChange": true,
+                "paging": true,
+                "responsive": false,
+                "autoWidth": true,
+                "lengthMenu": [
+                    [10, 20, 50, 100, 200, 300, -1],
+                    [10, 20, 50, 100, 200, 300, 'All']
+                ],
+            });
+        });
+    </script>
+    @livewireScripts
 
     @yield('scripts')
 </body>

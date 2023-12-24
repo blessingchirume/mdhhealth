@@ -79,6 +79,75 @@
                                             <textarea class="form-control" name="address" type="text" placeholder="Address" required>{{ $patient->address }}</textarea>
                                         </div>
                                     </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="email">Email Address</label>
+                                            <input class="form-control" name="email" type="text" placeholder="email" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="content">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="float-left btn-group btn-group-sm">
+                                    <h4>Fees Guarantor Details</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input class="form-control" name="guarantor_name" type="text" placeholder="name" value="{{ $patient->guarantor->name }}" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="surname">Surname</label>
+                                            <input class="form-control" name="guarantor_surname" type="text" placeholder="surname" value="{{ $patient->guarantor->surname }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="phone">Phone Number</label>
+                                            <input class="form-control" name="guarantor_phone" type="text" placeholder="Phone Numer" value="{{ $patient->guarantor->phone }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <input class="form-control" name="guarantor_gender" type="text" placeholder="Gender" value="{{ $patient->guarantor->gender }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="national_id">National ID</label>
+                                            <input class="form-control" name="guarantor_national_id" type="text" placeholder="National ID" value="{{ $patient->guarantor->national_id }}" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="address">Address</label>
+                                            <textarea class="form-control" name="guarantor_address" type="text" placeholder="Address" required>{{ $patient->guarantor->address }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="national_id">Relationship</label>
+                                            <input class="form-control" name="guarantor_relationship" type="text" placeholder="Relationship" value="{{ $patient->guarantor->relationship }}" required>
+                                        </div>
+                                    </div>                                   
                                 </div>
                             </div>
                         </div>
@@ -92,7 +161,6 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

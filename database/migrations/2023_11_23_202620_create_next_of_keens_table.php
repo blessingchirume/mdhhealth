@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('next_of_keen_gender');
             $table->string('next_of_keen_national_id');
             $table->string('next_of_keen_address');
+            $table->string('next_of_keen_relationship');
             $table->timestamps();
         });
     }

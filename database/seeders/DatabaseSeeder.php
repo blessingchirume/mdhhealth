@@ -10,6 +10,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
+            CurrencySeeder::class,
             RoleSeeder::class, 
             UserSeerder::class, 
             BranchSeeder::class, 
@@ -20,7 +21,7 @@ class DatabaseSeeder extends Seeder
             PriceGroupSeeder::class,
             ItemGroupSeeder::class,
             ItemSeeder::class,
-            PaymentSeeder::class,
+            // PaymentSeeder::class,
             VitalGroupSeeder::class
         ]);
     }
