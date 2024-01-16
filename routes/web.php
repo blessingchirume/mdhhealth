@@ -7,6 +7,7 @@ use App\Http\Controllers\MedicalAidController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VitalsController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [PatientController::class, 'store'])->name('patient.store');
         Route::post('/update/{patient}', [PatientController::class, 'update'])->name('patient.update');
         Route::get('/show/{patient}', [PatientController::class, 'show'])->name('patient.show');
+        Route::prefix('/episode')->group(function () {
+            Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
+            Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
+            Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
+            Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
+            Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
+            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
+            Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
+        });
         Route::prefix('/episode')->group(function () {
             Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
             Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
@@ -128,4 +138,12 @@ Route::middleware('auth')->group(function () {
             return view('layouts.reciepts.index');
         }
     )->name('reciept.index');
+
+    Route::get('vitals/{episode}', function () {
+        return view('layouts.patients.visits.vitals');
+    })->name('vitals.index');
+    Route::prefix('/vitals')->group(function () {
+        Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
+
+    });
 });
