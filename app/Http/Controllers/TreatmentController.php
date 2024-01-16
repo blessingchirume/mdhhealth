@@ -9,6 +9,7 @@ use App\Models\Patient;
 use App\Models\Episode;
 use App\Models\Treatment;
 use App\Models\Note;
+use App\Models\Icd10Code;
 class TreatmentController extends Controller
 {
     public function index()
@@ -67,6 +68,30 @@ class TreatmentController extends Controller
     ];
 
         return view('layouts.patients.visits.treatment', compact('treatments', 'patient', 'notes', 'episode'));
+    }
+
+    public function observation(Episode $episode)
+    {
+
+        $patient = $episode->patient;
+        $notes = $episode->notes;
+
+        $icd10 = new Icd10Code;
+        $icd10codes = $episode->icd10code;
+
+        $treatments = [
+            [
+            'drug'=>'Paracetamol',
+            'dose'=>'500mg',
+            'date'=>date('Y-m-d')
+        ],[
+            'drug'=>'Diclo',
+            'dose'=>'250mg',
+            'date'=>date('Y-m-d')
+        ],
+    ];
+
+        return view('layouts.patients.visits.consultation', compact('treatments', 'patient', 'notes', 'episode','icd10codes'));
     }
 
 }

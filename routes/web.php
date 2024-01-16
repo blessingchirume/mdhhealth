@@ -148,5 +148,12 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/treatment')->group(function () {
         Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
+
+    });
+    Route::prefix('/observation')->group(function () {
+        Route::get('/{episode}', [TreatmentController::class, 'observation'])->name('doctors.observation');
+        Route::post('/patients/{episode}/notes', [EpisodeController::class, 'createNotes'])->name('create-patient-notes');
+        Route::post('/patients/{episode}/icd10-codes', [TreatmentController::class, 'assignIcd10Codes'])->name('assign-icd10-codes');
+        Route::post('/patients/{episode}/treatment-plan', [TreatmentController::class, 'createTreatmentPlan'])->name('create-treatment-plan');
     });
 });

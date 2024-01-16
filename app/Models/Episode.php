@@ -25,12 +25,16 @@ class Episode extends Model
 
     public function items(){
         return $this->belongsToMany(Item::class, 'episode_items', 'episode_id', 'item_id')->withPivot('quantity');
-    } 
+    }
 
     public function patient() {
         return $this->belongsTo(patient::class);
     }
 
+    public function icd10code()
+    {
+        return $this->belongsTo(Icd10Code::class);
+    }
     public function designations() {
         return $this->hasMany(Designation::class);
     }

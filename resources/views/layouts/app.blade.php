@@ -7,7 +7,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
@@ -23,14 +28,15 @@
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                            class="fas fa-bars"></i></a>
                 </li>
-                @if(Auth::user()->role->name == 'system user')
-                <li class="nav-item">
-                    <button data-toggle="modal" data-target="#sync" type="button" class="btn btn-primary">
-                         Sync Transactions
-                    </button>
-                </li>
+                @if (Auth::user()->role->name == 'system user')
+                    <li class="nav-item">
+                        <button data-toggle="modal" data-target="#sync" type="button" class="btn btn-primary">
+                            Sync Transactions
+                        </button>
+                    </li>
                 @endif
             </ul>
 
@@ -48,7 +54,8 @@
                         <div class="dropdown-divider"></div>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
                                 <i class="mr-2 fas fa-sign-out-alt"></i>
                                 {{ __('Log Out') }}
                             </a>
@@ -63,7 +70,8 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
+                    class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
             </a>
 
@@ -92,7 +100,8 @@
             <!-- To the right -->
 
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2019 - {{ date('Y') }} <a href="https://www.sohna.net">sohna.net</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; 2019 - {{ date('Y') }} <a href="https://www.sohna.net">sohna.net</a>.</strong>
+            All rights reserved.
         </footer>
     </div>
     <!-- ./wrapper -->
@@ -102,7 +111,12 @@
     @vite('resources/js/app.js')
     <!-- AdminLTE App -->
     <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js" defer></script>
+    <script>
+        $(document).ready(function() {
+            $('#icd10_codes').select2();
+        });
+    </script>
     @yield('scripts')
 </body>
 
