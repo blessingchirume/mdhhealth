@@ -8,6 +8,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VitalsController;
+use App\Http\Controllers\TreatmentController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -139,11 +140,13 @@ Route::middleware('auth')->group(function () {
         }
     )->name('reciept.index');
 
-    Route::get('vitals/{episode}', function () {
-        return view('layouts.patients.visits.vitals');
-    })->name('vitals.index');
+
     Route::prefix('/vitals')->group(function () {
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
 
+    });
+    Route::prefix('/treatment')->group(function () {
+        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
+        Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
     });
 });
