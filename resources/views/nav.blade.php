@@ -3,168 +3,19 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item">
-            <a href="index3.html" class="nav-link">Administration</a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">Procurement</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Patient Management</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
 
-            </ul>
-        </li>
+        @foreach(Config::get('menu') as $menu)
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Billing</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
-
-            </ul>
+            @if($menu->url)
+            <a id="dropdownSubMenu1" href="{{ route($menu->url) }}" data-toggle="{{ $menu->children->count() ? 'dropdown' : null }}" aria-haspopup="true" aria-expanded="false" class="nav-link <?php if ($menu->children->count()) echo ('dropdown-toggle') ?>">{{ $menu->display_name }}</a>
+            @else
+            <a id="dropdownSubMenu1" href="#" data-toggle="{{ $menu->children->count() ? 'dropdown' : null }}" aria-haspopup="true" aria-expanded="false" class="nav-link <?php if ($menu->children->count()) echo ('dropdown-toggle') ?>">{{ $menu->display_name }}</a>
+            @endif
+            @if($menu->children->count())
+            <x-nav-item :menu="$menu" />
+            @endif
         </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Payments</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Pharmacy</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Laboritory</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Clinic</a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                <li><a href="#" class="dropdown-item">Some action </a></li>
-                <li><a href="#" class="dropdown-item">Some other action</a></li>
-                <li class="dropdown-divider"></li>
-                <li class="dropdown-submenu dropdown-hover">
-                    <a id="dropdownSubMenu2" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Hover for action</a>
-                    <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li>
-                            <a tabindex="-1" href="#" class="dropdown-item">level 2</a>
-                        </li>
-                        <li class="dropdown-submenu">
-                            <a id="dropdownSubMenu3" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">level 2</a>
-                            <ul aria-labelledby="dropdownSubMenu3" class="dropdown-menu border-0 shadow">
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                                <li><a href="#" class="dropdown-item">3rd level</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                        <li><a href="#" class="dropdown-item">level 2</a></li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
+        @endforeach
     </ul>
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">

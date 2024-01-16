@@ -17,6 +17,12 @@ class DesignationSeeder extends Seeder
     {
         Designation::create([
             'code' => 'MDHD' . rand(111111, 999999),
+            'name' => 'Casualty',
+            'description' => 'Starting point for every patient to get viatls and initial checks'
+        ]);
+
+        Designation::create([
+            'code' => 'MDHD' . rand(111111, 999999),
             'name' => 'Clinic',
             'description' => 'Starting point for every patient to get viatls and initial checks'
         ]);

@@ -12,9 +12,14 @@ use App\Models\Package;
 use App\Models\PatientMedicalAidEntry;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 class PatientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('menu');
+    }
 
     public function index()
     {
@@ -94,6 +99,7 @@ class PatientController extends Controller
 
     public function show(patient $patient)
     {
+        // dd(Config::get('menu'));
         $designations = Designation::all();
         return view('layouts.patients.show', compact('patient', 'designations'));
     }

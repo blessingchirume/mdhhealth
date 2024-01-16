@@ -31,9 +31,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
+
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -115,7 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::get(
         'branch',
         [\App\Http\Controllers\BranchController::class, 'index']
-    )->name('branch.index');
+    )->name('departments.index');
 
     Route::get(
         'branch/{id}',

@@ -1,13 +1,13 @@
 <div class="sidebar">
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link">
-                    <i class="nav-icon fas fa-chart-bar"></i>
-                    <p>
-                        {{ __('Dashboard') }}
-                    </p>
-                </a>
+            <i class="nav-icon fas fa-chart-bar"></i>
+            <p>
+                {{ __('Dashboard') }}
+            </p>
+            </a>
             </li>
             @can(App\constants\PermisionConstants::viewDepartments)
             <li class="nav-item">
@@ -102,7 +102,24 @@
                     </p>
                 </a>
             </li>
-            @endcan
+            @endcan--}}
+
+            @foreach(Config::get('menu') as $menu)
+            <li class="nav-item">
+                @if($menu->url)
+                <a href="{{ route($menu->url) }}" class="nav-link">
+                @else
+                <a href="#" class="nav-link">
+                @endif
+                    <i class="nav-icon fas {{ $menu->icon }}"></i>
+                    <p>
+                        {{ $menu->display_name }}
+                        <!-- <i class="fas fa-angle-left right"></i> -->
+                    </p>
+                </a>
+                <x-menu-item :menu="$menu" />
+            </li>
+            @endforeach
         </ul>
     </nav>
 </div>

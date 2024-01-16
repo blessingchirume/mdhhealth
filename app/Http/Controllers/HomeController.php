@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Designation;
 use App\Models\Episode;
+use App\Models\Menu;
 use App\Models\Partner;
 use App\Models\patient;
 use App\Models\Payment;
@@ -21,16 +22,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('menu');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
 
+        // dd(session()->get('menu'));
         $revenue = Episode::all()->sum('base_amount');
         $payment = Payment::all()->sum('amount');
         $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');

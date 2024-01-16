@@ -21,8 +21,8 @@
                             <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Generate
                             </button>
-                        </div>
-                        @endcan
+                            @endcan
+                        </div>         
                     </div>
                     <div class="card-body p-0">
                         <table id="table1" class="table data-table table-bordered">

@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             ItemGroupSeeder::class,
             ItemSeeder::class,
             // PaymentSeeder::class,
-            VitalGroupSeeder::class
+            VitalGroupSeeder::class,
+            MenuSeeder::class
         ]);
     }
 }
