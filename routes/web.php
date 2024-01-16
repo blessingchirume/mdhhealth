@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ItemController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\MedicalAidController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RoleController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -29,9 +31,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
+
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
     Route::view('about', 'about')->name('about');
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -82,12 +87,19 @@ Route::middleware('auth')->group(function () {
         Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
     });
 
-    Route::get(
-        'tank-reading',
-        function () {
-            return view('layouts.tanks.readings.index');
-        }
-    )->name('tank.reading.index');
+    Route::prefix('/role')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name('role.index');
+        Route::get('/{role}', [RoleController::class, 'show'])->name('role.show');
+        Route::post('/', [RoleController::class, 'store'])->name('role.store');
+        Route::post('/delete/{role}', [RoleController::class, 'destrole'])->name('role.deslete');
+        Route::post('/{role}', [RoleController::class, 'update'])->name('role.update');
+        Route::post('/permission/{role}', [RoleController::class, 'givePermission'])->name('role.give-permission');
+        Route::post('/revoke-permission/{role}/{permission}', [RoleController::class, 'revokePermission'])->name('role.revoke-permission');
+    });
+
+    Route::prefix('/currency')->group(function () {
+        Route::get('/', [CurrencyController::class, 'index'])->name('currency.index');
+    });
 
     Route::get(
         'pump-reading',
@@ -106,7 +118,7 @@ Route::middleware('auth')->group(function () {
     Route::get(
         'branch',
         [\App\Http\Controllers\BranchController::class, 'index']
-    )->name('branch.index');
+    )->name('departments.index');
 
     Route::get(
         'branch/{id}',
@@ -115,6 +127,8 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/item')->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('item.index');
+        Route::post('/create-price-list', [ItemController::class, 'generatePriceList'])->name('item.create-price-list');
+        Route::get('/{item}', [ItemController::class, 'show'])->name('item.show');
     });
     Route::get(
         'reciept',

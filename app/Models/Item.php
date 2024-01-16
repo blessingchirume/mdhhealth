@@ -18,5 +18,13 @@ class Item extends Model
     {
         return $this->belongsToMany(Episode::class, 'episode_items', 'item_id', 'episode_id')->withPivot('quantity');
     }
+
+    public function group() {
+        return $this->belongsTo(ItemGroup::class, 'item_group_id', 'id');
+    }
+
+    public function packages() {
+        return $this->hasMany(PriceGroup::class);
+    }
 }
 

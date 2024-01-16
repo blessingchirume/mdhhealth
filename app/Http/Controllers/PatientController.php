@@ -6,14 +6,20 @@ use App\Models\patient;
 use App\Http\Requests\StorepatientRequest;
 use App\Http\Requests\UpdatepatientRequest;
 use App\Models\Designation;
+use App\Models\Gurantor;
 use App\Models\NextOfKeen;
 use App\Models\Package;
 use App\Models\PatientMedicalAidEntry;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 class PatientController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('menu');
+    }
 
     public function index()
     {
@@ -36,14 +42,20 @@ class PatientController extends Controller
             'dob' => 'required',
             'gender' => 'required',
             'phone' => 'required',
-            'address' => 'required'
+            'address' => 'required',
+            'email' => 'email'
         ]);
+
+        // dd($data);
 
         $medicalAid = $request->validate([
             'package_id' => 'required',
             'member_name' => 'required',
             'policy_number' => 'required',
+            'suffix_number' => 'required'
         ]);
+
+        // dd($medicalAid);
 
         $nextOfKeen = $request->validate([
             'next_of_keen_name' => 'required',
@@ -51,18 +63,33 @@ class PatientController extends Controller
             'next_of_keen_phone' => 'required',
             'next_of_keen_gender' => 'required',
             'next_of_keen_national_id' => 'required',
-            'next_of_keen_address' => 'required'
+            'next_of_keen_address' => 'required',
         ]);
-        $data["patient_id"] = 'MDHP' . rand(00000, 99999);
 
+        $guarantor = [
+            'name' => $request->guarantor_name,
+            'surname' => $request->guarantor_surname,
+            'phone' => $request->guarantor_phone,
+            'gender' => $request->guarantor_gender,
+            'national_id' => $request->guarantor_national_id,
+            'address' => $request->guarantor_address,
+            'relationship' => $request->guarantor_relationship,
+        ];
+
+        $data["patient_id"] = 'MDHP' . rand(00000, 99999);
         try {
             Patient::create($data);
+
             $medicalAid["patient_id"] = Patient::latest()->first()->id;
             PatientMedicalAidEntry::create($medicalAid);
-            $nextOfKeen["patient_id"] = $medicalAid["patient_id"];
 
+            $nextOfKeen["patient_id"] = $medicalAid["patient_id"];
+            $nextOfKeen["next_of_keen_relationship"] = "Husband";
             NextOfKeen::create($nextOfKeen);
 
+            $guarantor['patient_id'] = $medicalAid['patient_id'];
+            Gurantor::create($guarantor);
+           
             return redirect()->route('patient.index')->with('success', 'patient record created successfully!');
         } catch (\Throwable $th) {
 
@@ -72,6 +99,7 @@ class PatientController extends Controller
 
     public function show(patient $patient)
     {
+        // dd(Config::get('menu'));
         $designations = Designation::all();
         return view('layouts.patients.show', compact('patient', 'designations'));
     }
@@ -115,7 +143,7 @@ class PatientController extends Controller
             $patient->update($data);
             $medicalAid["patient_id"] = Patient::latest()->first()->id;
             $patient->medicalaid->update($medicalAid);
-            $nextOfKeen["patient_id"] = $medicalAid["patient_id"];          
+            $nextOfKeen["patient_id"] = $medicalAid["patient_id"];
             $patient->nextofkeen->update($nextOfKeen);
             return redirect()->route('patient.index')->with('success', 'patient record updated successfully!');
         } catch (\Throwable $th) {

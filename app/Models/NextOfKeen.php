@@ -16,7 +16,8 @@ class NextOfKeen extends Model
         'next_of_keen_phone',
         'next_of_keen_gender',
         'next_of_keen_national_id',
-        'next_of_keen_address'
+        'next_of_keen_address',
+        'next_of_keen_relationship'
     ];
 
     public function patient() {

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ItemGroup;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,12 @@ class ItemGroupSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ItemGroup::create([
+            'name' => 'Medical Supplies'
+        ]);
+
+        ItemGroup::create([
+            'name' => 'Medical Procedures'
+        ]);
     }
 }

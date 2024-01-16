@@ -23,9 +23,9 @@ return new class extends Migration
             $table->string('gender');
             $table->string('phone');
             $table->string('address');
-            $table->string('medical_aid_number')->nullable();
-            $table->string('medical_aid_member_name')->nullable();
-            $table->string('medical_aid_provider')->nullable();          
+            $table->string('email')->nullable();
+            // $table->string('medical_aid_member_name')->nullable();
+            // $table->string('medical_aid_provider')->nullable();          
             $table->timestamps();
         });
     }
