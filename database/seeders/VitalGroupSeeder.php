@@ -29,5 +29,6 @@ class VitalGroupSeeder extends Seeder
         VitalGroup::create([
             'name' => 'HR'
         ]);
+        
     }
 }

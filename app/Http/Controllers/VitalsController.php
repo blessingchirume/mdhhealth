@@ -27,16 +27,63 @@ class VitalsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function recordVital(Request $request)
+    public function recordVitals(Request $request, Episode $episode)
     {
-        $patient = Patient::findOrFail($request->input('id'));
-        $patient->blood_pressure = $request->input('blood_pressure');
-        $patient->heart_rate = $request->input('heart_rate');
-        $patient->temperature = $request->input('temperature');
-        $patient->weight = $request->input('weight');
-        $patient->save();
+        try {
+            $vitals = [
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'BP',
+                    'value' => $request->blood_pressure
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'HR',
+                    'value' => $request->heart_rate
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'O2S',
+                    'value' => $request->oxygen_saturation
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'Temperture',
+                    'value' => $request->temperature
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'RR',
+                    'value' => $request->respiratory_rate
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'Weight',
+                    'value' => $request->weight
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'BS',
+                    'value' => $request->blood_sugar
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'PL',
+                    'value' => $request->pain_level
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'Height',
+                    'value' => $request->height
+                ]
+            ];
 
-        return redirect()->back()->with('success', 'patient vitals recorded successfully!');
+            Vital::insert($vitals);
+
+            return redirect()->back()->with('success', 'patient vitals recorded successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 

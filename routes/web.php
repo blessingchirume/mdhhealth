@@ -143,7 +143,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/vitals')->group(function () {
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
-
+        Route::post('/record-vitals/{episode}', [VitalsController::class, 'recordVitals'])->name('episode.record-vital');
     });
     Route::prefix('/treatment')->group(function () {
         Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');

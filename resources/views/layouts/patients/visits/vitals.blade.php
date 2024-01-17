@@ -15,7 +15,7 @@
                             <h4 class="float-left">Vitals</h4>
                         </div>
                 <section class="content p-4">
-                            <form role="form" method="post" action="{{ route('episode.create-vital', $episode) }}">
+                            <form role="form" method="post" action="{{ route('episode.record-vital', $episode) }}">
                                 @csrf
                                 <div class="box-body">
                                     <div class="row">
