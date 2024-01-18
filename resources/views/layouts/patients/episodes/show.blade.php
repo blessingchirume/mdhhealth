@@ -11,10 +11,11 @@
                     <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-secondary">
                         <i class="fa fa-eye"></i> View charge sheet
                     </a>
-
+                    @can(App\constants\PermisionConstants::createPayment)
                     <a data-toggle="modal" data-target="#add-payment-modal" class="btn btn-success">
                         <i class="fa fa-money-bill-alt"></i> Make Payment
                     </a>
+                    @endcan
 
                     <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-warning">
                         <i class="fa fa-unlock"></i> Dischage Patient
@@ -37,9 +38,11 @@
                         <div class="card-header">
                             <h4 class="float-left">Vitals</h4>
                             <div class="float-right btn-group btn-group-sm">
+                                @can(App\constants\PermisionConstants::createVital)
                                 <button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </button>
+                                @endcan
                             </div>
                         </div>
                         <div class="card-body">

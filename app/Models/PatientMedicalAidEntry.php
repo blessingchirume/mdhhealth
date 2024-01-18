@@ -14,7 +14,8 @@ class PatientMedicalAidEntry extends Model
         'patient_id',
         'policy_number',
         'member_name',
-        'package_id'
+        'package_id',
+        'suffix_number'
     ];
 
     public function patient() {

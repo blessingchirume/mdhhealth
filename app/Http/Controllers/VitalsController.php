@@ -11,6 +11,8 @@ use App\Models\Item;
 use App\Models\Note;
 use App\Models\Vital;
 use App\Models\VitalGroup;
+use App\Models\Observation;
+use Illuminate\Support\Facades\Auth;
 
 class VitalsController extends Controller
 {
@@ -79,7 +81,13 @@ class VitalsController extends Controller
             ];
 
             Vital::insert($vitals);
-
+            Observation::create([
+                'episode_id' => $episode->id,
+                'user_id'=> Auth::user()->name,
+                'observation' => $request->observation,
+                'complaints' => $request->complaints,
+                'origin'=>'Vitals'
+            ]);
             return redirect()->back()->with('success', 'patient vitals recorded successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

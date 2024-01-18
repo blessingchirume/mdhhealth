@@ -1,86 +1,61 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Role;
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Requests\UpdateRoleRequest;
+use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $collection = Role::all();
+        return view('layouts.permision.index', compact('collection'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(Request $request)
     {
-        //
+        $role = Role::create(['name' => $request->name]);
+        return back()->with('success', 'role created');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRoleRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRoleRequest $request)
+    public function show($id)
     {
-        //
+        $role = Role::where('id', $id)->first();
+        $permissions = $role->permissions()->get();
+        $availablePermissions = Permission::all();
+
+        return view('layouts.permision.view', compact('role', 'permissions', 'availablePermissions'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
+    public function givePermission(Request $request, $id)
     {
-        //
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        $role = Role::where('id', $id)->first();
+
+        $role->givePermissionTo($request->name);
+
+        return back()->with('success', 'permission assigned successfully');
+    }
+    public function createPermission(Request $request)
+    {
+        $permission = Permission::create(["name" => $request->name]);
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Role $role)
+
+    public function revokePermission($role, $permission)
     {
-        //
+        $role->revokePermissionTo($permission->name);
+        return redirect('/admin/roles/' . $role);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRoleRequest  $request
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRoleRequest $request, Role $role)
-    {
-        //
+    public function update() {
+        
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
-    {
-        //
+    public function destroy() {
+        
     }
 }

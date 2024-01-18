@@ -33,7 +33,7 @@ class PaymentController extends Controller
         // dd($request);
         $data = $request->validate([
             'patient_type' => 'required',
-            // 'attendee' => 'required',
+            // 'narration' => 'required',
             'ward' => 'required',
         ]);
         $data["attendee"] = Auth::user()->name. " " . Auth::user()->surname;
@@ -53,9 +53,10 @@ class PaymentController extends Controller
 
             Payment::create([
                 'episode_id' => $episode->id,
+                'narration' => $request->narration,
                 'amount' => $request->amount,
                 'balance' => 0,
-                'date' => $request->date
+                'date' => date('Y-m-d')
             ]);
             return redirect()->back()->with('success', 'payment created successfully');
         } catch (\Throwable $th) {

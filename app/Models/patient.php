@@ -25,4 +25,8 @@ class patient extends Model
     public function acruals() {
         return $this->episodes()->where('amount_due', '>', 0);
     }
+
+    public function guarantor() {
+        return $this->hasOne(Gurantor::class);
+    }
 }

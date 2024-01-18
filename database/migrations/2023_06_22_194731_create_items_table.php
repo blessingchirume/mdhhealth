@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('item_code');
             $table->string('item_description');
-            $table->string('item_group');
+            $table->string('item_group_id');
+            $table->string('si_unit');
+            $table->string('price_unit');
             $table->string('base_price');
             $table->timestamps();
         });

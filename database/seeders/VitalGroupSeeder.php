@@ -26,9 +26,25 @@ class VitalGroupSeeder extends Seeder
         VitalGroup::create([
             'name' => 'Temperature'
         ]);
+
         VitalGroup::create([
-            'name' => 'HR'
+            'name' => 'Glucose'
         ]);
-        
+
+        VitalGroup::create([
+            'name' => 'SPO2'
+        ]);
+
+        VitalGroup::create([
+            'name' => 'Rep'
+        ]);
+
+        VitalGroup::create([
+            'name' => 'Pulse'
+        ]);
+
+        VitalGroup::create([
+            'name' => 'MAP'
+        ]);
     }
 }

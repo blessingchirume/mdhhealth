@@ -11,6 +11,7 @@ class Payment extends Model
 
     protected $fillable = [
         'episode_id',
+        'narration',
         'amount',
         'balance',
         'date'

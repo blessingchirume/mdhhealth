@@ -11,6 +11,7 @@ class Note extends Model
 
     protected $fillable = [
         'episode_id',
+        'user_id',
         'comment'
     ];
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Designation;
 use App\Models\Episode;
+use App\Models\Menu;
 use App\Models\Partner;
 use App\Models\patient;
 use App\Models\Payment;
@@ -21,36 +22,13 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('menu');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function index()
     {
-        // check user company
-        // persist company
 
-        if(Auth::user()->role->name == 'system admin')
-        {
-            $revenue = Episode::all()->sum('base_amount');
-            $payment = Payment::all()->sum('amount');
-            $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');
-    
-            $analytics = [
-                'patients' => patient::all()->count(),
-                'partners' => Partner::all()->count(),
-                'departments' => Designation::all()->count(),
-                'users' => User::all()->count(),
-                'revenue' => $revenue,
-                'payments' => $payment,
-                'acruals' => $acruals
-            ];
-            return view('dashboard.admin', compact('analytics'));
-        }
-
+        // dd(session()->get('menu'));
         $revenue = Episode::all()->sum('base_amount');
         $payment = Payment::all()->sum('amount');
         $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');
@@ -64,7 +42,6 @@ class HomeController extends Controller
             'payments' => $payment,
             'acruals' => $acruals
         ];
-   
-        return view('layouts.designation.statistics', compact('analytics'));
+        return view('dashboard.admin', compact('analytics'));
     }
 }

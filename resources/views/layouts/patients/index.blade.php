@@ -18,9 +18,11 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right btn-group btn-group-sm">
+                                @can(App\constants\PermisionConstants::createPatient)
                                 <a href="{{ route('patient.create') }}" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </a>
+                                @endcan
                             </div>
                         </div>
                         <div class="card-body">
@@ -31,11 +33,14 @@
                                         <th>ID Number</th>
                                         <th>Name</th>
                                         <th>Surname</th>
+                                        <th>Email</th>
                                         <th>dob</th>
                                         <th>gender</th>
                                         <th>phone</th>
                                         <th>address</th>
-                                        <center><th>Action</th></center>
+                                        <center>
+                                            <th>Action</th>
+                                        </center>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,15 +50,19 @@
                                         <td>{{ $value->national_id }}</td>
                                         <td>{{ $value->name }}</td>
                                         <td>{{ $value->surname }}</td>
+                                        <td>{{ $value->email}}</td>
                                         <td>{{ $value->dob }}</td>
                                         <td>{{ $value->gender }}</td>
                                         <td>{{ $value->phone }}</td>
                                         <td>{{ $value->address }}</td>
                                         <td>
-                                            <center> 
-                                                <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success"></i></a>
+                                            <center>
+                                                @can(App\constants\PermisionConstants::viewPatient)
+                                                <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success mr-4"></i></a>
+                                                @endcan
+                                                @can(App\constants\PermisionConstants::updatePatient)
                                                 <a href="{{ route('patient.edit', $value)}}"><i class="fa fa-edit success"></i></a>
-
+                                                @endcan
                                             </center>
                                         </td>
                                     </tr>
