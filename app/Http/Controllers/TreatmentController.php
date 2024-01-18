@@ -92,7 +92,6 @@ public function createTreatmentPlan(Request $request, Episode $episode)
 {
     try {
         $treatment = new TreatmentPlan();
-        $treatment->patient_id = $episode->patient->id;
         $treatment->episode_id = $episode->id;
 
         if ($request->treatment_type == 'medication') {
@@ -103,7 +102,6 @@ public function createTreatmentPlan(Request $request, Episode $episode)
 
             foreach ($selectedMeds as $i => $medication) {
                 $treatmentPlan = new TreatmentPlan();
-                $treatmentPlan->patient_id = $treatment->patient_id;
                 $treatmentPlan->episode_id = $treatment->episode_id;
                 $treatmentPlan->medication = $medication;
                 $treatmentPlan->dosage = $dosages[$i];
