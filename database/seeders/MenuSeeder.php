@@ -118,5 +118,15 @@ class MenuSeeder extends Seeder
             'order' => 1,
             
         ]);
+
+        Menu::create([
+            'name' => 'laboratory',
+            'display_name' => 'Laboratory',
+            'icon' => 'fa-users',
+            'url' => 'laboratory.index',
+            'parent_id' => null,
+            'order' => 1,
+            
+        ]);
     }
 }

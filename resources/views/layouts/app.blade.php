@@ -26,7 +26,7 @@
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('nav')
+        {{--@include('nav')--}}
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->

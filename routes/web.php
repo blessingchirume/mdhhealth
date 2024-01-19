@@ -4,6 +4,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\MedicalAidController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
@@ -78,6 +79,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
             Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
         });
+    });
+
+    Route::prefix('laboratory')->group(function(){
+        Route::get('/', [LaboratoryController::class, 'index'])->name('laboratory.index');
     });
 
     Route::prefix('/medicalaid')->group(function () {
@@ -165,7 +170,7 @@ Route::middleware('auth')->group(function () {
 
     });
     Route::prefix('/observation')->group(function () {
-        Route::get('/{episode}', [TreatmentController::class, 'observation'])->name('doctors.observation');
+        Route::get('/', [TreatmentController::class, 'observation'])->name('doctors.observation');
         Route::post('/patients/{episode}/notes', [EpisodeController::class, 'createNotes'])->name('create-patient-notes');
         Route::post('/patients/{episode}/icd10-codes', [TreatmentController::class, 'assignIcd10Codes'])->name('assign-icd10-codes');
         Route::post('/patients/{episode}/treatment-plan', [TreatmentController::class, 'createTreatmentPlan'])->name('create-treatment-plan');
