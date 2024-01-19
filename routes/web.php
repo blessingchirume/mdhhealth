@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VitalsController;
 use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\WardController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
@@ -95,6 +96,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/designation')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
+        Route::get('/wards', [WardController::class, 'index'])->name('designation.ward.index');
         Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
     });
 
