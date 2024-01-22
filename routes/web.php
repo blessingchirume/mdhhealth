@@ -10,6 +10,7 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VitalsController;
 use App\Http\Controllers\TreatmentController;
+use App\Http\Controllers\TestResultsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ObservationsController;
 use App\Models\Designation;
@@ -126,6 +127,20 @@ Route::middleware('auth')->group(function () {
             return view('layouts.pumps.index');
         }
     )->name('pump.index');
+
+    Route::get(
+        'lab',
+        [\App\Http\Controllers\LabTestsController::class, 'index']
+    )->name('lab-tests.create');
+    Route::get(
+        'lab-results',
+        [\App\Http\Controllers\LabTestsController::class, 'retrieveResults']
+    )->name('lab-results.retrieve');
+    Route::post('/lab-tests', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
+
+    Route::get('/test-results', [\App\Http\Controllers\TestResultsController::class, 'index'])->name('test-results');
+    Route::post('/add-test-results', [\App\Http\Controllers\TestResultsController::class, 'addResults'])->name('add-test-results');
+
 
     Route::get(
         'branch',
