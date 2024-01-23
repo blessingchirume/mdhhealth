@@ -135,8 +135,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get(
         'lab-results/{episode}',
-        [\App\Http\Controllers\LabTestsController::class, 'retrieveResults']
-    )->name('lab-results.retrieve');
+        [\App\Http\Controllers\TestResultsController::class, 'results']
+    )->name('view-results');
 
     Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
 

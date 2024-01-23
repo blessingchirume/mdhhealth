@@ -65,6 +65,16 @@ try{ foreach ($selectedTests as $testId => $resultData) {
        // Redirect or return a response
    }
 
+   public function results(Episode $episode)
+{
+    // Fetch test results for the episode
+    $testResults = LabTests::where('episode', $episode->id)
+        ->join('tests', 'lab_tests.test', '=', 'tests.id')
+        ->select('lab_tests.*', 'tests.name')
+        ->get();
+    $age = PatientController::calculateAge($episode->patient->dob);
+    return view('layouts.lab.view-results', compact('episode', 'testResults','age'));
+}
     private function arrayToObject($array)
 {
     $object = new \stdClass();
