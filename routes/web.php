@@ -129,7 +129,7 @@ Route::middleware('auth')->group(function () {
     )->name('pump.index');
 
     Route::get(
-        'lab/{episode}',
+        'test-booking/{episode}',
         [\App\Http\Controllers\LabTestsController::class, 'index']
     )->name('lab-tests.create');
 
@@ -140,8 +140,9 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
 
-    Route::get('/test-results/{episode}', [\App\Http\Controllers\TestResultsController::class, 'index'])->name('test-results');
-    Route::post('/add-test-results', [\App\Http\Controllers\TestResultsController::class, 'addResults'])->name('add-test-results');
+    Route::get('/upload-test-results/{episode}', [TestResultsController::class, 'index'])->name('upload-test-results');
+
+    Route::post('/save-test-results', [TestResultsController::class, 'addResults'])->name('save-test-results');
 
 
     Route::get(

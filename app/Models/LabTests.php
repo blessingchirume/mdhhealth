@@ -12,10 +12,10 @@ class LabTests extends Model
 {
     use HasFactory;
 
-    protected $fillable =[
-        'category',
+    protected $fillable = [
+        'category_id',
         'test',
-        'episode',
+        'episode_id',
         'result',
         'test_date',
         'test_time',
@@ -23,29 +23,39 @@ class LabTests extends Model
         'status',
         'user_id',
         'doctor_id',
-        ];
+    ];
 
-function getCategoryForTest($testId) {
-    // Implement logic to retrieve the category ID for the given test ID
-            $test = Tests::find($testId);
+    public function test()
+    {
+        return $this->belongsTo(Tests::class, 'test');
+    }
 
-            if (!$test) {
-                throw new Exception("Test not found");
-            }
-            $categoryId = $test->category;
+    public function category()
+    {
+        return $this->belongsTo(TestCategory::class, 'category_id');
+    }
 
-            $category = TestCategory::where('id', $categoryId)->first();
+    public function getCategoryForTest($testId)
+    {
+        // Implement logic to retrieve the category ID for the given test ID
+        $test = Tests::find($testId);
 
-            if (!$category) {
-                throw new Exception("Category not found");
-            }
-
-            return $category->id;
+        if (!$test) {
+            throw new Exception("Test not found");
         }
 
+        return $test->category;
+    }
 
-        function getTestName($testId) {
-            // Implement logic to retrieve the test name for the given test ID
-            return Tests::find($testId)->name;
+    public function getTestName($testId)
+    {
+        // Implement logic to retrieve the test name for the given test ID
+        $test = Tests::find($testId);
+        if ($test) {
+            return $test->name;
         }
+        throw new Exception("Test not found");
+    }
+
+    // Additional methods and logic can be added here
 }

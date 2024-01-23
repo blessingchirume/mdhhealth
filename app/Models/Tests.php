@@ -9,27 +9,18 @@ use App\Models\TestCategory;
 class Tests extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'category',
         'name',
         'slug',
         'description'
     ];
 
-    public function category($id)
+    public function category()
     {
-      $testCategory = TestCategory::find($id);
-    
-      if (! $testCategory) {
-        return false;
-      }
-    
-      $this->category($testCategory)->associate();
-      return true;
+        return $this->belongsTo(TestCategory::class, 'category');
     }
-    
-    public function testCategory()
-    {
-        return $this->belongsTo('App\Models\TestCategory', 'category');
-    }
+
+    // Additional methods and logic can be added here
 }
+

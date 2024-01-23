@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class TestCategory extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'description'
     ];
 
-    public function tests(){
+    public function tests()
+    {
         return $this->hasMany(Tests::class, 'category');
+    }
+
+    public function bookedTests()
+    {
+        return $this->hasMany(LabTests::class, 'category_id');
     }
 }
