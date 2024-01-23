@@ -1,8 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="post" action="{{ route('lab.store') }}" id="lab-form">
-    <div class="card card-primary">
+<div class="card m-3">
+    <div class="card-header">
+        <h3 class="card-title">Book Lab Test</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <span><strong>Patient: </strong></span>{{ $episode->patient->name.' '.$episode->patient->surname }}
+            </div>
+            <div class="col-md-1">
+                <span><strong>Age: </strong></span>{{ $age }}
+            </div>
+            <div class="col-md-3">
+                <span><strong>Episode Code: </strong></span>{{ $episode->episode_code }}
+            </div>
+            <div class="col-md-3">
+                <span><strong>Attendee: </strong></span>{{ $episode->attendee }}
+            </div>
+            <div class="col-md-1">
+                <span><strong>Ward: </strong></span>{{ $episode->ward }}
+            </div>
+
+        </div>
+    </div>
+</div>
+<form method="post" action="{{ route('lab.store', $episode) }}" id="lab-form">
+    @csrf
+    <div class="card card-primary m-3">
         <div class="card-header">
             <h3 class="card-title">Select your desired tests</h3>
         </div>

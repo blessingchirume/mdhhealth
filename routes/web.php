@@ -129,16 +129,18 @@ Route::middleware('auth')->group(function () {
     )->name('pump.index');
 
     Route::get(
-        'lab',
+        'lab/{episode}',
         [\App\Http\Controllers\LabTestsController::class, 'index']
     )->name('lab-tests.create');
+
     Route::get(
-        'lab-results',
+        'lab-results/{episode}',
         [\App\Http\Controllers\LabTestsController::class, 'retrieveResults']
     )->name('lab-results.retrieve');
-    Route::post('/lab-tests', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
 
-    Route::get('/test-results', [\App\Http\Controllers\TestResultsController::class, 'index'])->name('test-results');
+    Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
+
+    Route::get('/test-results/{episode}', [\App\Http\Controllers\TestResultsController::class, 'index'])->name('test-results');
     Route::post('/add-test-results', [\App\Http\Controllers\TestResultsController::class, 'addResults'])->name('add-test-results');
 
 
