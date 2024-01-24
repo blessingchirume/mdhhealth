@@ -17,6 +17,7 @@ use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmergencyRoomAdmissionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -189,4 +190,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/{episode}/icd10-codes', [ObservationsController::class, 'assignIcd10Codes'])->name('assign-icd10-codes');
         Route::post('/{episode}/treatment-plan', [TreatmentController::class, 'createTreatmentPlan'])->name('create-treatment-plan');
     });
+
+Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::class, 'create'])->name('emergency-room-admissions.create');
+Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
 });
+Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
