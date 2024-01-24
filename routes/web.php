@@ -11,12 +11,14 @@ use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VitalsController;
 use App\Http\Controllers\TreatmentController;
+use App\Http\Controllers\TestResultsController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\WardController;
+use App\Http\Controllers\ObservationsController;
 use App\Models\Designation;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmergencyRoomAdmissionsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +40,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
 
-    
+
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
     Route::view('about', 'about')->name('about');
@@ -137,6 +139,23 @@ Route::middleware('auth')->group(function () {
     )->name('pump.index');
 
     Route::get(
+        'test-booking/{episode}',
+        [\App\Http\Controllers\LabTestsController::class, 'index']
+    )->name('lab-tests.create');
+
+    Route::get(
+        'lab-results/{episode}',
+        [\App\Http\Controllers\TestResultsController::class, 'results']
+    )->name('view-results');
+
+    Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
+
+    Route::get('/upload-test-results/{episode}', [TestResultsController::class, 'index'])->name('upload-test-results');
+
+    Route::post('/save-test-results', [TestResultsController::class, 'addResults'])->name('save-test-results');
+
+
+    Route::get(
         'branch',
         [\App\Http\Controllers\BranchController::class, 'index']
     )->name('departments.index');
@@ -167,7 +186,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/vitals')->group(function () {
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
-
+        Route::post('/record-vitals/{episode}', [VitalsController::class, 'recordVitals'])->name('episode.record-vital');
     });
     Route::prefix('/treatment')->group(function () {
         Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
@@ -175,9 +194,13 @@ Route::middleware('auth')->group(function () {
 
     });
     Route::prefix('/observation')->group(function () {
-        Route::get('/', [TreatmentController::class, 'observation'])->name('doctors.observation');
-        Route::post('/patients/{episode}/notes', [EpisodeController::class, 'createNotes'])->name('create-patient-notes');
-        Route::post('/patients/{episode}/icd10-codes', [TreatmentController::class, 'assignIcd10Codes'])->name('assign-icd10-codes');
-        Route::post('/patients/{episode}/treatment-plan', [TreatmentController::class, 'createTreatmentPlan'])->name('create-treatment-plan');
+        Route::get('/{episode}', [TreatmentController::class, 'observation'])->name('doctors.observation');
+        Route::post('/{episode}/observations', [ObservationsController::class, 'recordObservations'])->name('create-patient-notes');
+        Route::post('/{episode}/icd10-codes', [ObservationsController::class, 'assignIcd10Codes'])->name('assign-icd10-codes');
+        Route::post('/{episode}/treatment-plan', [TreatmentController::class, 'createTreatmentPlan'])->name('create-treatment-plan');
     });
+
+Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::class, 'create'])->name('emergency-room-admissions.create');
+Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
 });
+Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');

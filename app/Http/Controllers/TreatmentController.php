@@ -10,6 +10,9 @@ use App\Models\Episode;
 use App\Models\Treatment;
 use App\Models\Note;
 use App\Models\Icd10Code;
+use App\Models\Item;
+use App\Models\TreatmentPlan;
+
 class TreatmentController extends Controller
 {
     public function index()
@@ -57,15 +60,16 @@ class TreatmentController extends Controller
 
         $treatments = [
             [
-            'drug'=>'Paracetamol',
-            'dose'=>'500mg',
-            'date'=>date('Y-m-d')
-        ],[
-            'drug'=>'Diclo',
-            'dose'=>'250mg',
-            'date'=>date('Y-m-d')
-        ],
-    ];
+                'drug' => 'Paracetamol',
+                'dose' => '500mg',
+                'date' => date('Y-m-d')
+            ],
+            [
+                'drug' => 'Diclo',
+                'dose' => '250mg',
+                'date' => date('Y-m-d')
+            ],
+        ];
 
         return view('layouts.patients.visits.treatment', compact('treatments', 'patient', 'notes', 'episode'));
     }
@@ -78,21 +82,44 @@ class TreatmentController extends Controller
         $notes = $episode->notes;
 
         $icd10 = new Icd10Code;
-        $icd10codes = $episode->icd10code;
+        $icd10codes = $icd10->all();
 
-        $treatments = [
-            [
-            'drug'=>'Paracetamol',
-            'dose'=>'500mg',
-            'date'=>date('Y-m-d')
-        ],[
-            'drug'=>'Diclo',
-            'dose'=>'250mg',
-            'date'=>date('Y-m-d')
-        ],
-    ];
+        $items = Item::all();
 
-        return view('layouts.patients.visits.consultation', compact('treatments', 'patient', 'notes', 'episode','icd10codes'));
+        return view('layouts.patients.visits.consultation', compact('items', 'patient', 'notes', 'episode', 'icd10codes'));
     }
 
+public function createTreatmentPlan(Request $request, Episode $episode)
+{
+    try {
+        $treatment = new TreatmentPlan();
+        $treatment->episode_id = $episode->id;
+
+        if ($request->treatment_type == 'medication') {
+            $selectedMeds = request()->input('medication');
+            $dosages = $request->dosage;
+            $frequencies = $request->frequency;
+            $durations = $request->duration;
+
+            foreach ($selectedMeds as $i => $medication) {
+                $treatmentPlan = new TreatmentPlan();
+                $treatmentPlan->episode_id = $treatment->episode_id;
+                $treatmentPlan->medication = $medication;
+                $treatmentPlan->dosage = $dosages[$i];
+                $treatmentPlan->frequency = $frequencies[$i];
+                $treatmentPlan->duration = $durations[$i];
+                $treatmentPlan->instructions = $request->instructions;
+                $treatmentPlan->save();
+            }
+        } else {
+            $treatment->medication = $request->other_treatment;
+            $treatment->instructions = $request->instructions;
+            $treatment->save();
+        }
+
+        return back()->with('success', 'Treatment Plans added successfully!');
+    } catch (\Throwable $th) {
+        return redirect()->back()->with('error', $th->getMessage());
+    }
+}
 }

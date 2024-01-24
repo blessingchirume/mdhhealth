@@ -11,11 +11,6 @@ class Icd10Code extends Model
 
     protected $fillable = ['code', 'description'];
 
-    public function episodes()
-    {
-        return $this->belongsToMany(Episode::class);
-    }
-
     public function getFormattedDescriptionAttribute()
     {
         return ucfirst($this->description);

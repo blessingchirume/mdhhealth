@@ -14,8 +14,8 @@
                         <div class="card-header">
                             <h4 class="float-left">Vitals</h4>
                         </div>
-                <section class="content p-4">
-                            <form role="form" method="post" action="{{ route('episode.create-vital', $episode) }}">
+                        <section class="content p-4">
+                            <form role="form" method="post" action="{{ route('episode.record-vital', $episode) }}">
                                 @csrf
                                 <div class="box-body">
                                     <div class="row">
@@ -75,8 +75,21 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pain_level">Pain Level</label>
-                                                <input type="text" class="form-control" id="pain_level" name="pain_level"
-                                                    placeholder="Pain Level" required>
+                                                <select class="form-control" id="pain_level" name="pain_level" required>
+                                                    <option value="acute">Acute</option>
+                                                    <option value="severe">Severe</option>
+                                                    <option value="mild">Mild</option>
+                                                    <option value="moderate">Moderate</option>
+                                                    <option value="chronic">Chronic</option>
+                                                    <option value="persistent">Persistent</option>
+                                                    <option value="intermittent">Intermittent</option>
+                                                    <option value="dull">Dull</option>
+                                                    <option value="sharp">Sharp</option>
+                                                    <option value="throbbing">Throbbing</option>
+                                                    <option value="stabbing">Stabbing</option>
+                                                    <option value="burning">Burning</option>
+                                                    <option value="shooting">Shooting</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -96,8 +109,8 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="other_vitals">Nurses Review/Observations</label>
-                                                <textarea class="form-control" id="observersation" name="observersation" placeholder="Observersation"></textarea>
+                                                <label for="observation">Nurses Review/Observations</label>
+                                                <textarea class="form-control" id="observation" name="observation" placeholder="Observation"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -107,10 +120,10 @@
                                     <button type="submit" class="btn btn-primary">Save</button>
                                 </div>
                             </form>
-                </section>
-            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
         </div>
-     </div>
     </div>
 @endsection

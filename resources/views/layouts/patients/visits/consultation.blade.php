@@ -38,25 +38,25 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="complaints">Presentation of Complaints</label>
-                                            <textarea name="complaints" id="complaints" class="form-control"></textarea>
+                                            <textarea name="complaints" id="complaints" class="form-control">{{ $observation->complaints ?? null }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="complaints_history">History of Complaints</label>
-                                            <textarea name="complaints_history" id="complaints_history" class="form-control"></textarea>
+                                            <textarea name="complaints_history" id="complaints_history" class="form-control">{{ $observation->complaints_history ?? null }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="observation">Observation</label>
-                                            <textarea name="observation" id="observation" class="form-control"></textarea>
+                                            <textarea name="observation" id="observation" class="form-control">{{ $observation->observation ?? null }}</textarea>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="notes">Notes</label>
-                                            <textarea name="notes" id="notes" class="form-control"></textarea>
+                                            <textarea name="notes" id="notes" class="form-control">{{ $observation->notes ?? null }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -76,9 +76,10 @@
                                     <label for="icd10_codes">Select ICD-10 Codes:</label>
                                     <select id="icd10_codes" name="icd10_codes[]" class="form-control select2"
                                         multiple="multiple">
-                                        <option value="A00">Cholera</option>
-                                        <option value="A01">Typhoid fever</option>
-                                        <option value="A02">COVID19</option>
+                                        @foreach ($icd10codes as $option)
+                                            <option value="{{ $option->id }}">{{ $option->code }} |
+                                                {{ $option->description }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Assign Codes</button>
@@ -101,44 +102,70 @@
                                         <option value="other_treatment">Other Treatment</option>
                                     </select>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <div class="form-group d-none" id="medication_section">
-                                            <label for="medication">Medication:</label>
-                                            <select class="form-control select2" id="medication" name="medication">
-                                            </select>
+                                <div id="medication_section">
+                                    <table id="medication_table" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Medication</th>
+                                                <th>Dosage</th>
+                                                <th>Frequency</th>
+                                                <th>Duration (Days)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div id="medication_row">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="form-group d-none" id="medication_section">
+                                                <label for="medication">Medication:</label>
+                                                <select class="form-control select2" id="medication">
+                                                    @foreach ($items as $option)
+                                                        <option value="{{ $option->item_description }}">{{ $option->item_code }} |
+                                                            {{ $option->item_description }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-2">
-                                        <div class="form-group d-none" id="dosage_section">
-                                            <label for="dosage">Dosage:</label>
-                                            <input type="text" class="form-control" id="dosage" name="dosage">
+                                        <div class="col-md-2">
+                                            <div class="form-group d-none" id="dosage_section">
+                                                <label for="dosage">Dosage:</label>
+                                                <input type="text" class="form-control" id="dosage">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-3">
-                                        <div class="form-group d-none" id="dosage_section">
-                                            <label for="frequency">Frequency:</label>
-                                            <select class="form-control" id="frequency" name="frequency">
-                                            </select>
+                                        <div class="col-md-2">
+                                            <div class="form-group d-none" id="dosage_section">
+                                                <label for="frequency">Frequency:</label>
+                                                <select class="form-control" id="frequency">
+                                                    <option value="Once a day">Once a day</option>
+                                                    <option value="Twice a day">Twice a day</option>
+                                                    <option value="Three times a day">Three times a day</option>
+                                                    <option value="As needed">As needed</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="col-md-2">
-                                        <div class="form-group d-none" id="dosage_section">
-                                            <label for="duration">Duration:</label>
-                                            <input type="text" class="form-control" id="duration" name="duration">
+                                        <div class="col-md-2">
+                                            <div class="form-group d-none" id="dosage_section">
+                                                <label for="duration">Duration (Days):</label>
+                                                <input type="text" class="form-control" id="duration"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="form-group d-none" id="dosage_section">
+                                                <label for="duration">&nbsp;<br/></label>
+                                                <a class="btn btn-success" id="add_medication" href="#">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-
-                                <div class="form-group">
-                                    <label for="instructions">Application Instructions:</label>
-                                    <textarea class="form-control" id="instructions" name="instructions" rows="3"></textarea>
-                                </div>
 
                                 <div class="form-group d-none" id="other_treatment_section">
                                     <label for="other_treatment">Other Treatment:</label>
@@ -146,24 +173,13 @@
                                         name="other_treatment">
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="instructions">Application Instructions:</label>
+                                    <textarea class="form-control" id="instructions" name="instructions" rows="3"></textarea>
+                                </div>
+
                                 <button type="submit" class="btn btn-primary">Create Plan</button>
 
-                                <script>
-                                    $(document).ready(function() {
-                                        // Show the dosage_section initially
-                                        $("#medication_section, #dosage_section").removeClass("d-none");
-
-                                        $("#treatment_type").on("change", function() {
-                                            if ($(this).val() === "medication") {
-                                                $("#medication_section, #dosage_section").removeClass("d-none");
-                                                $("#other_treatment_section").addClass("d-none");
-                                            } else {
-                                                $("#medication_section, #dosage_section").addClass("d-none");
-                                                $("#other_treatment_section").removeClass("d-none");
-                                            }
-                                        });
-                                    });
-                                </script>
                             </form>
                         </div>
                     </div>
@@ -174,4 +190,62 @@
     </div>
 
 
+
+<script>
+    $(document).ready(function() {
+        // Show the dosage_section initially
+        $("#medication_section, #dosage_section").removeClass("d-none");
+
+        $("#treatment_type").on("change", function() {
+            if ($(this).val() === "medication") {
+                $("#medication_section, #dosage_section").removeClass("d-none");
+                $("#other_treatment_section").addClass("d-none");
+            } else {
+                $("#medication_section, #dosage_section").addClass("d-none");
+                $("#other_treatment_section").removeClass("d-none");
+            }
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var addMedicationBtn = document.getElementById('add_medication');
+        var medicationTable = document.getElementById('medication_table');
+        var medicationRow = document.getElementById('medication_row');
+
+        addMedicationBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Get the form field values
+            var medication = document.getElementById('medication').value;
+            var dosage = document.getElementById('dosage').value;
+            var frequency = document.getElementById('frequency').value;
+            var duration = document.getElementById('duration').value;
+
+            // Create a new row in the table
+            var newRow = medicationTable.insertRow();
+            newRow.innerHTML = `
+            <td>${medication}<input type="hidden" name="medication[]" value="${medication}"></td>
+            <td>${dosage}<input type="hidden" name="dosage[]" value="${dosage}"></td>
+            <td>${frequency}<input type="hidden" name="frequency[]" value="${frequency}"></td>
+            <td>${duration}<input type="hidden" name="duration[]" value="${duration}"></td>
+         `;
+
+            // Reset the form fields
+            document.getElementById('medication').value = '';
+            document.getElementById('dosage').value = '';
+            document.getElementById('frequency').value = '';
+            document.getElementById('duration').value = '';
+
+            // Clone the row and append it to the form container
+            // var clonedRow = medicationRow.cloneNode(true);
+            //  clonedRow.classList.remove('row');
+            //  medicationRow.parentNode.insertBefore(clonedRow, medicationRow.nextSibling);
+        });
+
+        // Submit the form
+       // document.getElementById('submit-btn').addEventListener('click', function() {
+     //       document.querySelector('form').submit();
+      //  });
+    });
+</script>
 @endsection

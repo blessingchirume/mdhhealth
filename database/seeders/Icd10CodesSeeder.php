@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Icd10Code;
 
 class Icd10CodesSeeder extends Seeder
 {
@@ -14,11 +15,21 @@ class Icd10CodesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('icd10_codes')->insert([
-            ['code' => 'A00', 'description' => 'Cholera'],
-            ['code' => 'A01', 'description' => 'Typhoid fever'],
-            ['code' => 'B00', 'description' => 'Herpesviral [herpes simplex] infections'],
-            ['code'=>'B01', 'description'=>'HPV'],
-        ]);
+        Icd10Code::truncate();
+
+        $csvFile = fopen(base_path("database/data/icd10codes.csv"), "r");
+
+        $firstline = true;
+        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
+            if (!$firstline) {
+                Icd10Code::create([
+                    "code" => $data['0'],
+                    "description" => $data['1']
+                ]);
+            }
+            $firstline = false;
+        }
+
+        fclose($csvFile);
     }
 }
