@@ -20,12 +20,12 @@ return new class extends Migration
             $table->string('test');
             $table->string('episode');
             $table->string('result')->nullable();
-            $table->date('test_date');
-            $table->time('test_time');
+            $table->date('test_date')->nullable();
+            $table->time('test_time')->nullable();
             $table->text('comment')->nullable();
-            $table->string('status');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('doctor_id');
+            $table->string('status')->default('Pending');
+            $table->unsignedBigInteger('uploaded_by')->nullable();
+            $table->unsignedBigInteger('refered_by');
             $table->timestamps();
         });
     }

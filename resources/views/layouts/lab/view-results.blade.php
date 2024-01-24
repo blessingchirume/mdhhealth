@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="card">
+    <div class="card m-3 card-primary">
         <div class="card-header">
-            <h3 class="card-title">View Test Results for Episode {{ $episode->episode_code }}</h3>
+            <h3 class="card-title">View Test Results for Episode <span class='text-warning'>[{{ $episode->episode_code }}]</span></h3>
         </div>
-        <div class="card-body">
+        <div class="card-body ">
             <h4>Patient Information</h4>
             <div class="row">
                 <div class="col-md-4">

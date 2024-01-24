@@ -21,8 +21,8 @@ class LabTests extends Model
         'test_time',
         'comment',
         'status',
-        'user_id',
-        'doctor_id',
+        'uploaded_by',
+        'refered_by',
     ];
 
     public function test()
@@ -56,6 +56,4 @@ class LabTests extends Model
         }
         throw new Exception("Test not found");
     }
-
-    // Additional methods and logic can be added here
 }

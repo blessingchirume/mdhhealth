@@ -30,7 +30,7 @@
     @csrf
     <div class="card card-primary m-3">
         <div class="card-header">
-            <h3 class="card-title">Select your desired tests</h3>
+            <h3 class="card-title">Select Tests</h3>
         </div>
         <div class="card-body">
             @foreach ($categories as $category)

@@ -30,7 +30,7 @@ class LabTestsController extends Controller
                 $test = new LabTests();
                 $test->category_id = $test->getCategoryForTest($testId);
                 $test->episode = $episode->id;
-                $test->doctor_id = Auth::user()->id;
+                $test->refered_by = Auth::user()->id;
                 $test->test = $testId;
                 $test->status = 'Pending';
                 $test->save();
