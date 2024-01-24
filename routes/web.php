@@ -4,6 +4,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\MedicalAidController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\PatientController;
@@ -18,6 +19,7 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
+use App\Http\Controllers\WardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,6 +85,10 @@ Route::middleware('auth')->group(function () {
         });
     });
 
+    Route::prefix('laboratory')->group(function(){
+        Route::get('/', [LaboratoryController::class, 'index'])->name('laboratory.index');
+    });
+
     Route::prefix('/medicalaid')->group(function () {
         Route::get('/', [PartnerController::class, 'index'])->name('medicalaid.index');
         Route::get('/{partner}', [PartnerController::class, 'show'])->name('medicalaid.show');
@@ -93,6 +99,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/designation')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
+        Route::get('/wards', [WardController::class, 'index'])->name('designation.ward.index');
+        Route::get('/wards/{ward}', [WardController::class, 'show'])->name('designation.ward.show');
+        Route::get('/wards/{ward}/edit', [WardController::class, 'show'])->name('designation.ward.edit');
+        Route::post('/wards', [WardController::class, 'store'])->name('designation.ward.store');
         Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
     });
 
