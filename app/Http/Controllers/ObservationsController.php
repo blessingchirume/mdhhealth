@@ -25,9 +25,9 @@ class ObservationsController extends Controller
             $observation->episode_id = $episode->id;
             $observation->user_id = Auth::user()->name;
             $observation->observation = $request->observation;
-            $observation->complaints = $request->compalaints;
-            $observation->complaints_history = $request->complaints_history;
-            $observation->notes = $request->notes;
+            $observation->complaints = $request->compalaints??null;
+            $observation->complaints_history = $request->complaints_history??null;
+            $observation->notes = $request->notes??null;
             $observation->origin = 'Observations';
             $observation->setCreatedAt(date('Y-m-d H:i'));
             $observation->save();
