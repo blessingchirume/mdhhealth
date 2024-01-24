@@ -81,6 +81,7 @@ class VitalsController extends Controller
             ];
 
             Vital::insert($vitals);
+            
             Observation::create([
                 'episode_id' => $episode->id,
                 'user_id'=> Auth::user()->name,

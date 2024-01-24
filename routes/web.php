@@ -18,6 +18,7 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
+use App\Http\Controllers\AppointmentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -195,3 +196,13 @@ Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::clas
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
 });
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
+
+
+Route::prefix('/appointments')->group(function () {
+    Route::get('/create', [AppointmentsController::class, 'index'])->name('create-appointment');
+    Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
+    Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
+    Route::get('/fetch', [AppointmentsController::class, 'index'])->name('show-appointments');
+    Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
+});
+
