@@ -9,6 +9,8 @@ class Ward extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function beds()
     {
         return $this->hasMany(Bed::class, 'ward_id', 'id');

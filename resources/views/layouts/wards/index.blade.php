@@ -22,7 +22,7 @@
                                 <i class="fa fa-plus"></i> Generate
                             </button>
                             @endcan
-                        </div>         
+                        </div>
                     </div>
                     <div class="card-body p-0">
                         <table id="table1" class="table data-table table-bordered">
@@ -46,9 +46,16 @@
                                     <td>{{ $value->beds->count() }}</td>
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
-                                    @can(App\constants\PermisionConstants::viewPayment)
-                                    <td>actions[view, edit, delete]</td>
-                                    @endcan
+                                    <td>
+                                        <center>
+                                            @can(App\constants\PermisionConstants::viewPatient)
+                                            <a href="{{ route('designation.ward.show', $value)}}"><i class="fa fa-eye success mr-4"></i></a>
+                                            @endcan
+                                            @can(App\constants\PermisionConstants::updatePatient)
+                                            <a href="{{ route('designation.ward.edit', $value)}}"><i class="fa fa-edit success"></i></a>
+                                            @endcan
+                                        </center>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -72,71 +79,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="episode_form" method="post" action="{{ route('payment.store') }}">
+                <form id="episode_form" method="post" action="{{ route('designation.ward.store') }}">
                     {{ csrf_field() }}
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label for="name">Designation</label>
-                                <select name="ward" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
+                                <select name="type_id" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
                                     @foreach($designations as $index => $designation)
                                     <option value="{{ $designation->id }}" selected="selected">{{ $designation->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Patient</label>
-                                <select name="patient_id" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    
-                                </select>
-                            </div>
-                        </div>
+                        </div>                 
                     </div>
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="name">Patient Group</label>
-                                <select name="patient_type" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="InPatient" selected="selected">In Patient</option>
-                                    <option value="OutPatient" selected="selected">Out Patient</option>
-                                </select>
+                                <label for="name">Name</label>
+                                <input class="form-control" name="name" type="text" placeholder="name" required>
                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Payment Method</label>
-                                <select name="" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="Cash" selected="selected">Cash</option>
-                                    <option value="Medical_aid">Medica Aid</option>
-                                </select>
-                            </div>
-                        </div>
+                        </div>                       
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Amount</label>
-                                <input class="form-control" name="amount" type="number" placeholder="Date of birth" required>
-
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Narration</label>
-                                <input class="form-control" name="narration" type="text" placeholder="Payment narration" required>
-                            </div>
-                        </div>
-                    </div>
-                    {{--<div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="name">Narration</label>
-                                <input class="form-control" name="narration" type="text" placeholder="Payment narration" required>
-                            </div>
-                        </div>
-                    </div>--}}
                 </form>
             </div>
             <div class="card-footer">

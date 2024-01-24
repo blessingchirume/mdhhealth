@@ -14,4 +14,25 @@ class WardController extends Controller
         $designations = Designation::all();
         return view('layouts.wards.index', compact('wards', 'designations'));
     }
+
+    public function show(Ward $ward)
+    {
+        $wards = Ward::all();
+        return view('layouts.wards.show', compact('ward'));
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'type_id' => 'required',
+            'name' => 'required'
+        ]);
+        try {
+            $ward = Ward::create($data);
+
+            return back()->with('success', 'successful');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
 }

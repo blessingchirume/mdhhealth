@@ -97,6 +97,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/designation')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
         Route::get('/wards', [WardController::class, 'index'])->name('designation.ward.index');
+        Route::get('/wards/{ward}', [WardController::class, 'show'])->name('designation.ward.show');
+        Route::get('/wards/{ward}/edit', [WardController::class, 'show'])->name('designation.ward.edit');
+        Route::post('/wards', [WardController::class, 'store'])->name('designation.ward.store');
         Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
     });
 
