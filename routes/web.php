@@ -19,6 +19,7 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
+use App\Http\Controllers\WardController;
 
 /*
 |--------------------------------------------------------------------------
