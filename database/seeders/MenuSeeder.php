@@ -116,7 +116,43 @@ class MenuSeeder extends Seeder
             'url' => 'users.index',
             'parent_id' => null,
             'order' => 1,
-            
+
         ]);
+        Menu::create([
+           'name'=>'Laboratory',
+           'display_name'=>'Laboratory',
+           'icon'=>'fa-flask',
+           'url'=>null,
+           'parent_id'=>null,
+           'order'=>1
+        ]);
+
+        Menu::create([
+            'name'=>'Test Booking',
+            'display_name'=>'Test Booking',
+            'icon'=>'fa-circle',
+            'url'=>'laboratory.index',
+            'parent_id'=>13,
+            'order'=>1
+        ]);
+
+        Menu::create([
+            'name'=>'vitals',
+            'display_name'=>'Vitals',
+            'icon'=>'fa-heartbeat',
+            'url'=>null,
+            'parent_id'=>null,
+            'order'=>1
+        ]);
+
+        Menu::create([
+            'name'=>'vitals',
+            'display_name'=>'Vitals Queue',
+            'icon'=>'fa-circle',
+            'url'=>'patient.vitals.index',
+            'parent_id'=>15,
+            'order'=>1
+        ]);
+
     }
 }

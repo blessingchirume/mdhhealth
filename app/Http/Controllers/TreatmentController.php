@@ -12,6 +12,8 @@ use App\Models\Note;
 use App\Models\Icd10Code;
 use App\Models\Item;
 use App\Models\TreatmentPlan;
+use App\Models\ChargeSheet;
+use App\Models\ChargesheetItem;
 
 class TreatmentController extends Controller
 {
@@ -26,20 +28,17 @@ class TreatmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function recordTreatment(Request $request)
+    public function recordTreatment(Request $request, Episode $episode)
     {
 
         $patientId = $request->input('patient_id');
         $treatmentDetails = $request->input('treatment_details');
-        $episode = $request->input('episode');
 
-
-        $episode = Episode::findOrFail($episode);
-
+        $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
         // Create a new treatment record
-        $treatment = new Treatment();
-        $treatment->patient_id = $episode->patient;
-        $treatment->episode_id = $episode->id;
+        $treatment = new ChargesheetItem();
+        $treatment->charge_sheet_id = $chargeSheet->id;
+        $treatment->item_id = null;
         $treatment->save();
 
         if ($request->has('note')) {
@@ -49,7 +48,7 @@ class TreatmentController extends Controller
             $treatment->notes()->save($note);  // Assuming belongsTo relationship
         }
 
-        return redirect()->back()->with('success', 'Treatment recorded successfully!');
+        return response()->json(ChargesheetItem::where('charge_sheet_id',$chargeSheet->id)->get(), 200);
     }
 
     public function show(Episode $episode)
@@ -58,18 +57,7 @@ class TreatmentController extends Controller
         $patient = $episode->patient;
         $notes = $episode->notes;
 
-        $treatments = [
-            [
-                'drug' => 'Paracetamol',
-                'dose' => '500mg',
-                'date' => date('Y-m-d')
-            ],
-            [
-                'drug' => 'Diclo',
-                'dose' => '250mg',
-                'date' => date('Y-m-d')
-            ],
-        ];
+        $treatments = TreatmentPlan::where('episode_id', $episode->id)->get();
 
         return view('layouts.patients.visits.treatment', compact('treatments', 'patient', 'notes', 'episode'));
     }

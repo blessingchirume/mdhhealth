@@ -132,8 +132,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get(
         'test-booking/{episode}',
+        [\App\Http\Controllers\LabTestsController::class, 'book']
+    )->name('test-booking');
+
+    Route::get(
+        'laboratory',
         [\App\Http\Controllers\LabTestsController::class, 'index']
-    )->name('lab-tests.create');
+    )->name('laboratory.index');
 
     Route::get(
         'lab-results/{episode}',
@@ -177,11 +182,13 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('/vitals')->group(function () {
+        Route::get('/', [VitalsController::class, 'index'])->name('patient.vitals.index');
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/record/{episode}', [VitalsController::class, 'create'])->name('patient.vitals.create');
         Route::post('/record-vitals/{episode}', [VitalsController::class, 'recordVitals'])->name('episode.record-vital');
     });
     Route::prefix('/treatment')->group(function () {
-        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.treatments.view');
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
 
     });
