@@ -22,9 +22,6 @@
                         <li class="nav-item">
                             <a class="nav-link" id="custom-content-below-home-tab" data-toggle="pill" href="#patient-details-acruals" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Acruals</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="custom-content-below-messages-tab" data-toggle="pill" href="#custom-content-below-messages" role="tab" aria-controls="custom-content-below-messages" aria-selected="false">Update</a>
-                        </li>
                     </ul>
                     <div class="tab-content" id="custom-content-below-tabContent">
                         <div class="tab-pane fade show active" id="custom-content-below-home" role="tabpanel" aria-labelledby="custom-content-below-home-tab">
@@ -108,48 +105,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="custom-content-below-messages" role="tabpanel" aria-labelledby="custom-content-below-messages-tab">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form method="post" action="">
-                                        {{ csrf_field() }}
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="name">id number</label>
-                                                    <input class="form-control" name="reading_number" value="43-170001N80" type="text" placeholder="id number" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="name">Plan</label>
-                                                    <select name="tank" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                                        <option value="" selected="selected">Cash</option>
-                                                        <option value="" selected="selected">Medical aid</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input class="form-control" name="purchase" value="Blessing" type="text" placeholder="Name" required>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-6">
-                                                <div class="form-group">
-                                                    <label for="name">Surname</label>
-                                                    <input class="form-control" name="opening_balance" value="Chirume" type="text" placeholder="Surname" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

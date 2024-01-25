@@ -22,7 +22,7 @@
     @yield('styles')
 </head>
 
-<body class="hold-transition">
+<body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
         <!-- Navbar -->
