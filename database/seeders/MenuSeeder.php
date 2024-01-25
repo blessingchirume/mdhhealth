@@ -15,6 +15,7 @@ class MenuSeeder extends Seeder
      */
     public function run()
     {
+        Menu::truncate();
         Menu::create([
             'name' => 'dashboard',
             'display_name' => 'Dashboard',
@@ -122,8 +123,8 @@ class MenuSeeder extends Seeder
            'name'=>'Laboratory',
            'display_name'=>'Laboratory',
            'icon'=>'fa-flask',
-           'url'=>null,
-           'parent_id'=>null,
+           'url'=>'laboratory.index',
+           'parent_id'=>3,
            'order'=>1
         ]);
 
@@ -140,8 +141,8 @@ class MenuSeeder extends Seeder
             'name'=>'vitals',
             'display_name'=>'Vitals',
             'icon'=>'fa-heartbeat',
-            'url'=>null,
-            'parent_id'=>null,
+            'url'=>'patient.vitals.index',
+            'parent_id'=>3,
             'order'=>1
         ]);
 
@@ -151,6 +152,23 @@ class MenuSeeder extends Seeder
             'icon'=>'fa-circle',
             'url'=>'patient.vitals.index',
             'parent_id'=>15,
+            'order'=>1
+        ]);
+
+        Menu::create([
+            'name'=>'appointments',
+            'display_name'=>'Appointments',
+            'icon'=>'fa-calendar',
+            'url'=>'appointments',
+            'parent_id'=>3,
+            'order'=>1
+        ]);
+        Menu::create([
+            'name'=>'appointments',
+            'display_name'=>'View Appointments',
+            'icon'=>'fa-circle',
+            'url'=>'appointments',
+            'parent_id'=>17,
             'order'=>1
         ]);
 
