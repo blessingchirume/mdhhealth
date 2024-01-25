@@ -44,6 +44,10 @@
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
                                     <td> 
+                                        <a href="{{ route('designation.ward.index', $value->id) }}">
+                                            <i class="fas fa-edit"></i> 
+                                        </a>
+
                                         <a href="/designation/1">
                                             <i class="fas fa-edit"></i> 
                                         </a>

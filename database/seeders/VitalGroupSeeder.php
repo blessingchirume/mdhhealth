@@ -26,6 +26,9 @@ class VitalGroupSeeder extends Seeder
         VitalGroup::create([
             'name' => 'Temperature'
         ]);
+        VitalGroup::create([
+            'name' => 'HR'
+        ]);
 
         VitalGroup::create([
             'name' => 'Glucose'

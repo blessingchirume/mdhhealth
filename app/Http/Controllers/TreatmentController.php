@@ -62,9 +62,10 @@ class TreatmentController extends Controller
         return view('layouts.patients.visits.treatment', compact('treatments', 'patient', 'notes', 'episode'));
     }
 
-    public function observation(Episode $episode)
+    public function observation()
     {
 
+        $episode = Episode::findOrFail(1);
         $patient = $episode->patient;
         $notes = $episode->notes;
 
