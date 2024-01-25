@@ -206,10 +206,11 @@ Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,
 
 
 Route::prefix('/appointments')->group(function () {
-    Route::get('/create', [AppointmentsController::class, 'index'])->name('create-appointment');
+    Route::get('/', [AppointmentsController::class,'index'])->name('appointments');
+    Route::get('/create', [AppointmentsController::class, 'create'])->name('create-appointment');
     Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
     Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
-    Route::get('/fetch', [AppointmentsController::class, 'index'])->name('show-appointments');
+    Route::get('/fetch', [AppointmentsController::class, 'fetch'])->name('fetch-appointments');
     Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
 });
 

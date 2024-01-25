@@ -1,5 +1,5 @@
 <div>
-    <select wire:model="selectedPatientId" class="form-control" id="patientSearch">
+    <select wire:model="selectedPatientId" class="form-control" id="patientSearch" name='patient'>
         <option value="">Select a patient</option>
         @foreach ($patients as $patient)
             <option value="{{ $patient->id }}">{{ $patient->name }}</option>

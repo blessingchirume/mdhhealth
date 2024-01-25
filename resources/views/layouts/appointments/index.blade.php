@@ -32,29 +32,37 @@
                     });
                 });
             </script>
-
-            <div id='calendar'></div>
-
-            <br/>
-           <form id="booking-form" action="{{ route('book-appointment') }}" method="POST">
-               @csrf
-               <div class="row">
-                   <div class="col-md-5 mb-3">
-                       <livewire:patient-search />
-                   </div>
-                   <div class="col-md-3 mb-3">
-                       <input type="date" name="date" class="form-control">
-                   </div>
-                   <div class="col-md-2 mb-3">
-                       <input type="time" name="start_time" class="form-control">
-                   </div>
-                   <div class="col-md-2 mb-3">
-                       <input type="time" name="end_time" class="form-control">
-                   </div>
-               </div>
-               <button type="submit" class="btn btn-primary">Book Appointment</button>
-               <a href="/appointments" class="btn btn-secondary">Cancel</a>
-           </form>
+            <div class="row">
+                <div class='col-md-8'>
+                    <div id='calendar'></div>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <h3>Create Appointment</h3><br>
+                    <form id="booking-form" action="{{ route('book-appointment') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="Patient">Select Patient</label>
+                                <livewire:patient-search />
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="date">Appointment Date</label>
+                                <input type="date" name="date" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="start_time">Start Time</label>
+                                <input type="time" name="start_time" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="end_time">End Time</label>
+                                <input type="time" name="end_time" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book Appointment</button>
+                        <a href="/appointments" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
