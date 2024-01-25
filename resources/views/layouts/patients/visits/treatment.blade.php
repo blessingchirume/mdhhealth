@@ -30,12 +30,11 @@
 
                     </div>
                     <div class="card-body">
-                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
-                            data-target="#administerTreatmentModal">
-                            Administer Treatment
-                        </button>
                         <table class="table table-bordered">
                             <thead>
+                                <tr>
+                                    <th colspan="3">Treatment Plan</th>
+                                </tr>
                                 <tr>
                                     <th style="width: 65%;">Treatment/Drug</th>
                                     <th style="width: 15%;">Dosage</th>
@@ -43,13 +42,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($treatments as $index => $value)
-                                <tr>
-                                    <td>{{ $value['drug'] }}</td>
-                                    <td>{{ $value['dose'] }}</td>
-                                    <td>{{ $value['date'] }}</td>
-                                </tr>
+                                @foreach ($treatments as $index => $value)
+                                    <tr>
+                                        <td>{{ $value['medication'] }}</td>
+                                        <td>{{ $value['dosage'] }}</td>
+                                        <td>{{ $value['frequency'] }}</td>
+                                    </tr>
                                 @endforeach
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                            data-target="#administerTreatmentModal">
+                            Administer Treatment
+                        </button>
+                        <table class="table table-bordered" id="administered">
+                            <thead>
+                                <tr>
+                                    <th colspan="3">Administered Treatments</th>
+                                </tr>
+                                <tr>
+                                    <th style="width: 65%;">Treatment/Drug</th>
+                                    <th style="width: 15%;">Dosage</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -64,14 +86,19 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="post" action="{{ route('administer-treatment', $patient->id) }}">
+                                        <form method="post" id="treatmentForm" action="">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-12 col-md-8">
                                                     <div class="form-group">
                                                         <label for="treatment">Treatment/Drug</label>
-                                                        <input type="text" class="form-control" id="treatment"
+                                                        <select type="text" class="form-control" id="treatment"
                                                             name="treatment" required>
+                                                            @foreach ($treatments as $index => $value)
+                                                                <option value="{{ $value['id'] }}">
+                                                                    {{ $value['medication'] }}</option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-12 col-md-4">
@@ -98,4 +125,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $('#treatmentForm').on('submit', function(e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                url: '{{ route('administer-treatment', $episode->id) }}', // Replace with your server endpoint
+                type: 'POST', // Or 'GET' if you're retrieving data
+                data: formData,
+                success: function(response) {
+                    // Update the table with the administered ID
+                    $('#administered tbody').append(`
+            <tr>
+                <td>${response.medication}</td>
+                <td>${response.dosage}</td>
+                <td>${response.frequency}</td>
+            </tr>
+        `);
+                }
+            });
+        });
+    </script>
 @stop

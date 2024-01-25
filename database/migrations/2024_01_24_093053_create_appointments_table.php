@@ -13,17 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('observations', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
-            $table->string('episode_id');
-            $table->string('user_id');
-            $table->string('origin');
-            $table->string('observation')->nullable();
-            $table->string('complaints')->nullable();;
-            $table->string('complaints_history')->nullable();;
-            $table->string('notes')->nullable();;
+            $table->string('date');
+            $table->string('time');
+            $table->string('status')->default('Available');
+            $table->unsignedBigInteger('patient_id');
+            $table->unsignedBigInteger('doctor_id');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
-            });
+        });
     }
 
     /**
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('appointments');
     }
 };

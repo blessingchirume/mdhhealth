@@ -7,18 +7,25 @@ use App\Models\TestCategory;
 use Illuminate\Http\Request;
 use App\Models\Episode;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Patient;
 use Exception;
 use Log;
 
 class LabTestsController extends Controller
 {
-    public function index(Episode $episode)
+    public function book(Episode $episode)
     {
         $categories = TestCategory::with('tests')->get();
         $age = PatientController::calculateAge($episode->patient->dob);
 
         return view('layouts.lab.lab', compact('categories', 'episode', 'age'));
     }
+
+    public function index(){
+        $episodes = Episode::with('labTests')->get();
+        return view('layouts.lab.index', compact('episodes'));
+    }
+    
     public function store(Request $request, Episode $episode)
     {
         $validatedData = $request->validate([

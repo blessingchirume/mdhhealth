@@ -38,4 +38,9 @@ class Episode extends Model
     public function designations() {
         return $this->hasMany(Designation::class);
     }
+
+    public function labTests()
+    {
+        return $this->hasMany(LabTests::class,'episode');
+    }
 }

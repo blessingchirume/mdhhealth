@@ -19,7 +19,9 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -141,8 +143,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get(
         'test-booking/{episode}',
+        [\App\Http\Controllers\LabTestsController::class, 'book']
+    )->name('test-booking');
+
+    Route::get(
+        'laboratory',
         [\App\Http\Controllers\LabTestsController::class, 'index']
-    )->name('lab-tests.create');
+    )->name('laboratory.index');
 
     Route::get(
         'lab-results/{episode}',
@@ -186,11 +193,13 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('/vitals')->group(function () {
+        Route::get('/', [VitalsController::class, 'index'])->name('patient.vitals.index');
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/record/{episode}', [VitalsController::class, 'create'])->name('patient.vitals.create');
         Route::post('/record-vitals/{episode}', [VitalsController::class, 'recordVitals'])->name('episode.record-vital');
     });
     Route::prefix('/treatment')->group(function () {
-        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.treatments.view');
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
 
     });
@@ -205,3 +214,13 @@ Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::clas
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
 });
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
+
+
+Route::prefix('/appointments')->group(function () {
+    Route::get('/create', [AppointmentsController::class, 'index'])->name('create-appointment');
+    Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
+    Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
+    Route::get('/fetch', [AppointmentsController::class, 'index'])->name('show-appointments');
+    Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
+});
+

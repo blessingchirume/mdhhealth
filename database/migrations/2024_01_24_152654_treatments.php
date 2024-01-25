@@ -13,17 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('observations', function (Blueprint $table) {
+        Schema::create('treatments', function (Blueprint $table) {
             $table->id();
-            $table->string('episode_id');
-            $table->string('user_id');
-            $table->string('origin');
-            $table->string('observation')->nullable();
-            $table->string('complaints')->nullable();;
-            $table->string('complaints_history')->nullable();;
-            $table->string('notes')->nullable();;
+            $table->string('item');
+            $table->string('episode');
+            $table->string('price');
+            $table->string('quantity');
+            $table->string('total');
+            $table->string('discount')->nullable();
+            $table->string('additional_notes')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
-            });
+        });
     }
 
     /**

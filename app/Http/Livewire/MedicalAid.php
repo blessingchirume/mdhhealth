@@ -33,5 +33,5 @@ class MedicalAid extends Component
         $this->packages = Package::where('partner_id',$this->provider)->get();
     }
 
-    
+
 }
