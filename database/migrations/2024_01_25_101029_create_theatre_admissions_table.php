@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('theatre_admissions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('episode')->constrained('episodes')->cascadeOnDelete();
+            $table->foreignId('episode_id')->constrained('episodes')->cascadeOnDelete();
             $table->foreignId('room')->constrained('theatre_rooms')->cascadeOnDelete();
             $table->string('doctor');
             $table->string('date');

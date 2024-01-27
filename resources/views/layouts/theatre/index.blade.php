@@ -12,8 +12,9 @@
                     <thead>
                         <tr>
                             <th>Patient Name</th>
-                            <th>Episode Details</th>
+                            <th>Episode</th>
                             <th>Room</th>
+                            <th>Status</th>
                             <th>Date</th>
                             <th>time</th>
                             <th>Action</th>
@@ -26,10 +27,21 @@
                                 <td>{{ $admission->patient->name ?? 'Unknown Patient' }}</td>
                                 <td>{{ $admission->episode_code ?? 'No Details' }}</td>
                                 <td>{{ $theatreAdmission->theatreRoom->room ?? 'No Details' }}</td>
+                                <td>{{ $theatreAdmission->status ?? 'No Details' }}</td>
                                 <td>{{ $theatreAdmission->date ?? 'No Details' }}</td>
                                 <td>{{ $theatreAdmission->time_in ?? 'No Details' }}</td>
                                 <td>
-                                    <a href="/calculate-bill/{{ $admission->id }}" class="btn btn-primary">Calculate Bill</a>
+                                    @if($theatreAdmission->status == 'Pending')
+                                        <a href="{{route('surgery_start', $theatreAdmission->id) }}" class="btn btn-primary">Send to Theatre</a>
+                                    @elseif($theatreAdmission->status == 'In-surgery')
+                                            <a href="{{route('surgery_end', $theatreAdmission->id) }}" class="btn btn-danger">End Surgery</a>
+
+                                            <!-- <livewire:surgery-duration-tracker :admissionId="$theatreAdmission->id" /-->
+                                    @elseif($theatreAdmission->status == 'Completed')
+                                        <a href="/calculate-bill/{{ $admission->id }}" class="btn btn-primary">Calculate Bill</a>
+                                    @else
+                                        Status Unknown
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach

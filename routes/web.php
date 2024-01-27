@@ -22,6 +22,7 @@ use App\Http\Controllers\EmergencyRoomAdmissionsController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
 use App\Http\Controllers\TheatreController;
+use App\Http\Controllers\SurgeryController;
 
 
 /*
@@ -234,3 +235,7 @@ Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theat
 Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
 Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
 Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');
+
+
+Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
+Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');

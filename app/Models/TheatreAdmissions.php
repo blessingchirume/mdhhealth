@@ -10,7 +10,7 @@ class TheatreAdmissions extends Model
     use HasFactory;
 
     protected $fillable = [
-        'episode',
+        'episode_id',
         'room',
         'doctor',
         'date',
@@ -30,6 +30,9 @@ class TheatreAdmissions extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
 
+    public function episode(){
+        return $this->belongsTo(Episode::class, 'episode_id', 'id');
+    }
     public function theatreRoom(){
         return $this->belongsTo(TheatreRooms::class, 'room', 'id');
     }

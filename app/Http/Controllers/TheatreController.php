@@ -28,7 +28,7 @@ class TheatreController extends Controller
 
         try {
             $toTheatre = TheatreAdmissions::create([
-                'episode' => $request->episode_id,
+                'episode_id' => $request->episode_id,
                 'room' => $request->room,
                 'doctor' => $request->doctor,
                 'date' => $request->date,

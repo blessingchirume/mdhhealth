@@ -45,6 +45,6 @@ class Episode extends Model
     }
 
     public function theatreAdmissions() {
-        return $this->hasMany(TheatreAdmissions::class, 'episode', 'id');
+        return $this->hasMany(TheatreAdmissions::class, 'episode_id', 'id');
     }
 }
