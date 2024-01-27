@@ -18,6 +18,6 @@ class TheatreRooms extends Model
     ];
 
     public function theatreAdminssions(){
-        return $this->hasMany(TheatreAdminssions::class,'room','id');
+        return $this->hasMany(TheatreAdmissions::class,'room','id');
     }
 }

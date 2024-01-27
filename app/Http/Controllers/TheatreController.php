@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
-use App\Models\TheatreAdminssions;
+use App\Models\TheatreAdmissions;
 use App\Models\Episode;
 use Auth;
 use Exception;
@@ -13,9 +13,9 @@ class TheatreController extends Controller
 {
     public function index()
     {
-        $theatre_admissions = TheatreAdminssions::with('episode')->get();
+        $admissions = Episode::has('theatreAdmissions')->with('theatreAdmissions', 'theatreAdmissions.theatreRoom')->get();
 
-        return view('layouts.theatre.index', compact('theatre_admissions'));
+        return view('layouts.theatre.index', compact('admissions'));
     }
 
     public function sendToTheatreQueue()
@@ -27,7 +27,7 @@ class TheatreController extends Controller
     {
 
         try {
-            $toTheatre = TheatreAdminssions::create([
+            $toTheatre = TheatreAdmissions::create([
                 'episode' => $request->episode_id,
                 'room' => $request->room,
                 'doctor' => $request->doctor,

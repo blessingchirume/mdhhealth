@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TheatreAdminssions extends Model
+class TheatreAdmissions extends Model
 {
     use HasFactory;
 
@@ -24,9 +24,11 @@ class TheatreAdminssions extends Model
         'updated_at',
     ];
 
-    public function episode(){
-        return $this->belongsTo(Episode::class, 'episode', 'id');
-    }
+    /**
+     * Retrieve the episode associated with the model.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
 
     public function theatreRoom(){
         return $this->belongsTo(TheatreRooms::class, 'room', 'id');
