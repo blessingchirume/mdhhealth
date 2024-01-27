@@ -224,7 +224,7 @@ Route::prefix('/appointments')->group(function () {
     Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
     Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
     Route::get('/fetch', [AppointmentsController::class, 'fetch'])->name('fetch-appointments');
-    Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
+    Route::get('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
 });
 
 

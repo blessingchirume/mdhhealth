@@ -29,4 +29,8 @@ class patient extends Model
     public function guarantor() {
         return $this->hasOne(Gurantor::class);
     }
+
+    public function appointments() {
+        return $this->hasMany(Appointment::class);
+    }
 }

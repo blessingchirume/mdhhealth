@@ -18,4 +18,8 @@ class Doctor extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function appointments(){
+        return $this->hasMany(Appointment::class,'doctor_id');
+    }
 }

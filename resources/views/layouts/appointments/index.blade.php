@@ -23,13 +23,6 @@
 
                     calendar.render();
 
-                    // Handle appointment booking form submission
-                    document.getElementById('booking-form').addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        var formData = new FormData(this);
-                        // Make an AJAX request to create a new appointment
-                        // ...
-                    });
                 });
             </script>
             <div class="row">
@@ -45,17 +38,13 @@
                                 <label for="Patient">Select Patient</label>
                                 <livewire:patient-search />
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="date">Appointment Date</label>
-                                <input type="date" name="date" class="form-control">
-                            </div>
                             <div class="col-md-6 mb-3">
                                 <label for="start_time">Start Time</label>
-                                <input type="time" name="start_time" class="form-control">
+                                <input type="datetime-local" name="start_time" class="form-control">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="end_time">End Time</label>
-                                <input type="time" name="end_time" class="form-control">
+                                <input type="date_time" name="end_time" class="form-control">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Book Appointment</button>
