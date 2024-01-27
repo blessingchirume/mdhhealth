@@ -44,7 +44,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="end_time">End Time</label>
-                                <input type="date_time" name="end_time" class="form-control">
+                                <input type="datetime-local" name="end_time" class="form-control">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Book Appointment</button>
