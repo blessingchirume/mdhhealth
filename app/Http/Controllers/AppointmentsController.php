@@ -38,6 +38,10 @@ class AppointmentsController extends Controller
     }
     public function create(Request $request)
     {
+        echo $request->input('start_time');
+        echo $request->input('end_time');
+        echo $request->input('date');
+        echo $request->input('patient');
         try {
             $appointment = Appointment::create([
                 'date' => $request->input('date'),

@@ -171,6 +171,13 @@ class MenuSeeder extends Seeder
             'parent_id'=>17,
             'order'=>1
         ]);
-
+Menu::create([
+    'name'=>'theatre',
+    'display_name'=>'Theatre',
+    'icon'=>'fa-circle',
+    'url'=>'theatre.index',
+    'parent_id'=>3,
+    'order'=>1
+]);
     }
 }

@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
+use App\Http\Controllers\TheatreController;
 
 
 /*
@@ -225,3 +226,11 @@ Route::prefix('/appointments')->group(function () {
     Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
 });
 
+
+Route::post('/send-to-theatre', [TheatreController::class,'sendToTheatre'])->name('send-to-theatre');
+Route::get('/calculate-bill/{episode}', [TheatreController::class,'calculateBill'])->name('calculate-bill');
+Route::get('/theatre', [TheatreController::class,'index'])->name('theatre.index');
+Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theatre.show');
+Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
+Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
+Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');

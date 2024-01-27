@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
-            $table->string('status')->default('Available');
+            $table->string('status')->default('Booked');
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->unsignedBigInteger('created_by')->nullable();
