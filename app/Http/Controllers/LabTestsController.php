@@ -18,14 +18,14 @@ class LabTestsController extends Controller
         $categories = TestCategory::with('tests')->get();
         $age = PatientController::calculateAge($episode->patient->dob);
 
-        return view('layouts.lab.lab', compact('categories', 'episode', 'age'));
+        return view('layouts.laboratory.lab-booking', compact('categories', 'episode', 'age'));
     }
 
     public function index(){
         $episodes = Episode::with('labTests')->get();
-        return view('layouts.lab.index', compact('episodes'));
+        return view('layouts.laboratory.index', compact('episodes'));
     }
-    
+
     public function store(Request $request, Episode $episode)
     {
         $validatedData = $request->validate([

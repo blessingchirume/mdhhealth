@@ -17,4 +17,8 @@ class ChargeSheet extends Model
     public function episode(){
         return $this->belongsToMany(Episode::class);
     }
+
+    public function chargesheetitems() {
+        return $this->hasMany(ChargesheetItem::class);
+    }
 }

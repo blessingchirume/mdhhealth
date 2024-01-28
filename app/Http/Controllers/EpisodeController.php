@@ -26,7 +26,9 @@ class EpisodeController extends Controller
 
     public function index()
     {
-        //
+        $episodes = Episode::all();
+
+        return view('layouts.patients.episodes.index', compact('episodes'));
     }
 
     public function create()
@@ -107,7 +109,7 @@ class EpisodeController extends Controller
                 $base_amount += (int)($item->pivot->quantity) * (int)($episode->patient->medicalaid->package->itemPrice($item->id, $episode->patient->medicalaid->package->id)->price);
                 $amount_due += (int)($item->pivot->quantity) * (int)($episode->patient->medicalaid->package->itemPrice($item->id, $episode->patient->medicalaid->package->id)->price);
             }
-            $episode->update(['amount_due' => $amount_due, 'base_amount' => $base_amount]);           
+            $episode->update(['amount_due' => $amount_due, 'base_amount' => $base_amount]);
             return redirect()->back()->with('success', 'comment added successfully!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
@@ -138,7 +140,7 @@ class EpisodeController extends Controller
                 'business id' => '365#GG',
             ],
         ]);
-        
+
         $customer = new Party([
             'name'          => $episode->patient->name. " " .$episode->patient->surname,
             'address'       => $episode->patient->address,
@@ -147,9 +149,9 @@ class EpisodeController extends Controller
                 'Episode number' => $episode->episode_code,
             ],
         ]);
-        
+
         $items = [
-            
+
             // InvoiceItem::make('Service 2')->pricePerUnit(71.96)->quantity(2),
             // InvoiceItem::make('Service 3')->pricePerUnit(4.56),
             // InvoiceItem::make('Service 4')->pricePerUnit(87.51)->quantity(7)->discount(4)->units('kg'),
@@ -177,14 +179,14 @@ class EpisodeController extends Controller
             ->quantity((int)$value->pivot->quantity)
             ->discount(1.00));
         }
-        
+
         $notes = [
             'your multiline',
             'additional notes',
             'in regards of delivery or something else',
         ];
         $notes = implode("<br>", $notes);
-        
+
         $invoice = Invoice::make('chargesheet')
             ->series('BIG')
             // ability to include translated invoice status
@@ -209,10 +211,10 @@ class EpisodeController extends Controller
             ->payUntilDays(10)
             // You can additionally save generated invoice to configured disk
             ->save('public');
-        
+
         $link = $invoice->url();
         // Then send email to party with link
-        
+
         // And return invoice itself to browser or have a different view
         return $invoice->stream();
     }

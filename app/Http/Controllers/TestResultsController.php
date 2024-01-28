@@ -42,7 +42,7 @@ class TestResultsController extends Controller
         $bookedTests = $this->arrayToObject($bookedLabTests);
 
         $age = PatientController::calculateAge($episode->patient->dob);
-        return view('layouts.lab.add-results', compact('episode', 'bookedTests', 'age'));
+        return view('layouts.laboratory.add-results', compact('episode', 'bookedTests', 'age'));
     }
     public function addResults(Request $request)
     {
@@ -73,7 +73,7 @@ class TestResultsController extends Controller
             ->select('lab_tests.*', 'tests.name')
             ->get();
         $age = PatientController::calculateAge($episode->patient->dob);
-        return view('layouts.lab.view-results', compact('episode', 'testResults', 'age'));
+        return view('layouts.laboratory.view-results', compact('episode', 'testResults', 'age'));
     }
     private function arrayToObject($array)
     {

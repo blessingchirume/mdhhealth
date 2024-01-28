@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
 use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
+use App\Http\Controllers\TheatreController;
+use App\Http\Controllers\SurgeryController;
 
 
 /*
@@ -217,10 +219,23 @@ Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,
 
 
 Route::prefix('/appointments')->group(function () {
-    Route::get('/create', [AppointmentsController::class, 'index'])->name('create-appointment');
+    Route::get('/', [AppointmentsController::class,'index'])->name('appointments');
+    Route::get('/create', [AppointmentsController::class, 'create'])->name('create-appointment');
     Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
     Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
-    Route::get('/fetch', [AppointmentsController::class, 'index'])->name('show-appointments');
-    Route::post('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
+    Route::get('/fetch', [AppointmentsController::class, 'fetch'])->name('fetch-appointments');
+    Route::get('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
 });
 
+
+Route::post('/send-to-theatre', [TheatreController::class,'sendToTheatre'])->name('send-to-theatre');
+Route::get('/calculate-bill/{episode}', [TheatreController::class,'calculateBill'])->name('calculate-bill');
+Route::get('/theatre', [TheatreController::class,'index'])->name('theatre.index');
+Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theatre.show');
+Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
+Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
+Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');
+
+
+Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
+Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');

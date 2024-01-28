@@ -43,4 +43,8 @@ class Episode extends Model
     {
         return $this->hasMany(LabTests::class,'episode');
     }
+
+    public function theatreAdmissions() {
+        return $this->hasMany(TheatreAdmissions::class, 'episode_id', 'id');
+    }
 }
