@@ -86,7 +86,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 ]);
             }elseif($request->input('admit_to') == 'ICU'){
                 $toTheatre = ICUAdmission::create([
-                    'admission_id' =>  $episode->id,
+                    'admission_id' =>  $admission->id,
                     'severity_score' => $request->severity_score,
                     'comment' => $request->reason_for_admission
                 ]);

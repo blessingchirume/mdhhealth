@@ -4,6 +4,7 @@
     <div class="card m-3">
         <div class="card-header">
             <h3 class="card-title">Emergency Room Admissions</h3>
+            <a href='{{ route('patient.index')}}' class='float-right btn btn-primary'>Admit Existing</a>
         </div>
         <div class="card-body">
             <form method="post" action="{{ route('emergency-room-admissions.store') }}">
@@ -48,6 +49,7 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+
                     <livewire:admission-selector />
                 </div>
                 <div class="col-md-12">

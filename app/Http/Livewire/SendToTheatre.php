@@ -43,7 +43,7 @@ class SendToTheatre extends Component
         $patients = Patient::all(); 
         $episodes = Episode::all();
         $theatres = TheatreRooms::all();
-        $doctors = Doctor::all();
+        $doctors = Doctor::getDoctors();
 
         return view('livewire.send-to-theatre', compact('patients', 'episodes', 'theatres','doctors'));
     }
