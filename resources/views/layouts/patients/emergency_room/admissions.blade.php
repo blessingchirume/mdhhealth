@@ -48,6 +48,9 @@
                     </div>
                 </div>
                 <div class="col-md-12">
+                    <livewire:admission-selector />
+                </div>
+                <div class="col-md-12">
                     <div class="form-group">
                         <label for="medical_history">Medical History / Reason For Admission:</label>
                         <textarea id="medical_history" name="medical_history" class="form-control"></textarea>

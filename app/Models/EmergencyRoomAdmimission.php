@@ -9,7 +9,7 @@ class EmergencyRoomAdmimission extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'age', 'gender', 'medical_history','status','created_by','episode'];
+    protected $fillable = ['name', 'age', 'gender', 'medical_history','status','created_by','episode', 'admit_to','type'];
 
     public function episode()
     {
@@ -19,5 +19,9 @@ class EmergencyRoomAdmimission extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'patient_id', 'id');
+    }
+
+    public function maternityAdmission(){
+        return $this->belongsTo(MaternityAdmission::class);
     }
 }
