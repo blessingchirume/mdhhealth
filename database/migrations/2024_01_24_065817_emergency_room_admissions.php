@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('medical_history')->nullable();
             $table->string('status')->default('Pending');
+            $table->string('admit_to')->default('Waiting Room');//Waiting Room, Ward, Theatre, ICU
+            $table->string('type')->default('In-Patient');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
         });

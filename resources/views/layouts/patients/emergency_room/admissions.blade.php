@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="card m-3">
+        <div class="card-header">
+            <h3 class="card-title">Emergency Room Admissions</h3>
+        </div>
         <div class="card-body">
             <form method="post" action="{{ route('emergency-room-admissions.store') }}">
                 @csrf
@@ -18,13 +21,23 @@
                             <input type="text" id="surname" name="surname" class="form-control">
                         </div>
                     </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="age">Age:</label>
                         <input type="text" id="age" name="age" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="patcategory">In/Out Patient:</label>
+                        <select type="text" id="patcategory" name="patcategory" class="form-control">
+                            <option value="">-- Select --</option>
+                            <option value="In-Patient">In-Patient</option>
+                            <option value="Out-Patient">Out-Patient</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="gender">Gender:</label>
                         <select type="text" id="gender" name="gender" class="form-control">
