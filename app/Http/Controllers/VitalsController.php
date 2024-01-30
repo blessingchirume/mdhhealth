@@ -81,13 +81,13 @@ class VitalsController extends Controller
             ];
 
             Vital::insert($vitals);
-            Observation::create([
-                'episode_id' => $episode->id,
-                'user_id'=> Auth::user()->name,
-                'observation' => $request->observation,
-                'complaints' => $request->complaints,
-                'origin'=>'Vitals'
-            ]);
+            // Observation::create([
+            //     'episode_id' => $episode->id,
+            //     'user_id'=> Auth::user()->name,
+            //     'observation' => $request->observation,
+            //     'complaints' => $request->complaints,
+            //     'origin'=>'Vitals'
+            // ]);
             return redirect()->back()->with('success', 'patient vitals recorded successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());

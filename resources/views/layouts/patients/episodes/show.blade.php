@@ -39,9 +39,13 @@
                             <h4 class="float-left">Vitals</h4>
                             <div class="float-right btn-group btn-group-sm">
                                 @can(App\constants\PermisionConstants::createVital)
-                                <button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
+                                {{--<button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
-                                </button>
+                                </button>--}}
+
+                                <a href="{{ route('patient.vitals.show', $episode) }}" class="btn btn-primary">
+                                    <i class="fa fa-plus"></i> Generate
+                                </a>
                                 @endcan
                             </div>
                         </div>
@@ -103,7 +107,7 @@
                                                 <td>{{ $value->item_group }}</td>
                                                 <td>{{ $value->pivot->quantity }}</td>
 
-                                                <td>{{ $episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price }}</td>
+                                                <td>{{ $episode->patient->medicalaid->package->itemPrice(1,2)->price }}</td>
                                                 <td>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
