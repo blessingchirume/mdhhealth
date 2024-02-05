@@ -188,5 +188,23 @@ class MenuSeeder extends Seeder
             'parent_id' => 3,
             'order' => 1
         ]);
+
+        Menu::create([
+            'name' => 'ICU',
+            'display_name' => 'ICU Admissions',
+            'icon' => 'fa-bed',
+            'url' => 'icu',
+            'parent_id' => 3,
+            'order' => 2
+        ]);
+        
+        Menu::create([
+            'name' => 'ICU Admissions',
+            'display_name' => 'ICU Admissions',
+            'icon' => 'fa-user-injured',
+            'url' => 'icu.show',
+            'parent_id' => 21,
+            'order' => 1
+        ]);
     }
 }

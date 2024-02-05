@@ -250,13 +250,5 @@ Route::prefix('/staff')->group(function () {
 
 Route::prefix('/icu')->group(function () {
    Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
-   Route::get('/create', [ICUAdmissionController::class, 'create'])->name('icu.create');
-   Route::post('/admission', [ICUAdmissionController::class, 'store'])->name('icu.store');
-   Route::get('/admissions', [ICUAdmissionController::class, 'admissions'])->name('icu.admissions');
    Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
-   Route::get('/admissions/{id}/edit', [ICUAdmissionController::class, 'edit'])->name('icu.edit');
-   Route::post('/admissions/{id}/update', [ICUAdmissionController::class, 'update'])->name('icu.update');
-   Route::get('/admissions/{id}/delete', [ICUAdmissionController::class, 'delete'])->name('icu.delete');
-   Route::get('/admissions/{id}/vitals', [ICUAdmissionController::class, 'vitals'])->name('icu.vitals');
-   Route::post('/admissions/{id}/vitals', [ICUAdmissionController::class, 'storeVitals'])->name('icu.storeVitals');
 });

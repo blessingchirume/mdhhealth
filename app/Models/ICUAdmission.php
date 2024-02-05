@@ -9,11 +9,17 @@ class ICUAdmission extends Model
 {
     use HasFactory;
 
-    protected $fillable=[
-        'admission_id','comment','severity_score','created_at','updated_at'
+    protected $fillable = [
+        'admission_id',
+        'comment',
+        'severity_score',
+        'created_at',
+        'updated_at'
     ];
 
-    public function admission(){
-        return $this->hasMany(EmergencyRoomAdmimission::class,'admission_id','id');
+    public function admission()
+    {
+        return $this->belongsTo(EmergencyRoomAdmimission::class);
     }
+    
 }

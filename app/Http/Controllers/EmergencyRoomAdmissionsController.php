@@ -9,6 +9,9 @@ use App\Models\Patient;
 use App\Models\Episode;
 use App\Models\ICUAdmission;
 use App\Models\MaternityAdmission;
+use App\Models\ChargeSheet;
+use App\Models\ChargesheetItem;
+use App\Models\Item;
 use Exception;
 use Log;
 use Auth;
@@ -63,15 +66,15 @@ class EmergencyRoomAdmissionsController extends Controller
 
             if ($request->input('admit_to') == 'Maternity') {
                 $tomaternity = MaternityAdmission::create([
-                    'admission_id'=>$admission->id,
+                    'admission_id' => $admission->id,
                     'gestational_age' => $request->input('gestational_age'),
                     'estimated_delivery_date' => $request->input('estimated_delivery_date'),
                     'prenatal_care_provider' => $request->input('prenatal_care_provider'),
-                    'date'=>now()
+                    'date' => now()
                 ]);
-            }elseif($request->input('admit_to') == 'Theatre'){
+            } elseif ($request->input('admit_to') == 'Theatre') {
                 $toTheatre = TheatreAdmissions::create([
-                    'episode_id' =>  $episode->id,
+                    'episode_id' => $episode->id,
                     'room' => $request->room,
                     'doctor' => 'null',
                     'date' => $request->date,
@@ -84,18 +87,32 @@ class EmergencyRoomAdmissionsController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-            }elseif($request->input('admit_to') == 'ICU'){
+            } elseif ($request->input('admit_to') == 'ICU') {
                 $toTheatre = ICUAdmission::create([
-                    'admission_id' =>  $admission->id,
+                    'admission_id' => $admission->id,
                     'severity_score' => $request->severity_score,
                     'comment' => $request->reason_for_admission
                 ]);
+
+                $item = Item::where('item_code', 'BED');
+                $episode = EmergencyRoomAdmimission::find($request->admission_id);
+
+                $charge = ChargeSheet::create([
+                    'episode_id' => $episode->episode,
+                    'checkin' => now()
+                ]);
+
+                $chargesheetItems = ChargeSheetItem::create([
+                    'item_id' => $item->item_id,
+                    'charge_sheet_id' => $charge->id
+                ]);
+
             }
             // Additional logic for handling the admission process
             return redirect()->back()->with('success', 'Patient admitted successfully');
         } catch (Exception $e) {
             Log::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
-            return redirect()->back()->with('error', 'Failed to admit patient'.$e);
+            return redirect()->back()->with('error', 'Failed to admit patient' . $e);
         }
     }
 

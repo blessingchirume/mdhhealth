@@ -12,9 +12,9 @@ class EmergencyRoomAdmimission extends Model
     protected $fillable = ['name', 'age', 'gender', 'medical_history','status','created_by','episode', 'admit_to','type'];
 
     public function episode()
-    {
-        return $this->belongsTo(Episode::class);
-    }
+{
+    return $this->belongsTo(Episode::class, 'episode');
+}
 
     public function patient()
     {
