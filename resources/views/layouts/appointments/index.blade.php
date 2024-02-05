@@ -35,7 +35,7 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                
+
                                 <livewire:patient-search />
                             </div>
                             <div class="col-md-6 mb-3">
@@ -46,7 +46,12 @@
                                 <label for="end_time">End Time</label>
                                 <input type="datetime-local" name="end_time" class="form-control">
                             </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="purpose">Purpose Of Visit</label>
+                                <textarea name="purpose" class="form-control"></textarea>
+                            </div>
                         </div>
+
                         <button type="submit" class="btn btn-primary">Book Appointment</button>
                         <a href="/appointments" class="btn btn-secondary">Cancel</a>
                     </form>

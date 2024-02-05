@@ -54,7 +54,6 @@ class AppointmentsController extends Controller
         //dd($request);
         try {
             $existingAppointment = Appointment::where('start_time', $request->start_time)
-                ->where('end_time', $request->end_time)
                 ->where('doctor_id', $request->doctor)
                 ->first();
 
@@ -67,6 +66,7 @@ class AppointmentsController extends Controller
                 'end_time' => $request->input('end_time'),
                 'patient_id' => $request->input('patient'),
                 'doctor_id' => $request->input('doctor'),
+                'booking_comment'=>$request->input('purpose'),
                 'created_by' => Auth::user()->id,
                 'status' => 'Booked'
             ]);

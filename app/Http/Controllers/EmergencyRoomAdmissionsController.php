@@ -106,7 +106,7 @@ class EmergencyRoomAdmissionsController extends Controller
                     'item_id' => $item->item_id,
                     'charge_sheet_id' => $charge->id
                 ]);
-
+               // $this->dispatch(new GenerateRecurringCharges($admission->id));
             }
             // Additional logic for handling the admission process
             return redirect()->back()->with('success', 'Patient admitted successfully');
