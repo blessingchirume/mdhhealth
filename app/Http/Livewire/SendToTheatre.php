@@ -40,10 +40,10 @@ class SendToTheatre extends Component
 
     public function render()
     {
-        $patients = Patient::all(); // Replace with your actual Patient model and query
-        $episodes = Episode::all(); // Replace with your actual Episode model and query
-        $theatres = TheatreRooms::all(); // Replace with your actual Theatre model and query
-        $doctors = Doctor::all();
+        $patients = Patient::all(); 
+        $episodes = Episode::all();
+        $theatres = TheatreRooms::all();
+        $doctors = Doctor::getDoctors();
 
         return view('livewire.send-to-theatre', compact('patients', 'episodes', 'theatres','doctors'));
     }

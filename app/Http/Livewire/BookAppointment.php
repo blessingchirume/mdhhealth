@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Doctor;
 
 class BookAppointment extends Component
 {
@@ -18,6 +19,7 @@ class BookAppointment extends Component
 
     public function render()
     {
-        return view('livewire.book-appointment');
+        $doctors = Doctor::getDoctors();
+        return view('livewire.book-appointment', compact('doctors'));
     }
 }

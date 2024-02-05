@@ -120,64 +120,91 @@ class MenuSeeder extends Seeder
 
         ]);
         Menu::create([
-           'name'=>'Laboratory',
-           'display_name'=>'Laboratory',
-           'icon'=>'fa-flask',
-           'url'=>'laboratory.index',
-           'parent_id'=>3,
-           'order'=>1
+            'name' => 'Laboratory',
+            'display_name' => 'Laboratory',
+            'icon' => 'fa-flask',
+            'url' => 'laboratory.index',
+            'parent_id' => 3,
+            'order' => 1
         ]);
 
         Menu::create([
-            'name'=>'Test Booking',
-            'display_name'=>'Test Booking',
-            'icon'=>'fa-circle',
-            'url'=>'laboratory.index',
-            'parent_id'=>13,
-            'order'=>1
+            'name' => 'Test Booking',
+            'display_name' => 'Test Booking',
+            'icon' => 'fa-circle',
+            'url' => 'laboratory.index',
+            'parent_id' => 13,
+            'order' => 1
         ]);
 
         Menu::create([
-            'name'=>'vitals',
-            'display_name'=>'Vitals',
-            'icon'=>'fa-heartbeat',
-            'url'=>'patient.vitals.index',
-            'parent_id'=>3,
-            'order'=>1
+            'name' => 'vitals',
+            'display_name' => 'Vitals',
+            'icon' => 'fa-heartbeat',
+            'url' => 'patient.vitals.index',
+            'parent_id' => 3,
+            'order' => 1
         ]);
 
         Menu::create([
-            'name'=>'vitals',
-            'display_name'=>'Vitals Queue',
-            'icon'=>'fa-circle',
-            'url'=>'patient.vitals.index',
-            'parent_id'=>15,
-            'order'=>1
+            'name' => 'vitals',
+            'display_name' => 'Vitals Queue',
+            'icon' => 'fa-circle',
+            'url' => 'patient.vitals.index',
+            'parent_id' => 15,
+            'order' => 1
         ]);
 
         Menu::create([
-            'name'=>'appointments',
-            'display_name'=>'Appointments',
-            'icon'=>'fa-calendar',
-            'url'=>'appointments',
-            'parent_id'=>3,
-            'order'=>1
+            'name' => 'appointments',
+            'display_name' => 'Appointments',
+            'icon' => 'fa-calendar',
+            'url' => 'appointments',
+            'parent_id' => 3,
+            'order' => 1
         ]);
         Menu::create([
-            'name'=>'appointments',
-            'display_name'=>'View Appointments',
-            'icon'=>'fa-circle',
-            'url'=>'appointments',
-            'parent_id'=>17,
-            'order'=>1
+            'name' => 'appointments',
+            'display_name' => 'View Appointments',
+            'icon' => 'fa-circle',
+            'url' => 'appointments',
+            'parent_id' => 17,
+            'order' => 1
         ]);
-Menu::create([
-    'name'=>'theatre',
-    'display_name'=>'Theatre',
-    'icon'=>'fa-circle',
-    'url'=>'theatre.index',
-    'parent_id'=>3,
-    'order'=>1
-]);
+        Menu::create([
+            'name' => 'theatre',
+            'display_name' => 'Theatre',
+            'icon' => 'fa-circle',
+            'url' => 'theatre.index',
+            'parent_id' => 3,
+            'order' => 1
+        ]);
+
+        Menu::create([
+            'name' => 'emergency room',
+            'display_name' => 'ER Admissions',
+            'icon' => 'fa-circle',
+            'url' => 'emergency-room-admissions.create',
+            'parent_id' => 3,
+            'order' => 1
+        ]);
+
+        Menu::create([
+            'name' => 'ICU',
+            'display_name' => 'ICU Admissions',
+            'icon' => 'fa-bed',
+            'url' => 'icu',
+            'parent_id' => 3,
+            'order' => 2
+        ]);
+        
+        Menu::create([
+            'name' => 'ICU Admissions',
+            'display_name' => 'ICU Admissions',
+            'icon' => 'fa-user-injured',
+            'url' => 'icu.show',
+            'parent_id' => 21,
+            'order' => 1
+        ]);
     }
 }

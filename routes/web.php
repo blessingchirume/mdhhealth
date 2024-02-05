@@ -23,7 +23,9 @@ use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
 use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\SurgeryController;
-
+use App\Http\Controllers\NurseController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ICUAdmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -239,3 +241,14 @@ Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAja
 
 Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
 Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');
+
+
+Route::prefix('/staff')->group(function () {
+  Route::get('/doctors', [DoctorController::class, 'index'])->name('view-doctors');
+  Route::get('/nurses', [NurseController::class, 'index'])->name('view-nurses');
+});
+
+Route::prefix('/icu')->group(function () {
+   Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
+   Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
+});

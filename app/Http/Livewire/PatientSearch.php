@@ -17,7 +17,7 @@ class PatientSearch extends Component
     public function render()
     {
         $patients = Patient::all();
-        $doctors = Doctor::all();
+        $doctors = Doctor::getDoctors();
         return view('livewire.appointment', compact('patients', 'doctors'));
     }
 }
