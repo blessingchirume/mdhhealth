@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="card">
+        <div class="card-header">
+            <h2>ICU Patients List<a href="{{ 'home'}}" class="btn btn-primary float-right"><i class="fa fa-home"></i></a></h2>
+
+        </div>
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
@@ -19,13 +23,14 @@
                     @foreach($admissions as $value)
                     <tr>
                         <td>{{ $value->id }}</td>
-                        <td>{{ $value->episode_code }}</td>
-                        <td>{{ $value->patient->name }}</td>
-                        <td>{{ $value->admission_date }}</td>
-                        <td>{{ $value->discharge_date }}</td>
-                        <td>{{ $value->status }}</td>
+                        <td>{{ $value->admission->episode->episode_code ?? null }}</td>
+                        <td>{{ $value->admission->name ?? null}}</td>
+                        <td>{{ $value->episode->chargesheet->checkin??null }}</td>
+                        <td>{{ $value->episode->chargesheet->checkout??null }}</td>
+                        <td>{{ $value->status ?? null}}</td>
                         <td>
-                            <a href="{{ route('episode.show', $value) }}"><i class="fa fa-eye success"></i></a>
+                            <a href="{{ route('icu.show', $value->id) }}"><i class="fa fa-eye success"></i></a>
+                            <a href="#" ><i class="fa fa-exchange" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                     @endforeach

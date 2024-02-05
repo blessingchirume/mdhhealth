@@ -61,7 +61,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 'gender' => $gender,
                 'medical_history' => $medical_history,
                 'created_by' => Auth::user()->id,
-                'episode' => $episode->id
+                'episode_id' => $episode->id
             ]);
 
             if ($request->input('admit_to') == 'Maternity') {
@@ -88,31 +88,34 @@ class EmergencyRoomAdmissionsController extends Controller
                     'updated_at' => now(),
                 ]);
             } elseif ($request->input('admit_to') == 'ICU') {
-                $toTheatre = ICUAdmission::create([
+                $toICU = ICUAdmission::create([
                     'admission_id' => $admission->id,
                     'severity_score' => $request->severity_score,
                     'comment' => $request->reason_for_admission
                 ]);
 
-                $item = Item::where('item_code', 'BED');
-                $episode = EmergencyRoomAdmimission::find($request->admission_id);
 
                 $charge = ChargeSheet::create([
-                    'episode_id' => $episode->episode,
+                    'episode_id' => $episode->id,
                     'checkin' => now()
                 ]);
 
-                $chargesheetItems = ChargeSheetItem::create([
-                    'item_id' => $item->item_id,
-                    'charge_sheet_id' => $charge->id
-                ]);
+                $items = Item::where('item_code', 'BED')->get();
+                if ($items->count()) {
+                    $itemId = $items->first()->id;
+                    $chargesheetItems = ChargeSheetItem::create([
+                        'item_id' => $itemId,
+                        'charge_sheet_id'=>$charge->id
+                    ]);
+                }
+
                // $this->dispatch(new GenerateRecurringCharges($admission->id));
             }
             // Additional logic for handling the admission process
             return redirect()->back()->with('success', 'Patient admitted successfully');
         } catch (Exception $e) {
             Log::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
-            return redirect()->back()->with('error', 'Failed to admit patient' . $e);
+            return redirect()->back()->with('error', 'Failed to admit patient' . $e->getMessage());
         }
     }
 

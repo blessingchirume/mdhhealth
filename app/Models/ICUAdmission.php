@@ -16,10 +16,15 @@ class ICUAdmission extends Model
         'created_at',
         'updated_at'
     ];
+    const STATUSES = [
+        'active' => 'Active',
+        'discharged' => 'Discharged',
+        'transfered' => 'Transfered'
+    ];
 
     public function admission()
     {
         return $this->belongsTo(EmergencyRoomAdmimission::class);
     }
-    
+
 }

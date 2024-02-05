@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('age')->nullable();
-            $table->integer('episode')->nullable();
+            $table->integer('episode_id')->nullable();
             $table->string('gender')->nullable();
             $table->longText('medical_history')->nullable();
             $table->string('status')->default('Pending');

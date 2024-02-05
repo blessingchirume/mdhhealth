@@ -13,7 +13,7 @@ class EmergencyRoomAdmimission extends Model
 
     public function episode()
 {
-    return $this->belongsTo(Episode::class, 'episode');
+    return $this->belongsTo(Episode::class, 'episode_id');
 }
 
     public function patient()

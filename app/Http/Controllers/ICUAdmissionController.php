@@ -16,17 +16,9 @@ class ICUAdmissionController extends Controller
 
     public function index()
     {
-        $icuadmissions = ICUAdmission::with('admission.episode.patient')->get();
+        $admissions = ICUAdmission::with('admission.episode.patient', 'admission.episode.chargesheet')
+    ->paginate();
 
-        $patientsInICU = [];
-
-        foreach ($icuadmissions as $admission) {
-            // dd($admission);
-            $patient = $admission->admission->episode->patient;
-            if ($patient) {
-                $patientsInICU[] = $patient;
-            }
-        }
 
         return view('layouts.patients.icu.index', compact('admissions'));
     }
@@ -46,7 +38,7 @@ class ICUAdmissionController extends Controller
             $admission = EmergencyRoomAdmimission::find($icuadmission->admission_id);
 
             if ($admission) {
-                $episode = Episode::find($admission->episode);
+                $episode = Episode::find($admission->episode_id);
 
                 if ($episode) {
                     // Retrieve patient details related to the episode
@@ -54,13 +46,13 @@ class ICUAdmissionController extends Controller
 
                     return view('layouts.patients.icu.show', compact('icuadmission', 'episode', 'admission', 'patientDetails', 'items', 'vitalGroups'));
                 } else {
-                    return response()->json(['error' => 'Episode not found.'], 404);
+                    return redirect()->back()->with('error', 'Episode not found.');
                 }
             } else {
-                return response()->json(['error' => 'Admission not found for ' . $icuadmission->admission_id]);
+                return redirect()->back()->with('error', 'Admission not found for ' . $icuadmission->admission_id);
             }
         } else {
-            return response()->json(['error' => 'ICU Admission not found.']);
+            return redirect()->back()->with('error', 'ICU Admission not found.');
         }
     }
     public function store(Request $request)
@@ -76,7 +68,7 @@ class ICUAdmissionController extends Controller
         $episode = EmergencyRoomAdmimission::find($request->admission_id);
 
         $charge = ChargeSheet::create([
-            'episode_id' => $episode->episode,
+            'episode_id' => $episode->episode_id,
             'checkin' => now()
         ]);
 
