@@ -29,6 +29,14 @@ class TheatreController extends Controller
     }
     public function sendToTheatre(Request $request)
     {
+        $existingSlot = $this->checkAvailableSlots($request->room, $request->doctor, $request->date, $request->time)->first();
+
+        if ($existingSlot) {
+            return redirect()->back()->with('error' , 'This time slot is already booked.');
+            exit;
+        }
+
+        // Proceed with booking creation
 
         try {
             $toTheatre = TheatreAdmissions::create([
@@ -52,6 +60,15 @@ class TheatreController extends Controller
             return redirect()->back()->with('error', 'An Error occurred while creating a new Theatre Booking. Please Notify Systems Administrator For Assistance.' . $e->getMessage());
         }
     }
+
+    public function checkAvailableSlots($room, $doctor, $date, $time)
+{
+    return TheatreAdmissions::where('room', $room)
+        ->where('doctor', $doctor)
+        ->where('date', $date)
+        ->where('time_in',$time)
+        ->where('status', '!=', 'Completed');
+}
 
     public function calculateBill($episode)
     {
