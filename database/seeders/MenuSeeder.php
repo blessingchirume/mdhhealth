@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constants\PermisionConstants;
 use App\Models\Menu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -22,7 +23,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-chart-bar',
             'url' => 'home',
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewDashboard
         ]);
 
         Menu::create([
@@ -31,7 +33,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-code-branch',
             'url' => 'designation.index',
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewDepartments
         ]);
 
         Menu::create([
@@ -40,7 +43,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-clock',
             'url' => null,
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewDashboard
         ]);
 
         Menu::create([
@@ -49,7 +53,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'patient.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
         ]);
 
         Menu::create([
@@ -58,7 +63,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'reciept.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewI
         ]);
 
         Menu::create([
@@ -67,7 +73,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'reciept.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewDashboard
         ]);
 
         Menu::create([
@@ -76,7 +83,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-money-bill-alt',
             'url' => 'payment.index',
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewPayments
         ]);
         Menu::create([
             'name' => 'providers',
@@ -84,7 +92,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-shuttle-van',
             'url' => 'medicalaid.index',
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewProviders
         ]);
         Menu::create([
             'name' => 'inventory',
@@ -92,7 +101,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-luggage-cart',
             'url' => null,
             'parent_id' => null,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewDashboard
         ]);
         Menu::create([
             'name' => 'items',
@@ -100,7 +110,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'item.index',
             'parent_id' => 9,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
         ]);
         Menu::create([
             'name' => 'reciept',
@@ -108,7 +119,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'reciept.index',
             'parent_id' => 9,
-            'order' => 1
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewInventoryIntake
         ]);
         Menu::create([
             'name' => 'users',
@@ -117,6 +129,7 @@ class MenuSeeder extends Seeder
             'url' => 'users.index',
             'parent_id' => null,
             'order' => 1,
+            'permission' => PermisionConstants::viewUserMaster
 
         ]);
         Menu::create([
@@ -125,7 +138,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-flask',
             'url' => 'laboratory.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewLaboratory
         ]);
 
         Menu::create([
@@ -134,7 +148,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'laboratory.index',
             'parent_id' => 13,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewTestBooking
         ]);
 
         Menu::create([
@@ -143,7 +158,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-heartbeat',
             'url' => 'patient.vitals.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewVitals
         ]);
 
         Menu::create([
@@ -152,7 +168,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'patient.vitals.index',
             'parent_id' => 15,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewVitalsQueue
         ]);
 
         Menu::create([
@@ -161,7 +178,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-calendar',
             'url' => 'appointments',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewAppointmentsMaster
         ]);
         Menu::create([
             'name' => 'appointments',
@@ -169,7 +187,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'appointments',
             'parent_id' => 17,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewAppointments
         ]);
         Menu::create([
             'name' => 'theatre',
@@ -177,7 +196,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'theatre.index',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewTheater
         ]);
 
         Menu::create([
@@ -186,7 +206,8 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-circle',
             'url' => 'emergency-room-admissions.create',
             'parent_id' => 3,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewEmergencyRoomAddmissions
         ]);
 
         Menu::create([
@@ -195,16 +216,78 @@ class MenuSeeder extends Seeder
             'icon' => 'fa-bed',
             'url' => 'icu',
             'parent_id' => 3,
-            'order' => 2
+            'order' => 2,
+            'permission' => PermisionConstants::viewIcu
         ]);
         
         Menu::create([
             'name' => 'ICU Admissions',
             'display_name' => 'ICU Admissions',
             'icon' => 'fa-user-injured',
-            'url' => 'icu.show',
+            'url' => 'icu',
             'parent_id' => 21,
-            'order' => 1
+            'order' => 1,
+            'permission' => PermisionConstants::viewIcuAdmissions
+        ]);
+
+        Menu::create([
+            'name' => 'Providers',
+            'display_name' => 'Medical Providers',
+            'icon' => 'fa-user-injured',
+            'url' => 'medicalaid.index',
+            // 'parent_id' => 21,
+            'order' => 1,
+            'permission' => PermisionConstants::viewProviders
+        ]);
+
+        Menu::create([
+            'name' => 'Roles',
+            'display_name' => 'User Roles',
+            'icon' => 'fa-user-injured',
+            'url' => 'role.index',
+            'parent_id' => 12,
+            'order' => 1,
+            'permission' => PermisionConstants::viewUserRoles
+        ]);
+
+        Menu::create([
+            'name' => 'users',
+            'display_name' => 'System Users',
+            'icon' => 'fa-user-injured',
+            'url' => 'role.index',
+            'parent_id' => 12,
+            'order' => 1,
+            'permission' => PermisionConstants::viewUsers
+        ]);
+
+        Menu::create([
+            'name' => 'Clinic',
+            'display_name' => 'Clinic',
+            'icon' => 'fa-user-injured',
+            // 'url' => 'role.index',
+            // 'parent_id' => 12,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewProviders
+        ]);
+
+        Menu::create([
+            'name' => 'Nurses',
+            'display_name' => 'Nurses',
+            'icon' => 'fa-user-injured',
+            'url' => 'view-nurses',
+            'parent_id' => 26,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewProviders
+        ]);
+
+        Menu::create([
+            'name' => 'Doctors',
+            'display_name' => 'Doctors',
+            'icon' => 'fa-user-injured',
+            'url' => 'view-doctors',
+            'parent_id' => 26,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewProviders
         ]);
     }
 }

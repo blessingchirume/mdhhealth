@@ -1,5 +1,6 @@
 <ul aria-labelledby="dropdownSubMenu{{ $menu->depth }}" class="dropdown-menu border-0 shadow">
     @foreach($menu->children as $child)
+    @can($child->permission)
     <li class="dropdown-divider"></li>
     <li class="dropdown-submenu dropdown-hover">
         @if($child->url)
@@ -11,5 +12,6 @@
         <x-nav-item :menu="$child" />
         @endif
     </li>
+    @endcan
     @endforeach
 </ul>
