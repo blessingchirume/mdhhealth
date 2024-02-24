@@ -78,7 +78,8 @@
         $(document).ready(function() {
             $('#icd10_codes').select2();
         });
-    </script>
+      </script>
+
     <!-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" defer></script> -->
     <script type="module">
         $(function() {

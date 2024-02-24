@@ -19,7 +19,13 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmergencyRoomAdmissionsController;
+use App\Http\Controllers\AppointmentsController;
 use App\Http\Controllers\WardController;
+use App\Http\Controllers\TheatreController;
+use App\Http\Controllers\SurgeryController;
+use App\Http\Controllers\NurseController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\ICUAdmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -141,8 +147,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get(
         'test-booking/{episode}',
+        [\App\Http\Controllers\LabTestsController::class, 'book']
+    )->name('test-booking');
+
+    Route::get(
+        'laboratory',
         [\App\Http\Controllers\LabTestsController::class, 'index']
-    )->name('lab-tests.create');
+    )->name('laboratory.index');
 
     Route::get(
         'lab-results/{episode}',
@@ -186,11 +197,13 @@ Route::middleware('auth')->group(function () {
 
 
     Route::prefix('/vitals')->group(function () {
+        Route::get('/', [VitalsController::class, 'index'])->name('patient.vitals.index');
         Route::get('/show/{episode}', [VitalsController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/record/{episode}', [VitalsController::class, 'create'])->name('patient.vitals.create');
         Route::post('/record-vitals/{episode}', [VitalsController::class, 'recordVitals'])->name('episode.record-vital');
     });
     Route::prefix('/treatment')->group(function () {
-        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.vitals.show');
+        Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.treatments.view');
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
 
     });
@@ -205,3 +218,37 @@ Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::clas
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
 });
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
+
+
+Route::prefix('/appointments')->group(function () {
+    Route::get('/', [AppointmentsController::class,'index'])->name('appointments');
+    Route::get('/create', [AppointmentsController::class, 'create'])->name('create-appointment');
+    Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('book-appointment');
+    Route::get('/list', [AppointmentsController::class, 'showAppointments'])->name('show-appointments');
+    Route::get('/fetch', [AppointmentsController::class, 'fetch'])->name('fetch-appointments');
+    Route::get('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
+});
+
+
+Route::post('/send-to-theatre', [TheatreController::class,'sendToTheatre'])->name('send-to-theatre');
+Route::get('/calculate-bill/{episode}', [TheatreController::class,'calculateBill'])->name('calculate-bill');
+Route::get('/theatre', [TheatreController::class,'index'])->name('theatre.index');
+Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theatre.show');
+Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
+Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
+Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');
+
+
+Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
+Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');
+
+
+Route::prefix('/staff')->group(function () {
+  Route::get('/doctors', [DoctorController::class, 'index'])->name('view-doctors');
+  Route::get('/nurses', [NurseController::class, 'index'])->name('view-nurses');
+});
+
+Route::prefix('/icu')->group(function () {
+   Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
+   Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
+});

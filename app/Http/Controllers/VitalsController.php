@@ -17,10 +17,10 @@ use Illuminate\Support\Facades\Auth;
 class VitalsController extends Controller
 {
 
-    public function index()
-    {
-        //
-    }
+    public function index(){
+        $episodes = Episode::with('vitals')->get();
+        return view('layouts.patients.visits.index', compact('episodes'));
+     }
 
     /**
      * Record the patient's vitals.
@@ -28,7 +28,6 @@ class VitalsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-
     public function recordVitals(Request $request, Episode $episode)
     {
         try {
@@ -81,13 +80,14 @@ class VitalsController extends Controller
             ];
 
             Vital::insert($vitals);
-            // Observation::create([
-            //     'episode_id' => $episode->id,
-            //     'user_id'=> Auth::user()->name,
-            //     'observation' => $request->observation,
-            //     'complaints' => $request->complaints,
-            //     'origin'=>'Vitals'
-            // ]);
+
+            Observation::create([
+                'episode_id' => $episode->id,
+                'user_id'=> Auth::user()->name,
+                'observation' => $request->observation??null,
+                'complaints' => $request->complaints??null,
+                'origin'=>'Vitals'
+            ]);
             return redirect()->back()->with('success', 'patient vitals recorded successfully!');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -95,10 +95,15 @@ class VitalsController extends Controller
     }
 
 
-    public function show(Episode $episode)
+    public function create(Episode $episode)
     {
         $items = Item::all();
         $vitalGroups = VitalGroup::all();
         return view('layouts.patients.visits.vitals', compact('episode', 'items', 'vitalGroups'));
+    }
+
+    public function show(Episode $episode){
+        $vitals = Vital::where('episode_id', $episode->id)->get();
+        return view('layouts.patients.visits.view-vitals', compact('episode', 'vitals'));
     }
 }
