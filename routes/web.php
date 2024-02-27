@@ -52,6 +52,16 @@ Route::middleware('auth')->group(function () {
 
     Route::view('about', 'about')->name('about');
 
+    Route::prefix('/users')->group(function(){
+        Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+        Route::post('/', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+        Route::get('/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
+        Route::post('/{user}/update', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+        Route::post('/{user}/delete', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
+        Route::post('/{user}/assign-role', [\App\Http\Controllers\UserController::class, 'assignRole'])->name('users.role.assign');
+    });
+
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
