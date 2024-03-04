@@ -56,5 +56,17 @@ class DesignationSeeder extends Seeder
             'name' => 'Billing',
             'description' => 'Responsible for all tooth care services'
         ]);
+
+        Designation::create([
+            'code' => 'MDHD' . rand(111111, 999999),
+            'name' => 'Martenity',
+            'description' => 'Responsible for Martenity services'
+        ]);
+
+        Designation::create([
+            'code' => 'MDHD' . rand(111111, 999999),
+            'name' => 'ICU',
+            'description' => 'Responsible for all Intensive Care Unit services'
+        ]);
     }
 }

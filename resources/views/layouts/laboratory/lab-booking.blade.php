@@ -3,7 +3,7 @@
 @section('content')
 <div class="card m-3">
     <div class="card-header">
-        <h3 class="card-title">Book Lab Test</h3>
+        <h4 class="">Book Lab Test<div class="float-right"><a href="{{ route('laboratory.index') }}" class="btn btn-primary ">Back</a></div></h4>
     </div>
     <div class="card-body">
         <div class="row">

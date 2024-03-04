@@ -28,5 +28,13 @@ class WardSeeder extends Seeder
             'name'=>'Theatre',
             'type_id'=>4
         ]);
+        Ward::create([
+            'name'=>'Maternity',
+            'type_id'=>5
+        ]);
+        Ward::create([
+            'name'=>'ICU',
+            'type_id'=>6
+        ]);
     }
 }
