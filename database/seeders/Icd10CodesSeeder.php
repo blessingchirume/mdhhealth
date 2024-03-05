@@ -24,7 +24,8 @@ class Icd10CodesSeeder extends Seeder
             if (!$firstline) {
                 Icd10Code::create([
                     "code" => $data['0'],
-                    "description" => $data['1']
+                    "description" => $data['1'],
+                    "category" => 1
                 ]);
             }
             $firstline = false;
