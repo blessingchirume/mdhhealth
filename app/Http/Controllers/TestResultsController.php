@@ -7,17 +7,18 @@ use App\Models\Tests;
 use App\Models\Episode;
 use App\Models\TestCategory;
 use App\Models\LabTests;
+use App\Models\LabBooking;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 
 class TestResultsController extends Controller
 {
-    public function index(Episode $episode)
+    public function create(LabBooking $booking)
     {
         $bookedLabTests = [];
-        $labtests = LabTests::where('episode', $episode->id)->get();
+        $labtests = LabBooking::with('tests')->where('id', $booking->id)->first();
 
-        foreach ($labtests as $labtest) {
+        foreach ($labtests->tests as $labtest) {
             $testname = Tests::find($labtest->test);
             $category = TestCategory::find($testname->category);
 
@@ -34,6 +35,8 @@ class TestResultsController extends Controller
                 'name' => $testname->name,
                 'slug' => $testname->slug,
                 'id' => $labtest->id,
+                'result' => $labtest->result ?? null,
+                'comment' => $labtest->comment ?? null
             ];
 
             $setCategory = $categoryName;
@@ -41,8 +44,8 @@ class TestResultsController extends Controller
 
         $bookedTests = $this->arrayToObject($bookedLabTests);
 
-        $age = PatientController::calculateAge($episode->patient->dob);
-        return view('layouts.laboratory.add-results', compact('episode', 'bookedTests', 'age'));
+        $age = PatientController::calculateAge($booking->episode->patient->dob);
+        return view('layouts.laboratory.add-results', compact('booking', 'bookedTests', 'age'));
     }
     public function addResults(Request $request)
     {
@@ -50,6 +53,11 @@ class TestResultsController extends Controller
 
         // Add the result to the selected tests
         try {
+            //update LabBooking set status In Progress
+            $booking = LabBooking::find($request->input('booking_id'));
+            $booking->status = 'In-Progress';
+            $booking->save();
+
             foreach ($selectedTests as $testId => $resultData) {
                 $test = LabTests::find($testId);
                 $test->result = $resultData['result'];
@@ -65,15 +73,15 @@ class TestResultsController extends Controller
         }
     }
 
-    public function results(Episode $episode)
+    public function results(LabBooking $booking)
     {
         // Fetch test results for the episode
-        $testResults = LabTests::where('episode', $episode->id)
+        $testResults = LabTests::where('booking', $booking->id)
             ->join('tests', 'lab_tests.test', '=', 'tests.id')
             ->select('lab_tests.*', 'tests.name')
             ->get();
-        $age = PatientController::calculateAge($episode->patient->dob);
-        return view('layouts.laboratory.view-results', compact('episode', 'testResults', 'age'));
+        $age = PatientController::calculateAge($booking->episode->patient->dob);
+        return view('layouts.laboratory.view-results', compact('booking', 'testResults', 'age'));
     }
     private function arrayToObject($array)
     {
