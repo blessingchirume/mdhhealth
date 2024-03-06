@@ -104,6 +104,26 @@ class RoleSeeder extends Seeder
 
         // Vital
         Permission::create(['name' => PermisionConstants::createVital]);
+        Permission::create(['name' => PermisionConstants::viewVitals]);
+        Permission::create(['name' => PermisionConstants::viewVitalsQueue]);
+
+        // Admissions
+        Permission::create(['name' => PermisionConstants::viewIcu]);
+        Permission::create(['name' => PermisionConstants::viewEmergencyRoomAddmissions]);
+        Permission::create(['name' => PermisionConstants::viewIcuAdmissions]);
+
+        // Theater
+        Permission::create(['name' => PermisionConstants::viewTheater]);
+
+        // Appointments
+        Permission::create(['name' => PermisionConstants::viewAppointments]);
+        Permission::create(['name' => PermisionConstants::viewAppointmentsMaster]);
+
+        // Bookings
+        Permission::create(['name' => PermisionConstants::viewTestBooking]);
+
+        // Laboratory
+        Permission::create(['name' => PermisionConstants::viewLaboratory]);
 
         $super = Role::create(['name' => FactoryRoleConstants::SuperAdmin]);
         $inventoryClerk = Role::create(['name' => FactoryRoleConstants::InventoryClerk]);

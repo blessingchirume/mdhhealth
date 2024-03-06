@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Designation;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -17,47 +19,82 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::all();
         $designations = Designation::all();
-        return view('users.create', compact('roles', 'designations'));
+        return view('users.create', compact('designations'));
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        User::create(request()->validate([
+
+        $data = $request->validate([
             'name' => 'required',
             'surname' => 'required',
-            'email' => 'required|email',
-            'role_id'=> 'required',
-            'designation_id'=> 'required',
-            'password'=> bcrypt('password123'),
-        ])
-    );
-        return redirect()->back()->with('success', 'User created successfully, with default password `password123`');
+            'email' => 'required',
+            'designation_id' => 'required'
+        ]);
+        try {
+            $user = new User();
+            $user->create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'role_id' => 1,
+                'branch_id' => 1,
+                'designation_id' => $request->designation_id,
+                'password' => Hash::make('12345678')
+            ]);
+
+            return redirect()->route('users.index')->with('success', 'user created successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
+
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
-    }
-
-    public function edit(User $user)
-    {
-        return view('users.edit', compact('user'));
-    }
-
-    public function update(User $user)
-    {
-        $user->update(request()->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => 'required|email',
-        ]));
-        return redirect()->back()->with('success', 'User updated successfully');
+        $roles = Role::all();
+        return view('users.show', compact('user', 'roles'));
     }
 
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->back()->with('success', 'User deleted successfully');
+        try {
+            $user->delete();
+            return redirect()->route('users.index')->with('success', 'user deleted successfully');
+        } catch (\Throwable $th) {
+            return redirect()->route('users.index')->with('error', $th->getMessage());
+        }
+    }
+
+    public function update(Request $request, User $user)
+    {
+        // dd($request);
+        $data = $request->validate([
+            'name' => 'required',
+            'surname' => 'required',
+            'email' => 'required',
+            // 'phone' => 'required'
+        ]);
+        try {
+            $user->update([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+            ]);
+
+            return redirect()->route('users.index')->with('success', 'user updated successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function assignRole(Request $request, User $user)
+    {
+        try {
+            $user->assignRole(Role::findByName($request->role));
+            return redirect()->route('users.index')->with('success', 'user role assigned successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }

@@ -21,6 +21,7 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->sapService = new SapService("/Invoices");
+        $this->middleware('menu');
     }
 
     public function index()
