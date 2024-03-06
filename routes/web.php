@@ -26,6 +26,7 @@ use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ICUAdmissionController;
+use App\Http\Controllers\BedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,24 @@ Route::middleware('auth')->group(function () {
 
     Route::view('about', 'about')->name('about');
 
+    Route::prefix('/users')->group(function(){
+        Route::get('/', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+        Route::post('/', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+        Route::get('/{user}', [\App\Http\Controllers\UserController::class, 'show'])->name('users.show');
+        Route::post('/{user}/update', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+        Route::post('/{user}/delete', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.delete');
+        Route::post('/{user}/assign-role', [\App\Http\Controllers\UserController::class, 'assignRole'])->name('users.role.assign');
+    });
+
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('create', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    Route::get('edit/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::get('show/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.show');
+    Route::post('store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+    Route::patch('update/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::get('destroy/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    });
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -109,9 +127,31 @@ Route::middleware('auth')->group(function () {
         Route::get('/wards/{ward}', [WardController::class, 'show'])->name('designation.ward.show');
         Route::get('/wards/{ward}/edit', [WardController::class, 'show'])->name('designation.ward.edit');
         Route::post('/wards', [WardController::class, 'store'])->name('designation.ward.store');
-        Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
+        Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');
+        Route::get('/{designation}', [DesignationController::class, 'edit'])->name('designation.edit');
     });
 
+
+    Route::prefix('beds')->group(function () {
+        Route::post('/{ward}', [BedController::class, 'store'])->name('ward.beds.store');
+        Route::get('/{bed}', [BedController::class, 'bedsShow'])->name('ward.beds.show');
+        Route::get('/edit', [BedController::class, 'bedsEdit'])->name('ward.beds.edit');
+        Route::post('/{bed}', [BedController::class, 'bedsUpdate'])->name('ward.beds.update');
+        Route::post('/{bed}/delete', [BedController::class, 'bedsDestroy'])->name('ward.beds.delete');
+    });
+
+    Route::prefix('ward')->group(function () {
+        Route::get('/', [WardController::class, 'index'])->name('ward.index');
+        Route::get('/create', [WardController::class, 'create'])->name('ward.create');
+        Route::post('/', [WardController::class, 'store'])->name('ward.store');
+        Route::get('/{ward}', [WardController::class, 'show'])->name('ward.show');
+        Route::get('/{ward}/edit', [WardController::class, 'edit'])->name('ward.edit');
+        Route::post('/{ward}', [WardController::class, 'update'])->name('ward.update');
+        Route::post('/{ward}/delete', [WardController::class, 'destroy'])->name('ward.delete');
+        Route::post('/{ward}/restore', [WardController::class, 'restore'])->name('ward.restore');
+        Route::get('/{ward}/beds', [WardController::class, 'beds'])->name('ward.beds');
+
+    });
     Route::prefix('/payment')->group(function () {
         Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
         Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
@@ -223,7 +263,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::class, 'create'])->name('emergency-room-admissions.create');
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
-});
+
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
 
 

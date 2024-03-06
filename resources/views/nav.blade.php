@@ -5,6 +5,7 @@
         </li>
 
         @foreach(Config::get('menu') as $menu)
+        @can($menu->permission)
         <li class="nav-item dropdown">
             @if($menu->url)
             <a id="dropdownSubMenu1" href="{{ route($menu->url) }}" data-toggle="{{ $menu->children->count() ? 'dropdown' : null }}" aria-haspopup="true" aria-expanded="false" class="nav-link <?php if ($menu->children->count()) echo ('dropdown-toggle') ?>">{{ $menu->display_name }}</a>
@@ -15,6 +16,7 @@
             <x-nav-item :menu="$menu" />
             @endif
         </li>
+        @endcan
         @endforeach
     </ul>
     <ul class="navbar-nav ml-auto">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Designation;
 use App\Models\Ward;
 use Illuminate\Http\Request;
+use App\Models\Bed;
 
 class WardController extends Controller
 {
@@ -18,7 +19,7 @@ class WardController extends Controller
     public function show(Ward $ward)
     {
         $wards = Ward::all();
-        return view('layouts.wards.show', compact('ward'));
+        return view('layouts.wards.show', compact('ward', 'wards'));
     }
 
     public function store(Request $request)
@@ -35,4 +36,6 @@ class WardController extends Controller
             return back()->with('error', $th->getMessage());
         }
     }
+
+
 }
