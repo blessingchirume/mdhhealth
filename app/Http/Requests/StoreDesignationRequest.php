@@ -13,6 +13,11 @@ class StoreDesignationRequest extends FormRequest
      */
     public function authorize()
     {
+        //fetch user role
+        $user = auth()->user();
+        if ($user->role_id == 1) {
+            return true;
+        }
         return false;
     }
 

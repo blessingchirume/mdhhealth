@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('role_id');
-            $table->string('designation_id');
-            $table->string('branch_id');
+            $table->string('designation_id')->nullable();
+            $table->string('branch_id')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

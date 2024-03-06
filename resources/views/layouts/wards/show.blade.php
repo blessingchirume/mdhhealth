@@ -24,8 +24,8 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-right btn-group btn-group-sm">
-                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
-                                            <i class="fa fa-plus"></i> Generate
+                                        <button data-toggle="modal" data-target="#generate-bed" type="button" class="btn btn-primary">
+                                            <i class="fa fa-plus"></i> Bed
                                         </button>
                                     </div>
                                 </div>
@@ -63,12 +63,42 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </section>
             </div>
         </div>
     </div>
 </div>
-
+<div class="modal lg fade" id="generate-bed">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Bed / Room</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="episode_form" method="post" action="{{ route('ward.beds.store' ,$ward->id) }}">
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="name">Bed / Room Name</label>
+                                <input class="form-control" name="name" type="text" placeholder="name" required>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="ward_id" value="{{ $ward->id }}" />
+                </form>
+            </div>
+            <div class="card-footer">
+                <div class="form-group pull-right">
+                    <button onclick="$('#episode_form').submit()" class="btn btn-secondary float-right mr-2">Update Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

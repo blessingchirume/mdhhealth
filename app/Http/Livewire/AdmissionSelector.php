@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\TheatreRooms;
+use App\Models\Ward;
 class AdmissionSelector extends Component
 {
     public $admitedTo;
@@ -20,6 +21,7 @@ class AdmissionSelector extends Component
     public function render()
     {
         $theatres = TheatreRooms::all();
-        return view('livewire.admission-selector', compact('theatres'));
+        $wards = Ward::all();
+        return view('livewire.admission-selector', compact('theatres', 'wards'));
     }
 }

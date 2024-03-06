@@ -16,11 +16,13 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <div class="alert alert-info">
-                        Sample table page
-                    </div>
+
 
                     <div class="card">
+                        <div class="card-header">
+                            Users Table
+                            <a href="{{ route('users.create') }}" class="btn btn-primary float-right">Add User</a>
+                         </div>
                         <div class="card-body p-0">
 
                             <table id="table1" class="table data-table table-bordered">
@@ -38,7 +40,11 @@
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->surname }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>actions[view, edit, delete]</td>
+                                        <td>
+                                            <a href="{{ route('users.show', $user) }}"><i class="fa fa-eye success"></i></a>
+                                            <a href="{{ route('users.edit', $user) }}"><i class="fa fa-edit success"></i></a>
+                                            <a href="{{ route('users.destroy', $user) }}"><i class="fa fa-trash danger"></i></a>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

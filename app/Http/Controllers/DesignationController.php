@@ -38,6 +38,12 @@ class DesignationController extends Controller
     public function store(StoreDesignationRequest $request)
     {
         //
+        $designation = Designation::create([
+            'code' =>  'MDHD' . rand(111111, 999999),
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+        return redirect()->back()->with('success', 'Designation created successfully');
     }
 
     /**
@@ -71,7 +77,11 @@ class DesignationController extends Controller
      */
     public function update(UpdateDesignationRequest $request, Designation $designation)
     {
-        //
+        $designation->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+        return redirect()->back()->with('success', 'Designation updated successfully');
     }
 
     /**

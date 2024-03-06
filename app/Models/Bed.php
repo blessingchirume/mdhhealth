@@ -10,8 +10,14 @@ class Bed extends Model
 {
     use HasFactory;
 
+    protected $fillable=[
+        'ward_id',
+        'name',
+    ];
+
     public function ward()
     {
         return $this->belongsTo(Ward::class, 'ward_id');
     }
+
 }
