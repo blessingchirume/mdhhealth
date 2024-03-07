@@ -166,13 +166,20 @@ Route::middleware('auth')->group(function () {
     )->name('laboratory.index');
 
     Route::get(
-        'lab-results/{episode}',
-        [\App\Http\Controllers\TestResultsController::class, 'results']
+        'laboratory/bookings',
+        [LaboratoryController::class, 'show']
+    )->name('laboratory.bookings');
+
+    Route::get(
+        'lab-results/{booking}',
+        [TestResultsController::class, 'results']
     )->name('view-results');
+
+    Route::get('lab-tests/conclude/{booking}',[LaboratoryController::class,'conclude'])->name('laboratory.conclude-test');
 
     Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
 
-    Route::get('/upload-test-results/{episode}', [TestResultsController::class, 'index'])->name('upload-test-results');
+    Route::get('/upload-test-results/{booking}', [TestResultsController::class, 'create'])->name('upload-test-results');
 
     Route::post('/save-test-results', [TestResultsController::class, 'addResults'])->name('save-test-results');
 

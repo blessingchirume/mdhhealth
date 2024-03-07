@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\LabBooking;
 use stdClass;
 use App\Models\LabTests;
 use App\Models\TestCategory;
@@ -33,10 +34,18 @@ class LabTestsController extends Controller
         ]);
 
         try {
+            $booking = LabBooking::create(
+                [
+                    'episode_id' => $episode->id,
+                    'status' => 'Pending',
+                ]
+            );
+
             foreach ($validatedData['tests'] as $testId) {
+
                 $test = new LabTests();
                 $test->category_id = $test->getCategoryForTest($testId);
-                $test->episode = $episode->id;
+                $test->booking = $booking->id;
                 $test->refered_by = Auth::user()->id;
                 $test->test = $testId;
                 $test->status = 'Pending';
@@ -47,7 +56,7 @@ class LabTestsController extends Controller
         } catch (Exception $e) {
             logger()->error('An Error occurred while creating a new Tests Booking: ' . $e->getMessage(), ['exception' => $e]);
 
-            return redirect()->back()->with('error', 'An Error occurred while creating a new Tests Booking. Please Notify Systems Administrator For Assistance.');
+            return redirect()->back()->with('error', 'An Error occurred while creating a new Tests Booking. Please Notify Systems Administrator For Assistance.'.$e);
         }
     }
 }

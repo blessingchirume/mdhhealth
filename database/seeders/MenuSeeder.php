@@ -219,12 +219,12 @@ class MenuSeeder extends Seeder
             'order' => 2,
             'permission' => PermisionConstants::viewIcu
         ]);
-        
+
         Menu::create([
             'name' => 'ICU Admissions',
             'display_name' => 'ICU Admissions',
             'icon' => 'fa-user-injured',
-            'url' => 'icu',
+          'url' => 'icu',
             'parent_id' => 21,
             'order' => 1,
             'permission' => PermisionConstants::viewIcuAdmissions

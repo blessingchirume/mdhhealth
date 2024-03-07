@@ -41,7 +41,7 @@ class Episode extends Model
 
     public function labTests()
     {
-        return $this->hasMany(LabTests::class,'episode');
+        return $this->hasMany(LabBooking::class,'episode_id');
     }
 
     public function theatreAdmissions() {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->string('test');
-            $table->string('episode');
+            $table->string('booking');
             $table->string('result')->nullable();
             $table->date('test_date')->nullable();
             $table->time('test_time')->nullable();
