@@ -32,7 +32,7 @@ class TheatreController extends Controller
         $existingSlot = $this->checkAvailableSlots($request->room, $request->doctor, $request->date, $request->time)->first();
 
         if ($existingSlot) {
-            return redirect()->back()->with('error' , 'This time slot is already booked.');
+            return redirect()->back()->with('error', 'This time slot is already booked.');
             exit;
         }
 
@@ -62,47 +62,49 @@ class TheatreController extends Controller
     }
 
     public function checkAvailableSlots($room, $doctor, $date, $time)
-{
-    return TheatreAdmissions::where('room', $room)
-        ->where('doctor', $doctor)
-        ->where('date', $date)
-        ->where('time_in',$time)
-        ->where('status', '!=', 'Completed');
-}
+    {
+        return TheatreAdmissions::where('room', $room)
+            ->where('doctor', $doctor)
+            ->where('date', $date)
+            ->where('time_in', $time)
+            ->where('status', '!=', 'Completed');
+    }
 
     public function calculateBill($episode)
     {
 
-      try { $admission = TheatreAdmissions::where('episode_id', $episode)->first();
-        if ($admission) {
-            $item = Item::where('item_code', 'OPR')->get()->first();
+        try {
+            $admission = TheatreAdmissions::where('episode_id', $episode)->first();
+            if ($admission) {
+                $item = Item::where('item_code', 'OPR')->get()->first();
 
-            $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
-            $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
+                $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
+                $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
 
-            $operatingRoomDuration = $timeOut->getTimestamp() - $timeIn->getTimestamp();
-            $operatingRoomTimeInMinutes = $operatingRoomDuration / 60;
+                $operatingRoomDuration = $timeOut->getTimestamp() - $timeIn->getTimestamp();
+                $operatingRoomTimeInMinutes = $operatingRoomDuration / 60;
 
-            $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
-
-
-            $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
+                $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
 
 
-            $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
-            $chargeSheet->chargesheetitems()->save($chargeSheetItem);
+                $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
 
-            $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
-            return redirect()->back()->with('success', 'Bill Calculated Successfully. Bill Amount: ' . $formatter->formatCurrency($billAmount, 'USD'));
-        } else {
-            logger()->error('No Theatre Admission Found for Episode: ' . $episode);
-            return redirect()->back()->with('error', 'No Theatre Admission Found for Episode: ' . $episode);
-        }}catch(Exception $e){
+                $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
+                $chargeSheet->chargesheetitems()->save($chargeSheetItem);
+
+                $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+
+                return redirect()->back()->with('success', 'Bill Calculated Successfully. Bill Amount: ' . $formatter->formatCurrency($billAmount, 'USD'));
+            } else {
+                logger()->error('No Theatre Admission Found for Episode: ' . $episode);
+                return redirect()->back()->with('error', 'No Theatre Admission Found for Episode: ' . $episode);
+            }
+        } catch (Exception $e) {
 
             logger()->error('An Error occurred while Calculating Bill : ' . $e->getMessage(), ['exception' => $e]);
 
-            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.' );
+            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.');
         }
     }
 
