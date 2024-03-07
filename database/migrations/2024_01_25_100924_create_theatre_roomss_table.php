@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('room');
             $table->string('status')->default('Available');//Available, Occupied
-            $table->integer('ward_id')->unsigned()->nullable();
-            $table->foreign('ward_id')->cascadeOnUpdate()->references('id')->on('wards');
+            $table->bigInteger('ward_id')->unsigned()->nullable();
+            $table->foreign('ward_id')->references('id')->on('wards')->onUpdate('cascade');
             $table->string('comment')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
