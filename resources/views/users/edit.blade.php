@@ -46,6 +46,23 @@
                                     <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}">
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <select name="role_id" id="role" class="form-control">
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->id }}" {{ $role->id == old('role_id', $user->role_id) ? 'selected' : '' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="designation">Designation</label>
+                                    <select name="designation_id" id="designation" class="form-control">
+                                        @foreach ($designations as $designation)
+                                        <option value="{{ $designation->id }}" {{ $designation->id == old('designation_id', $user->designation_id) ? 'selected' : '' }}>{{ $designation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Update User</button>
 
                             </div>

@@ -16,12 +16,14 @@ class AdmissionSelector extends Component
 
     public function mount()
     {
-        $this->admitedTo = null; // Initialize selected ward
+        $this->admitedTo = 1; // Initialize selected ward
     }
     public function render()
     {
         $theatres = TheatreRooms::all();
         $wards = Ward::all();
-        return view('livewire.admission-selector', compact('theatres', 'wards'));
+        $selectedWard = Ward::where('id', $this->admitedTo)->first(); // Fetch ward data based on selection
+    //    dd($selectedWard);
+        return view('livewire.admission-selector', compact('theatres', 'selectedWard', 'wards'));
     }
 }
