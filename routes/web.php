@@ -297,5 +297,7 @@ Route::prefix('/staff')->group(function () {
 
 Route::prefix('/icu')->group(function () {
    Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
+   Route::get('/create', [ICUAdmissionController::class, 'create'])->name('icu.create');
+   Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
    Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
 });
