@@ -26,6 +26,7 @@ use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ICUAdmissionController;
+use App\Http\Controllers\BedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,13 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('create', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    Route::get('edit/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::get('show/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.show');
+    Route::post('store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+    Route::patch('update/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::get('destroy/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    });
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -119,9 +127,31 @@ Route::middleware('auth')->group(function () {
         Route::get('/wards/{ward}', [WardController::class, 'show'])->name('designation.ward.show');
         Route::get('/wards/{ward}/edit', [WardController::class, 'show'])->name('designation.ward.edit');
         Route::post('/wards', [WardController::class, 'store'])->name('designation.ward.store');
-        Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
+        Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');
+        Route::get('/{designation}', [DesignationController::class, 'edit'])->name('designation.edit');
     });
 
+
+    Route::prefix('beds')->group(function () {
+        Route::post('/{ward}', [BedController::class, 'store'])->name('ward.beds.store');
+        Route::get('/{bed}', [BedController::class, 'bedsShow'])->name('ward.beds.show');
+        Route::get('/edit', [BedController::class, 'bedsEdit'])->name('ward.beds.edit');
+        Route::post('/{bed}', [BedController::class, 'bedsUpdate'])->name('ward.beds.update');
+        Route::post('/{bed}/delete', [BedController::class, 'bedsDestroy'])->name('ward.beds.delete');
+    });
+
+    Route::prefix('ward')->group(function () {
+        Route::get('/', [WardController::class, 'index'])->name('ward.index');
+        Route::get('/create', [WardController::class, 'create'])->name('ward.create');
+        Route::post('/', [WardController::class, 'store'])->name('ward.store');
+        Route::get('/{ward}', [WardController::class, 'show'])->name('ward.show');
+        Route::get('/{ward}/edit', [WardController::class, 'edit'])->name('ward.edit');
+        Route::post('/{ward}', [WardController::class, 'update'])->name('ward.update');
+        Route::post('/{ward}/delete', [WardController::class, 'destroy'])->name('ward.delete');
+        Route::post('/{ward}/restore', [WardController::class, 'restore'])->name('ward.restore');
+        Route::get('/{ward}/beds', [WardController::class, 'beds'])->name('ward.beds');
+
+    });
     Route::prefix('/payment')->group(function () {
         Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
         Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
@@ -233,7 +263,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::class, 'create'])->name('emergency-room-admissions.create');
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
-});
+
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
 
 
@@ -267,5 +297,7 @@ Route::prefix('/staff')->group(function () {
 
 Route::prefix('/icu')->group(function () {
    Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
+   Route::get('/create', [ICUAdmissionController::class, 'create'])->name('icu.create');
+   Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
    Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
 });

@@ -19,7 +19,7 @@
                         <div class="float-right btn-group btn-group-sm">
                             @can(App\constants\PermisionConstants::createPayment)
                             <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
-                                <i class="fa fa-plus"></i> Generate
+                                <i class="fa fa-plus"></i> Ward
                             </button>
                             @endcan
                         </div>
@@ -73,7 +73,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Episode number</h4>
+                <h4 class="modal-title">Edit Ward</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -91,7 +91,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>                 
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
@@ -99,7 +99,7 @@
                                 <label for="name">Name</label>
                                 <input class="form-control" name="name" type="text" placeholder="name" required>
                             </div>
-                        </div>                       
+                        </div>
                     </div>
                 </form>
             </div>

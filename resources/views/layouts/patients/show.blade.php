@@ -58,6 +58,7 @@
                                                 <td>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
+                                                    <a href="{{ route('doctors.observation', $value)}}"><i class="fa fa-clipboard m-2"></i></a>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-trash m-2"></i></a>
                                                 </td>
                                             </tr>

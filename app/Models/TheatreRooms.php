@@ -20,4 +20,8 @@ class TheatreRooms extends Model
     public function theatreAdminssions(){
         return $this->hasMany(TheatreAdmissions::class,'room','id');
     }
+
+    public function ward(){
+        return $this->belongsTo(Ward::class,'id','ward_id');
+    }
 }

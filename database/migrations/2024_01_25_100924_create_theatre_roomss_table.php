@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('room');
             $table->string('status')->default('Available');//Available, Occupied
-            $table->string('comment');
-            $table->string('created_by');
-            $table->string('updated_by');
+            $table->bigInteger('ward_id')->unsigned()->nullable();
+            $table->foreign('ward_id')->references('id')->on('wards')->onUpdate('cascade');
+            $table->string('comment')->nullable();
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
             $table->timestamps();
         });
     }
