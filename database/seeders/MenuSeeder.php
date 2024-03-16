@@ -291,6 +291,15 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
+            'name'=>'theatre_rooms',
+            'display_name'=>'Theatre Rooms',
+            'icon'=>'fa-user-injured',
+            'url'=>'theatre.rooms',
+            'parent_id'=>18,
+            'order',1,
+        ]);
+
+        Menu::create([
             'name' => 'billing',
             'display_name' => 'Billing Groups',
             'icon' => 'fa-circle',
