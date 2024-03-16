@@ -296,7 +296,8 @@ class MenuSeeder extends Seeder
             'icon'=>'fa-user-injured',
             'url'=>'theatre.rooms',
             'parent_id'=>18,
-            'order',1,
+            'order'=> 1,
+            // 'permission' => PermisionConstants::viewProviders
         ]);
 
         Menu::create([
