@@ -289,5 +289,14 @@ class MenuSeeder extends Seeder
             'order' => 1,
             // 'permission' => PermisionConstants::viewProviders
         ]);
+
+        Menu::create([
+            'name'=>'theatre_rooms',
+            'display_name'=>'Theatre Rooms',
+            'icon'=>'fa-user-injured',
+            'url'=>'theatre.rooms',
+            'parent_id'=>18,
+            'order',1,
+        ]);
     }
 }

@@ -22,5 +22,13 @@ class ItemGroupSeeder extends Seeder
         ItemGroup::create([
             'name' => 'Medical Procedures'
         ]);
+
+        ItemGroup::create([
+            'name' => 'Drugs'
+        ]);
+
+        ItemGroup::create([
+            'name' => 'Sundries'
+        ]);
     }
 }

@@ -38,7 +38,7 @@
 
                                             <!-- <livewire:surgery-duration-tracker :admissionId="$theatreAdmission->id" /-->
                                     @elseif($theatreAdmission->status == 'Completed')
-                                        <a href="/calculate-bill/{{ $admission->id }}" class="btn btn-primary">Calculate Bill</a>
+                                        <a href="/theatre-billables/{{ $admission->id }}" class="btn btn-primary">Update Bill</a>
                                     @else
                                         Status Unknown
                                     @endif

@@ -32,7 +32,7 @@ class TheatreController extends Controller
         $existingSlot = $this->checkAvailableSlots($request->room, $request->doctor, $request->date, $request->time)->first();
 
         if ($existingSlot) {
-            return redirect()->back()->with('error' , 'This time slot is already booked.');
+            return redirect()->back()->with('error', 'This time slot is already booked.');
             exit;
         }
 
@@ -62,50 +62,74 @@ class TheatreController extends Controller
     }
 
     public function checkAvailableSlots($room, $doctor, $date, $time)
-{
-    return TheatreAdmissions::where('room', $room)
-        ->where('doctor', $doctor)
-        ->where('date', $date)
-        ->where('time_in',$time)
-        ->where('status', '!=', 'Completed');
-}
-
-    public function calculateBill($episode)
     {
-
-      try { $admission = TheatreAdmissions::where('episode_id', $episode)->first();
-        if ($admission) {
-            $item = Item::where('item_code', 'OPR')->get()->first();
-
-            $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
-            $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
-
-            $operatingRoomDuration = $timeOut->getTimestamp() - $timeIn->getTimestamp();
-            $operatingRoomTimeInMinutes = $operatingRoomDuration / 60;
-
-            $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
+        return TheatreAdmissions::where('room', $room)
+            ->where('doctor', $doctor)
+            ->where('date', $date)
+            ->where('time_in', $time)
+            ->where('status', '!=', 'Completed');
+    }
 
 
-            $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
+    public function addBillables(Episode $episode)
+    {
+        return view('layouts.theatre.billables', compact('episode'));
+    }
+
+    public function storeBillables(Episode $episode, Request $request)
+    {
+        try {
+            $admission = TheatreAdmissions::where('episode_id', $episode->id)->first();
+            if ($admission) {
+                $item = Item::where('item_code', 'OPR')->get()->first();
+
+                $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
+                $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
+
+                $operatingRoomDuration = $timeOut->getTimestamp() - $timeIn->getTimestamp();
+                $operatingRoomTimeInMinutes = $operatingRoomDuration / 60;
+
+                $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
 
 
-            $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
-            $chargeSheet->chargesheetitems()->save($chargeSheetItem);
+                $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
 
-            $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
 
-            return redirect()->back()->with('success', 'Bill Calculated Successfully. Bill Amount: ' . $formatter->formatCurrency($billAmount, 'USD'));
-        } else {
-            logger()->error('No Theatre Admission Found for Episode: ' . $episode);
-            return redirect()->back()->with('error', 'No Theatre Admission Found for Episode: ' . $episode);
-        }}catch(Exception $e){
+                $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
+                $chargeSheet->chargesheetitems()->save($chargeSheetItem);
+
+
+                 // Validate the incoming request data
+        $validatedData = $request->validate([
+            'procedures.*' => 'required',
+            'sundries.*' => 'required',
+            'other_items.*' => 'required',
+        ]);
+
+        // Loop through each submitted entry and store it in the database
+        foreach ($validatedData['procedures'] as $key => $procedure) {
+            $item = Item::where('item_description', 'LIKE', '%' . $procedure . '%')
+            ->orWhere('item_description', 'LIKE', '%' . $validatedData['sundries'][$key] . '%')
+            ->orWhere('item_description', 'LIKE', '%' . $validatedData['other_items'][$key] . '%')
+            ->first();
+
+            // Create a new TheatreBillable instance
+            $billable = new ChargeSheetItem();
+            // Assign the values from the form submission
+            $billable->charge_sheet_id = $chargeSheet->id;
+            $billable->item_id = $item->id;
+            // Save the instance to the database
+            $billable->save();
+        }
+
+            }
+        } catch (Exception $e) {
 
             logger()->error('An Error occurred while Calculating Bill : ' . $e->getMessage(), ['exception' => $e]);
 
-            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.' );
+            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.');
         }
     }
-
     public function sendToTheatreAjax(Request $request)
     {
         $episodes = Episode::where('patient', $request->patient)->get();
