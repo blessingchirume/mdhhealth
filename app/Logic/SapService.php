@@ -10,8 +10,6 @@ class SapService
 
     const MAKE_PAYMENT_URL = "/PurchaseInvoices";
 
-    private $data;
-
     private $url;
 
     public function __construct($url)
@@ -28,19 +26,17 @@ class SapService
             ]
         )->post(self::BASE_url.$this->url, $data);
 
-        dd($response->json());
-
         return $response->json()["value"];
     }
 
-    public function getDeliveryNotes($data = [])
+    public function createSapPayment($data = [])
     {
         $response = Http::withHeaders(
             [
                 "Content-Type" => "application/json",
                 "Cookie" => "B1SESSION=9d55c19c-b626-11ee-8000-000c2918eb7d"
             ]
-        )->get(self::BASE_url.$this->url);
+        )->post(self::BASE_url.$this->url, $data);
 
         return $response->json()["value"];
     }

@@ -289,5 +289,25 @@ class MenuSeeder extends Seeder
             'order' => 1,
             // 'permission' => PermisionConstants::viewProviders
         ]);
+
+        Menu::create([
+            'name' => 'billing',
+            'display_name' => 'Billing Groups',
+            'icon' => 'fa-circle',
+            'url' => 'currency.index',
+            'parent_id' => 4,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
+        ]);
+
+        Menu::create([
+            'name' => 'patients',
+            'display_name' => 'Patients',
+            'icon' => 'fa-circle',
+            'url' => 'patient.index',
+            'parent_id' => 4,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
+        ]);
     }
 }

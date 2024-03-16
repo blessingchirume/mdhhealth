@@ -169,6 +169,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/currency')->group(function () {
         Route::get('/', [CurrencyController::class, 'index'])->name('currency.index');
+        Route::post('/update', [CurrencyController::class, 'update'])->name('currency.update');
     });
 
     Route::get(
