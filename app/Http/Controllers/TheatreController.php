@@ -70,7 +70,6 @@ class TheatreController extends Controller
             ->where('status', '!=', 'Completed');
     }
 
-
     public function addBillables(Episode $episode)
     {
         return view('layouts.theatre.billables', compact('episode'));
@@ -90,7 +89,6 @@ class TheatreController extends Controller
                 $operatingRoomTimeInMinutes = $operatingRoomDuration / 60;
 
                 $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
-
 
                 $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
 
@@ -121,7 +119,6 @@ class TheatreController extends Controller
             // Save the instance to the database
             $billable->save();
         }
-
             }
         } catch (Exception $e) {
 
