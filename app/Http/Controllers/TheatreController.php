@@ -122,6 +122,8 @@ class TheatreController extends Controller
                     ]);
                 }
                 return redirect()->back()->with('success', 'Billables added successfully.');
+            }else{
+                return redirect()->back()->with('error', 'Theatre Admission not found.');
             }
         } catch (Exception $e) {
 
