@@ -19,7 +19,7 @@ class PackageFactory extends Factory
     {
         return [
             'partner_id' => 1,
-            'name' => fake()->text(50)
+            'name' => "First Mutual Gold"
         ];
     }
 }

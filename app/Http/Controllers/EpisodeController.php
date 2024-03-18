@@ -144,7 +144,7 @@ class EpisodeController extends Controller
         $customer = new Party([
             'name'          => $episode->patient->name. " " .$episode->patient->surname,
             'address'       => $episode->patient->address,
-            'code'          => '#22663214',
+            'code'          => $episode->patient->patient_id,
             'custom_fields' => [
                 'Episode number' => $episode->episode_code,
             ],
@@ -175,7 +175,9 @@ class EpisodeController extends Controller
         foreach($episode->items as $index => $value){
             array_push($items, InvoiceItem::make($value->item_code)
             ->description($value->item_description)
-            ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
+            ->pricePerUnit($value->base_price)
+
+            // ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
             ->quantity((int)$value->pivot->quantity)
             ->discount(1.00));
         }
@@ -188,15 +190,15 @@ class EpisodeController extends Controller
         $notes = implode("<br>", $notes);
 
         $invoice = Invoice::make('chargesheet')
-            ->series('BIG')
+            ->series('MDH')
             // ability to include translated invoice status
             // in case it was paid
             ->status(__('invoices::invoice.due'))
             ->sequence(667)
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            // ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->seller($client)
             ->buyer($customer)
-            ->date(now()->subWeeks(3))
+            ->date(now()->subWeeks(0))
             ->dateFormat('m/d/Y')
             ->payUntilDays(14)
             ->currencySymbol('$')
@@ -208,7 +210,7 @@ class EpisodeController extends Controller
             ->addItems($items)
             ->notes($notes)
             // ->logo(public_path('vendor/invoices/sample-logo.png'))
-            ->payUntilDays(10)
+            // ->payUntilDays(10)
             // You can additionally save generated invoice to configured disk
             ->save('public');
 

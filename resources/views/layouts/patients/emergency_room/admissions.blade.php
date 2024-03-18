@@ -4,7 +4,7 @@
     <div class="card m-3">
         <div class="card-header">
             <h3 class="card-title">Emergency Room Admissions</h3>
-            <a href='{{ route('patient.index')}}' class='float-right btn btn-primary'>Admit Existing</a>
+            <a href="{{ route('patient.index')}}" class='float-right btn btn-primary'>Admit Existing</a>
         </div>
         <div class="card-body">
             <form method="post" action="{{ route('emergency-room-admissions.store') }}">
@@ -24,8 +24,8 @@
                     </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="age">Age:</label>
-                        <input type="text" id="age" name="age" class="form-control">
+                        <label for="age">DOB:</label>
+                        <input type="date" id="age" name="age" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-2">

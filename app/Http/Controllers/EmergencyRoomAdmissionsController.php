@@ -16,6 +16,7 @@ use App\Models\Ward;
 use Exception;
 use Log;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class EmergencyRoomAdmissionsController extends Controller
 {
@@ -38,7 +39,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 'surname' => $surname,
                 'patient_id' => 'MDHP' . rand(00000, 99999),
                 'national_id' => '',
-                'dob' => '',
+                'dob' => $age,
                 'phone' => '',
                 'address' => '',
                 'gender' => $gender
@@ -52,17 +53,17 @@ class EmergencyRoomAdmissionsController extends Controller
                 'episode_entry' => $episode_entry,
                 'episode_code' => $patient->patient_id . "/" . $episode_entry,
                 'date' => date('Y-m-d'),
-                'attendee' => null,
+                'attendee' => 1,
                 'ward' => $request->admit_to
             ]);
 
-            $wards = Ward::find('id',$request->admit_to)->first();
+            $wards = Ward::find($request->admit_to)->first();
             $admission = EmergencyRoomAdmimission::create([
                 'name' => $name . ' ' . $surname,
                 'age' => $age,
                 'gender' => $gender,
                 'medical_history' => $medical_history,
-                'created_by' => Auth::user()->id,
+                'created_by' => FacadesAuth::user()->id,
                 'episode_id' => $episode->id
             ]);
 
