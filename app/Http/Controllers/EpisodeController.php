@@ -80,6 +80,14 @@ class EpisodeController extends Controller
         //
     }
 
+    public function discharge($episode)
+    {
+        $discharge = ChargeSheet::where('episode_id', $episode)->update([
+            'checkout' => date('Y-m-d'),
+        ]);
+        return redirect()->back()->with('success', 'Patient Discharged successfully!');
+    }
+
     public function destroy(Episode $episode)
     {
         //
