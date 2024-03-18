@@ -74,7 +74,8 @@ class TheatreController extends Controller
     public function addBillables(Episode $episode)
     {
         $itemgroups = ItemGroup::all();
-        return view('layouts.theatre.billables', compact('episode', 'itemgroups'));
+        $chargeitems = Chargesheet::with(['chargesheetitems', 'chargesheetitems.item'])->where('episode_id', $episode->id)->get();
+        return view('layouts.theatre.billables', compact('episode', 'itemgroups','chargeitems'));
     }
 
     public function storeBillables(Episode $episode, Request $request)

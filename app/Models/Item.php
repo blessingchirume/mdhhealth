@@ -34,5 +34,10 @@ class Item extends Model
     public function packages() {
         return $this->hasMany(PriceGroup::class);
     }
+
+    public function chargesheetitems()
+    {
+        return $this->hasMany(ChargesheetItem::class);
+    }
 }
 

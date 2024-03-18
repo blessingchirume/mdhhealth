@@ -9,6 +9,38 @@
                 <div class="float-right"><a href="{{ route('theatre.index') }}">Back</a></div>
             </div>
             <div class="card-body">
+                @if (isset($chargeitems))
+                <div class="row">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item</th>
+                                <th>Quantity</th>
+                                <th style="float:right">Unit Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($chargeitems as $items)
+                            <?php $total = 0 ; ?>
+                            @foreach ($items->chargesheetitems as $item) 
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->item->item_description }}</td>
+                                    <td>{{ $item->quantity }}</td>
+                                    <td align="right">{{ number_format($item->item->price_unit,2) }}</td>
+                                </tr>
+                                <?php $total += $item->quantity * $item->item->price_unit; ?>
+                                @endforeach
+                                @endforeach
+                            <tr>
+                                <td colspan="3"><strong>Total</strong></td>
+                                <td align="right"> <strong>{{ number_format($total,2) }}</strong> </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                @endif
                 <form method="post" action="{{ route('theatre.billables.add', $episode) }}">
                     @csrf
                     <div id="dynamic-inputs">
@@ -37,7 +69,7 @@
                             </div>
                         </!--div-->
                     </div>
-                    <button type="button" class="btn btn-secondary" id="add-input">Add Another Entry</button>
+                    <!--button type="button" class="btn btn-secondary" id="add-input">Add Another Entry</!--button-->
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
