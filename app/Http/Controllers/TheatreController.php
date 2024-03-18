@@ -11,6 +11,7 @@ use Exception;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 use App\Models\Item;
+use App\Models\ItemGroup;
 use NumberFormatter;
 
 class TheatreController extends Controller
@@ -70,13 +71,21 @@ class TheatreController extends Controller
             ->where('status', '!=', 'Completed');
     }
 
-    public function calculateBill($episode)
+    public function addBillables(Episode $episode)
     {
+        $itemgroups = ItemGroup::all();
+        $chargeitems = Chargesheet::with(['chargesheetitems', 'chargesheetitems.item'])->where('episode_id', $episode->id)->get();
+        return view('layouts.theatre.billables', compact('episode', 'itemgroups','chargeitems'));
+    }
 
+    public function storeBillables(Episode $episode, Request $request)
+    {
         try {
-            $admission = TheatreAdmissions::where('episode_id', $episode)->first();
+            $admission = TheatreAdmissions::where('episode_id', $episode->id)->first();
             if ($admission) {
-                $item = Item::where('item_code', 'OPR')->get()->first();
+                $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->get()->first();
+
+                /*$item = Item::where('item_code', 'OPR')->get()->first();
 
                 $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
                 $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
@@ -87,27 +96,42 @@ class TheatreController extends Controller
                 $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
 
 
-                $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
+                
 
 
                 $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
                 $chargeSheet->chargesheetitems()->save($chargeSheetItem);
 
-                $formatter = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
+*/
+                // Validate the incoming request data
+                $validatedData = $request->validate([
+                    'item.*' => 'required',
+                    'quantity.*' => 'required',
+                ]);
 
-                return redirect()->back()->with('success', 'Bill Calculated Successfully. Bill Amount: ' . $formatter->formatCurrency($billAmount, 'USD'));
-            } else {
-                logger()->error('No Theatre Admission Found for Episode: ' . $episode);
-                return redirect()->back()->with('error', 'No Theatre Admission Found for Episode: ' . $episode);
+                // Loop through each submitted entry and store it in the database
+                foreach ($validatedData['item'] as $key => $item_id) {
+                    if ($validatedData['item'][$key] == '0' || $validatedData['quantity'][$key] == '0') {
+                        continue;
+                    }
+                    // Create a new TheatreBillable instance
+                    $billable = ChargeSheetItem::create([
+                        'charge_sheet_id' => $chargeSheet->id,
+                        'item_id' => $validatedData['item'][$key],
+                        'quantity' => $validatedData['quantity'][$key],
+                    ]);
+                }
+                return redirect()->back()->with('success', 'Billables added successfully.');
+            }else{
+                return redirect()->back()->with('error', 'Theatre Admission not found.');
             }
         } catch (Exception $e) {
 
             logger()->error('An Error occurred while Calculating Bill : ' . $e->getMessage(), ['exception' => $e]);
 
-            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.');
+            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance. ' );
         }
     }
-
     public function sendToTheatreAjax(Request $request)
     {
         $episodes = Episode::where('patient', $request->patient)->get();

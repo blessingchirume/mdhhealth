@@ -140,10 +140,10 @@
                                             <div class="form-group d-none" id="dosage_section">
                                                 <label for="frequency">Frequency:</label>
                                                 <select class="form-control" id="frequency">
-                                                    <option value="Once a day">Once a day</option>
-                                                    <option value="Twice a day">Twice a day</option>
-                                                    <option value="Three times a day">Three times a day</option>
-                                                    <option value="As needed">As needed</option>
+                                                    <option value="1">Once a day</option>
+                                                    <option value="2">Twice a day</option>
+                                                    <option value="3">Three times a day</option>
+                                                    <option value="0">As needed</option>
                                                 </select>
                                             </div>
                                         </div>

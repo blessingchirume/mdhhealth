@@ -12,6 +12,7 @@ use App\Models\MaternityAdmission;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 use App\Models\Item;
+use App\Models\Ward;
 use Exception;
 use Log;
 use Auth;
@@ -51,10 +52,16 @@ class EmergencyRoomAdmissionsController extends Controller
                 'episode_entry' => $episode_entry,
                 'episode_code' => $patient->patient_id . "/" . $episode_entry,
                 'date' => date('Y-m-d'),
-                'attendee' => $request->admit_to,
-                'ward' => 1
+                'attendee' => 0,
+                'ward' => $request->admit_to
             ]);
 
+            $charge = ChargeSheet::create([
+                'episode_id' => $episode->id,
+                'checkin' => now()
+            ]);
+
+            $wards = Ward::find($request->admit_to)->first();
             $admission = EmergencyRoomAdmimission::create([
                 'name' => $name . ' ' . $surname,
                 'age' => $age,
@@ -64,7 +71,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 'episode_id' => $episode->id
             ]);
 
-            if ($request->input('admit_to') == 'Maternity') {
+            if ($wards->name == 'Maternity' || $wards->name == 'Maternity Ward') {
                 $tomaternity = MaternityAdmission::create([
                     'admission_id' => $admission->id,
                     'gestational_age' => $request->input('gestational_age'),
@@ -72,7 +79,7 @@ class EmergencyRoomAdmissionsController extends Controller
                     'prenatal_care_provider' => $request->input('prenatal_care_provider'),
                     'date' => now()
                 ]);
-            } elseif ($request->input('admit_to') == 'Theatre') {
+            } elseif ($wards->name == 'Theatre' || $wards->name == 'OR' || $wards->name == 'Operating Room' || $wards->name == 'Theatre Ward' || $wards->name == 'Surgery') {
                 $toTheatre = TheatreAdmissions::create([
                     'episode_id' => $episode->id,
                     'room' => $request->room,
@@ -87,17 +94,11 @@ class EmergencyRoomAdmissionsController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
-            } elseif ($request->input('admit_to') == 'ICU') {
+            } elseif ($wards->name == 'ICU' || $wards->name == 'Intensive Care') {
                 $toICU = ICUAdmission::create([
                     'admission_id' => $admission->id,
                     'severity_score' => $request->severity_score,
                     'comment' => $request->reason_for_admission
-                ]);
-
-
-                $charge = ChargeSheet::create([
-                    'episode_id' => $episode->id,
-                    'checkin' => now()
                 ]);
 
                 $items = Item::where('item_code', 'BED')->get();

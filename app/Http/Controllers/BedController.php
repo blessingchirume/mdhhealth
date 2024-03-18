@@ -17,7 +17,7 @@ class BedController extends Controller
         ]);
         try {
             $bed = Bed::create($data);
-            if($ward->name == "Theatre" || $ward->name == "Surgery" || $ward->name == "OR" || $ward->name == "Operating Room") {
+            if($ward->name == "Theatre" ||$ward->name == "Theatre Ward" || $ward->name == "Surgery"  || $ward->name == "Surgery Ward" || $ward->name == "Surgeons Ward" || $ward->name == "Op Room"  || $ward->name == "OR" || $ward->name == "Operating Room") {
              $theatreroom = TheatreRooms::create([
                  'room' => $request->name,
                  'status' => 'Available',

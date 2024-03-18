@@ -69,9 +69,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Treatment Plan</a>
                         </li>
-                        <li class="nav-item">
+                        <!--li class="nav-item">
                             <a class="nav-link" id="custom-content-below-messages-tab" data-toggle="pill" href="#custom-content-below-messages" role="tab" aria-controls="custom-content-below-messages" aria-selected="false">Update</a>
-                        </li>
+                        </!--li-->
 
                     </ul>
 
@@ -94,7 +94,6 @@
                                                 <th>Item Description</th>
                                                 <th>Item Group</th>
                                                 <th>Quantity</th>
-                                                <th>Price</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -107,7 +106,6 @@
                                                 <td>{{ $value->item_group }}</td>
                                                 <td>{{ $value->pivot->quantity }}</td>
 
-                                                <td>{{ $episode->patient->medicalaid->package->itemPrice(1,2)->price }}</td>
                                                 <td>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
@@ -195,6 +193,42 @@
                                             <div class="timeline-body">
                                                 {{ $value->comment }}
                                             </div>
+                                            {{--<div class="timeline-footer">
+                                                <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                                            </div>--}}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="timeline">
+                                <div class="timeline timeline-inverse">
+                                    <div class="time-label">
+                                        <span class="">
+                                            {{ $episode->date }}
+                                        </span>
+                                    </div>
+                                    @foreach($observations as $notes)
+                                    <div>
+                                        <i class="fas fa-edit bg-secondary"></i>
+                                        <div class="timeline-item">
+                                            <span class="time"><i class="far fa-clock"></i> {{ $notes->created_at }}</span>
+                                            <h3 class="timeline-header"><a href="#">{{ $notes->origin }}</h3>
+                                                <div class="timeline-body">
+                                                    <strong>Observations : </strong>{{ $notes->observation }}
+                                                </div>
+                                                <div class="timeline-body">
+                                                    <strong>Patients Complaints : </strong>{{ $notes->complaints }}
+                                                </div>
+                                                <div class="timeline-body">
+                                                    <strong>Notes : </strong>{{ $notes->notes }}
+                                                </div>
                                             {{--<div class="timeline-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm">Delete</a>

@@ -10,7 +10,13 @@ class TheatreRoomController extends Controller
 {
  public function index()
  {
-     return view('layouts.theatre.index');
+    $rooms = TheatreRooms::all();
+    return view('layouts.theatre.rooms', compact('rooms'));
+}
+
+public function create()
+{
+     return view('layouts.theatre.rooms');
  }
 
  public function store(Request $request)

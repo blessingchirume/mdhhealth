@@ -104,7 +104,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
             Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
             Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
-            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
+            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'discharge'])->name('episode.create-chargesheet');
             Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
         });
     });
@@ -226,7 +226,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/item')->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('item.index');
-        Route::post('/create-price-list', [ItemController::class, 'generatePriceList'])->name('item.create-price-list');
+        Route::post('/create-price-list', [ItemController::class, 'store'])->name('item.create-price-list');
         Route::get('/{item}', [ItemController::class, 'show'])->name('item.show');
     });
     Route::get(
@@ -284,7 +284,10 @@ Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theat
 Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
 Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
 Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');
-
+Route::get('/theatre-billables/{episode}',[TheatreController::class,'addBillables'])->name('theatre.billables');
+Route::post('/theatre-billables-store/{episode}',[TheatreController::class,'storeBillables'])->name('theatre.billables.add');
+Route::get('/theatre-rooms',[App\Http\Controllers\TheatreRoomController::class,'index'])->name('theatre.rooms');
+Route::post('/add-theatre-room',[App\Http\Controllers\TheatreRoomController::class,'store'])->name('store.theatre.room');
 
 Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
 Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');

@@ -12,5 +12,16 @@ class ChargesheetItem extends Model
     protected $fillable = [
         'item_id',
         'charge_sheet_id',
+        'quantity',
     ];
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function chargeSheet()
+    {
+        return $this->belongsTo(ChargeSheet::class);
+    }
 }
