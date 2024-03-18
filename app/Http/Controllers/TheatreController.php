@@ -71,7 +71,6 @@ class TheatreController extends Controller
             ->where('status', '!=', 'Completed');
     }
 
-
     public function addBillables(Episode $episode)
     {
         $itemgroups = ItemGroup::all();

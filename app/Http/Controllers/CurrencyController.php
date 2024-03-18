@@ -12,6 +12,7 @@ class CurrencyController extends Controller
     {
         $currencies = Currency::all();
         $groups = Group::all();
+
         return view('layouts.currency.index', compact('currencies', 'groups'));
     }
 }
