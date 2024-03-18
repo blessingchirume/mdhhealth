@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('episode_id');
             $table->string('medication')->nullable();
+            $table->string('item_id')->nullable();
             $table->string('dosage')->nullable();
             $table->string('frequency')->nullable();
             $table->string('duration')->nullable();

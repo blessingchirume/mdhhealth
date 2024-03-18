@@ -14,6 +14,7 @@ use App\Models\Item;
 use App\Models\TreatmentPlan;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
+use App\Models\EpisodeItem;
 
 class TreatmentController extends Controller
 {
@@ -48,7 +49,7 @@ class TreatmentController extends Controller
             $treatment->notes()->save($note);  // Assuming belongsTo relationship
         }
 
-        return response()->json(ChargesheetItem::where('charge_sheet_id',$chargeSheet->id)->get(), 200);
+        return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
     }
 
     public function show(Episode $episode)
@@ -77,37 +78,72 @@ class TreatmentController extends Controller
         return view('layouts.patients.visits.consultation', compact('items', 'patient', 'notes', 'episode', 'icd10codes'));
     }
 
-public function createTreatmentPlan(Request $request, Episode $episode)
-{
-    try {
-        $treatment = new TreatmentPlan();
-        $treatment->episode_id = $episode->id;
+    public function createTreatmentPlan(Request $request, Episode $episode)
+    {
+        try {
+            $treatment = new TreatmentPlan();
+            $treatment->episode_id = $episode->id;
 
-        if ($request->treatment_type == 'medication') {
-            $selectedMeds = request()->input('medication');
-            $dosages = $request->dosage;
-            $frequencies = $request->frequency;
-            $durations = $request->duration;
+            if ($request->treatment_type == 'medication') {
+                $selectedMeds = request()->input('medication');
+                $dosages = $request->dosage;
+                $frequencies = $request->frequency;
+                $durations = $request->duration;
 
-            foreach ($selectedMeds as $i => $medication) {
-                $treatmentPlan = new TreatmentPlan();
-                $treatmentPlan->episode_id = $treatment->episode_id;
-                $treatmentPlan->medication = $medication;
-                $treatmentPlan->dosage = $dosages[$i];
-                $treatmentPlan->frequency = $frequencies[$i];
-                $treatmentPlan->duration = $durations[$i];
-                $treatmentPlan->instructions = $request->instructions;
-                $treatmentPlan->save();
+                foreach ($selectedMeds as $i => $medication) {
+                    $item = Item::where('item_description', $medication)->first();
+                    $treatmentPlan = new TreatmentPlan();
+                    $treatmentPlan->episode_id = $treatment->episode_id;
+                    $treatmentPlan->medication = $medication;
+                    $treatmentPlan->item_id = $item->id;
+                    $treatmentPlan->dosage = $dosages[$i];
+                    $treatmentPlan->frequency = $frequencies[$i];
+                    $treatmentPlan->duration = $durations[$i];
+                    $treatmentPlan->instructions = $request->instructions;
+                    $treatmentPlan->save();
+                }
+            } else {
+                $treatment->medication = $request->other_treatment;
+                $treatment->instructions = $request->instructions;
+                $treatment->save();
             }
-        } else {
-            $treatment->medication = $request->other_treatment;
-            $treatment->instructions = $request->instructions;
-            $treatment->save();
-        }
 
-        return back()->with('success', 'Treatment Plans added successfully!');
-    } catch (\Throwable $th) {
-        return redirect()->back()->with('error', $th->getMessage());
+            return back()->with('success', 'Treatment Plans added successfully!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
-}
+
+    function convertFrequencyToNumber($frequency)
+    {
+        $frequency = strtolower($frequency);
+
+        // Define mappings
+        $mapping = [
+            'once a day' => 1,
+            'twice a day' => 2,
+            'once every two days' => 0.5,
+            'three times a day' => 3,
+            'four times a day' => 4,
+            'five times a day' => 5,
+            'six times a day' => 6,
+            'seven times a day' => 7,
+            'eight times a day' => 8,
+            'nine times a day' => 9,
+            'ten times a day' => 10,
+            'as needed' => 0,
+            'twice every 2 days' => 0.25,
+            'once every 3 days' => 0.33,
+            'thrice every 2 days' => 0.75,
+        ];
+
+        // Check if the description exists in the mapping
+        if (array_key_exists($frequency, $mapping)) {
+            return $mapping[$frequency];
+        } else {
+            return null; // Or handle the case where the description is not recognized
+        }
+    }
+
+
 }

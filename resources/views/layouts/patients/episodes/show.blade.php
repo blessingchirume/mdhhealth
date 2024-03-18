@@ -69,9 +69,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" id="custom-content-below-home-tab" data-toggle="pill" href="#custom-content-below-home" role="tab" aria-controls="custom-content-below-home" aria-selected="true">Treatment Plan</a>
                         </li>
-                        <li class="nav-item">
+                        <!--li class="nav-item">
                             <a class="nav-link" id="custom-content-below-messages-tab" data-toggle="pill" href="#custom-content-below-messages" role="tab" aria-controls="custom-content-below-messages" aria-selected="false">Update</a>
-                        </li>
+                        </!--li-->
 
                     </ul>
 
@@ -94,7 +94,6 @@
                                                 <th>Item Description</th>
                                                 <th>Item Group</th>
                                                 <th>Quantity</th>
-                                                <th>Price</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -107,7 +106,6 @@
                                                 <td>{{ $value->item_group }}</td>
                                                 <td>{{ $value->pivot->quantity }}</td>
 
-                                                <td>{{ $episode->patient->medicalaid->package->itemPrice(1,2)->price }}</td>
                                                 <td>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
