@@ -174,12 +174,12 @@ class EpisodeController extends Controller
             // InvoiceItem::make('Service 20')->pricePerUnit(55.80),
         ];
 
-        foreach($episode->items as $index => $value){
+        foreach($episode->chargesheetItems as $index => $value){
             array_push($items, InvoiceItem::make($value->item_code)
             ->description($value->item_description)
-            ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
+            ->pricePerUnit($value->base_price)
             ->quantity((int)$value->pivot->quantity)
-            ->discount(1.00));
+            ->discount(0.00));
         }
 
         $notes = [
