@@ -13,18 +13,22 @@
                     @csrf
                     <div id="dynamic-inputs">
                         <div class="row">
+                            @foreach ($itemgroups as $category)
                             <div class="form-group col-md-4">
-                                <label for="procedure">Procedure</label>
-                                <input type="text" class="form-control" name="procedures[]" required>
+                                <label for="item-category">{{ $category->name }}</label>
+                                <select class="form-control" name="item[]" required>
+                                    <option value='0'>--Select Option--</option>
+                                    @foreach ($category->items as $item)
+                                        <option value="{{ $item->id }}">{{ $item->item_description }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="text" name="quantity[]" placeholder="Quantity Administered To Patient in {{ $item->si_unit }}" class="form-control" @if (count($category->items) == 0) 
+                                value="0"
+                                disabled
+                                @endif>
                             </div>
-                            <div class="form-group col-md-4">
-                                <label for="sundries">Sundries</label>
-                                <input type="text" class="form-control" name="sundries[]" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="other_items">Other Items</label>
-                                <input type="text" class="form-control" name="other_items[]" required>
-                            </div>
+                            @endforeach
+                            
                         </div>
                         <!--div class="row">
                             <div class="form-group col-md-4">

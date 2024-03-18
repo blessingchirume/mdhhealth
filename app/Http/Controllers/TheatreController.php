@@ -11,6 +11,7 @@ use Exception;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 use App\Models\Item;
+use App\Models\ItemGroup;
 use NumberFormatter;
 
 class TheatreController extends Controller
@@ -73,7 +74,8 @@ class TheatreController extends Controller
 
     public function addBillables(Episode $episode)
     {
-        return view('layouts.theatre.billables', compact('episode'));
+        $itemgroups = ItemGroup::all();
+        return view('layouts.theatre.billables', compact('episode', 'itemgroups'));
     }
 
     public function storeBillables(Episode $episode, Request $request)
@@ -81,7 +83,9 @@ class TheatreController extends Controller
         try {
             $admission = TheatreAdmissions::where('episode_id', $episode->id)->first();
             if ($admission) {
-                $item = Item::where('item_code', 'OPR')->get()->first();
+                $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->get()->first();
+                
+                /*$item = Item::where('item_code', 'OPR')->get()->first();
 
                 $timeIn = \DateTime::createFromFormat('H:i:s', $admission->time_in);
                 $timeOut = \DateTime::createFromFormat('H:i:s', $admission->time_out);
@@ -92,42 +96,38 @@ class TheatreController extends Controller
                 $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
 
 
-                $chargeSheet = ChargeSheet::where('episode_id', $episode)->get()->first();
+                
 
 
                 $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);
                 $chargeSheet->chargesheetitems()->save($chargeSheetItem);
 
+*/
+                // Validate the incoming request data
+                $validatedData = $request->validate([
+                    'item.*' => 'required',
+                    'quantity.*'=>'required',
+                ]);
 
-                 // Validate the incoming request data
-        $validatedData = $request->validate([
-            'procedures.*' => 'required',
-            'sundries.*' => 'required',
-            'other_items.*' => 'required',
-        ]);
-
-        // Loop through each submitted entry and store it in the database
-        foreach ($validatedData['procedures'] as $key => $procedure) {
-            $item = Item::where('item_description', 'LIKE', '%' . $procedure . '%')
-            ->orWhere('item_description', 'LIKE', '%' . $validatedData['sundries'][$key] . '%')
-            ->orWhere('item_description', 'LIKE', '%' . $validatedData['other_items'][$key] . '%')
-            ->first();
-
-            // Create a new TheatreBillable instance
-            $billable = new ChargeSheetItem();
-            // Assign the values from the form submission
-            $billable->charge_sheet_id = $chargeSheet->id;
-            $billable->item_id = $item->id;
-            // Save the instance to the database
-            $billable->save();
-        }
-
+                // Loop through each submitted entry and store it in the database
+                foreach ($validatedData['item'] as $key => $item_id) {
+                    if( $validatedData['item'][$key]=='0' || $validatedData['quantity'][$key]=='0'){
+                        continue;
+                    }
+                    // Create a new TheatreBillable instance
+                    $billable = ChargeSheetItem::create([
+                        'charge_sheet_id'=>$chargeSheet->id,
+                        'item_id' => $validatedData['item'][$key],
+                        'quantity' => $validatedData['quantity'][$key],
+                    ]);
+                }
+return redirect()->back()->with('success', 'Billables added successfully.');
             }
         } catch (Exception $e) {
 
             logger()->error('An Error occurred while Calculating Bill : ' . $e->getMessage(), ['exception' => $e]);
 
-            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.');
+            return redirect()->back()->with('error', 'An Error occurred while Culculating Bill. Please Notify Systems Administrator For Assistance.' . $e->getMessage());
         }
     }
     public function sendToTheatreAjax(Request $request)

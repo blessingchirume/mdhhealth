@@ -12,5 +12,6 @@ class ChargesheetItem extends Model
     protected $fillable = [
         'item_id',
         'charge_sheet_id',
+        'quantity',
     ];
 }

@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'item_code',
+        'item_description',
+        'item_group_id',
+        'si_unit',
+        'price_unit',
+        'base_price'
+    ];
 
     public function chargesheet()
     {

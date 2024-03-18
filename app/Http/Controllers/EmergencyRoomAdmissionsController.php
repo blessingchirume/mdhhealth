@@ -52,11 +52,16 @@ class EmergencyRoomAdmissionsController extends Controller
                 'episode_entry' => $episode_entry,
                 'episode_code' => $patient->patient_id . "/" . $episode_entry,
                 'date' => date('Y-m-d'),
-                'attendee' => null,
+                'attendee' => 0,
                 'ward' => $request->admit_to
             ]);
 
-            $wards = Ward::find('id',$request->admit_to)->first();
+            $charge = ChargeSheet::create([
+                'episode_id' => $episode->id,
+                'checkin' => now()
+            ]);
+
+            $wards = Ward::find($request->admit_to)->first();
             $admission = EmergencyRoomAdmimission::create([
                 'name' => $name . ' ' . $surname,
                 'age' => $age,
@@ -94,12 +99,6 @@ class EmergencyRoomAdmissionsController extends Controller
                     'admission_id' => $admission->id,
                     'severity_score' => $request->severity_score,
                     'comment' => $request->reason_for_admission
-                ]);
-
-
-                $charge = ChargeSheet::create([
-                    'episode_id' => $episode->id,
-                    'checkin' => now()
                 ]);
 
                 $items = Item::where('item_code', 'BED')->get();
