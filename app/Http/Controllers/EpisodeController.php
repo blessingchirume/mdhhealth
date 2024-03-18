@@ -20,6 +20,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 use PhpParser\Node\Stmt\TryCatch;
+use App\Models\Observation;
 
 class EpisodeController extends Controller
 {
@@ -65,7 +66,8 @@ class EpisodeController extends Controller
         $items = Item::all();
         // $episode->load(['chargesheet']);
         $vitalGroups = VitalGroup::all();
-        return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups'));
+        $observations = Observation::where('episode_id', $episode->id)->get();
+        return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups', 'observations'));
     }
 
     public function edit(Episode $episode)
