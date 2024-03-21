@@ -99,7 +99,7 @@
                                     <label for="treatment_type">Treatment Type:</label>
                                     <select class="form-control" id="treatment_type" name="treatment_type">
                                         <option value="medication">Medication</option>
-                                        <option value="other_treatment">Other Treatment</option>
+                                        <option value="other_treatment">Procedures / Other Treatment(s)</option>
                                     </select>
                                 </div>
                                 <div id="medication_section">
@@ -122,6 +122,9 @@
                                                 <label for="medication">Medication:</label>
                                                 <select class="form-control select2" id="medication">
                                                     @foreach ($items as $option)
+                                                    @if ($option->group->name != 'Drugs')
+                                                        <?php continue ; ?>
+                                                    @endif
                                                         <option value="{{ $option->item_description }}">{{ $option->item_code }} |
                                                             {{ $option->item_description }}</option>
                                                     @endforeach
@@ -169,8 +172,15 @@
 
                                 <div class="form-group d-none" id="other_treatment_section">
                                     <label for="other_treatment">Other Treatment:</label>
-                                    <input type="text" class="form-control" id="other_treatment"
-                                        name="other_treatment">
+                                    <select class="form-control select2" id="medication" name="other_treatment">
+                                        @foreach ($items as $option)
+                                        @if ($option->group->name == 'Drugs' || $option->group->name == 'Medications' || $option->group->name == 'Drug' || $option->group->name == 'Medication' || $option->group->name == 'Drugs & Medications' || $option->group->name == 'Medications & Drugs')
+                                            <?php continue ; ?>
+                                        @endif
+                                            <option value="{{ $option->item_description }}">{{ $option->item_code }} |
+                                                {{ $option->item_description }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
