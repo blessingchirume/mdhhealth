@@ -130,7 +130,7 @@
             e.preventDefault();
             var formData = $(this).serialize();
             $.ajax({
-                url: '{{ route('administer-treatment', $episode->id) }}', // Replace with your server endpoint
+                url: "{{ route('administer-treatment', $episode->id) }}", // Replace with your server endpoint
                 type: 'POST', // Or 'GET' if you're retrieving data
                 data: formData,
                 success: function(response) {
