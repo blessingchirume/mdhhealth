@@ -307,5 +307,15 @@ class MenuSeeder extends Seeder
             'parent_id'=>19,
             'order'=>1,
         ]);
+
+        Menu::create([
+            'name' => 'patients',
+            'display_name' => 'Patients',
+            'icon' => 'fa-circle',
+            'url' => 'patient.index',
+            'parent_id' => 3,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
+        ]);
     }
 }
