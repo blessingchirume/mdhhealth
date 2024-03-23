@@ -17,6 +17,7 @@ use Exception;
 use Log;
 use Auth;
 use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class EmergencyRoomAdmissionsController extends Controller
 {
@@ -90,8 +91,8 @@ class EmergencyRoomAdmissionsController extends Controller
                     'time_out' => '',
                     'status' => 'Pending',
                     'comment' => null,
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
+                    'created_by' => FacadesAuth::user()->id,
+                    'updated_by' => FacadesAuth::user()->id,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -116,7 +117,7 @@ class EmergencyRoomAdmissionsController extends Controller
             // Additional logic for handling the admission process
             return redirect()->back()->with('success', 'Patient admitted successfully');
         } catch (Exception $e) {
-            Log::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
+            FacadesLog::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
             return redirect()->back()->with('error', 'Failed to admit patient' . $e->getMessage());
         }
     }
