@@ -23,6 +23,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 use PhpParser\Node\Stmt\TryCatch;
+use App\Models\Observation;
 
 class EpisodeController extends Controller
 {
@@ -116,7 +117,8 @@ class EpisodeController extends Controller
         $items = Item::all();
         // $episode->load(['chargesheet']);
         $vitalGroups = VitalGroup::all();
-        return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups'));
+        $observations = Observation::where('episode_id', $episode->id)->get();
+        return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups', 'observations'));
     }
 
     public function edit(Episode $episode)
@@ -127,6 +129,14 @@ class EpisodeController extends Controller
     public function update(UpdateEpisodeRequest $request, Episode $episode)
     {
         //
+    }
+
+    public function discharge($episode)
+    {
+        $discharge = ChargeSheet::where('episode_id', $episode)->update([
+            'checkout' => date('Y-m-d'),
+        ]);
+        return redirect()->back()->with('success', 'Patient Discharged successfully!');
     }
 
     public function destroy(Episode $episode)
@@ -224,14 +234,12 @@ class EpisodeController extends Controller
             // InvoiceItem::make('Service 20')->pricePerUnit(55.80),
         ];
 
-        foreach ($episode->items as $index => $value) {
+        foreach($episode->chargesheetItems as $index => $value){
             array_push($items, InvoiceItem::make($value->item_code)
-                ->description($value->item_description)
-                ->pricePerUnit($value->base_price)
-
-                // ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
-                ->quantity((int)$value->pivot->quantity)
-                ->discount(1.00));
+            ->description($value->item_description)
+            ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
+            ->quantity((int)$value->pivot->quantity)
+            ->discount(1.00));
         }
 
         $notes = [

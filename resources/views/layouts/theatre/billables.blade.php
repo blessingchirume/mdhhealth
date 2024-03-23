@@ -9,31 +9,68 @@
                 <div class="float-right"><a href="{{ route('theatre.index') }}">Back</a></div>
             </div>
             <div class="card-body">
+                @if (isset($chargeitems))
+                    <div class="row">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Item</th>
+                                    <th>Quantity</th>
+                                    <th style="float:right">Base Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($chargeitems as $items)
+                                    <?php $total = 0; ?>
+                                    @foreach ($items->chargesheetitems as $item)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $item->item->item_description }}</td>
+                                            <td>{{ $item->quantity }}</td>
+                                            <td align="right">{{ number_format($item->item->base_price, 2) }}</td>
+                                        </tr>
+                                        <?php $total += $item->quantity * $item->item->base_price; ?>
+                                    @endforeach
+                                @endforeach
+                                <tr>
+                                    <td colspan="3"><strong>Total</strong></td>
+                                    <td align="right"> <strong>{{ number_format($total, 2) }}</strong> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                @endif
                 <form method="post" action="{{ route('theatre.billables.add', $episode) }}">
                     @csrf
                     <div id="dynamic-inputs">
                         <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="procedure">Procedure</label>
-                                <input type="text" class="form-control" name="procedures[]" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="sundries">Sundries</label>
-                                <input type="text" class="form-control" name="sundries[]" required>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="other_items">Other Items</label>
-                                <input type="text" class="form-control" name="other_items[]" required>
-                            </div>
+                            @foreach ($itemgroups as $category)
+                                <div class="form-group col-md-4">
+                                    <label for="item-category">{{ $category->name }}</label>
+                                    <select class="form-control" name="item[]" required>
+                                        <option value='0'>--Select Option--</option>
+                                        @foreach ($category->items as $item)
+                                            <option value="{{ $item->id }}">{{ $item->item_description }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="text" name="quantity[]"
+                                        placeholder="Quantity Administered To Patient in {{ $item->si_unit }}"
+                                        class="form-control"
+                                        @if (count($category->items) == 0) value="0"
+                                disabled @endif>
+                                </div>
+                            @endforeach
+
                         </div>
                         <!--div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="bill_amount">Bill Amount</label>
-                                <input type="number" class="form-control" name="bill_amount" required>
-                            </div>
-                        </!--div-->
+                                <div class="form-group col-md-4">
+                                    <label for="bill_amount">Bill Amount</label>
+                                    <input type="number" class="form-control" name="bill_amount" required>
+                                </div>
+                            </!--div-->
                     </div>
-                    <button type="button" class="btn btn-secondary" id="add-input">Add Another Entry</button>
+                    <!--button type="button" class="btn btn-secondary" id="add-input">Add Another Entry</!--button-->
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
