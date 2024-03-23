@@ -90,6 +90,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{patient}', [PatientController::class, 'update'])->name('patient.update');
         Route::get('/show/{patient}', [PatientController::class, 'show'])->name('patient.show');
         Route::prefix('/episode')->group(function () {
+            Route::get('/create/{patient}', [EpisodeController::class, 'create'])->name('episode.create');
             Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
             Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
             Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
@@ -98,15 +99,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
             Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
         });
-        Route::prefix('/episode')->group(function () {
-            Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
-            Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
-            Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
-            Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
-            Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
-            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
-            Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
-        });
+        // Route::prefix('/episode')->group(function () {
+        //     Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
+        //     Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
+        //     Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
+        //     Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
+        //     Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
+        //     Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
+        //     Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
+        // });
     });
 
     Route::prefix('laboratory')->group(function(){

@@ -20,11 +20,14 @@ return new class extends Migration
             $table->string('patient_id');
             $table->string('patient_type');
             $table->string('date');
+            $table->unsignedBigInteger('payment_option_id')->unsigned()->nullable();
             $table->string('attendee');
             $table->double('base_amount')->default(0.00);
             $table->double('amount_due')->default(0.00);
             $table->string('ward');
             $table->timestamps();
+
+            $table->foreign('payment_option_id')->references('id')->on('payment_options')->onDelete('set null');
         });
     }
 
