@@ -175,7 +175,8 @@ class EpisodeController extends Controller
         foreach($episode->items as $index => $value){
             array_push($items, InvoiceItem::make($value->item_code)
             ->description($value->item_description)
-            ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
+            ->pricePerUnit($value->base_price)
+            // ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
             ->quantity((int)$value->pivot->quantity)
             ->discount(1.00));
         }
@@ -183,7 +184,7 @@ class EpisodeController extends Controller
         $notes = [
             'your multiline',
             'additional notes',
-            'in regards of delivery or something else',
+            'in regards of '.$episode->episode_code,
         ];
         $notes = implode("<br>", $notes);
 
