@@ -118,6 +118,8 @@ class EpisodeController extends Controller
         // $episode->load(['chargesheet']);
         $vitalGroups = VitalGroup::all();
         $observations = Observation::where('episode_id', $episode->id)->get();
+
+        // dd($observations);
         return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups', 'observations'));
     }
 
@@ -237,7 +239,7 @@ class EpisodeController extends Controller
         foreach($episode->chargesheetItems as $index => $value){
             array_push($items, InvoiceItem::make($value->item_code)
             ->description($value->item_description)
-            ->pricePerUnit($episode->patient->medicalaid->package->itemPrice($value->id, $episode->patient->medicalaid->package->id)->price)
+            ->pricePerUnit($value->base_price)
             ->quantity((int)$value->pivot->quantity)
             ->discount(1.00));
         }

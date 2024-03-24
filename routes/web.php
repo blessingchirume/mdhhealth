@@ -155,7 +155,8 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('/payment')->group(function () {
         Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
-        Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
+        Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
+        Route::post('/', [PaymentController::class, 'makeAccountReceivableInvoice'])->name('payment.store');
     });
 
     Route::prefix('/role')->group(function () {

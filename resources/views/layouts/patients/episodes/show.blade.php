@@ -175,23 +175,30 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="timeline">
                                 <div class="timeline timeline-inverse">
                                     <div class="time-label">
                                         <span class="">
-                                            {{ $episode->date }}
+                                            Observations
                                         </span>
                                     </div>
-                                    @foreach($episode->notes as $index => $value)
+                                    @foreach($observations as $notes)
                                     <div>
                                         <i class="fas fa-edit bg-secondary"></i>
                                         <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> 12:05</span>
+                                            <span class="time"><i class="far fa-clock"></i>{{ $notes->created_at }}</span>
                                             <h3 class="timeline-header"><a href="#">{{ Auth::user()->name }} {{ Auth::user()->surname }}</a> {{ Auth::user()->designation->name }}</h3>
                                             <div class="timeline-body">
-                                                {{ $value->comment }}
+                                                {{ $notes->notes }}
+                                            </div>
+                                            <div class="timeline-body">
+                                                {{ $notes->complaints }}
+                                            </div>
+                                            <div class="timeline-body">
+                                                {{ $notes->observations }}
                                             </div>
                                             {{--<div class="timeline-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
@@ -205,30 +212,26 @@
                         </div>
 
                     </div>
+
                     <div class="card-body">
                         <div class="tab-content">
                             <div class="tab-pane active" id="timeline">
                                 <div class="timeline timeline-inverse">
                                     <div class="time-label">
                                         <span class="">
-                                            {{ $episode->date }}
+                                            Attending Dr / Ns Notes
                                         </span>
                                     </div>
-                                    @foreach($observations as $notes)
+                                    @foreach($episode->notes as $note)
                                     <div>
                                         <i class="fas fa-edit bg-secondary"></i>
                                         <div class="timeline-item">
-                                            <span class="time"><i class="far fa-clock"></i> {{ $notes->created_at }}</span>
-                                            <h3 class="timeline-header"><a href="#">{{ $notes->origin }}</h3>
-                                                <div class="timeline-body">
-                                                    <strong>Observations : </strong>{{ $notes->observation }}
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <strong>Patients Complaints : </strong>{{ $notes->complaints }}
-                                                </div>
-                                                <div class="timeline-body">
-                                                    <strong>Notes : </strong>{{ $notes->notes }}
-                                                </div>
+                                            <span class="time"><i class="far fa-clock"></i>{{ $notes->created_at }}</span>
+                                            <h3 class="timeline-header"><a href="#">{{ Auth::user()->name }} {{ Auth::user()->surname }}</a> {{ Auth::user()->designation->name }}</h3>
+                                            <div class="timeline-body">
+                                                {{ $note->comment }}
+                                            </div>
+                                            
                                             {{--<div class="timeline-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm">Delete</a>
