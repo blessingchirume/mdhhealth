@@ -15,7 +15,7 @@ class LabTests extends Model
     protected $fillable = [
         'category_id',
         'test',
-        'episode_id',
+        'booking',
         'result',
         'test_date',
         'test_time',
@@ -24,6 +24,11 @@ class LabTests extends Model
         'uploaded_by',
         'refered_by',
     ];
+
+    public function booking()
+    {
+      return $this->belongsTo(LabBooking::class, 'booking');
+    }
 
     public function test()
     {

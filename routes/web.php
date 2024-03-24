@@ -26,6 +26,7 @@ use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ICUAdmissionController;
+use App\Http\Controllers\BedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,13 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('users', [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
+    Route::get('create', [\App\Http\Controllers\UserController::class, 'create'])->name('users.create');
+    Route::get('edit/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::get('show/{user}', [\App\Http\Controllers\UserController::class, 'edit'])->name('users.show');
+    Route::post('store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
+    Route::patch('update/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
+    Route::get('destroy/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+    });
 
     Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
@@ -82,6 +90,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{patient}', [PatientController::class, 'update'])->name('patient.update');
         Route::get('/show/{patient}', [PatientController::class, 'show'])->name('patient.show');
         Route::prefix('/episode')->group(function () {
+            Route::get('/create/{patient}', [EpisodeController::class, 'create'])->name('episode.create');
             Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
             Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
             Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
@@ -90,15 +99,15 @@ Route::middleware('auth')->group(function () {
             Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
             Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
         });
-        Route::prefix('/episode')->group(function () {
-            Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
-            Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
-            Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
-            Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
-            Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
-            Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
-            Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
-        });
+        // Route::prefix('/episode')->group(function () {
+        //     Route::post('/{patient}', [EpisodeController::class, 'store'])->name('patient.episode.store');
+        //     Route::get('/show/{episode}', [EpisodeController::class, 'show'])->name('patient.episode.show');
+        //     Route::post('/create-note/{episode}', [EpisodeController::class, 'createNote'])->name('episode.create-note');
+        //     Route::post('/create-item/{episode}', [EpisodeController::class, 'createItem'])->name('episode.create-item');
+        //     Route::post('/create-vital/{episode}', [EpisodeController::class, 'createVital'])->name('episode.create-vital');
+        //     Route::get('/create-chargesheet/{episode}', [EpisodeController::class, 'createChargesheet'])->name('episode.create-chargesheet');
+        //     Route::post('/create-payment/{episode}', [EpisodeController::class, 'payment'])->name('episode.create-payment');
+        // });
     });
 
     Route::prefix('laboratory')->group(function(){
@@ -119,12 +128,35 @@ Route::middleware('auth')->group(function () {
         Route::get('/wards/{ward}', [WardController::class, 'show'])->name('designation.ward.show');
         Route::get('/wards/{ward}/edit', [WardController::class, 'show'])->name('designation.ward.edit');
         Route::post('/wards', [WardController::class, 'store'])->name('designation.ward.store');
-        Route::post('/', [DesignationController::class, 'store'])->name('designation.store');
+        Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');
+        Route::get('/{designation}', [DesignationController::class, 'edit'])->name('designation.edit');
     });
 
+
+    Route::prefix('beds')->group(function () {
+        Route::post('/{ward}', [BedController::class, 'store'])->name('ward.beds.store');
+        Route::get('/{bed}', [BedController::class, 'bedsShow'])->name('ward.beds.show');
+        Route::get('/edit', [BedController::class, 'bedsEdit'])->name('ward.beds.edit');
+        Route::post('/{bed}', [BedController::class, 'bedsUpdate'])->name('ward.beds.update');
+        Route::post('/{bed}/delete', [BedController::class, 'bedsDestroy'])->name('ward.beds.delete');
+    });
+
+    Route::prefix('ward')->group(function () {
+        Route::get('/', [WardController::class, 'index'])->name('ward.index');
+        Route::get('/create', [WardController::class, 'create'])->name('ward.create');
+        Route::post('/', [WardController::class, 'store'])->name('ward.store');
+        Route::get('/{ward}', [WardController::class, 'show'])->name('ward.show');
+        Route::get('/{ward}/edit', [WardController::class, 'edit'])->name('ward.edit');
+        Route::post('/{ward}', [WardController::class, 'update'])->name('ward.update');
+        Route::post('/{ward}/delete', [WardController::class, 'destroy'])->name('ward.delete');
+        Route::post('/{ward}/restore', [WardController::class, 'restore'])->name('ward.restore');
+        Route::get('/{ward}/beds', [WardController::class, 'beds'])->name('ward.beds');
+
+    });
     Route::prefix('/payment')->group(function () {
         Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
-        Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
+        Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
+        Route::post('/', [PaymentController::class, 'makeAccountReceivableInvoice'])->name('payment.store');
     });
 
     Route::prefix('/role')->group(function () {
@@ -139,6 +171,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/currency')->group(function () {
         Route::get('/', [CurrencyController::class, 'index'])->name('currency.index');
+        Route::post('/update', [CurrencyController::class, 'update'])->name('currency.update');
     });
 
     Route::get(
@@ -166,13 +199,20 @@ Route::middleware('auth')->group(function () {
     )->name('laboratory.index');
 
     Route::get(
-        'lab-results/{episode}',
-        [\App\Http\Controllers\TestResultsController::class, 'results']
+        'laboratory/bookings',
+        [LaboratoryController::class, 'show']
+    )->name('laboratory.bookings');
+
+    Route::get(
+        'lab-results/{booking}',
+        [TestResultsController::class, 'results']
     )->name('view-results');
+
+    Route::get('lab-tests/conclude/{booking}',[LaboratoryController::class,'conclude'])->name('laboratory.conclude-test');
 
     Route::post('/lab-tests/{episode}', [\App\Http\Controllers\LabTestsController::class, 'store'])->name('lab.store');
 
-    Route::get('/upload-test-results/{episode}', [TestResultsController::class, 'index'])->name('upload-test-results');
+    Route::get('/upload-test-results/{booking}', [TestResultsController::class, 'create'])->name('upload-test-results');
 
     Route::post('/save-test-results', [TestResultsController::class, 'addResults'])->name('save-test-results');
 
@@ -189,7 +229,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/item')->group(function () {
         Route::get('/', [ItemController::class, 'index'])->name('item.index');
-        Route::post('/create-price-list', [ItemController::class, 'generatePriceList'])->name('item.create-price-list');
+        Route::post('/create-price-list', [ItemController::class, 'store'])->name('item.create-price-list');
         Route::get('/{item}', [ItemController::class, 'show'])->name('item.show');
     });
     Route::get(
@@ -226,7 +266,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/patient/emergency/create', [EmergencyRoomAdmissionsController::class, 'create'])->name('emergency-room-admissions.create');
 Route::post('/emergency-room-admissions', [EmergencyRoomAdmissionsController::class, 'store'])->name('emergency-room-admissions.store');
-});
+
 Route::get('/patient/emergency/list', [EmergencyRoomAdmissionsController::class,'listPatients'])->name('emergency-room-patients.list');
 
 
@@ -247,7 +287,10 @@ Route::get('/theatre/{episode}', [TheatreController::class,'show'])->name('theat
 Route::get('/theatre/queue/{episode}', [TheatreController::class,'queue'])->name('theatre.queue');
 Route::get('/send-to-theatre-queue', [TheatreController::class,'sendToTheatreQueue'])->name('send_to_theatre');
 Route::post('/send-to-theatre-ajax', [TheatreController::class,'sendToTheatreAjax'])->name('send_to_theatre_ajax');
-
+Route::get('/theatre-billables/{episode}',[TheatreController::class,'addBillables'])->name('theatre.billables');
+Route::post('/theatre-billables-store/{episode}',[TheatreController::class,'storeBillables'])->name('theatre.billables.add');
+Route::get('/theatre-rooms',[App\Http\Controllers\TheatreRoomController::class,'index'])->name('theatre.rooms');
+Route::post('/add-theatre-room',[App\Http\Controllers\TheatreRoomController::class,'store'])->name('store.theatre.room');
 
 Route::get('/surgery/start/{id}', [SurgeryController::class, 'startSurgery'])->name('surgery_start');
 Route::get('/surgery/end/{id}', [SurgeryController::class, 'endSurgery'])->name('surgery_end');
@@ -260,5 +303,7 @@ Route::prefix('/staff')->group(function () {
 
 Route::prefix('/icu')->group(function () {
    Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
+   Route::get('/create', [ICUAdmissionController::class, 'create'])->name('icu.create');
+   Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
    Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
 });

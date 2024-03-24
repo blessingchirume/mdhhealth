@@ -27,6 +27,10 @@ class Episode extends Model
         return $this->belongsToMany(Item::class, 'episode_items', 'episode_id', 'item_id')->withPivot('quantity');
     }
 
+    public function chargesheetItems(){
+        return $this->belongsToMany(Item::class, 'chargesheet_items', 'charge_sheet_id', 'item_id')->withPivot('quantity');
+    }
+
     public function patient() {
         return $this->belongsTo(patient::class);
     }
@@ -41,7 +45,7 @@ class Episode extends Model
 
     public function labTests()
     {
-        return $this->hasMany(LabTests::class,'episode');
+        return $this->hasMany(LabBooking::class,'episode_id');
     }
 
     public function theatreAdmissions() {

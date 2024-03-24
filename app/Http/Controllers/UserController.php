@@ -20,7 +20,8 @@ class UserController extends Controller
     public function create()
     {
         $designations = Designation::all();
-        return view('users.create', compact('designations'));
+        $roles = Role::all();
+        return view('users.create', compact('designations', 'roles'));
     }
 
     public function store(Request $request)
@@ -38,8 +39,8 @@ class UserController extends Controller
                 'name' => $request->name,
                 'surname' => $request->surname,
                 'email' => $request->email,
-                'role_id' => 1,
-                'branch_id' => 1,
+                'role_id' => $request->role_id,
+                'branch_id' => 0,
                 'designation_id' => $request->designation_id,
                 'password' => Hash::make('12345678')
             ]);
@@ -48,6 +49,13 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
+    }
+
+    public function edit(User $user)
+    {
+        $roles = Role::all();
+        $designations = Designation::all();
+        return view('users.edit', compact('user', 'roles', 'designations'));
     }
 
     public function show(User $user)

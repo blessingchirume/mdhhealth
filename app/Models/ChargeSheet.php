@@ -14,11 +14,13 @@ class ChargeSheet extends Model
         return $this->belongsToMany(Item::class, 'chargesheet_items', 'charge_sheet_id', 'item_id');
     }
 
+    public function chargesheetitems()
+    {
+        return $this->hasMany(ChargesheetItem::class);
+    }
+
     public function episode(){
         return $this->belongsToMany(Episode::class);
     }
 
-    public function chargesheetitems() {
-        return $this->hasMany(ChargesheetItem::class);
-    }
 }

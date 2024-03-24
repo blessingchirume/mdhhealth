@@ -14,6 +14,7 @@ return new class extends Migration
             $table->unsignedBiginteger('charge_sheet_id')->unsigned();
             $table->foreign('item_id')->references('id')
                  ->on('items')->onDelete('cascade');
+            $table->decimal('quantity', 10, 2)->default(1.00);
             $table->foreign('charge_sheet_id')->references('id')
                 ->on('charge_sheets')->onDelete('cascade');
             $table->timestamps();

@@ -8,6 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'item_code',
+        'item_description',
+        'item_group_id',
+        'si_unit',
+        'price_unit',
+        'base_price'
+    ];
 
     public function chargesheet()
     {
@@ -25,6 +33,11 @@ class Item extends Model
 
     public function packages() {
         return $this->hasMany(PriceGroup::class);
+    }
+
+    public function chargesheetitems()
+    {
+        return $this->hasMany(ChargesheetItem::class);
     }
 }
 

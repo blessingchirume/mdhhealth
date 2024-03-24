@@ -28,9 +28,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-right btn-group btn-group-sm">
-                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                    <a href="{{ route('episode.create', $patient) }}" type="button" class="btn btn-primary">
                                             <i class="fa fa-plus"></i> Generate
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -58,6 +58,7 @@
                                                 <td>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-edit primary m-2"></i></a>
+                                                    <a href="{{ route('doctors.observation', $value)}}"><i class="fa fa-clipboard m-2"></i></a>
                                                     <a href="{{ route('patient.episode.show', $value)}}"><i class="fa fa-trash m-2"></i></a>
                                                 </td>
                                             </tr>
@@ -71,9 +72,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-right btn-group btn-group-sm">
-                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                        <a href="{{ route('episode.create', $patient) }}" type="button" class="btn btn-primary">
                                             <i class="fa fa-plus"></i> Generate
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body">

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CurrencyGroup extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'rate'
+    ];
 }
