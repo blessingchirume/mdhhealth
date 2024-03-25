@@ -16,6 +16,8 @@ use App\Models\Ward;
 use Exception;
 use Log;
 use Auth;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
+use Illuminate\Support\Facades\Log as FacadesLog;
 
 class EmergencyRoomAdmissionsController extends Controller
 {
@@ -38,7 +40,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 'surname' => $surname,
                 'patient_id' => 'MDHP' . rand(00000, 99999),
                 'national_id' => '',
-                'dob' => '',
+                'dob' => $age,
                 'phone' => '',
                 'address' => '',
                 'gender' => $gender
@@ -67,7 +69,7 @@ class EmergencyRoomAdmissionsController extends Controller
                 'age' => $age,
                 'gender' => $gender,
                 'medical_history' => $medical_history,
-                'created_by' => Auth::user()->id,
+                'created_by' => FacadesAuth::user()->id,
                 'episode_id' => $episode->id
             ]);
 
@@ -89,8 +91,8 @@ class EmergencyRoomAdmissionsController extends Controller
                     'time_out' => '',
                     'status' => 'Pending',
                     'comment' => null,
-                    'created_by' => Auth::user()->id,
-                    'updated_by' => Auth::user()->id,
+                    'created_by' => FacadesAuth::user()->id,
+                    'updated_by' => FacadesAuth::user()->id,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
@@ -115,7 +117,7 @@ class EmergencyRoomAdmissionsController extends Controller
             // Additional logic for handling the admission process
             return redirect()->back()->with('success', 'Patient admitted successfully');
         } catch (Exception $e) {
-            Log::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
+            FacadesLog::error("message: {$e->getMessage()}, file: {$e->getFile()}, line: {$e->getLine()}");
             return redirect()->back()->with('error', 'Failed to admit patient' . $e->getMessage());
         }
     }

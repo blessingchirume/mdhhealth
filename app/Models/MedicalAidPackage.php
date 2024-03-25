@@ -23,4 +23,9 @@ class MedicalAidPackage extends Model
     {
         return $this->hasOne(MedicalAidPriceList::class);
     }
+
+    public function billingGroup()
+    {
+        return $this->belongsTo(Group::class);
+    }
 }

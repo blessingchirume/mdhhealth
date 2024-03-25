@@ -7,9 +7,12 @@ use App\Http\Requests\StoreEpisodeRequest;
 use App\Http\Requests\UpdateEpisodeRequest;
 use App\Models\ChargeSheet;
 use App\Models\EpisodeItem;
+use App\Models\Gurantor;
 use App\Models\Item;
+use App\Models\NextOfKeen;
 use App\Models\Note;
 use App\Models\patient;
+use App\Models\PatientMedicalAidEntry;
 use App\Models\Payment;
 use App\Models\Vital;
 use App\Models\VitalGroup;
@@ -32,24 +35,58 @@ class EpisodeController extends Controller
         return view('layouts.patients.episodes.index', compact('episodes'));
     }
 
-    public function create()
+    public function create(patient $patient)
     {
-        //
+        return view('layouts.patients.episodes.create', compact('patient'));
     }
 
     public function store(Request $request, patient $patient)
     {
 
+        // dd($request);
         $data = $request->validate([
             'patient_type' => 'required',
             'attendee' => 'required',
             'ward' => 'required',
         ]);
 
+        // dd($data);
+
+        $nextOfKeen = $request->validate([
+            'next_of_keen_name' => 'required',
+            'next_of_keen_surname' => 'required',
+            'next_of_keen_phone' => 'required',
+            'next_of_keen_gender' => 'required',
+            'next_of_keen_national_id' => 'required',
+            'next_of_keen_address' => 'required',
+        ]);
+
+        // dd($nextOfKeen);
+
+        $guarantor = [
+            'name' => $request->guarantor_name,
+            'surname' => $request->guarantor_surname,
+            'phone' => $request->guarantor_phone,
+            'gender' => $request->guarantor_gender,
+            'national_id' => $request->guarantor_national_id,
+            'address' => $request->guarantor_address,
+            'relationship' => $request->guarantor_relationship,
+        ];
+        // dd($guarantor);
+        $medicalAid = $request->validate([
+            'package_id' => 'required',
+            'member_name' => 'required',
+            'policy_number' => 'required',
+            'suffix_number' => 'required'
+        ]);
+
+        // dd($medicalAid);
+
         $data["episode_entry"] = (int)Episode::where('patient_id', $patient->id)->max('episode_entry') + 1;
         $data["episode_code"] = $patient->patient_id . "/" . $data["episode_entry"];
 
         $data["patient_id"] = $patient->id;
+        $data["payment_option_id"] = $request->paymentOption;
         $data["date"] = date('Y-m-d');
 
         $episode = Episode::create($data);
@@ -58,7 +95,21 @@ class EpisodeController extends Controller
             "episode_id" => $episode->id,
             "checkin" => date('Y-m-d'),
         ]);
-        return back();
+
+        // $data["patient_id"] = 'MDHP' . rand(00000, 99999);
+
+        // Patient::create($data);
+
+        $medicalAid["patient_id"] = $patient->id;
+        PatientMedicalAidEntry::where('patient_id', $patient->id)->update($medicalAid);
+
+        $nextOfKeen["patient_id"] = $medicalAid["patient_id"];
+        $nextOfKeen["next_of_keen_relationship"] = "Husband";
+        NextOfKeen::where('patient_id', $patient->id)->update($nextOfKeen);
+
+        $guarantor['patient_id'] = $medicalAid['patient_id'];
+        Gurantor::where('patient_id', $patient->id)->update($guarantor);
+        return back()->with('success', 'Records created successfully');
     }
 
     public function show(Episode $episode)
@@ -67,6 +118,8 @@ class EpisodeController extends Controller
         // $episode->load(['chargesheet']);
         $vitalGroups = VitalGroup::all();
         $observations = Observation::where('episode_id', $episode->id)->get();
+
+        // dd($observations);
         return view('layouts.patients.episodes.show', compact('episode', 'items', 'vitalGroups', 'observations'));
     }
 
@@ -141,7 +194,8 @@ class EpisodeController extends Controller
         }
     }
 
-    public function createChargesheet(Episode $episode) {
+    public function createChargesheet(Episode $episode)
+    {
         $client = new Party([
             'name'          => 'Mbuya Dorcas Hospital',
             'phone'         => '(520) 318-9486',
@@ -152,9 +206,9 @@ class EpisodeController extends Controller
         ]);
 
         $customer = new Party([
-            'name'          => $episode->patient->name. " " .$episode->patient->surname,
+            'name'          => $episode->patient->name . " " . $episode->patient->surname,
             'address'       => $episode->patient->address,
-            'code'          => '#22663214',
+            'code'          => $episode->patient->patient_id,
             'custom_fields' => [
                 'Episode number' => $episode->episode_code,
             ],
@@ -187,26 +241,26 @@ class EpisodeController extends Controller
             ->description($value->item_description)
             ->pricePerUnit($value->base_price)
             ->quantity((int)$value->pivot->quantity)
-            ->discount(0.00));
+            ->discount(1.00));
         }
 
         $notes = [
             'your multiline',
             'additional notes',
-            'in regards of delivery or something else',
+            'in regards of '.$episode->episode_code,
         ];
         $notes = implode("<br>", $notes);
 
         $invoice = Invoice::make('chargesheet')
-            ->series('BIG')
+            ->series('MDH')
             // ability to include translated invoice status
             // in case it was paid
             ->status(__('invoices::invoice.due'))
             ->sequence(667)
-            ->serialNumberFormat('{SEQUENCE}/{SERIES}')
+            // ->serialNumberFormat('{SEQUENCE}/{SERIES}')
             ->seller($client)
             ->buyer($customer)
-            ->date(now()->subWeeks(3))
+            ->date(now()->subWeeks(0))
             ->dateFormat('m/d/Y')
             ->payUntilDays(14)
             ->currencySymbol('$')
@@ -218,7 +272,7 @@ class EpisodeController extends Controller
             ->addItems($items)
             ->notes($notes)
             // ->logo(public_path('vendor/invoices/sample-logo.png'))
-            ->payUntilDays(10)
+            // ->payUntilDays(10)
             // You can additionally save generated invoice to configured disk
             ->save('public');
 
@@ -229,7 +283,8 @@ class EpisodeController extends Controller
         return $invoice->stream();
     }
 
-    public function payment(Request $request, Episode $episode) {
+    public function payment(Request $request, Episode $episode)
+    {
         try {
             Payment::create([
                 'episode_id' => $episode->id,

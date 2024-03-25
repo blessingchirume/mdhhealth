@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             InvoiceSeeder::class,
             TestsSeeder::class,
             TestCategorySeeder::class,
+            PaymentOptionSeeder::class
         ]);
     }
 }

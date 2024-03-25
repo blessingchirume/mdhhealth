@@ -194,7 +194,7 @@ class MenuSeeder extends Seeder
             'name' => 'theatre',
             'display_name' => 'Theatre',
             'icon' => 'fa-circle',
-            'url' => 'theatre.index',
+            'url' => null,
             'parent_id' => 3,
             'order' => 1,
            // 'permission' => PermisionConstants::viewTheater
@@ -224,7 +224,7 @@ class MenuSeeder extends Seeder
             'name' => 'ICU Admissions',
             'display_name' => 'ICU Admissions',
             'icon' => 'fa-user-injured',
-          'url' => 'icu',
+            'url' => 'icu',
             'parent_id' => 21,
             'order' => 1,
            // 'permission' => PermisionConstants::viewIcuAdmissions
@@ -291,21 +291,43 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'name'=>'theatre_rooms',
-            'display_name'=>'Theatre Rooms',
-            'icon'=>'fa-user-injured',
-            'url'=>'theatre.rooms',
-            'parent_id'=>19,
-            'order'=>1,
+            'name' => 'theatre_queue',
+            'display_name' => 'Theatre Queue',
+            'icon' => 'fa-user-injured',
+            'url' => 'theatre.index',
+            'parent_id' => 19,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewProviders
         ]);
 
         Menu::create([
-            'name'=>'theatre_rooms',
-            'display_name'=>'Theatre Queue',
-            'icon'=>'fa-user-injured',
-            'url'=>'theatre.index',
-            'parent_id'=>19,
-            'order'=>1,
+            'name' => 'theatre_rooms',
+            'display_name' => 'Theatre Rooms',
+            'icon' => 'fa-user-injured',
+            'url' => 'theatre.rooms',
+            'parent_id' => 19,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewProviders
+        ]);
+
+        Menu::create([
+            'name' => 'billing',
+            'display_name' => 'Billing Groups',
+            'icon' => 'fa-circle',
+            'url' => 'currency.index',
+            'parent_id' => 4,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
+        ]);
+
+        Menu::create([
+            'name' => 'patients',
+            'display_name' => 'Patients',
+            'icon' => 'fa-circle',
+            'url' => 'patient.index',
+            'parent_id' => 4,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
         ]);
 
         Menu::create([
