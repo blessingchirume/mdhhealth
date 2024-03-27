@@ -105,6 +105,7 @@
                                                 <td>{{ $value->item_description }}</td>
                                                 <td>{{ $value->item_group }}</td>
                                                 <td>{{ $value->pivot->quantity }}</td>
+                                                <td>{{ $value->base_price }}</td>
 
                                                 <td>
                                                     <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success m-2"></i></a>

@@ -247,7 +247,7 @@ class EpisodeController extends Controller
         $notes = [
             'your multiline',
             'additional notes',
-            'in regards of delivery or something else',
+            'in regards of '.$episode->episode_code,
         ];
         $notes = implode("<br>", $notes);
 
