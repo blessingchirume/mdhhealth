@@ -21,7 +21,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        // $this->sapService = new SapService();
+        $this->sapService = new SapService();
         $this->middleware('menu');
     }
 
