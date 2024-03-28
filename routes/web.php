@@ -254,6 +254,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
 
     });
+
+    Route::prefix('/prescription')->group(function () {
+        Route::get('/show/{episode}', [App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescription.view');
+        Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
+
+    });
     Route::prefix('/observation')->group(function () {
         Route::get('/{episode}', [TreatmentController::class, 'observation'])->name('doctors.observation');
         Route::post('/{episode}/observations', [ObservationsController::class, 'recordObservations'])->name('create-patient-notes');
