@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DrugsAndSundries extends Model
+class MedicalItemsCategory extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    public function categories()
+    public function drugs_sundries()
     {
-        return $this->belongsTo(MedicalItemsCategory::class,  'medical_categories_id');
+        return $this->hasMany(DrugsAndSundries::class,'medical_categories_id');
     }
 }

@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drugs_and_sundries', function (Blueprint $table) {
+        Schema::create('medical_items_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('name')->nullable();
-            $table->string('description');
-            $table->enum('category',['Drug','Sundry','Procedure'])->default('Drug');
-            $table->integer('created_by');
-            $table->integer('updated_by');
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drugs_and_sundries');
+        Schema::dropIfExists('medical_items_categories');
     }
 };
