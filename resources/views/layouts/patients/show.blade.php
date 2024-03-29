@@ -28,9 +28,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-right btn-group btn-group-sm">
-                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                    <a href="{{ route('episode.create', $patient) }}" type="button" class="btn btn-primary">
                                             <i class="fa fa-plus"></i> Generate
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -72,9 +72,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="float-right btn-group btn-group-sm">
-                                        <button data-toggle="modal" data-target="#pump-reading" type="button" class="btn btn-primary">
+                                        <a href="{{ route('episode.create', $patient) }}" type="button" class="btn btn-primary">
                                             <i class="fa fa-plus"></i> Generate
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="card-body">

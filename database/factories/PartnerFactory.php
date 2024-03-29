@@ -18,7 +18,7 @@ class PartnerFactory extends Factory
     {
         return [
             'code' => 'MDHP'. rand(000000, 999999),
-            'name' => fake()->text(50)
+            'name' => 'First Mutual Life Assurance'
         ];
     }
 }

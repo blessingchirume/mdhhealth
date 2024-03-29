@@ -120,7 +120,7 @@
                                         <div class="col-md-5">
                                             <div class="form-group d-none" id="medication_section">
                                                 <label for="medication">Medication:</label>
-                                                <select class="form-control select2" id="medication">
+                                                <select class="form-control select2" name="medication[]" id="medication">
                                                     @foreach ($items as $option)
                                                     @if ($option->group->name != 'Drugs')
                                                         <?php continue ; ?>
@@ -135,14 +135,14 @@
                                         <div class="col-md-2">
                                             <div class="form-group d-none" id="dosage_section">
                                                 <label for="dosage">Dosage:</label>
-                                                <input type="text" class="form-control" id="dosage">
+                                                <input type="text" class="form-control" name="dosage[]" id="dosage">
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
                                             <div class="form-group d-none" id="dosage_section">
                                                 <label for="frequency">Frequency:</label>
-                                                <select class="form-control" id="frequency">
+                                                <select class="form-control" name="frequency[]" id="frequency">
                                                     <option value="1">Once a day</option>
                                                     <option value="2">Twice a day</option>
                                                     <option value="3">Three times a day</option>
@@ -154,7 +154,7 @@
                                         <div class="col-md-2">
                                             <div class="form-group d-none" id="dosage_section">
                                                 <label for="duration">Duration (Days):</label>
-                                                <input type="text" class="form-control" id="duration"
+                                                <input type="text" class="form-control" name="duration[]" id="duration"
                                                     >
                                             </div>
                                         </div>
@@ -185,7 +185,7 @@
 
                                 <div class="form-group">
                                     <label for="instructions">Application Instructions:</label>
-                                    <textarea class="form-control" id="instructions" name="instructions" rows="3"></textarea>
+                                    <textarea class="form-control" id="instructions" name="instructions[]" rows="3"></textarea>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary">Create Plan</button>

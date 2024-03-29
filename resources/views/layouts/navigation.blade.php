@@ -104,7 +104,7 @@
             </li>
             @endcan--}}
 
-            @foreach(Config::get('menu') as $menu)
+           {{-- @foreach(Config::get('menu') as $menu)
             <li class="nav-item">
                 @if($menu->url)
                 <a href="{{ route($menu->url) }}" class="nav-link">
@@ -119,7 +119,7 @@
                 </a>
                 <x-menu-item :menu="$menu" />
             </li>
-            @endforeach
+            @endforeach--}}
         </ul>
     </nav>
 </div>

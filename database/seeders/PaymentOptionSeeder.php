@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Partner;
+use App\Models\PaymentOption;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PartnerSeeder extends Seeder
+class PaymentOptionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +15,7 @@ class PartnerSeeder extends Seeder
      */
     public function run()
     {
-        Partner::factory()->count(1)->create();
+        $option = PaymentOption::Create(['name' => 'Cash']);
+        $option = PaymentOption::Create(['name' => 'Medical Aid']);
     }
 }

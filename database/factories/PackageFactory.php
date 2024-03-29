@@ -17,10 +17,9 @@ class PackageFactory extends Factory
      */
     public function definition()
     {
-        $partnerId = rand(1, Partner::all()->count());
         return [
-            'partner_id' => $partnerId,
-            'name' => fake()->text(50)
+            'partner_id' => 1,
+            'name' => "First Mutual Gold"
         ];
     }
 }

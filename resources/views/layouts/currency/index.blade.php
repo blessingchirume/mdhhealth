@@ -29,21 +29,20 @@
                             <table id="table1" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>Group Name</th>
                                         @foreach($currencies as $index => $currency)
                                         <th>{{ $currency->name }}</th>
                                         @endforeach
-                                        <center>
-                                            <th>Action</th>
-                                        </center>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($groups as $value)
                                     <tr>
+                                        <td>{{$value->name}}</td>
                                         @foreach($value->currencies as $currency)
-                                        <td>{{ $currency->pivot->rate }}</td>
+                                        <td><a href="" class="editable" data-type="text" data-name="rate" data-pk="{{ $currency->pivot->id }}">{{ $currency->pivot->rate }}</a></td>
                                         @endforeach
-                                        <td>[View]</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
