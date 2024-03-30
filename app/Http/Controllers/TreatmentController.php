@@ -11,6 +11,7 @@ use App\Models\Treatment;
 use App\Models\Note;
 use App\Models\Icd10Code;
 use App\Models\Item;
+use App\Models\ItemGroup;
 use App\Models\TreatmentPlan;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
@@ -73,7 +74,7 @@ class TreatmentController extends Controller
         $icd10 = new Icd10Code;
         $icd10codes = $icd10->all();
 
-        $items = Item::all();
+        $items = Item::with('group')->get();
 
         return view('layouts.patients.visits.consultation', compact('items', 'patient', 'notes', 'episode', 'icd10codes'));
     }
@@ -103,7 +104,12 @@ class TreatmentController extends Controller
                     $treatmentPlan->save();
                 }
             } else {
+                $item = Item::where('item_description', $request->other_treatment)->first();
                 $treatment->medication = $request->other_treatment;
+                $treatment->item_id = $item->id;
+                $treatment->dosage = 1;
+                $treatment->frequency = 1;
+                $treatment->duration = 1;
                 $treatment->instructions = $request->instructions;
                 $treatment->save();
             }
