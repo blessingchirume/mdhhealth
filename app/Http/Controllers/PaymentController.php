@@ -124,11 +124,14 @@ class PaymentController extends Controller
 
     function makeAccountReceivableInvoice(Request $request)
     {
+        // dd($request);
         $documentLines = [];
-
-        foreach ($request->items as $key => $value) {
+        // if ($request->treatmentPlan) {
+        //     # code...
+        // }
+        foreach ($request->treatmentPlan as $key => $value) {
             array_push($documentLines, [
-                "ItemCode" => "OXY001",
+                "ItemCode" => "RMK001",
                 "ItemDescription" => "Crates White Yoghurt",
                 "Quantity" => 1,
                 // "Quantity" => (float)$value["Quantity"],
@@ -156,20 +159,22 @@ class PaymentController extends Controller
             "DocDueDate" => date('Y-m-d'),
             // "Whse" => "MSASA",
             // "WarehouseCode" => "MSASA",
-            "CardCode" => $request->cardCode,
-            "DocTotal" => $request->total,
-            "DocCurrency" => $request->currency,
+            "CardCode" => "CRA001",
+            "DocTotal" =>1,
+            // "DocCurrency" => $request->currency,
             "DocRate" => 1.0,
-            "JournalMemo" => "A/R Invoices - " . $request->cardCode,
+            "JournalMemo" => "A/R Invoices - " . $request->narration,
             // "ControlAccount" => "_SYS00000000042",
             "DocumentLines" => $documentLines
 
         ];
 
+        // dd($data);
+
         $response = $this->sapService->createSapInvoice($data);
         $docEntry = $response['DocEntry'] ?? null;
 
-        // return $response;
+        return $response;
 
         if ($docEntry == null) {
             return response(['error' => 'something went wrong', 'success' => null], 500);

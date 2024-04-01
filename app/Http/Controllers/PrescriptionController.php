@@ -17,6 +17,8 @@ class PrescriptionController extends Controller
     {
         $prescriptions = Prescription::all();
 
+        
+
     }
 
     /**

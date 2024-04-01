@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 class SapService
 {
-    const BASE_url = "https://10.0.0.90:50000/b1s/v1/";
+    const BASE_url = "https://172.16.16.9:50000/b1s/v1/";
+
+    // const BASE_url = "https://10.0.0.90:50000/b1s/v1/";
 
     const MAKE_PAYMENT_URL = "/IncomingPayments";
 
@@ -22,6 +24,7 @@ class SapService
     // const MAKE_ACCOUNTS_RECEIVABLE_INVOICE_URL = "/Invoices";
 
     // const MAKE_INVENTORY_TRANSFER_URL = "/StockTransfers";
+    private $sessionId;
 
     const MAKE_INVENTORY_TRANSFER_REQUEST_URL = "/PurchaseInvoices";
 
@@ -37,70 +40,76 @@ class SapService
         $response = Http::withHeaders(
             [
                 "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". Auth::user()->sap_token
+                "Cookie" => "B1SESSION=". $this->sessionId
             ]
         )->post(self::BASE_url . self::MAKE_ACCOUNTS_RECEIVABLE_INVOICE_URL, $data);
 
         return $response->json();
     }
 
-    public function createSapInventoryTranfer($data = [])
-    {
-        $response = Http::withHeaders(
-            [
-                "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=".Auth::user()->sap_token
-            ]
-        )->post(self::BASE_url . self::MAKE_INVENTORY_TRANSFER_URL, $data);
+    // public function createSapInventoryTranfer($data = [])
+    // {
+    //     $response = Http::withHeaders(
+    //         [
+    //             "Content-Type" => "application/json",
+    //             "Cookie" => "B1SESSION=".Auth::user()->sap_token
+    //         ]
+    //     )->post(self::BASE_url . self::MAKE_INVENTORY_TRANSFER_URL, $data);
 
-        return $response;
-    }
+    //     return $response;
+    // }
 
-    public function createSapInventoryTranferRequest($data = [])
-    {
-        $response = Http::withHeaders(
-            [
-                "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". Auth::user()->sap_token
-            ]
-        )->post(self::BASE_url . self::MAKE_INVENTORY_TRANSFER_REQUEST_URL, $data);
+    // public function createSapInventoryTranferRequest($data = [])
+    // {
+    //     $response = Http::withHeaders(
+    //         [
+    //             "Content-Type" => "application/json",
+    //             "Cookie" => "B1SESSION=". Auth::user()->sap_token
+    //         ]
+    //     )->post(self::BASE_url . self::MAKE_INVENTORY_TRANSFER_REQUEST_URL, $data);
 
-        return $response->json();
-    }
+    //     return $response->json();
+    // }
 
     public function createSapIncomingPayment($data = [])
     {
         $response = Http::withHeaders(
             [
                 "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". Auth::user()->sap_token
+                "Cookie" => "B1SESSION=". $this->sessionId
             ]
         )->post(self::BASE_url . self::MAKE_PAYMENT_URL, $data);
 
         return $response;
     }
 
-    public function getWarehouseProducts()
-    {
-        $response = Http::withHeaders(
-            [
-                "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". Auth::user()->sap_token
-            ]
-        )->get(self::BASE_url . self::GET_ITEMS_URL);
+    // public function getWarehouseProducts()
+    // {
+    //     $response = Http::withHeaders(
+    //         [
+    //             "Content-Type" => "application/json",
+    //             "Cookie" => "B1SESSION=". Auth::user()->sap_token
+    //         ]
+    //     )->get(self::BASE_url . self::GET_ITEMS_URL);
 
-        return $response->json()['value'];
-    }
+    //     return $response->json()['value'];
+    // }
 
     public function authenticate()
     {
         $response = Http::post(self::BASE_url . "/Login", [
-            "CompanyDB" => "QG",
+            "CompanyDB" => "KEFALOS_USD_NEW",
             "UserName" => "manager",
-            "Password" => "P@ssword1"
+            "Password" => "manager"
         ]);
 
-        return ($response->json()["SessionId"]);
+        // dd($response->json());
+        // dd($response->json()['SessionId']);
+        $sessionId = $response->json()['SessionId'];
+
+        $this->sessionId = $sessionId;
+
+        return $sessionId;
     }
 }
 
