@@ -257,6 +257,25 @@ Route::middleware('auth')->group(function () {
         Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
 
     });
+
+    Route::prefix('/prescription')->group(function () {
+        Route::get('/show/{episode}', [App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescription.view');
+        Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
+
+    });
+
+    Route::prefix('/drugs-and-sundries')->group(function () {
+        Route::get('/', [App\Http\Controllers\DrugsAndSundriesController::class, 'index'])->name('drugs-and-sundries');
+        Route::get('/{drug}', [App\Http\Controllers\DrugsAndSundriesController::class, 'show'])->name('drug.show');
+        Route::post('/store', [App\Http\Controllers\DrugsAndSundriesController::class, 'store'])->name('drug-sundries-store');
+    });
+
+    Route::prefix('/medical-item-category')->group(function () {
+        Route::get('/', [App\Http\Controllers\DrugsAndSundriesController::class, 'categories'])->name('medical-item-category-index');
+        Route::get('/{category}', [App\Http\Controllers\DrugsAndSundriesController::class, 'showCategory'])->name('medical-item-category-show');
+        Route::post('/store', [App\Http\Controllers\DrugsAndSundriesController::class, 'createCategory'])->name('medical-item-category-store');
+    });
+
     Route::prefix('/observation')->group(function () {
         Route::get('/{episode}', [TreatmentController::class, 'observation'])->name('doctors.observation');
         Route::post('/{episode}/observations', [ObservationsController::class, 'recordObservations'])->name('create-patient-notes');
