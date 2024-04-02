@@ -1,6 +1,6 @@
 <div>
     <form wire:submit.prevent="submit">
-        <h4>Medication</h4>{{$episode}}
+        <h4>Medication</h4>
         <!-- Your medication form structure -->
         <table class="table table-bordered table-striped">
             <!-- Table header -->
