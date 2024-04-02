@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Episode;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
-use App\Models\Doctor;
-use App\Models\Patient;
+use App\Models\Prescription;
+use App\Models\PrescriptionItem;
 
 class OPDController extends Controller
 {
@@ -26,6 +26,6 @@ class OPDController extends Controller
 
     public function prescription(Episode $episode)
     {
-        
+
     }
 }

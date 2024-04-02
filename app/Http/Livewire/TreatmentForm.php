@@ -3,7 +3,12 @@
 namespace App\Http\Livewire;
 
 use App\Models\Item;
+use App\Models\Prescription;
+use App\Models\PrescriptionItem;
+use App\Models\Episode;
+use Exception;
 use Livewire\Component;
+use Auth;
 
 class TreatmentForm extends Component
 {
@@ -20,20 +25,29 @@ class TreatmentForm extends Component
     public $dosages = ['5mg', '10mg', '15mg'];
     public $frequencies = ['Once a day', 'Twice a day', 'Three times a day', 'As needed'];
     public $procedures = [];
-    public $procedure='';
+    public $procedure = '';
+    public $episode;
+    public $prescriptions = [];
 
     public function addProcedure()
     {
         $item = Item::find($this->procedure);
         $this->procedures[] = [
-          'procedure' =>  $item->item_description,
+            'procedure' => $item->item_description,
             // 'procedure' => $this->procedure,
+        ];
+        $this->prescriptions[] = [
+            'medication' => $this->procedure,
+            'dosage' => null,
+            'frequency' => null,
+            'duration' => 1,
         ];
         $this->reset('procedure');
     }
 
-    public function mount()
+    public function mount(Episode $episode)
     {
+        $this->episode = $episode;
         $this->drugs = Item::whereHas('group', function ($query) {
             $query->where('name', 'Drugs');
         })->pluck('item_description', 'id')->toArray();
@@ -59,7 +73,12 @@ class TreatmentForm extends Component
             'frequency' => $this->frequency,
             'duration' => $this->duration,
         ];
-
+        $this->prescriptions[] = [
+            'medication' => $this->medication,
+            'dosage' => $this->dosage,
+            'frequency' => $this->frequency,
+            'duration' => $this->duration,
+        ];
         // Reset form fields
         $this->reset(['medication', 'dosage', 'frequency', 'duration']);
 
@@ -74,12 +93,32 @@ class TreatmentForm extends Component
 
     public function submit()
     {
+
         // Handle form submission logic here
-        dd($this->medications);
+        $prescription = Prescription::create([
+            'episode_id' => $this->episode->id,
+            'prescribed_by' => Auth::user()->id,
+            'created_at' => now()->toDateString(),
+        ]);
+
+        foreach ($this->prescriptions as $prescribed) {
+            $mdecation = PrescriptionItem::create([
+                'prescription_id' => $prescription->id,
+                'item_id' => $prescribed['medication'],
+                'dosage' => $prescribed['dosage'],
+                'frequency' => $prescribed['frequency'],
+                'duration' => $prescribed['duration']
+            ]);
+        }
 
         // Reset form fields after submission
         $this->reset([
-            'medications', 'otherTreatment', 'dosage', 'duration', 'frequency', 'instructions'
+            'medications',
+            'otherTreatment',
+            'dosage',
+            'duration',
+            'frequency',
+            'instructions'
         ]);
     }
 

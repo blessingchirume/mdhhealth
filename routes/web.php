@@ -261,6 +261,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/prescription')->group(function () {
         Route::get('/show/{episode}', [App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescription.view');
         Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
+        Route::get('/pdf/{episode}', [App\Http\Controllers\PrescriptionController::class, 'generatePDF'])->name('prescription.pdf');
 
     });
 
