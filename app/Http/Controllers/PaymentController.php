@@ -9,6 +9,7 @@ use App\Logic\SapService;
 use App\Models\ChargeSheet;
 use App\Models\Designation;
 use App\Models\Episode;
+use App\Models\Item;
 use App\Models\patient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->sapService = new SapService();
+        // $this->sapService = new SapService();
         $this->middleware('menu');
     }
 
@@ -124,12 +125,13 @@ class PaymentController extends Controller
 
     function makeAccountReceivableInvoice(Request $request)
     {
-        // dd($request);
+        // dd($request->treatmentPlan);
         $documentLines = [];
         // if ($request->treatmentPlan) {
         //     # code...
         // }
-        foreach ($request->treatmentPlan as $key => $value) {
+        foreach ($request->treatmentPlan as $value) {
+            $item = Item::find($value["medication"]);
             array_push($documentLines, [
                 "ItemCode" => "RMK001",
                 "ItemDescription" => "Crates White Yoghurt",
@@ -137,8 +139,8 @@ class PaymentController extends Controller
                 // "Quantity" => (float)$value["Quantity"],
                 "Price" => 1,
                 // "Price" => (float)$value["Price"],
-                "Currency" => 'USD',
-                // "Currency" => $request->currency,
+                // "Currency" => 'USD',
+                "Currency" => $request->currency,
                 "DiscountPercent" => 0.0,
                 // "WarehouseCode" => "CMFS",
                 // "Whse" => "MSASA",
@@ -161,15 +163,13 @@ class PaymentController extends Controller
             // "WarehouseCode" => "MSASA",
             "CardCode" => "CRA001",
             "DocTotal" =>1,
-            // "DocCurrency" => $request->currency,
+            "DocCurrency" => $request->currency,
             "DocRate" => 1.0,
             "JournalMemo" => "A/R Invoices - " . $request->narration,
             // "ControlAccount" => "_SYS00000000042",
             "DocumentLines" => $documentLines
 
         ];
-
-        // dd($data);
 
         $response = $this->sapService->createSapInvoice($data);
         $docEntry = $response['DocEntry'] ?? null;

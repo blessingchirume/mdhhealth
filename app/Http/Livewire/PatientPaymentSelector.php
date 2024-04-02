@@ -57,6 +57,12 @@ class PatientPaymentSelector extends Component
         // Handle sending the selected episode to the theatre
     }
 
+    public function removePrescriptionItem($index)
+    {
+        unset($this->treatmentPlan[$index]);
+        // $this->treatmentPlan = array_values($this->treatmentPlan);
+    }
+
     public function render()
     {
         $patients = patient::all();

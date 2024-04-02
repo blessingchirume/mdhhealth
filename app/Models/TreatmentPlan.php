@@ -11,4 +11,8 @@ class TreatmentPlan extends Model
     protected $fillable =[
         'episode_id','medication','dosage','frequency','duration','instructions', 'item_id'
     ];
+
+    public function items() {
+        return $this->belongsTo(Item::class);
+    }
 }

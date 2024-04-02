@@ -50,13 +50,15 @@
             </div>
         </div>
         <br />
+        <br />
+        <h4>Prescribed Medicine</h4>
         @if($treatmentPlan && $treatmentPlan->count() > 0)
         @foreach($treatmentPlan as $index => $item)
         <div class="row">
 
             <div class="col-md-3">
                 <label for="theatre">Item</label>
-                <input type="test" id="itemCode" name='treatmentPlan[{{$index}}][medication]' class="form-control" value="{{$item->medication}}">
+                <input type="test" id="itemCode" name='treatmentPlan[{{$index}}][medication]' class="form-control" value="{{$item->medication}}" readonly>
 
             </div>
 
@@ -65,14 +67,18 @@
                 <input type="number" id="price" name="treatmentPlan[{{$index}}][price]" class="form-control">
             </div>
             <div class="col-md-3">
-                <label for="time">Time:</label>
+                <label for="time">Quantity:</label>
                 <input type="number" id="quantity" name='treatmentPlan[{{$index}}][quantity]' class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="time">Action:</label>
+                <input wire:click="removePrescriptionItem({{ $index }})" type="button" class="form-control btn btn-danger" value="Remove">
             </div>
         </div>
         @endforeach
         <br />
         @endif
-        <button type="submit" wire:click="sendToTheatre($selectedEpisode)" class="btn btn-primary" id="sendToTheatreBtn">Confirm</button>
+        <button type="submit" wire:click="sendToTheatre({{$selectedEpisode}})" class="btn btn-primary" id="sendToTheatreBtn">Confirm</button>
         @endif
         @endif
     </form>

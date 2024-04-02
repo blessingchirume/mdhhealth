@@ -90,13 +90,12 @@ class TreatmentController extends Controller
                 $dosages = $request->dosage;
                 $frequencies = $request->frequency;
                 $durations = $request->duration;
-// dd($selectedMeds);
                 foreach ($selectedMeds as $i => $medication) {
                     $item = Item::where('item_description', $medication)->first();
                     $treatmentPlan = new TreatmentPlan();
                     $treatmentPlan->episode_id = $episode->id;
                     $treatmentPlan->medication = $medication;
-                    $treatmentPlan->item_id = $item->id;
+                    $treatmentPlan->item_id = 3;
                     $treatmentPlan->dosage = $dosages[$i];
                     $treatmentPlan->frequency = $frequencies[$i];
                     $treatmentPlan->duration = $durations[$i];
@@ -110,7 +109,7 @@ class TreatmentController extends Controller
                 $treatment->dosage = 1;
                 $treatment->frequency = 1;
                 $treatment->duration = 1;
-                $treatment->instructions = $request->instructions;
+                $treatment->instructions = $request->instructions[0];
                 $treatment->save();
             }
 
