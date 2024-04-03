@@ -9,6 +9,7 @@ use App\Logic\SapService;
 use App\Models\ChargeSheet;
 use App\Models\Designation;
 use App\Models\Episode;
+use App\Models\Item;
 use App\Models\patient;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -124,18 +125,22 @@ class PaymentController extends Controller
 
     function makeAccountReceivableInvoice(Request $request)
     {
+        // dd($request->treatmentPlan);
         $documentLines = [];
-
-        foreach ($request->items as $key => $value) {
+        // if ($request->treatmentPlan) {
+        //     # code...
+        // }
+        foreach ($request->treatmentPlan as $value) {
+            $item = Item::find($value["medication"]);
             array_push($documentLines, [
-                "ItemCode" => "OXY001",
+                "ItemCode" => "RMK001",
                 "ItemDescription" => "Crates White Yoghurt",
                 "Quantity" => 1,
                 // "Quantity" => (float)$value["Quantity"],
                 "Price" => 1,
                 // "Price" => (float)$value["Price"],
-                "Currency" => 'USD',
-                // "Currency" => $request->currency,
+                // "Currency" => 'USD',
+                "Currency" => $request->currency,
                 "DiscountPercent" => 0.0,
                 // "WarehouseCode" => "CMFS",
                 // "Whse" => "MSASA",
@@ -156,11 +161,11 @@ class PaymentController extends Controller
             "DocDueDate" => date('Y-m-d'),
             // "Whse" => "MSASA",
             // "WarehouseCode" => "MSASA",
-            "CardCode" => $request->cardCode,
-            "DocTotal" => $request->total,
+            "CardCode" => "CRA001",
+            "DocTotal" =>1,
             "DocCurrency" => $request->currency,
             "DocRate" => 1.0,
-            "JournalMemo" => "A/R Invoices - " . $request->cardCode,
+            "JournalMemo" => "A/R Invoices - " . $request->narration,
             // "ControlAccount" => "_SYS00000000042",
             "DocumentLines" => $documentLines
 
@@ -169,7 +174,7 @@ class PaymentController extends Controller
         $response = $this->sapService->createSapInvoice($data);
         $docEntry = $response['DocEntry'] ?? null;
 
-        // return $response;
+        return $response;
 
         if ($docEntry == null) {
             return response(['error' => 'something went wrong', 'success' => null], 500);

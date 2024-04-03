@@ -9,6 +9,10 @@ class TreatmentPlan extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'episode_id','medication','dosage','frequency','duration','instructions'
+        'episode_id','medication','dosage','frequency','duration','instructions', 'item_id'
     ];
+
+    public function items() {
+        return $this->belongsTo(Item::class);
+    }
 }

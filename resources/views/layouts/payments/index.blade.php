@@ -18,9 +18,12 @@
                     <div class="card-header">
                         <div class="float-right btn-group btn-group-sm">
                             @can(App\constants\PermisionConstants::createPayment)
-                            <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
+                           {{-- <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Generate
-                            </button>
+                            </button>--}}
+                            <a href="{{ route('payment.create') }}" class="btn btn-primary">
+                                <i class="fa fa-plus"></i> Generate
+                           </a>
                             @endcan
                         </div>         
                     </div>
