@@ -49,37 +49,12 @@
                         <div class="tab-pane fade show active" id="observation-tab" role="tabpanel" aria-labelledby="observation-tab">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">Notes and Observations</h5>
+                                    <h5 class="card-title">Observations</h5>
                                 </div>
                                 <div class="card-body">
                                     <form method="post" action="{{ route('create-patient-notes', $episode) }}">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="complaints">Presentation of Complaints</label>
-                                                    <textarea name="complaints" id="complaints" class="form-control">{{ $observation->complaints ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="complaints_history">History of Complaints</label>
-                                                    <textarea name="complaints_history" id="complaints_history" class="form-control">{{ $observation->complaints_history ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="observation">Observation</label>
-                                                    <textarea name="observation" id="observation" class="form-control">{{ $observation->observation ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="notes">Notes</label>
-                                                    <textarea name="notes" id="notes" class="form-control">{{ $observation->notes ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @livewire('observation-form')
                                         <button type="submit" class="btn btn-primary">Save Observation</button>
                                     </form>
                                 </div>
@@ -95,7 +70,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="icd10_codes">Select ICD-10 Codes:</label>
-                                            <select id="icd10_codes" name="icd10_codes[]" class="form-control select2" multiple="multiple">
+                                            <select id="icd10_codes" name="icd10_codes[]" class="form-control select2" multiple="multiple" style="width: 100% color:black">
                                                 @foreach ($icd10codes as $option)
                                                 <option value="{{ $option->id }}">{{ $option->code }} |
                                                     {{ $option->description }}

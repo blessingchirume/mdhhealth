@@ -265,6 +265,14 @@ Route::middleware('auth')->group(function () {
 
     });
 
+Route::prefix('/opd')->group(function () {
+    Route::get('/', [App\Http\Controllers\OpdController::class, 'index'])->name('opd.index');
+    Route::get('/{patient}', [App\Http\Controllers\OpdController::class, 'show'])->name('opd.show');
+    Route::get('/bill/{episode}', [App\Http\Controllers\OpdController::class, 'bill'])->name('opd.bill');
+    Route::get('/consult/{episode}', [TreatmentController::class, 'observation'])->name('opd.consult');
+    
+});
+
     Route::prefix('/drugs-and-sundries')->group(function () {
         Route::get('/', [App\Http\Controllers\DrugsAndSundriesController::class, 'index'])->name('drugs-and-sundries');
         Route::get('/{drug}', [App\Http\Controllers\DrugsAndSundriesController::class, 'show'])->name('drug.show');
