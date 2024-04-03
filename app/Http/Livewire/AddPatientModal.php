@@ -42,7 +42,7 @@ class AddPatientModal extends Component
     public $guarantorNationalId;
     public $guarantorGender;
     public $guarantorSurname;
-    
+
     protected $rules = [
         'name' => 'required',
         'surname' => 'required',
@@ -143,6 +143,10 @@ class AddPatientModal extends Component
     public function selectMedicalAid($provider)
     {
         $this->medicalAidPackages = MedicalAid::find($provider)->with('packages')->get();
+    }
+
+    public function switchStage($stage) {
+        $this->currentStage = $stage;
     }
 
     public function selectPatient($patientId)
