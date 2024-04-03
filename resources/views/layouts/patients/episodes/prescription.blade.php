@@ -32,7 +32,7 @@
                             <h5 class="card-title">Prescribe Medication</h5>
                         </div>
                         <div class="card-body">
-                            @livewire('treatment-form')
+                            @livewire('treatment-form', ['episode' =>  $episode])
                         </div>
                     </div>
 

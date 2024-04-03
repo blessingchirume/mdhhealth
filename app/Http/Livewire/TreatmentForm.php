@@ -101,14 +101,20 @@ class TreatmentForm extends Component
             'created_at' => now()->toDateString(),
         ]);
 
-        foreach ($this->prescriptions as $prescribed) {
-            $mdecation = PrescriptionItem::create([
-                'prescription_id' => $prescription->id,
-                'item_id' => $prescribed['medication'],
-                'dosage' => $prescribed['dosage'],
-                'frequency' => $prescribed['frequency'],
-                'duration' => $prescribed['duration']
-            ]);
+        // dd($this->prescriptions);
+        try {
+
+            foreach ($this->prescriptions as $prescribed) {
+                $mdecation = PrescriptionItem::create([
+                    'prescription_id' => $prescription->id,
+                    'item_id' => $prescribed['medication'],
+                    'dosage' => $prescribed['dosage'],
+                    'frequency' => $prescribed['frequency'],
+                    'duration' => $prescribed['duration']
+                ]);
+            }
+        } catch (\Throwable $th) {
+            throw $th->getMessage();
         }
 
         // Reset form fields after submission

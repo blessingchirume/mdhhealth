@@ -20,7 +20,7 @@ class OPDController extends Controller
     public function bill(Episode $episode)
     {
         $chargesheet = ChargeSheet::where('episode_id', '=', $episode->id)->first();
-        $chargesheetItems = ChargesheetItem::where('chargesheet_id', '=', $chargesheet->id)->get();
+        $chargesheetItems = ChargesheetItem::where('charge_sheet_id', '=', $chargesheet->id)->get();
         return view('layouts.patients.visits.opd-bill', compact('episode', 'chargesheet', 'chargesheetItems'));
     }
 

@@ -74,6 +74,10 @@ class AddPatientModal extends Component
         $this->currentStage++;
     }
 
+    public function switchStage($stage) {
+        $this->currentStage = $stage;
+    }
+
     public function selectPatient($patientId)
     {
         // Fetch the details of the selected patient
