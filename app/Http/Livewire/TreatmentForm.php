@@ -28,7 +28,7 @@ class TreatmentForm extends Component
     public $episode;
     public $prescriptions = [];
     public $hasPrescription;
-    
+
     public function addProcedure()
     {
         $item = Item::find($this->procedure);
@@ -114,9 +114,9 @@ class TreatmentForm extends Component
                 $mdecation = PrescriptionItem::create([
                     'prescription_id' => $prescription->id,
                     'item_id' => $prescribed['medication'],
-                    'dosage' => $prescribed['dosage'],
-                    'frequency' => $prescribed['frequency'],
-                    'duration' => $prescribed['duration']
+                    'dosage' => $prescribed['dosage']??'N/A',
+                    'frequency' => $prescribed['frequency']??'N/A',
+                    'duration' => $prescribed['duration']??1
                 ]);
             }
             $this->emit('prescriptionAdded');
