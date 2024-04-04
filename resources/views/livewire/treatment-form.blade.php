@@ -107,7 +107,7 @@
                                 wire:change="$refresh">
                                 <option value="">Select Procedure / Service</option>
                                 @foreach ($otherTreatments as $id => $option)
-                                <option value="{{ $id }}">{{ $option }}</option>
+                                    <option value="{{ $id }}">{{ $option }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -125,6 +125,10 @@
 
 
         <button type="submit" class="btn btn-primary">Create Plan</button>
+
+        @if ($hasPrescription)
+            <a href="{{ route('prescription.pdf', $episode) }}" class="btn btn-primary">Download Prescription</a>
+        @endif
     </form>
 </div>
 
@@ -134,6 +138,10 @@
 
         Livewire.hook('message.processed', (message, component) => {
             $('.select2').select2(); // Re-initialize Select2 after Livewire update
+        });
+
+        Livewire.on('prescriptionAdded', () => {
+            window.location.reload();
         });
     });
 </script>

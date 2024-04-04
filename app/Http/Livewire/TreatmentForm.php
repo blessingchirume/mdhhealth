@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\Item;
 use App\Models\Prescription;
 use App\Models\PrescriptionItem;
-use App\Models\Episode;
 use Exception;
 use Livewire\Component;
 use Auth;
@@ -22,13 +21,14 @@ class TreatmentForm extends Component
     public $instructions = '';
     public $drugs;
     public $otherTreatments;
-    public $dosages = ['5mg', '10mg', '15mg'];
+    public $dosages = ['5mg', '10mg', '15mg','120mg'];
     public $frequencies = ['Once a day', 'Twice a day', 'Three times a day', 'As needed'];
     public $procedures = [];
     public $procedure = '';
     public $episode;
     public $prescriptions = [];
-
+    public $hasPrescription;
+    
     public function addProcedure()
     {
         $item = Item::find($this->procedure);
@@ -45,16 +45,22 @@ class TreatmentForm extends Component
         $this->reset('procedure');
     }
 
-    public function mount(Episode $episode)
+    public function hasPrescription()
+    {
+        return Prescription::where('episode_id', $this->episode->id)->exists();
+    }
+    public function mount($episode)
     {
         $this->episode = $episode;
         $this->drugs = Item::whereHas('group', function ($query) {
-            $query->where('name', 'Drugs');
+            $query->whereIn('name', ['Drugs', 'Medical Supplies', 'Medicine']);
         })->pluck('item_description', 'id')->toArray();
 
         $this->otherTreatments = Item::whereHas('group', function ($query) {
-            $query->whereIn('name', ['Procedures', 'Services']);
+            $query->whereIn('name', ['Procedures', 'Services', 'Medical Procedures']);
         })->pluck('item_description', 'id')->toArray();
+
+        $this->hasPrescription = $this->hasPrescription();
     }
 
     public function addMedication()
@@ -113,19 +119,10 @@ class TreatmentForm extends Component
                     'duration' => $prescribed['duration']
                 ]);
             }
-        } catch (\Throwable $th) {
-            throw $th->getMessage();
+            $this->emit('prescriptionAdded');
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-
-        // Reset form fields after submission
-        $this->reset([
-            'medications',
-            'otherTreatment',
-            'dosage',
-            'duration',
-            'frequency',
-            'instructions'
-        ]);
     }
 
     public function render()

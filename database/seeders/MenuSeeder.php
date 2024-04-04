@@ -352,17 +352,7 @@ class MenuSeeder extends Seeder
 
         Menu::create([
             'name' => 'opd',
-            'display_name' => 'Vitals Queue',
-            'icon' => 'fa-circle',
-            'url' => 'opd.index',
-            'parent_id' => 34,
-            'order' => 1,
-            // 'permission' => PermisionConstants::viewIt
-        ]);
-
-        Menu::create([
-            'name' => 'opd_consult_queue',
-            'display_name' => 'Consultation Queue',
+            'display_name' => 'OPD Queue',
             'icon' => 'fa-circle',
             'url' => 'opd.index',
             'parent_id' => 34,
