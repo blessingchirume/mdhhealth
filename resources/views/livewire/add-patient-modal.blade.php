@@ -14,6 +14,18 @@
             <a class="nav-link {{ $currentStage == 4 ? 'active' : '' }}">Next of Kin</a>
         </li>
     </ul>
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <!-- Your form and other HTML content here... -->
+
     <div class="tab-content mt-2">
         <div class="tab-pane fade {{ $currentStage == 1 ? 'show active' : '' }}" id="patient-details" role="tabpanel">
             <!-- Patient Details Form Section -->
@@ -179,16 +191,17 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="phone">Phone</label>
-                        <input type="text" class="form-control" wire:model.defer="guarantorPhone" id="phone">
-                        @error('phone')
+                        <label for="surname">Surname</label>
+                        <input type="surname" class="form-control" wire:model.defer="guarantorSurname"
+                            id="surname">
+                        @error('surname')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" wire:model.defer="guarantorEmail" id="email">
-                        @error('email')
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" wire:model.defer="guarantorPhone" id="phone">
+                        @error('phone')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -202,8 +215,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="gender">Gender</label>
-                        <select class="form-control" wire:model.defer="guarantorGender"
-                            id="gender">
+                        <select class="form-control" wire:model.defer="guarantorGender" id="gender">
                             <option value="">Select Gender</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -235,11 +247,89 @@
         </div>
         <div class="tab-pane fade {{ $currentStage == 4 ? 'show active' : '' }}" id="next-of-kin" role="tabpanel">
             <!-- Next of Kin Form Section -->
-            <form wire:submit.prevent="addNextOfKin">
+            <form wire:submit.prevent="addNextOfKin" class="row">
                 <!-- Next of Kin Form Fields -->
-                <!-- Next of Kin Details -->
-                <!-- Submit Button -->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_name">Name</label>
+                        <input type="text" class="form-control" wire:model.defer="kinName"
+                            id="next_of_keen_name">
+                        @error('kinName')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_surname">Surname</label>
+                        <input type="text" class="form-control" wire:model.defer="kinSurname"
+                            id="next_of_keen_surname">
+                        @error('kinSurname')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_phone">Phone</label>
+                        <input type="text" class="form-control" wire:model.defer="kinPhone"
+                            id="next_of_keen_phone">
+                        @error('kinPhone')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_gender">Gender</label>
+                        <select class="form-control" wire:model.defer="kinGender" id="next_of_keen_gender">
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                        @error('kinGender')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_national_id">National ID No.</label>
+                        <input type="text" class="form-control" wire:model.defer="kinNationalId"
+                            id="next_of_keen_national_id">
+                        @error('kinNationalId')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="next_of_keen_relationship">Relationship</label>
+                        <input type="text" class="form-control" wire:model.defer="kinRelation"
+                            id="next_of_keen_relationship">
+                        @error('kinRelation')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label for="next_of_keen_address">Address</label>
+                        <textarea type="text" class="form-control" wire:model.defer="kinAddress"
+                            id="next_of_keen_address"></textarea>
+                        @error('kinAddress')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!-- Next of Kin Details -->
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary">Add Next of Kin</button>
+                </div>
             </form>
+
         </div>
     </div>
     <div class="modal-footer">

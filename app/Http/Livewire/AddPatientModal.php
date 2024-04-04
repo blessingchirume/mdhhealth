@@ -42,24 +42,6 @@ class AddPatientModal extends Component
     public $guarantorNationalId;
     public $guarantorGender;
     public $guarantorSurname;
-
-    protected $rules = [
-        'name' => 'required',
-        'surname' => 'required',
-        'dob' => 'required',
-        'gender' => 'required',
-        'email' => 'required',
-        'phone' => 'required',
-        'address' => 'required',
-        'national_id' => 'required',
-        /*'paymentMethod'=>'required',
-        'medicalAidProvider'=>'required',
-        'medicalAidPackege'=>'required',
-        'medicalAidSuffix'=>'required',
-        'medicalAidMemberName'=>'required',
-        'medicalAidPolicyNumber'=>'required'*/
-    ];
-
     public $medicalAidProviders;
     public $medicalAidProvider;
     public $medicalAidPackages = [];
@@ -70,6 +52,13 @@ class AddPatientModal extends Component
     public $ward;
     public $wards;
     public $medicalAidSuffix;
+    public $kinName;
+    public $kinSurname;
+    public $kinPhone;
+    public $kinGender;
+    public $kinNationalId;
+    public $kinAddress;
+    public $kinRelation;
 
     public function mount()
     {
@@ -175,6 +164,16 @@ class AddPatientModal extends Component
         // Create a new patient
         try {
             if ($this->selectedPatientId == null) {
+                $this->validate([
+                    'name' => 'required',
+                    'surname' => 'required',
+                    'dob' => 'required',
+                    'gender' => 'required',
+                    'email' => 'required',
+                    'phone' => 'required',
+                    'address' => 'required',
+                    'national_id' => 'required',
+                ]);
                 $newPatient = Patient::create([
                     'name' => $this->name,
                     'surname' => $this->surname,
@@ -239,7 +238,7 @@ class AddPatientModal extends Component
             'guarantorNationalId' => 'required',
         ]);
 
-       // try {
+        try {
             $guarantor = Gurantor::create([
                 'patient_id' => $this->selectedPatientId,
                 'name' => $this->guarantorName,
@@ -253,10 +252,11 @@ class AddPatientModal extends Component
 
             session()->flash('success', 'Guarantor added successfully!');
             $this->nextStage();
-      //  } catch (\Exception $e) {
-      //      session()->flash('error', 'Error adding guarantor: ' . $e->getMessage());
-      //  }
-        $this->resetGuarantorFields();
+            $this->resetGuarantorFields();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error adding guarantor: ' . $e->getMessage());
+        }
+        //
     }
 
     public function resetGuarantorFields()
@@ -266,6 +266,37 @@ class AddPatientModal extends Component
         $this->guarantorEmail = '';
         $this->guarantorAddress = '';
         $this->guarantorRelationship = '';
+    }
+
+    public function addNextOfKin()
+    {
+        $this->validate([
+            'kinName' => 'required',
+            'kinSurname' => 'required',
+            'kinPhone' => 'required',
+            'kinGender' => 'required',
+            'kinNationalId' => 'required',
+            'kinAddress' => 'required',
+            'kinRelation'=>'required',
+        ]);
+
+        try{
+            $kindred = NextOfKeen::create([
+                'patient_id' => $this->selectedPatientId,
+                'next_of_keen_name' => $this->kinName,
+                'next_of_keen_phone' => $this->kinPhone,
+                'next_of_keen_surname' => $this->kinSurname,
+                'next_of_keen_address' => $this->kinAddress,
+                'next_of_keen_national_id' => $this->kinNationalId,
+                'next_of_keen_gender' => $this->kinGender,
+                'next_of_keen_relationship' =>$this->kinRelation
+            ]);
+
+            session()->flash('success', 'Next of Kin added successfully!');
+
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error adding next of kin: ' . $e->getMessage());
+        }
     }
     public function queuePatient()
     {
