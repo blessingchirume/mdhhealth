@@ -27,7 +27,7 @@ class AddPatientModal extends Component
     public $paymentGuarantorDetails;
     public $nextOfKinDetails;
     public $currentStage = 1;
-    public $paymentOption;
+    public $paymentOption=1;
     public $national_id;
     public $email;
     public $phone;
@@ -153,6 +153,8 @@ class AddPatientModal extends Component
         $this->email = $selectedPatient->email;
         $this->national_id = $selectedPatient->national_id;
 
+        //set selected patient value
+        $this->selectedPatientId = $patientId;
 
         // Clear the search input and existing suggestions
         $this->search = '';
@@ -300,14 +302,17 @@ class AddPatientModal extends Component
     }
     public function queuePatient()
     {
-        $data["episode_entry"] = (int) Episode::where('patient_id', $this->selectedPatientId)->max('episode_entry') + 1;
-        $data["episode_code"] = $this->selectedPatientId . "/" . $data["episode_entry"];
+        $patient = Patient::find($this->selectedPatientId)->first();
+        $patientId = $patient->patient_id;
+        $data["episode_entry"] = (int) Episode::where('patient_id', $patientId)->max('episode_entry') + 1;
+        $data["episode_code"] = $patientId . "/" . $data["episode_entry"];
 
         $data["patient_id"] = $this->selectedPatientId;
         $data["patient_type"] = 'OutPatient';
         $data["payment_option_id"] = $this->paymentOption;
         $data['visit_purpose'] = ($this->visitPurpose != 'other') ? $this->visitPurpose : $this->otherVisitPurpose;
         $data['ward'] = $this->ward;
+        $data['attendee']='OPD';
         $data["date"] = date('Y-m-d');
 
         $episode = Episode::create($data);
