@@ -27,7 +27,7 @@ class AddPatientModal extends Component
     public $paymentGuarantorDetails;
     public $nextOfKinDetails;
     public $currentStage = 1;
-    public $paymentOption=1;
+    public $paymentOption = 1;
     public $national_id;
     public $email;
     public $phone;
@@ -134,7 +134,8 @@ class AddPatientModal extends Component
         $this->medicalAidPackages = MedicalAid::find($provider)->with('packages')->get();
     }
 
-    public function switchStage($stage) {
+    public function switchStage($stage)
+    {
         $this->currentStage = $stage;
     }
 
@@ -279,10 +280,10 @@ class AddPatientModal extends Component
             'kinGender' => 'required',
             'kinNationalId' => 'required',
             'kinAddress' => 'required',
-            'kinRelation'=>'required',
+            'kinRelation' => 'required',
         ]);
 
-        try{
+        try {
             $kindred = NextOfKeen::create([
                 'patient_id' => $this->selectedPatientId,
                 'next_of_keen_name' => $this->kinName,
@@ -291,7 +292,7 @@ class AddPatientModal extends Component
                 'next_of_keen_address' => $this->kinAddress,
                 'next_of_keen_national_id' => $this->kinNationalId,
                 'next_of_keen_gender' => $this->kinGender,
-                'next_of_keen_relationship' =>$this->kinRelation
+                'next_of_keen_relationship' => $this->kinRelation
             ]);
 
             session()->flash('success', 'Next of Kin added successfully!');
@@ -302,29 +303,36 @@ class AddPatientModal extends Component
     }
     public function queuePatient()
     {
-        $patient = Patient::find($this->selectedPatientId)->first();
-        $patientId = $patient->patient_id;
-        $data["episode_entry"] = (int) Episode::where('patient_id', $patientId)->max('episode_entry') + 1;
-        $data["episode_code"] = $patientId . "/" . $data["episode_entry"];
+        try {
+            $patient = Patient::find($this->selectedPatientId)->first();
+            $patientId = $patient->patient_id;
+            $data["episode_entry"] = (int) Episode::where('patient_id', $patientId)->max('episode_entry') + 1;
+            $data["episode_code"] = $patientId . "/" . $data["episode_entry"];
 
-        $data["patient_id"] = $this->selectedPatientId;
-        $data["patient_type"] = 'OutPatient';
-        $data["payment_option_id"] = $this->paymentOption;
-        $data['visit_purpose'] = ($this->visitPurpose != 'other') ? $this->visitPurpose : $this->otherVisitPurpose;
-        $data['ward'] = $this->ward;
-        $data['attendee']='OPD';
-        $data["date"] = date('Y-m-d');
+            $data["patient_id"] = $this->selectedPatientId;
+            $data["patient_type"] = 'OutPatient';
+            $data["payment_option_id"] = $this->paymentOption;
+            $data['visit_purpose'] = ($this->visitPurpose != 'other') ? $this->visitPurpose : $this->otherVisitPurpose;
+            $data['ward'] = $this->ward;
+            $data['attendee'] = 'OPD';
+            $data["date"] = date('Y-m-d');
 
-        $episode = Episode::create($data);
+            $episode = Episode::create($data);
 
-        ChargeSheet::create([
-            "episode_id" => $episode->id,
-            "checkin" => date('Y-m-d'),
-        ]);
+            ChargeSheet::create([
+                "episode_id" => $episode->id,
+                "checkin" => date('Y-m-d'),
+            ]);
 
-        $this->resetForm();
+            $this->resetForm();
+            session()->flash('success', 'OPD Patient added successfully!');
 
-        // Close the modal after adding the patient
-        $this->emit('closeModal');
+            // Close the modal after adding the patient
+            $this->emit('patientAddedToQueue');
+            $this->emit('closeModal');
+        } catch (\Exception $e) {
+            session()->flash('error', 'OPD Patient could not be added successfully!<br/>' . $e->getMessage());
+
+        }
     }
 }

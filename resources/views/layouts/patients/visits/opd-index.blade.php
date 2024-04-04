@@ -45,4 +45,16 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('livewire:load', function () {
+        Livewire.on('patientAddedToQueue', () => {
+            window.location.reload();
+        });
+
+        Livewire.on('closeModal', () => {
+            $('#addPatientModal').modal('hide');
+        });
+    });
+</script>
+
 @endsection
