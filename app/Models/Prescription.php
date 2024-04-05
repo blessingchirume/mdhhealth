@@ -10,9 +10,9 @@ class Prescription extends Model
     use HasFactory;
     protected $guarded = [];
 
-    public function drugs_sundries()
+    public function prescription_items()
     {
-        return $this->hasMany(DrugsAndSundries::class, 'id','drug_sundry_id');
+        return $this->hasMany(PrescriptionItem::class);
     }
 
     public function episode()

@@ -20,7 +20,16 @@
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css" rel="stylesheet" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.min.js"></script>
-
+<style>
+    /* Target the selected item in the dropdown */
+.select2-results__option[aria-selected=true] {
+    background-color: #09033a !important;
+}
+.select2-selection__choice {
+    background-color: #1c4a85 !important;
+    color: #ffffff !important; /* Optionally, you can also change the text color */
+}
+</style>
     @livewireStyles
     @yield('styles')
 </head>

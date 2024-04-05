@@ -261,8 +261,23 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/prescription')->group(function () {
         Route::get('/show/{episode}', [App\Http\Controllers\PrescriptionController::class, 'show'])->name('prescription.view');
         Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
-
+        Route::get('/pdf/{episode}', [App\Http\Controllers\PrescriptionController::class, 'generatePDF'])->name('prescription.pdf');
+        Route::post('store/{episode}',[App\Http\Controllers\PrescriptionController::class, 'store'])->name('prescription.store');
     });
+
+    Route::prefix('/transfers')->group(function () {
+        Route::get('/', [App\Http\Controllers\TransferController::class, 'index'])->name('transfers.index');
+        Route::get('/create', [App\Http\Controllers\TransferController::class, 'create'])->name('transfers.create');
+        Route::post('/store', [App\Http\Controllers\TransferController::class, 'store'])->name('patient.transfer');
+    });
+
+Route::prefix('/opd')->group(function () {
+    Route::get('/', [App\Http\Controllers\OpdController::class, 'index'])->name('opd.index');
+    Route::get('/{patient}', [App\Http\Controllers\OpdController::class, 'show'])->name('opd.show');
+    Route::get('/bill/{episode}', [App\Http\Controllers\OpdController::class, 'bill'])->name('opd.bill');
+    Route::get('/consult/{episode}', [App\Http\Controllers\OpdController::class, 'consult'])->name('opd.consult');
+
+});
 
     Route::prefix('/drugs-and-sundries')->group(function () {
         Route::get('/', [App\Http\Controllers\DrugsAndSundriesController::class, 'index'])->name('drugs-and-sundries');

@@ -341,13 +341,24 @@ class MenuSeeder extends Seeder
         ]);
 
         Menu::create([
-            'name' => 'drugs_and_sundries',
-            'display_name' => 'Drugs and Sundries',
+            'name' => 'opd',
+            'display_name' => 'OPD',
             'icon' => 'fa-circle',
-            'url' => 'drugs-and-sundries',
-            'parent_id' => 9,
-            'order' => 2,
+            'url' => null,
+            'parent_id' => 3,
+            'order' => 1,
             // 'permission' => PermisionConstants::viewIt
         ]);
+
+        Menu::create([
+            'name' => 'opd',
+            'display_name' => 'OPD Queue',
+            'icon' => 'fa-circle',
+            'url' => 'opd.index',
+            'parent_id' => 34,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
     }
 }

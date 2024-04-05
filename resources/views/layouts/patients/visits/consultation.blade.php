@@ -49,37 +49,12 @@
                         <div class="tab-pane fade show active" id="observation-tab" role="tabpanel" aria-labelledby="observation-tab">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">Notes and Observations</h5>
+                                    <h5 class="card-title">Observations</h5>
                                 </div>
                                 <div class="card-body">
                                     <form method="post" action="{{ route('create-patient-notes', $episode) }}">
                                         @csrf
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="complaints">Presentation of Complaints</label>
-                                                    <textarea name="complaints" id="complaints" class="form-control">{{ $observation->complaints ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="complaints_history">History of Complaints</label>
-                                                    <textarea name="complaints_history" id="complaints_history" class="form-control">{{ $observation->complaints_history ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="observation">Observation</label>
-                                                    <textarea name="observation" id="observation" class="form-control">{{ $observation->observation ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="notes">Notes</label>
-                                                    <textarea name="notes" id="notes" class="form-control">{{ $observation->notes ?? null }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @livewire('observation-form')
                                         <button type="submit" class="btn btn-primary">Save Observation</button>
                                     </form>
                                 </div>
@@ -95,7 +70,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="icd10_codes">Select ICD-10 Codes:</label>
-                                            <select id="icd10_codes" name="icd10_codes[]" class="form-control select2" multiple="multiple">
+                                            <select id="icd10_codes" name="icd10_codes[]" class="form-control select2" multiple="multiple" style="width: 100% color:black">
                                                 @foreach ($icd10codes as $option)
                                                 <option value="{{ $option->id }}">{{ $option->code }} |
                                                     {{ $option->description }}
@@ -226,63 +201,61 @@
     </div>
 </div>
 
+    <script>
+        $(document).ready(function() {
+            // Show the dosage_section initially
+            $("#medication_section, #dosage_section").removeClass("d-none");
 
-
-<script>
-    $(document).ready(function() {
-        // Show the dosage_section initially
-        $("#medication_section, #dosage_section").removeClass("d-none");
-
-        $("#treatment_type").on("change", function() {
-            if ($(this).val() === "medication") {
-                $("#medication_section, #dosage_section").removeClass("d-none");
-                $("#other_treatment_section").addClass("d-none");
-            } else {
-                $("#medication_section, #dosage_section").addClass("d-none");
-                $("#other_treatment_section").removeClass("d-none");
-            }
+            $("#treatment_type").on("change", function() {
+                if ($(this).val() === "medication") {
+                    $("#medication_section, #dosage_section").removeClass("d-none");
+                    $("#other_treatment_section").addClass("d-none");
+                } else {
+                    $("#medication_section, #dosage_section").addClass("d-none");
+                    $("#other_treatment_section").removeClass("d-none");
+                }
+            });
         });
-    });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        var addMedicationBtn = document.getElementById('add_medication');
-        var medicationTable = document.getElementById('medication_table');
-        var medicationRow = document.getElementById('medication_row');
+        document.addEventListener('DOMContentLoaded', function() {
+            var addMedicationBtn = document.getElementById('add_medication');
+            var medicationTable = document.getElementById('medication_table');
+            var medicationRow = document.getElementById('medication_row');
 
-        addMedicationBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+            addMedicationBtn.addEventListener('click', function(e) {
+                e.preventDefault();
 
-            // Get the form field values
-            var medication = document.getElementById('medication').value;
-            var dosage = document.getElementById('dosage').value;
-            var frequency = document.getElementById('frequency').value;
-            var duration = document.getElementById('duration').value;
+                // Get the form field values
+                var medication = document.getElementById('medication').value;
+                var dosage = document.getElementById('dosage').value;
+                var frequency = document.getElementById('frequency').value;
+                var duration = document.getElementById('duration').value;
 
-            // Create a new row in the table
-            var newRow = medicationTable.insertRow();
-            newRow.innerHTML = `
+                // Create a new row in the table
+                var newRow = medicationTable.insertRow();
+                newRow.innerHTML = `
             <td>${medication}<input type="hidden" name="medication[]" value="${medication}"></td>
             <td>${dosage}<input type="hidden" name="dosage[]" value="${dosage}"></td>
             <td>${frequency}<input type="hidden" name="frequency[]" value="${frequency}"></td>
             <td>${duration}<input type="hidden" name="duration[]" value="${duration}"></td>
          `;
 
-            // Reset the form fields
-            document.getElementById('medication').value = '';
-            document.getElementById('dosage').value = '';
-            document.getElementById('frequency').value = '';
-            document.getElementById('duration').value = '';
+                // Reset the form fields
+                document.getElementById('medication').value = '';
+                document.getElementById('dosage').value = '';
+                document.getElementById('frequency').value = '';
+                document.getElementById('duration').value = '';
 
-            // Clone the row and append it to the form container
-            // var clonedRow = medicationRow.cloneNode(true);
-            //  clonedRow.classList.remove('row');
-            //  medicationRow.parentNode.insertBefore(clonedRow, medicationRow.nextSibling);
-        });
+                // Clone the row and append it to the form container
+                // var clonedRow = medicationRow.cloneNode(true);
+                //  clonedRow.classList.remove('row');
+                //  medicationRow.parentNode.insertBefore(clonedRow, medicationRow.nextSibling);
+            });
 
         // Submit the form
-        // document.getElementById('submit-btn').addEventListener('click', function() {
-        //       document.querySelector('form').submit();
-        //  });
+       // document.getElementById('submit-btn').addEventListener('click', function() {
+     //       document.querySelector('form').submit();
+      //  });
     });
 </script>
 @endsection
