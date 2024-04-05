@@ -108,7 +108,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="{{ route('patient.transfer', $episode) }}">
+                    <form method="POST" action="{{ route('patient.transfer') }}">
                         @csrf
                         <input type="hidden" id="episodeId" name="episode_id" />
                         <div class="form-group">
