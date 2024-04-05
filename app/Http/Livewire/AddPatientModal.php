@@ -6,8 +6,8 @@ use Livewire\Component;
 use App\Models\Patient;
 use App\Models\Episode;
 use App\Models\ChargeSheet;
-use App\Models\MedicalAid;
-use App\Models\MedicalAidPackage;
+use App\Models\Partner;
+use App\Models\Package;
 use App\Models\PatientMedicalAidEntry;
 use App\Models\PaymentOption;
 use App\Models\Ward;
@@ -64,7 +64,7 @@ class AddPatientModal extends Component
     {
         // Fetch existing patients or set defaults
         // Fetch medical aid providers
-        $this->medicalAidProviders = MedicalAid::all();
+        $this->medicalAidProviders = Partner::all();
         $this->paymentOptions = PaymentOption::all();
         $this->wards = Ward::all();
     }
@@ -73,7 +73,7 @@ class AddPatientModal extends Component
     {
         // Fetch medical aid packages based on the selected provider
         if ($value) {
-            $this->medicalAidPackages = MedicalAidPackage::where('medical_aid_id', $value)->get();
+            $this->medicalAidPackages = Package::where('partner_id', $value)->get();
         } else {
             $this->medicalAidPackages = [];
         }
@@ -89,7 +89,7 @@ class AddPatientModal extends Component
         } else {
             $this->existingPatients = [];
         }
-        $medicalAidProviders = MedicalAid::all();
+        $medicalAidProviders = Partner::all();
         return view('livewire.add-patient-modal', compact('medicalAidProviders'));
     }
     public function submitFocusedForm()
@@ -131,7 +131,7 @@ class AddPatientModal extends Component
 
     public function selectMedicalAid($provider)
     {
-        $this->medicalAidPackages = MedicalAid::find($provider)->with('packages')->get();
+        $this->medicalAidPackages = Partner::find($provider)->with('packages')->get();
     }
 
     public function switchStage($stage)

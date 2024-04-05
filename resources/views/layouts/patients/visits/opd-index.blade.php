@@ -22,17 +22,20 @@
                             <td>{{ $episode->visit_purpose }}</td>
                             <td>
                                 @if ($episode->vitals->isEmpty())
-                                    <a href="{{ route('patient.vitals.create', $episode->id) }}"><i
+                                    <a href="{{ route('patient.vitals.create', $episode->id) }}" title="Record Vitals"><i
                                             class="fas fa-heartbeat"></i></a>
                                 @else
-                                &emsp;
-                                    <a href="{{ route('patient.vitals.show', $episode->id) }}"><i
+                                    <a href="{{ route('patient.vitals.show', $episode->id) }}" title="View Vitals"><i
                                             class="fas fa-heartbeat"></i></a>
                                 @endif
                                 &emsp;
-                                <a href="{{ route('opd.consult', $episode->id) }}"><i class="fas fa-stethoscope"></i></a>&emsp;
-                                <a href="{{ route('prescription.pdf', $episode->id) }}" ><i class="fas fa-prescription"></i>
+                                <a href="{{ route('opd.consult', $episode->id) }}" title="Consult"><i
+                                        class="fas fa-stethoscope"></i></a>&emsp;
+                                <a href="{{ route('prescription.pdf', $episode->id) }}" target="_blank" title="Download Prescription"><i
+                                        class="fas fa-prescription"></i>
                                 </a>
+                                &emsp;
+                                <a href="#" title="Transfer Patient"><i class="fas fa-ambulance"></i></a>
                             </td>
                         </tr>
                     @endforeach

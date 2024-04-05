@@ -133,7 +133,7 @@
                             <select class="form-control" wire:model="medicalAidProvider" id="medical-aid-provider">
                                 <option value="">Select Provider</option>
                                 @foreach ($medicalAidProviders as $medicalAid)
-                                    <option value="{{ $medicalAid->id }}">{{ $medicalAid->provider_name }}</option>
+                                    <option value="{{ $medicalAid->id }}">{{ $medicalAid->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -163,8 +163,8 @@
                                 <input type="text" class="form-control" wire:model.defer="medicalAidPolicyNumber"
                                     id="medical-aid-policy-number">
                             </div>
+                            @endif
                     </div>
-                @endif
                 @endif
                 <br />
                 <div class="row">
