@@ -110,7 +110,7 @@
                 <div class="modal-body">
                     <form method="POST" action="{{ route('patient.transfer', $episode) }}">
                         @csrf
-                        <input type="text" id="episodeId" name="episode_id"/>
+                        <input type="hidden" id="episodeId" name="episode_id" />
                         <div class="form-group">
                             <label for="destination_id">Select Destination</label>
                             <select class="form-control" id="destination_id" name="destination_id">

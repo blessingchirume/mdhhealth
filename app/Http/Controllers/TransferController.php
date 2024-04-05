@@ -27,7 +27,6 @@ class TransferController extends Controller
             $oldChargesheet->update(['checkout' => now()]);
             $data["episode_entry"] = (int) Episode::where('patient_id', $episode->patient->id)->max('episode_entry') + 1;
             $data["episode_code"] = $episode->patient->patient_id . "/" . $data["episode_entry"];
-
             $data["patient_id"] = $episode->patient->id;
             $data["patient_type"] = $request->destination_id;
             $data["payment_option_id"] = $episode->payment_option_id;
