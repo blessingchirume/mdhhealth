@@ -35,7 +35,35 @@
                                         class="fas fa-prescription"></i>
                                 </a>
                                 &emsp;
-                                <a href="#" title="Transfer Patient"><i class="fas fa-ambulance"></i></a>
+                                <a href="#" title="Transfer Patient" data-toggle="modal"
+                                    data-target="#transferPatientModal{{ $episode->id }}"><i
+                                        class="fas fa-ambulance"></i></a>
+
+                                <!-- Transfer Patient Modal -->
+                                <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
+                                    role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="transferPatientModalLabel">Transfer Patient</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Transferring this patient means concluding and discharging them from OPD.</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary"
+                                                    onclick="openDestinationModal({{ $episode->id }})">Proceed</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Transfer Patient Modal -->
                             </td>
                         </tr>
                     @endforeach
@@ -60,7 +88,64 @@
     </div>
 
     <script>
-        document.addEventListener('livewire:load', function() {
+        function openDestinationModal(episodeId) {
+            $('#transferPatientModal'+episodeId).modal('hide');
+            $('#destinationModal').modal('show');
+            $('#episodeId').val(episodeId) ;
+            // Additional logic to handle transfer to new destination
+        }
+    </script>
+
+    <!-- Destination Selection Modal -->
+    <div class="modal fade" id="destinationModal" tabindex="-1" role="dialog" aria-labelledby="destinationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="destinationModalLabel">Select Destination</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ route('patient.transfer', $episode) }}">
+                        @csrf
+                        <input type="text" id="episodeId" name="episode_id"/>
+                        <div class="form-group">
+                            <label for="destination_id">Select Destination</label>
+                            <select class="form-control" id="destination_id" name="destination_id">
+                                <option value="">-- Select Destination --</option>
+                                @foreach ($designations as $destination)
+                                    <option value="{{ $destination->name }}">{{ $destination->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ward">Select Ward</label>
+                            <select class="form-control" id="ward" name="ward">
+                                <option value="">-- Select Ward --</option>
+                                @foreach ($wards as $ward)
+                                    <option value="{{ $ward->id }}">{{ $ward->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reason">Reason for Transfer:</label>
+                            <textarea id="reason" name="reason" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Proceed</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Destination Selection Modal -->
+
+    <script>
+        document.addEventListener('livewire:load', function () {
             Livewire.on('patientAddedToQueue', () => {
                 window.location.reload();
             });
