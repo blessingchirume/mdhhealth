@@ -305,7 +305,7 @@ class AddPatientModal extends Component
     {
         try {
             $patient = Patient::find($this->selectedPatientId);
-            $patientId = $patient->patient_id;//dd($patient);
+            $patientId = $patient->id;//dd($patient);
             $data["episode_entry"] = (int) Episode::where('patient_id', $patientId)->max('episode_entry') + 1;
             $data["episode_code"] = $patientId . "/" . $data["episode_entry"];
 
