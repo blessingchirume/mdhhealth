@@ -47,7 +47,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="reviews-plan-tab" data-toggle="pill"
                                     href="#reviews-plan" role="tab" aria-controls="reviews-plan"
-                                    aria-selected="false">Reviews</a>
+                                    aria-selected="false">Schedule Review</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="custom-content-below-tabContent">
