@@ -278,6 +278,7 @@ Route::prefix('/opd')->group(function () {
     Route::get('/consult/{episode}', [App\Http\Controllers\OpdController::class, 'consult'])->name('opd.consult');
     Route::get('/treatment/{episode}', [App\Http\Controllers\OpdController::class, 'treatment'])->name('opd.treatment');
     Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
+    Route::get('/print/{episode}', [App\Http\Controllers\OpdController::class, 'print'])->name('opd.print');
 });
 
 Route::prefix('/drugs-and-sundries')->group(function () {

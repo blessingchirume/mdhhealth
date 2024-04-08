@@ -39,8 +39,12 @@
                                     data-target="#transferPatientModal{{ $episode->id }}"><i
                                         class="fas fa-ambulance"></i></a>
                                 &emsp;
-                                <a href="{{ route('opd.treatment', $episode->id)  }}" title="Administer Treatment"><i class="fas fa-user-nurse"></i></a>
-                                <!-- Transfer Patient Modal -->
+                                <a href="{{ route('opd.treatment', $episode->id) }}" title="Administer Treatment"><i
+                                        class="fas fa-user-nurse"></i></a>
+
+                                &emsp;
+                                <a href="{{ route('opd.print', $episode->id) }}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
+                                        <!-- Transfer Patient Modal -->
                                 <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -155,6 +159,9 @@
             Livewire.on('closeModal', () => {
                 $('#addPatientModal').modal('hide');
             });
+
+
+
         });
     </script>
 @endsection

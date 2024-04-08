@@ -52,4 +52,14 @@ public function treatment(Episode $episode)
     $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id','=',$episode->chargesheet->id)->where('is_consultation_fee','=',0)->get();//dd($chargesheetItems);
     return view('layouts.patients.visits.opd-treatment', compact('chargesheetItems', 'items', 'prescriptions','patient', 'episode', 'icd10codes'));
 }
+
+public function print(Episode $episode)
+{
+    $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
+    $chargeSheetItems = ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get();
+
+    // Render the print view and pass the data
+    return view('layouts.patients.episodes.print-episode', compact('episode', 'chargeSheetItems'));
+
+}
 }
