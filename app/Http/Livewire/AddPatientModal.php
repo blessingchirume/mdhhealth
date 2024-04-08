@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\ChargesheetItem;
 use Livewire\Component;
 use App\Models\Patient;
 use App\Models\Episode;
@@ -12,6 +13,7 @@ use App\Models\PatientMedicalAidEntry;
 use App\Models\PaymentOption;
 use App\Models\Ward;
 use App\Models\Gurantor;
+use App\Models\Item;
 use App\Models\NextOfKeen;
 
 class AddPatientModal extends Component
@@ -307,7 +309,7 @@ class AddPatientModal extends Component
             $patient = Patient::find($this->selectedPatientId);
             $patientId = $patient->id;//dd($patient);
             $data["episode_entry"] = (int) Episode::where('patient_id', $patientId)->max('episode_entry') + 1;
-            $data["episode_code"] = $patientId . "/" . $data["episode_entry"];
+            $data["episode_code"] = $patient->patient_id . "/" . $data["episode_entry"];
 
             $data["patient_id"] = $this->selectedPatientId;
             $data["patient_type"] = 'OutPatient';
@@ -322,6 +324,16 @@ class AddPatientModal extends Component
             ChargeSheet::create([
                 "episode_id" => $episode->id,
                 "checkin" => date('Y-m-d'),
+            ]);
+
+            $item = Item::where('item_description', 'LIKE', 'Consultation')
+            ->orWhere('item_description', 'LIKE', 'Provider Fee')->first();
+            ChargesheetItem::create([
+                "charge_sheet_id" => $episode->chargesheet->id,
+                "item_id" => $item->id??0,
+                "quantity" => 1,
+                "is_consultation_fee" => 1,
+                "status" => "Paid"
             ]);
 
             $this->resetForm();

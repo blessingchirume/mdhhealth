@@ -71,13 +71,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($chargesheetItems as $administered)
-                                    <tr>
-                                        <td>{{ $administered->item->item_description }}</td>
-                                        <!--td>{{ $administered->dosage }}</td-->
-                                        <td>{{ $administered->created_at }}</td>
-                                    </tr>
-                                @endforeach
+
+                                    @foreach ($chargesheetItems as $administered)
+                                    @if (isset($administered->item))
+                                        <tr>
+                                            <td>{{ $administered->item->item_description }}</td>
+                                            <!--td>{{ $administered->dosage }}</td-->
+                                            <td>{{ $administered->created_at }}</td>
+                                        </tr>
+                                        @endif
+                                    @endforeach
+
                             </tbody>
                         </table>
 
