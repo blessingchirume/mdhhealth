@@ -44,7 +44,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="weight">Weight</label>
+                                                <label for="weight">Weight (kg)</label>
                                                 <input type="text" class="form-control" id="weight" name="weight"
                                                     placeholder="Weight" required>
                                             </div>
@@ -94,16 +94,16 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="other_vitals">Height</label>
+                                                <label for="height">Height (m)</label>
                                                 <input type="text" class="form-control" id="height" name="height"
-                                                    placeholder="Height" />
+                                                    placeholder="Height" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="other_vitals">Presentation Of Complaints</label>
+                                                <label for="complaints">Presentation Of Complaints</label>
                                                 <textarea class="form-control" id="complaints" name="complaints" placeholder="Complaints"></textarea>
                                             </div>
                                         </div>
@@ -111,6 +111,14 @@
                                             <div class="form-group">
                                                 <label for="observation">Nurses Review/Observations</label>
                                                 <textarea class="form-control" id="observation" name="observation" placeholder="Observation"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="bmi">BMI</label>
+                                                <input type="text" class="form-control" id="bmi" name="bmi" placeholder="BMI" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -126,4 +134,25 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        // Calculate BMI when weight and height are provided
+        function calculateBMI() {
+            var weight = parseFloat(document.getElementById('weight').value);
+            var height = parseFloat(document.getElementById('height').value);
+
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                var bmi = weight / (height * height);
+                document.getElementById('bmi').value = bmi.toFixed(2);
+            } else {
+                document.getElementById('bmi').value = '';
+            }
+        }
+
+        // Attach event listeners to weight and height inputs
+        document.getElementById('weight').addEventListener('input', calculateBMI);
+        document.getElementById('height').addEventListener('input', calculateBMI);
+    </script>
 @endsection
