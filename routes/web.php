@@ -313,6 +313,9 @@ Route::prefix('/appointments')->group(function () {
     Route::get('/show/{id}', [AppointmentsController::class, 'show'])->name('show-appointment-details');
 });
 
+Route::prefix('/reviews')->group(function(){
+    Route::post('/add-booking', [AppointmentsController::class, 'create'])->name('set-review-date');
+});
 
 Route::post('/send-to-theatre', [TheatreController::class,'sendToTheatre'])->name('send-to-theatre');
 Route::get('/calculate-bill/{episode}', [TheatreController::class,'calculateBill'])->name('calculate-bill');
