@@ -59,9 +59,29 @@
             </tr>
         </table>
         <div class="confirmation">
-            <p>Confirmation: The consultation fee has been paid.</p>
+            <p>Consultation fee has been paid.</p>
             <p>Amount: ${{ $chargeSheetItems->where('is_consultation_fee', true)->sum('total_amount') }}</p>
         </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($chargeSheetItems as $item)
+                    <tr>
+                        <td>{{ $item->item->item_description }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>{{ $item->item->base_price }}</td>
+                        <td>{{ $item->status }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
