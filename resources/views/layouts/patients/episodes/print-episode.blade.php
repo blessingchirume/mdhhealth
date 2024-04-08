@@ -1,6 +1,51 @@
-@extends('layouts.app')
+<!Doctype html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
 
-@section('content')
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            text-align: left;
+            background-color: #f2f2f2;
+        }
+
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #ddd;
+        }
+
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .mt-5 {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body onblur="window.close()">
     <div class="container">
         <h1>Patient Episode Details</h1>
         <table class="table table-borderless">
@@ -51,4 +96,23 @@
             </tbody>
         </table>
     </div>
-@endsection
+</body>
+<script>
+    // Add event listener for 'afterprint' event
+    window.addEventListener('afterprint', function() {
+        // Close the window after printing
+        window.close();
+    });
+
+    // Trigger the print dialog
+    window.print();
+
+    // Check if the print dialog is still open after 5 seconds
+    setTimeout(function() {
+        // If the print dialog is still open after 5 seconds, close the window
+        if (!window.matchMedia('print').matches) {
+            window.close();
+        }
+    }, 5000); // Adjust the duration as needed
+</script>
+</html>

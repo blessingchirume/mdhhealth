@@ -43,8 +43,9 @@
                                         class="fas fa-user-nurse"></i></a>
 
                                 &emsp;
-                                <a href="{{ route('opd.print', $episode->id) }}" title="Print" target="_blank"><i class="fa fa-print"></i></a>
-                                        <!-- Transfer Patient Modal -->
+                                <a href="#" onclick="openAndPrint('{{ route('opd.print', $episode->id) }}')"
+                                    title="Print" target="_blank"><i class="fa fa-print"></i></a>
+                                <!-- Transfer Patient Modal -->
                                 <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -159,9 +160,17 @@
             Livewire.on('closeModal', () => {
                 $('#addPatientModal').modal('hide');
             });
-
-
-
         });
+
+        function openAndPrint(url) {
+            // Open a new popup window with the URL
+            var popupWindow = window.open(url, 'Print Window', 'width=1000,height=900');
+
+            // Once the popup window is open, trigger the print dialog
+          /*  popupWindow.onload = function() {
+                popupWindow.print();
+            };*/
+
+        }
     </script>
 @endsection
