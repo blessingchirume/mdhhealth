@@ -5,13 +5,19 @@
         <div class="card-body">
             <h1>OPD Queue<span class="float-right"><button class="btn btn-primary" data-toggle="modal"
                         data-target="#addPatientModal"><i class="fa fa-plus"></i> Generate</button></span></h1>
-            <table class="table table-bordered table-striped data-table">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <input type="text" id="searchInput" class="form-control float-right" style="width: 25%"
+                        placeholder="Search by Episode Code/ Patient Name">
+                </div>
+            </div>
+            <table class="table table-bordered table-striped data-table" id="OPDtable">
                 <thead>
                     <tr>
-                        <th>EpisodeCode</th>
+                        <th width="14%">EpisodeCode</th>
                         <th>Patient Name</th>
-                        <th>Visit Type</th>
-                        <th>Actions</th>
+                        <th width="20%">Visit Type</th>
+                        <th width="20%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,8 +80,11 @@
                             </td>
                         </tr>
                     @endforeach
+                    <!-- add pagination links -->
+
                 </tbody>
             </table>
+            <div class="float-right pt-2">{{ $opdQueue->links() }}</div>
         </div>
     </div>
 
@@ -167,10 +176,31 @@
             var popupWindow = window.open(url, 'Print Window', 'width=1000,height=900');
 
             // Once the popup window is open, trigger the print dialog
-          /*  popupWindow.onload = function() {
-                popupWindow.print();
-            };*/
+            /*  popupWindow.onload = function() {
+                  popupWindow.print();
+              };*/
 
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const rows = document.querySelectorAll('#OPDtable tbody tr');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const patientName = row.cells[1].textContent.toLowerCase();
+                    const episodeCode = row.cells[0].textContent.toLowerCase();
+
+                    if (patientName.includes(searchTerm) || episodeCode.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
     </script>
+    
 @endsection

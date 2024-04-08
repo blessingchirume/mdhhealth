@@ -15,7 +15,7 @@ class OPDController extends Controller
 {
     public function index()
     {
-        $opdQueue = Episode::where('patient_type', '=', 'OutPatient')->get();
+        $opdQueue = Episode::where('patient_type', '=', 'OutPatient')->paginate(15);
         $designations = \App\Models\Designation::all();
         $wards = \App\Models\Ward::all();
         return view('layouts.patients.visits.opd-index', compact('opdQueue','wards','designations'));
