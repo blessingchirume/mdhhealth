@@ -40,4 +40,16 @@ class OPDController extends Controller
 
     return view('layouts.patients.visits.opd-consult', compact('items', 'patient', 'notes', 'episode', 'icd10codes'));
 }
+
+public function treatment(Episode $episode)
+{
+    $prescriptions = Prescription::with(['prescription_items', 'prescription_items.item'])->where('episode_id', '=', $episode->id)->get();
+    //dd($prescriptions);
+    $patient = $episode->patient;
+    $icd10 = new Icd10Code;
+    $icd10codes = $icd10->all();
+    $items = Item::with('group')->get();
+    $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id','=',$episode->chargesheet->id)->get();//dd($chargesheetItems);
+    return view('layouts.patients.visits.opd-treatment', compact('chargesheetItems', 'items', 'prescriptions','patient', 'episode', 'icd10codes'));
+}
 }

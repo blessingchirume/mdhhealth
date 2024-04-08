@@ -39,7 +39,7 @@
                                     data-target="#transferPatientModal{{ $episode->id }}"><i
                                         class="fas fa-ambulance"></i></a>
                                 &emsp;
-                                <a href="#" title="Administer Treatment"><i class="fas fa-user-nurse"></i></a>
+                                <a href="{{ route('opd.treatment', $episode->id)  }}" title="Administer Treatment"><i class="fas fa-user-nurse"></i></a>
                                 <!-- Transfer Patient Modal -->
                                 <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
