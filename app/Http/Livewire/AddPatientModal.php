@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Patient;
 use App\Models\Episode;
 use App\Models\ChargeSheet;
+use App\Models\ChargesheetItem;
 use App\Models\Partner;
 use App\Models\Package;
 use App\Models\PatientMedicalAidEntry;
@@ -13,6 +14,7 @@ use App\Models\PaymentOption;
 use App\Models\Ward;
 use App\Models\Gurantor;
 use App\Models\NextOfKeen;
+use App\Models\Item;
 
 class AddPatientModal extends Component
 {
@@ -322,6 +324,19 @@ class AddPatientModal extends Component
             ChargeSheet::create([
                 "episode_id" => $episode->id,
                 "checkin" => date('Y-m-d'),
+            ]);
+
+            $item= Item::where('item_description', 'Consultation Fees')
+            ->orWhere('item_description', 'Consultation')
+            ->orWhere('item_description', 'Consultation Fee')
+            ->orWhere('item_description', 'Provider Fees')->first();
+
+            ChargesheetItem::create([
+                'charge_sheet_id' => ChargeSheet::where('episode_id', $episode->id)->first()->id,
+                'item_id' => $item->id??0,
+                'status'=>'Paid',
+                'is_consultation_fee' => 1,
+                'quantity' => 1,
             ]);
 
             $this->resetForm();

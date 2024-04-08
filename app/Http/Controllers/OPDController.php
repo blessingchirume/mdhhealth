@@ -49,7 +49,7 @@ public function treatment(Episode $episode)
     $icd10 = new Icd10Code;
     $icd10codes = $icd10->all();
     $items = Item::with('group')->get();
-    $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id','=',$episode->chargesheet->id)->get();//dd($chargesheetItems);
+    $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id','=',$episode->chargesheet->id)->where('is_consultation_fee','=',0)->get();//dd($chargesheetItems);
     return view('layouts.patients.visits.opd-treatment', compact('chargesheetItems', 'items', 'prescriptions','patient', 'episode', 'icd10codes'));
 }
 }
