@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             TestsSeeder::class,
             TestCategorySeeder::class,
             PaymentOptionSeeder::class,
-            CurrencySeeder::class
         ]);
     }
 }
+    
