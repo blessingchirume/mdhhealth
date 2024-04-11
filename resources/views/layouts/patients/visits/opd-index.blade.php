@@ -5,13 +5,19 @@
         <div class="card-body">
             <h1>OPD Queue<span class="float-right"><button class="btn btn-primary" data-toggle="modal"
                         data-target="#addPatientModal"><i class="fa fa-plus"></i> Generate</button></span></h1>
-            <table class="table table-bordered table-striped data-table">
+            <div class="row mb-3">
+                <div class="col-md-12">
+                    <input type="text" id="searchInput" class="form-control float-right" style="width: 25%"
+                        placeholder="Search by Episode Code/ Patient Name">
+                </div>
+            </div>
+            <table class="table table-bordered table-striped data-table" id="OPDtable">
                 <thead>
                     <tr>
-                        <th>EpisodeCode</th>
+                        <th width="14%">EpisodeCode</th>
                         <th>Patient Name</th>
-                        <th>Visit Type</th>
-                        <th>Actions</th>
+                        <th width="20%">Visit Type</th>
+                        <th width="20%">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,15 +36,24 @@
                                 @endif
                                 &emsp;
                                 <a href="{{ route('opd.consult', $episode->id) }}" title="Consult"><i
-                                        class="fas fa-stethoscope"></i></a>&emsp;
-                                <a href="{{ route('prescription.pdf', $episode->id) }}" target="_blank" title="Download Prescription"><i
-                                        class="fas fa-prescription"></i>
+                                        class="fas fa-stethoscope"></i>
                                 </a>
+
+                                    &emsp;
+                                    <a href="{{ route('prescription.pdf', $episode->id) }}" target="_blank"
+                                        title="Download Prescription"><i class="fas fa-prescription"></i>
+                                    </a>&emsp;
+                                    <a href="{{ route('opd.treatment', $episode->id) }}" title="Administer Treatment"><i
+                                            class="fas fa-user-nurse"></i></a>
+                                
                                 &emsp;
                                 <a href="#" title="Transfer Patient" data-toggle="modal"
                                     data-target="#transferPatientModal{{ $episode->id }}"><i
                                         class="fas fa-ambulance"></i></a>
 
+                                &emsp;
+                                <a href="#" onclick="openAndPrint('{{ route('opd.print', $episode->id) }}')"
+                                    title="Print" target="_blank"><i class="fa fa-print"></i></a>
                                 <!-- Transfer Patient Modal -->
                                 <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
@@ -52,7 +67,8 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Transferring this patient means concluding and discharging them from OPD.</p>
+                                                <p>Transferring this patient means concluding and discharging them from OPD.
+                                                </p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -67,8 +83,11 @@
                             </td>
                         </tr>
                     @endforeach
+                    <!-- add pagination links -->
+
                 </tbody>
             </table>
+            <div class="float-right pt-2">{{ $opdQueue->links() }}</div>
         </div>
     </div>
 
@@ -89,9 +108,9 @@
 
     <script>
         function openDestinationModal(episodeId) {
-            $('#transferPatientModal'+episodeId).modal('hide');
+            $('#transferPatientModal' + episodeId).modal('hide');
             $('#destinationModal').modal('show');
-            $('#episodeId').val(episodeId) ;
+            $('#episodeId').val(episodeId);
             // Additional logic to handle transfer to new destination
         }
     </script>
@@ -145,13 +164,44 @@
     <!-- End Destination Selection Modal -->
 
     <script>
-        document.addEventListener('livewire:load', function () {
+        document.addEventListener('livewire:load', function() {
             Livewire.on('patientAddedToQueue', () => {
                 window.location.reload();
             });
 
             Livewire.on('closeModal', () => {
                 $('#addPatientModal').modal('hide');
+            });
+        });
+
+        function openAndPrint(url) {
+            // Open a new popup window with the URL
+            var popupWindow = window.open(url, 'Print Window', 'width=1000,height=900');
+
+            // Once the popup window is open, trigger the print dialog
+            /*  popupWindow.onload = function() {
+                  popupWindow.print();
+              };*/
+
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const rows = document.querySelectorAll('#OPDtable tbody tr');
+
+            searchInput.addEventListener('input', function() {
+                const searchTerm = searchInput.value.toLowerCase();
+
+                rows.forEach(row => {
+                    const patientName = row.cells[1].textContent.toLowerCase();
+                    const episodeCode = row.cells[0].textContent.toLowerCase();
+
+                    if (patientName.includes(searchTerm) || episodeCode.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
             });
         });
     </script>

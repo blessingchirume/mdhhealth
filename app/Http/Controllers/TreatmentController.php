@@ -28,7 +28,6 @@ class TreatmentController extends Controller
      * Record a new treatment for a patient.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function recordTreatment(Request $request, Episode $episode)
     {
@@ -40,7 +39,8 @@ class TreatmentController extends Controller
         // Create a new treatment record
         $treatment = new ChargesheetItem();
         $treatment->charge_sheet_id = $chargeSheet->id;
-        $treatment->item_id = null;
+        $treatment->item_id = $request->input('treatment');
+        $treatment->quantity = $request->input('quantity');
         $treatment->save();
 
         if ($request->has('note')) {
@@ -50,7 +50,8 @@ class TreatmentController extends Controller
             $treatment->notes()->save($note);  // Assuming belongsTo relationship
         }
 
-        return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
+        return back()->with('success','Drug Administration Recorded Successfully');
+       // return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
     }
 
     public function show(Episode $episode)
