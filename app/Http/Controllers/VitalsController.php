@@ -76,6 +76,11 @@ class VitalsController extends Controller
                     'episode_id' => $episode->id,
                     'name' => 'Height',
                     'value' => $request->height
+                ],
+                [
+                    'episode_id' => $episode->id,
+                    'name' => 'BMI',
+                    'value' => $request->bmi
                 ]
             ];
 
