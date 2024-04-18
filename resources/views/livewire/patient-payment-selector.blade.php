@@ -58,13 +58,13 @@
 
             <div class="col-md-3">
                 <label for="theatre">Item</label>
-                <input type="test" id="itemCode" name='treatmentPlan[{{$index}}][medication]' class="form-control" value="{{$item->medication}}" readonly>
+                <input type="test" id="itemCode" name='treatmentPlan[{{$index}}][medication]' class="form-control" value="{{$item->item->item_description}}" readonly>
 
             </div>
 
             <div class="col-md-3">
                 <label for="date">Price:</label>
-                <input type="number" id="price" name="treatmentPlan[{{$index}}][price]" class="form-control">
+                <input type="number" id="price" name="treatmentPlan[{{$index}}][price]" class="form-control" value="{{$item->item->base_price}}">
             </div>
             <div class="col-md-3">
                 <label for="time">Quantity:</label>

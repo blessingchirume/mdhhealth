@@ -6,6 +6,7 @@ use App\Models\Currency;
 use App\Models\Doctor;
 use App\Models\Episode;
 use App\Models\patient;
+use App\Models\Prescription;
 use App\Models\TheatreRooms;
 use App\Models\TreatmentPlan;
 use Livewire\Component;
@@ -43,7 +44,7 @@ class PatientPaymentSelector extends Component
     {
         // dd($this->selectedEpisode);
         if ($value) {
-            $this->treatmentPlan = TreatmentPlan::where('episode_id', $value)->get(); // Query episodes matching the selected patient's ID
+            $this->treatmentPlan = Prescription::where('episode_id', $value)->first()->prescription_items; // Query episodes matching the selected patient's ID
             $episode = Episode::find($this->selectedEpisode);
             $this->date = $episode->date;
             $this->designation = $episode->designation;

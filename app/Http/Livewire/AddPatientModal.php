@@ -172,7 +172,7 @@ class AddPatientModal extends Component
                 $this->validate([
                     'name' => 'required',
                     'surname' => 'required',
-                    'dob' => 'required',
+                    'dob' => 'required|date',
                     'gender' => 'required',
                     'email' => 'required',
                     'phone' => 'required',
@@ -330,7 +330,7 @@ class AddPatientModal extends Component
             ->orWhere('item_description', 'LIKE', 'Provider Fee')->first();
             ChargesheetItem::create([
                 "charge_sheet_id" => $episode->chargesheet->id,
-                "item_id" => $item->id??0,
+                "item_id" => $item->id?? null,
                 "quantity" => 1,
                 "is_consultation_fee" => 1,
                 "status" => "Paid"
