@@ -263,6 +263,12 @@ Route::prefix('/prescription')->group(function () {
     Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
     Route::get('/pdf/{episode}', [App\Http\Controllers\PrescriptionController::class, 'generatePDF'])->name('prescription.pdf');
     Route::post('store/{episode}', [App\Http\Controllers\PrescriptionController::class, 'store'])->name('prescription.store');
+    Route::post('/update-start-dose', function ($id) {
+        $prescription = App\Models\Prescription::find($id);
+        $prescription->start_dose = $prescription->start_dose + 1;
+        $prescription->save();
+        return redirect()->back();
+    })->name('update-start-dose');
 });
 
 Route::prefix('/transfers')->group(function () {
