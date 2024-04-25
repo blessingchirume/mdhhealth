@@ -9,6 +9,7 @@
                 <tr>
                     <th width="33%">Medication</th>
                     <th>Dosage</th>
+                    <th>Start Dose</th>
                     <th>Frequency</th>
                     <th>Duration</th>
                     <th width="7%"></th>
@@ -21,23 +22,12 @@
                 <tr>
                     <td>{{ $medication['medication'] }}</td>
                     <td>{{ $medication['dosage'] }}</td>
+                    <td>{{ $medication['start_dose'] }}</td>
                     <td>{{ $medication['frequency'] }}</td>
                     <td>{{ $medication['duration'] }}</td>
                     <!-- Add button to remove row if needed -->
                     <td>
-                        <a href="#" class=""><i class="fa fa-trash text-danger"></i></a>&nbsp;
-                        <!-- Button to indicate dosage plan -->
-                        @if (!$medication['has_start_dose'])
-
-                        <!-- Button to open the modal -->
-                        <a href="#" class="" data-toggle="modal" data-target="#startDoseModal" wire:click="$emit('openModal', {{ $medication['id'] }})"><i class="fas fa-prescription-bottle text-indigo"></i>
-                        </a>
-                        <div>
-                            <!-- Livewire Start Dose Modal Component with medicationId parameter -->
-                            <livewire:start-dose-modal :medicationId="$medication['id']" />
-                        </div>
-                        @endif
-
+                        <a href="#" class=""><i class="fa fa-trash text-danger"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -66,6 +56,11 @@
                                 <option value="{{ $dosage }}">{{ $dosage }}</option>
                                 @endforeach
                             </select>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input wire:model.lazy="start_dose" class="form-control" id="start_dose" type="text">
                         </div>
                     </td>
                     <!-- Frequency select -->
