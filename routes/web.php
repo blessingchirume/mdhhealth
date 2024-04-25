@@ -280,6 +280,7 @@ Route::prefix('/opd')->group(function () {
     Route::get('/treatment/{episode}', [App\Http\Controllers\OpdController::class, 'treatment'])->name('opd.treatment');
     Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
     Route::get('/print/{episode}', [App\Http\Controllers\OpdController::class, 'print'])->name('opd.print');
+    Route::post('/add-sundries/{episode}', [TreatmentController::class, 'addSundries'])->name('treatment-sundries');
 });
 
 Route::prefix('/drugs-and-sundries')->group(function () {

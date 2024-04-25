@@ -8,6 +8,7 @@ use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 use App\Models\Item;
 use App\Models\Icd10Code;
+use App\Models\ItemGroup;
 use App\Models\Observation;
 use App\Models\Prescription;
 use App\Models\PrescriptionItem;
@@ -50,8 +51,9 @@ public function treatment(Episode $episode)
     $icd10 = new Icd10Code;
     $icd10codes = $icd10->all();
     $items = Item::with('group')->get();
+    $sundries = ItemGroup::with('items')->where('name','=','Sundries')->get();//dd($sundries);
     $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id','=',$episode->chargesheet->id)->where('is_consultation_fee','=',0)->get();//dd($chargesheetItems);
-    return view('layouts.patients.visits.opd-treatment', compact('chargesheetItems', 'items', 'prescriptions','patient', 'episode', 'icd10codes'));
+    return view('layouts.patients.visits.opd-treatment', compact('chargesheetItems', 'items', 'sundries', 'prescriptions','patient', 'episode', 'icd10codes'));
 }
 
 public function print(Episode $episode)

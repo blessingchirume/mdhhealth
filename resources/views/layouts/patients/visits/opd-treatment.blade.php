@@ -69,6 +69,11 @@
                             data-target="#administerTreatmentModal">
                             Administer Treatment
                         </button>
+
+                        <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                            data-target="#sundriesModal">
+                            Record Sundries
+                        </button>
                         <table class="table table-bordered" id="administered">
                             <thead>
                                 <tr>
@@ -147,6 +152,51 @@
                                                             </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-12 col-md-3">
+                                                    <div class="form-group">
+                                                        <label for="dosage">Quantity</label>
+                                                        <input type='text' class="form-control" id="quantity"
+                                                            name="quantity" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Upload</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="sundriesModal" tabindex="-1" role="dialog"
+                            aria-labelledby="sundriesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="sundriesModalLabel">Record Sundries For This Episode
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" id="sundriesForm"
+                                            action="{{ route('treatment-sundries', $episode->id) }}">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="col-sm-12 col-md-8">
+                                                    <div class="form-group">
+                                                        <label for="treatment">Sundries</label>
+                                                        <select type="text" class="form-control" id="item"
+                                                            name="item" required>
+                                                            @foreach ($sundries as $sundry)
+                                                            @foreach ($sundry->items as $item)
+                                                               <option value="{{$item->id}}">{{$item->item_description}}</option>
+                                                            @endforeach
+                                                             @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                
                                                 <div class="col-sm-12 col-md-3">
                                                     <div class="form-group">
                                                         <label for="dosage">Quantity</label>
