@@ -8,6 +8,7 @@ use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 use App\Models\Item;
 use App\Models\Icd10Code;
+use App\Models\Observation;
 use App\Models\Prescription;
 use App\Models\PrescriptionItem;
 
@@ -57,9 +58,10 @@ public function print(Episode $episode)
 {
     $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
     $chargeSheetItems = ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get();
-
+    $observations = Observation::where('episode_id',$episode->id)->first();
+    //dd($observations);
     // Render the print view and pass the data
-    return view('layouts.patients.episodes.print-episode', compact('episode', 'chargeSheetItems'));
+    return view('layouts.patients.episodes.print-episode', compact('episode', 'chargeSheetItems','observations'));
 
 }
 }

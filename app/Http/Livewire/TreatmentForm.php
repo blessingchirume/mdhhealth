@@ -75,6 +75,8 @@ class TreatmentForm extends Component
         $item = Item::find($this->medication);
         $this->medications[] = [
             'medication' => $item->item_description,
+            'id'=>$this->medication,
+            'has_start_dose' => $item->has_start_dose,
             'dosage' => $this->dosage,
             'frequency' => $this->frequency,
             'duration' => $this->duration,

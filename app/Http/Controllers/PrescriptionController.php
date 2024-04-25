@@ -20,7 +20,7 @@ class PrescriptionController extends Controller
     {
         $prescriptions = Prescription::all();
 
-        
+
 
     }
 
@@ -84,6 +84,27 @@ class PrescriptionController extends Controller
     public function destroy(Prescription $prescription)
     {
         //
+    }
+
+    public function updateStartDose(Request $request)
+    {
+        $medicationId = $request->input('medication_id');
+        $startDose = $request->input('start_dose');
+
+        // Retrieve the medication from the database
+        $medication = Item::find($medicationId);
+
+        if ($medication) {
+            // Update the start dose for the medication
+            $medication->start_dose = $startDose;
+            $medication->save();
+
+            // Return a response indicating success
+            return response()->json(['success' => true]);
+        }
+
+        // Return a response indicating failure
+        return response()->json(['success' => false, 'message' => 'Medication not found'], 404);
     }
 
     public function generatePDF(Episode $episode)

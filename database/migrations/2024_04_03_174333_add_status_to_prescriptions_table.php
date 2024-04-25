@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('prescriptions', function (Blueprint $table) {
-            $table->string('start_dose')->default('0');
+        Schema::table('prescription_items', function (Blueprint $table) {
+            $table->string('start_dose')->nullable();
+            $table->integer('has_start_dose')->default(0);
             $table->integer('is_paid')->default(0);
         });
     }
@@ -26,7 +27,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('prescriptions', function (Blueprint $table) {
+        Schema::table('prescription_items', function (Blueprint $table) {
             //
         });
     }

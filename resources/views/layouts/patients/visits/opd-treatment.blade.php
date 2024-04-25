@@ -50,12 +50,7 @@
                                             <td>{{ $item->dosage }}</td>
                                             <td>{{ $item->frequency }}</td>
                                             <td>{{ $item->duration }}</td>
-                                            <td>
-                                                <!-- Button to indicate dosage plan -->
-                                                <button type="button" class="btn btn-primary start-dose-btn" data-toggle="modal" data-target="#startDoseModal" data-medication-id="{{ $item->id }}" data-medication-name="{{ $item->item->item_description }}">
-                                                    Start Dose
-                                                </button>
-                                            </td>
+                                            
                                         </tr>
                                     @endforeach
                                 @endforeach
@@ -78,15 +73,15 @@
                             </thead>
                             <tbody>
 
-                                    @foreach ($chargesheetItems as $administered)
+                                @foreach ($chargesheetItems as $administered)
                                     @if (isset($administered->item))
                                         <tr>
                                             <td>{{ $administered->item->item_description }}</td>
                                             <!--td>{{ $administered->dosage }}</td-->
                                             <td>{{ $administered->created_at }}</td>
                                         </tr>
-                                        @endif
-                                    @endforeach
+                                    @endif
+                                @endforeach
 
                             </tbody>
                         </table>
@@ -149,63 +144,6 @@
             </div>
         </div>
     </div>
-    <!-- Start Dose Modal -->
-    <div class="modal fade" id="startDoseModal" tabindex="-1" role="dialog" aria-labelledby="startDoseModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="startDoseModalLabel">Start Dose for Medication</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <!-- Form to input start dose -->
-                    <form id="startDoseForm">
-                        <p><span id="medicationName"></span></p>
-                        <div class="form-group">
-                            <label for="startDose">Dose:</label>
-                            <input type="text" class="form-control" id="startDose" name="startDose">
-                        </div>
-                        <input type="hidden" id="medicationId" name="medicationId">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @stop
 
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $('.start-dose-btn').click(function() {
-                var medicationId = $(this).data('medication-id');
-                $('#medicationId').val(medicationId);
-                $('#medicationName').text($(this).data('medication-name'));
-            });
-
-            $('#startDoseForm').submit(function(e) {
-                e.preventDefault();
-                var medicationId = $('#medicationId').val();
-                var startDose = $('#startDose').val();
-
-                // Perform AJAX request to update start dose for medicationId
-                $.ajax({
-                    url: "{{ route('update-start-dose') }}",
-                    method: "POST",
-                    data: {
-                        medication_id: medicationId,
-                        start_dose: startDose
-                    },
-                    success: function(response) {
-                        // Handle success response
-                        alert('Start dose updated successfully!');
-                    }
-                })
-                // Close modal
-                $('#startDoseModal').modal('hide');
-            });
-        });
-    </script>
-@stop
