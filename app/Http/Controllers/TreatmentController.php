@@ -41,6 +41,7 @@ class TreatmentController extends Controller
         $treatment->charge_sheet_id = $chargeSheet->id;
         $treatment->item_id = $request->input('treatment');
         $treatment->quantity = $request->input('quantity');
+        $treatment->administration_mode = $request->input('administration');
         $treatment->save();
 
         if ($request->has('note')) {
