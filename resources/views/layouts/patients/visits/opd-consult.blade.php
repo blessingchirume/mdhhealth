@@ -56,7 +56,7 @@
                                         <button type="submit" class="btn btn-primary">Save Observation</button>
                                     </form>
                                     <br/><br/>
-                                    <form action="{{ route('upload.store') }}" method="post" enctype="multipart/form-data">
+                                    <form action="{{ route('upload.store', $episode) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         <input type="file" name="file">
                                         <button type="submit" class="btn btn-primary">Upload Images</button>

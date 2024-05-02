@@ -352,5 +352,5 @@ Route::prefix('/icu')->group(function () {
 });
 
 Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
-Route::post('/upload', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
+Route::post('/upload/{episode}', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
 
