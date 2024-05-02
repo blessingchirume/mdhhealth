@@ -272,6 +272,8 @@ Route::prefix('/transfers')->group(function () {
     Route::post('/store', [App\Http\Controllers\TransferController::class, 'store'])->name('patient.transfer');
 });
 
+Route::get('/claim/{episode}', [App\Http\Controllers\OPDController::class, 'generateClaimForm'])->name('claim-form');
+
 Route::prefix('/opd')->group(function () {
     Route::get('/', [App\Http\Controllers\OpdController::class, 'index'])->name('opd.index');
     Route::get('/{patient}', [App\Http\Controllers\OpdController::class, 'show'])->name('opd.show');
@@ -348,3 +350,7 @@ Route::prefix('/icu')->group(function () {
     Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
     Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
 });
+
+Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
+Route::post('/upload', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
+

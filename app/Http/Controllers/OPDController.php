@@ -12,6 +12,8 @@ use App\Models\ItemGroup;
 use App\Models\Observation;
 use App\Models\Prescription;
 use App\Models\PrescriptionItem;
+use App\Models\User;
+use PDF;
 
 class OPDController extends Controller
 {
@@ -66,4 +68,59 @@ public function print(Episode $episode)
     return view('layouts.patients.episodes.print-episode', compact('episode', 'chargeSheetItems','observations'));
 
 }
+
+public function generateClaimForm(Episode $episode)
+{
+    // Retrieve all prescriptions for the episode
+    $prescriptions = Prescription::with('prescription_items')->where('episode_id', $episode->id)->get();
+
+    // Check if any prescriptions exist for the episode
+    if ($prescriptions->isNotEmpty()) {
+        $patient = $episode->patient;
+
+        // Initialize an empty array to hold prescription data
+        $prescriptionData = [];
+
+        // Iterate over each prescription to format the data
+        foreach ($prescriptions as $prescription) {
+            foreach ($prescription->prescription_items as $prescribed) {
+                $item = Item::find($prescribed->item_id);
+                $prescriptionData[] = [
+                    'medication' => $item->item_description,
+                    'dosage' => $prescribed->dosage,
+                    'frequency' => $prescribed->frequency,
+                    'duration' => $prescribed->duration
+                ];
+            }
+        }
+
+        // Pass the episode's patient name and prescription data to the view
+        $data = [
+            'patient_detail' => $patient,
+            'prescription_number' => str_pad($prescription->id,7,0,STR_PAD_LEFT),
+            'prescribed_by' => User::find($prescription->prescribed_by),
+            'prescriptions' => $prescriptionData,
+            'prescription_date' => $prescription->created_at->toDateString(),
+        ];
+
+        // Debugging: Dump the $data array to ensure it's populated correctly
+        // dd($data);
+
+        // Load the view and generate the PDF
+        $pdf = PDF::loadView('layouts.patients.episodes.claim-form-pdf', $data);
+
+        // Debugging: Dump the generated PDF content to check if it's empty
+        // dd($pdf->output());
+
+        // Render the PDF
+        $pdf->render();
+
+        // Output the PDF to the browser
+        return $pdf->stream($episode->episode_code . '-claim-form.pdf', array('Attachment' => false));
+    } else {
+        // Handle the case where no prescriptions exist for the episode
+        return response()->json(['error' => 'No prescriptions found for the episode'], 404);
+    }
+}
+
 }
