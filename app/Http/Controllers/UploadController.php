@@ -17,4 +17,9 @@ class UploadController extends Controller
 
         return redirect()->back()->with('success', 'File uploaded successfully.');
     }
+
+    public function show(Episode $episode)
+    {
+        
+    }
 }

@@ -27,6 +27,7 @@ class OPDController extends Controller
 
     public function bill(Episode $episode)
     {
+        $totalAmount = $episode->episode_total();
         $chargesheet = ChargeSheet::where('episode_id', '=', $episode->id)->first();
         $chargesheetItems = ChargesheetItem::where('charge_sheet_id', '=', $chargesheet->id)->get();
         return view('layouts.patients.visits.opd-bill', compact('episode', 'chargesheet', 'chargesheetItems'));
@@ -34,6 +35,7 @@ class OPDController extends Controller
 
  public function consult(Episode $episode)
  {
+    $totalAmount = $episode->episode_total();
     $patient = $episode->patient;
         $notes = $episode->notes;
 
@@ -47,6 +49,8 @@ class OPDController extends Controller
 
 public function treatment(Episode $episode)
 {
+    $totalAmount = $episode->episode_total();//dd($totalAmount);
+
     $prescriptions = Prescription::with(['prescription_items', 'prescription_items.item'])->where('episode_id', '=', $episode->id)->get();
     //dd($prescriptions);
     $patient = $episode->patient;
@@ -60,6 +64,7 @@ public function treatment(Episode $episode)
 
 public function print(Episode $episode)
 {
+    $totalAmount = $episode->episode_total();
     $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
     $chargeSheetItems = ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get();
     $observations = Observation::where('episode_id',$episode->id)->first();
@@ -71,6 +76,7 @@ public function print(Episode $episode)
 
 public function generateClaimForm(Episode $episode)
 {
+    $totalAmount = $episode->episode_total();
     // Retrieve all prescriptions for the episode
     $prescriptions = Prescription::with('prescription_items')->where('episode_id', $episode->id)->get();
 
