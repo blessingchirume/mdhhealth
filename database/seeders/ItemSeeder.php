@@ -23,7 +23,8 @@ class ItemSeeder extends Seeder
                 "price_unit"=> 2.5,
                 "si_unit"=> "Min",//Minutes
                 'item_group_id'=>2,
-                'base_price'=>0.0
+                'base_price'=>0.0,
+                'tariff_code'=>11101
             ]);
     }
 }

@@ -25,7 +25,7 @@ class PartnerController extends Controller
     public function store(StorePartnerRequest $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate(['code' => 'required', 'name' => 'required']);
-        $data = ['code' => $request->code, 'name' => $request->name ];
+        $data = ['code' => $request->code, 'name' => $request->name, 'acronym'=>$request->acronym ];
         try {
             Partner::create($data)->save();
             return redirect()->route('medicalaid.index')->with('success', 'Provider added successfully!');

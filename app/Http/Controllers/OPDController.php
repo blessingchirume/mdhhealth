@@ -29,7 +29,7 @@ class OPDController extends Controller
     {
         $totalAmount = $episode->episode_total();
         $chargesheet = ChargeSheet::where('episode_id', '=', $episode->id)->first();
-        $chargesheetItems = ChargesheetItem::where('charge_sheet_id', '=', $chargesheet->id)->get();
+        $chargesheetItems = ChargesheetItem::with('item')->where('charge_sheet_id', '=', $chargesheet->id)->get();dd($chargesheetItems);
         return view('layouts.patients.visits.opd-bill', compact('episode', 'chargesheet', 'chargesheetItems'));
     }
 
@@ -77,40 +77,20 @@ public function print(Episode $episode)
 public function generateClaimForm(Episode $episode)
 {
     $totalAmount = $episode->episode_total();
-    // Retrieve all prescriptions for the episode
-    $prescriptions = Prescription::with('prescription_items')->where('episode_id', $episode->id)->get();
-
-    // Check if any prescriptions exist for the episode
-    if ($prescriptions->isNotEmpty()) {
-        $patient = $episode->patient;
-
-        // Initialize an empty array to hold prescription data
-        $prescriptionData = [];
-
-        // Iterate over each prescription to format the data
-        foreach ($prescriptions as $prescription) {
-            foreach ($prescription->prescription_items as $prescribed) {
-                $item = Item::find($prescribed->item_id);
-                $prescriptionData[] = [
-                    'medication' => $item->item_description,
-                    'dosage' => $prescribed->dosage,
-                    'frequency' => $prescribed->frequency,
-                    'duration' => $prescribed->duration
-                ];
-            }
-        }
-
+    $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
+    $chargeSheetItems = ChargesheetItem::with('item')->where('charge_sheet_id', $chargeSheet->id)->get();
+    $partner = $episode->patient->medicalaid->package->partner??null;
+  $member = $episode->patient->medicalaid;
         // Pass the episode's patient name and prescription data to the view
         $data = [
-            'patient_detail' => $patient,
-            'prescription_number' => str_pad($prescription->id,7,0,STR_PAD_LEFT),
-            'prescribed_by' => User::find($prescription->prescribed_by),
-            'prescriptions' => $prescriptionData,
-            'prescription_date' => $prescription->created_at->toDateString(),
+            'chargesheet' => $chargeSheet,
+            'patient'=>$episode->patient,
+            'partner'=>$partner,
+            'member'=>$member,
+            'episode'=>$episode,
+            'items' => $chargeSheetItems,
+            'total_amount' => $totalAmount
         ];
-
-        // Debugging: Dump the $data array to ensure it's populated correctly
-        // dd($data);
 
         // Load the view and generate the PDF
         $pdf = PDF::loadView('layouts.patients.episodes.claim-form-pdf', $data);
@@ -123,10 +103,7 @@ public function generateClaimForm(Episode $episode)
 
         // Output the PDF to the browser
         return $pdf->stream($episode->episode_code . '-claim-form.pdf', array('Attachment' => false));
-    } else {
-        // Handle the case where no prescriptions exist for the episode
-        return response()->json(['error' => 'No prescriptions found for the episode'], 404);
-    }
+   
 }
 
 }
