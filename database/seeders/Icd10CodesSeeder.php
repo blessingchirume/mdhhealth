@@ -17,7 +17,7 @@ class Icd10CodesSeeder extends Seeder
     {
         Icd10Code::truncate();
 
-        $csvFile = fopen(base_path("database/data/icd10codes.csv"), "r");
+        $csvFile = fopen(base_path("database/data/icd10codescopy.csv"), "r");
 
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {

@@ -18,6 +18,7 @@ class PatientPaymentSelector extends Component
     public $selectedEpisode;
     public $selectedTheatre;
     public $treatmentPlan;
+    public $administeredMedication;
     public $currencies;
     public $selectedDoctor;
     public $date;
@@ -46,6 +47,9 @@ class PatientPaymentSelector extends Component
         if ($value) {
             $this->treatmentPlan = Prescription::where('episode_id', $value)->first()->prescription_items; // Query episodes matching the selected patient's ID
             $episode = Episode::find($this->selectedEpisode);
+
+            // $this->administeredMedication = $episode->chargesheetItems(); // Query episodes matching the selected patient's ID
+
             $this->date = $episode->date;
             $this->designation = $episode->designation;
         } else {
