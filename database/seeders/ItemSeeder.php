@@ -47,13 +47,13 @@ class ItemSeeder extends Seeder
         );
         Item::create(
             [
-                "item_code" => "OPR",
-                "item_description" => "Operating Room Fees",
-                "price_unit" => 2.5,
-                "si_unit" => "Min", //Minutes
-                'item_group_id' => 2,
-                'base_price' => 0.0
-            ]
-        );
+                "item_code"=> "OPR",
+                "item_description"=> "Operating Room Fees",
+                "price_unit"=> 2.5,
+                "si_unit"=> "Min",//Minutes
+                'item_group_id'=>2,
+                'base_price'=>0.0,
+                'tariff_code'=>11101
+            ]);
     }
 }

@@ -35,7 +35,8 @@ class ItemController extends Controller
                 'item_group_id'=>$request->item_group_id,
                 'si_unit'=>$request->si_unit,
                 'price_unit'=>$request->price_unit,
-                'base_price'=>$request->base_price
+                'base_price'=>$request->base_price,
+                'tariff_code'=>$request->tariff_code
             ]);
             $this->generatePriceList();
             return redirect()->back()->with('success', 'Item Creation successful');
@@ -56,7 +57,22 @@ class ItemController extends Controller
 
     public function update(UpdateItemRequest $request, Item $item)
     {
-        //
+        
+        try{
+            $item->update([
+                'item_code'=>$request->item_code,
+                'item_description'=>$request->item_description,
+                'item_group_id'=>$request->item_group_id,
+                'si_unit'=>$request->si_unit,
+                'price_unit'=>$request->price_unit,
+                'base_price'=>$request->base_price,
+                'tariff_code'=>$request->tariff_code
+            ]);
+            $this->generatePriceList();
+            return redirect()->back()->with('success', 'Item Update successful');
+        }catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     public function destroy(Item $item)
