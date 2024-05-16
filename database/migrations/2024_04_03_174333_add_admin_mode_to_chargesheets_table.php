@@ -14,8 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('chargesheet_items', function (Blueprint $table) {
-            $table->enum('status',['Pending','Paid'])->default('Pending');
-            $table->integer('is_consultation_fee')->default(0);
+            $table->string('administration_mode')->nullable();
         });
     }
 

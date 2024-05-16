@@ -41,6 +41,7 @@ class TreatmentController extends Controller
         $treatment->charge_sheet_id = $chargeSheet->id;
         $treatment->item_id = $request->input('treatment');
         $treatment->quantity = $request->input('quantity');
+        $treatment->administration_mode = $request->input('administration');
         $treatment->save();
 
         if ($request->has('note')) {
@@ -53,6 +54,33 @@ class TreatmentController extends Controller
         return back()->with('success','Drug Administration Recorded Successfully');
        // return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
     }
+
+    public function addSundries(Request $request, Episode $episode)
+    {
+
+        $patientId = $request->input('patient_id');
+        $treatmentDetails = $request->input('treatment_details');
+
+        $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
+        // Create a new treatment record
+        $treatment = new ChargesheetItem();
+        $treatment->charge_sheet_id = $chargeSheet->id;
+        $treatment->item_id = $request->input('item');
+        $treatment->quantity = $request->input('quantity');
+       // $treatment->administration_mode = $request->input('administration');
+        $treatment->save();
+
+        if ($request->has('note')) {
+            $note = new Note();
+            $note->content = $request->input('note');
+            // ...set other note attributes
+            $treatment->notes()->save($note);  // Assuming belongsTo relationship
+        }
+
+        return back()->with('success','Sundries Recorded Successfully');
+       // return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
+    }
+
 
     public function show(Episode $episode)
     {

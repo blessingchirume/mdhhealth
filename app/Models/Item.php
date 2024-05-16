@@ -14,7 +14,8 @@ class Item extends Model
         'item_group_id',
         'si_unit',
         'price_unit',
-        'base_price'
+        'base_price',
+        'tariff_code'
     ];
 
     public function chargesheet()

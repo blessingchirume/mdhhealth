@@ -263,6 +263,7 @@ Route::prefix('/prescription')->group(function () {
     Route::get('/create/{episode}', [App\Http\Controllers\PrescriptionController::class, 'create'])->name('create-prescriptiion');
     Route::get('/pdf/{episode}', [App\Http\Controllers\PrescriptionController::class, 'generatePDF'])->name('prescription.pdf');
     Route::post('store/{episode}', [App\Http\Controllers\PrescriptionController::class, 'store'])->name('prescription.store');
+    Route::post('/update-start-dose', [App\Http\Controllers\PrescriptionController::class, 'updateStartDose'])->name('update-start-dose');
 });
 
 Route::prefix('/transfers')->group(function () {
@@ -270,6 +271,8 @@ Route::prefix('/transfers')->group(function () {
     Route::get('/create', [App\Http\Controllers\TransferController::class, 'create'])->name('transfers.create');
     Route::post('/store', [App\Http\Controllers\TransferController::class, 'store'])->name('patient.transfer');
 });
+
+Route::get('/claim/{episode}', [App\Http\Controllers\OPDController::class, 'generateClaimForm'])->name('claim-form');
 
 Route::prefix('/opd')->group(function () {
     Route::get('/', [App\Http\Controllers\OpdController::class, 'index'])->name('opd.index');
@@ -279,6 +282,7 @@ Route::prefix('/opd')->group(function () {
     Route::get('/treatment/{episode}', [App\Http\Controllers\OpdController::class, 'treatment'])->name('opd.treatment');
     Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
     Route::get('/print/{episode}', [App\Http\Controllers\OpdController::class, 'print'])->name('opd.print');
+    Route::post('/add-sundries/{episode}', [TreatmentController::class, 'addSundries'])->name('treatment-sundries');
 });
 
 Route::prefix('/drugs-and-sundries')->group(function () {
@@ -346,3 +350,7 @@ Route::prefix('/icu')->group(function () {
     Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
     Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
 });
+
+Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
+Route::post('/upload/{episode}', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
+

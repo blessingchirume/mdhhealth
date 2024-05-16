@@ -21,13 +21,15 @@ class TreatmentForm extends Component
     public $instructions = '';
     public $drugs;
     public $otherTreatments;
-    public $dosages = ['5mg', '10mg', '15mg','120mg'];
+    public $dosages = ['5mg', '10mg', '15mg', '120mg'];
     public $frequencies = ['Once a day', 'Twice a day', 'Three times a day', 'As needed'];
     public $procedures = [];
     public $procedure = '';
     public $episode;
     public $prescriptions = [];
     public $hasPrescription;
+    public $start_dose;
+    public $has_start_dose;
 
     public function addProcedure()
     {
@@ -61,6 +63,26 @@ class TreatmentForm extends Component
         })->pluck('item_description', 'id')->toArray();
 
         $this->hasPrescription = $this->hasPrescription();
+
+        /* if ($this->hasPrescription()) {
+            $prescription = Prescription::with('prescription_items')->where('episode_id', $this->episode->id)->first();
+
+            foreach ($prescription->prescription_items as $drug) {
+                $item = Item::where('id','=',$drug->item_id)->whereHas('group', function ($query) {
+                    $query->whereIn('name', ['Drugs', 'Medical Supplies', 'Medicine']);
+                })->pluck('item_description', 'id')->toArray();//dd($item);
+                $this->medications[] = [
+                    'medication' => $item[$drug->item_id],
+                    'id' => $drug->item_id,
+                    'has_start_dose' => $drug->has_start_dose,
+                    'dosage' => $drug->dosage,
+                    'frequency' => $drug->frequency,
+                    'duration' => $drug->duration,
+                ];
+            }
+        }else{
+
+        }*/
     }
 
     public function addMedication()
@@ -75,6 +97,9 @@ class TreatmentForm extends Component
         $item = Item::find($this->medication);
         $this->medications[] = [
             'medication' => $item->item_description,
+            'id' => $this->medication,
+            'start_dose' => $this->start_dose,
+            'has_start_dose' => $this->has_start_dose,
             'dosage' => $this->dosage,
             'frequency' => $this->frequency,
             'duration' => $this->duration,
@@ -82,11 +107,12 @@ class TreatmentForm extends Component
         $this->prescriptions[] = [
             'medication' => $this->medication,
             'dosage' => $this->dosage,
+            'start_dose' => $this->start_dose,
             'frequency' => $this->frequency,
             'duration' => $this->duration,
         ];
         // Reset form fields
-        $this->reset(['medication', 'dosage', 'frequency', 'duration']);
+        $this->reset(['medication', 'dosage', 'start_dose', 'frequency', 'duration']);
 
         // Emit custom event to re-render the component
         $this->emit('medicationAdded');
@@ -101,22 +127,31 @@ class TreatmentForm extends Component
     {
 
         // Handle form submission logic here
-        $prescription = Prescription::create([
-            'episode_id' => $this->episode->id,
-            'prescribed_by' => Auth::user()->id,
-            'created_at' => now()->toDateString(),
-        ]);
+        if (!$this->hasPrescription()) {
+            $prescription = Prescription::create([
+                'episode_id' => $this->episode->id,
+                'prescribed_by' => Auth::user()->id,
+                'created_at' => now()->toDateString(),
+            ]);
+        } else {
+            $prescription = Prescription::where('episode_id', $this->episode->id)->first();
+        }
 
         // dd($this->prescriptions);
         try {
 
             foreach ($this->prescriptions as $prescribed) {
+                
+                $has_start_dose = $prescribed['start_dose']!=null? 1:0;
+
                 $mdecation = PrescriptionItem::create([
                     'prescription_id' => $prescription->id,
                     'item_id' => $prescribed['medication'],
-                    'dosage' => $prescribed['dosage']??'N/A',
-                    'frequency' => $prescribed['frequency']??'N/A',
-                    'duration' => $prescribed['duration']??1
+                    'dosage' => $prescribed['dosage'] ?? 'N/A',
+                    'start_dose' => $prescribed['start_dose'],
+                    'has_start_dose'=>$has_start_dose,
+                    'frequency' => $prescribed['frequency'] ?? 'N/A',
+                    'duration' => $prescribed['duration'] ?? 1
                 ]);
             }
             $this->emit('prescriptionAdded');

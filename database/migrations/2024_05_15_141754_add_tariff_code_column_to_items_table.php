@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('chargesheet_items', function (Blueprint $table) {
-            $table->enum('status',['Pending','Paid'])->default('Pending');
-            $table->integer('is_consultation_fee')->default(0);
+        Schema::table('items', function (Blueprint $table) {
+            $table->string('tariff_code')->nullable();
         });
     }
 
@@ -26,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('chargesheet_items', function (Blueprint $table) {
+        Schema::table('items', function (Blueprint $table) {
             //
         });
     }

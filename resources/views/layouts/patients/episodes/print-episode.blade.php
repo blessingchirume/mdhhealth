@@ -1,6 +1,6 @@
 <!Doctype html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="utf-8">
     <style>
         .container {
@@ -22,7 +22,8 @@
             margin-bottom: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             border: 1px solid #ccc;
         }
@@ -32,7 +33,8 @@
             background-color: #f2f2f2;
         }
 
-        .table-bordered th, .table-bordered td {
+        .table-bordered th,
+        .table-bordered td {
             border: 1px solid #ddd;
         }
 
@@ -43,6 +45,7 @@
         .mt-5 {
             margin-top: 50px;
         }
+
     </style>
 </head>
 <body onblur="window.close()">
@@ -65,6 +68,14 @@
                 <th>Purpose of Visit:</th>
                 <td>{{ $episode->visit_purpose }}</td>
             </tr>
+            <tr>
+                <th>Complaints:</th>
+                <td>{{ $observations->complaints }}</td>
+            </tr>
+            <tr>
+                <th>Observations:</th>
+                <td>{{ $observations->observation }}</td>
+            </tr>
         </table>
 
         <table class="table table-striped table-bordered mt-5">
@@ -82,19 +93,20 @@
                     <td>Paid</td>
                 </tr>
 
-                    @foreach ($chargeSheetItems as $item)
-                    @if (isset($item->item))
-                        <tr>
-                            <td>{{ $item->item->item_description }}</td>
-                            <td>{{ $item->quantity }}</td>
-                            <td>{{ number_format($item->item->base_price, 2) }}</td>
-                            <td>{{ $item->status }}</td>
-                        </tr>
-                        @endif
-                    @endforeach
+                @foreach ($chargeSheetItems as $item)
+                @if (isset($item->item))
+                <tr>
+                    <td>{{ $item->item->item_description }}</td>
+                    <td>{{ $item->quantity }}</td>
+                    <td>{{ number_format($item->item->base_price, 2) }}</td>
+                    <td>{{ $item->status }}</td>
+                </tr>
+                @endif
+                @endforeach
 
             </tbody>
         </table>
+
     </div>
 </body>
 <script>
@@ -114,5 +126,6 @@
             window.close();
         }
     }, 5000); // Adjust the duration as needed
+
 </script>
 </html>

@@ -134,6 +134,7 @@
                             <label for="destination_id">Select Destination</label>
                             <select class="form-control" id="destination_id" name="destination_id">
                                 <option value="">-- Select Destination --</option>
+                                <option value="Discharge">Send Patient Home</option>
                                 @foreach ($designations as $destination)
                                     <option value="{{ $destination->name }}">{{ $destination->name }}</option>
                                 @endforeach

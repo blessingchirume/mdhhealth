@@ -86,6 +86,12 @@
                                 <input class="form-control" name="name" type="text" placeholder="name" required>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="acronym">Provider Acrony</label>
+                                <input class="form-control" name="acronym" type="text" placeholder="acronym" required>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="form-group pull-right">

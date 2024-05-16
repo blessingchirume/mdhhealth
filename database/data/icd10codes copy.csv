@@ -1,0 +1,675 @@
+ "A000   ","Cholera due to Vibrio cholerae 01, biovar cholerae"
+"A001   ","Cholera due to Vibrio cholerae 01, biovar eltor"
+"A009   ","Cholera, unspecified"
+"Z510   ",Encounter for antineoplastic radiation therapy
+"Z5111  ",Encounter for antineoplastic chemotherapy
+"Z5112  ",Encounter for antineoplastic immunotherapy
+"Z515   ",Encounter for palliative care
+"Z5181  ",Encounter for therapeutic drug level monitoring
+"Z5189  ",Encounter for other specified aftercare
+"Z52000 ","Unspecified donor, whole blood"
+"Z52001 ","Unspecified donor, stem cells"
+"Z52008 ","Unspecified donor, other blood"
+"Z52010 ","Autologous donor, whole blood"
+"Z52011 ","Autologous donor, stem cells"
+"Z52018 ","Autologous donor, other blood"
+"Z52090 ","Other blood donor, whole blood"
+"Z52091 ","Other blood donor, stem cells"
+"Z52098 ","Other blood donor, other blood"
+"Z5210  ","Skin donor, unspecified"
+"Z5211  ","Skin donor, autologous"
+"Z5219  ","Skin donor, other"
+"Z5220  ","Bone donor, unspecified"
+"Z5221  ","Bone donor, autologous"
+"Z5229  ","Bone donor, other"
+"Z523   ",Bone marrow donor
+"Z524   ",Kidney donor
+"Z525   ",Cornea donor
+"Z526   ",Liver donor
+"Z52810 ","Egg (Oocyte) donor under age 35, anonymous recipient"
+"Z52811 ","Egg (Oocyte) donor under age 35, designated recipient"
+"Z52812 ","Egg (Oocyte) donor age 35 and over, anonymous recipient"
+"Z52813 ","Egg (Oocyte) donor age 35 and over, designated recipient"
+"Z52819 ","Egg (Oocyte) donor, unspecified"
+"Z5289  ",Donor of other specified organs or tissues
+"Z529   ",Donor of unspecified organ or tissue
+"Z5301  ",Procedure and treatment not carried out due to patient smoking
+"Z5309  ",Procedure and treatment not carried out because of other contraindication
+"Z531   ",Procedure and treatment not carried out because of patient's decision for reasons of belief and group pressure
+"Z5320  ",Procedure and treatment not carried out because of patient's decision for unspecified reasons
+"Z5321  ",Procedure and treatment not carried out due to patient leaving prior to being seen by health care provider
+"Z5329  ",Procedure and treatment not carried out because of patient's decision for other reasons
+"Z538   ",Procedure and treatment not carried out for other reasons
+"Z539   ","Procedure and treatment not carried out, unspecified reason"
+"Z550   ",Illiteracy and low-level literacy
+"Z551   ",Schooling unavailable and unattainable
+"Z552   ",Failed school examinations
+"Z553   ",Underachievement in school
+"Z554   ",Educational maladjustment and discord with teachers and classmates
+"Z558   ",Other problems related to education and literacy
+"Z559   ","Problems related to education and literacy, unspecified"
+"Z560   ","Unemployment, unspecified"
+"Z561   ",Change of job
+"Z562   ",Threat of job loss
+"Z563   ",Stressful work schedule
+"Z564   ",Discord with boss and workmates
+"Z565   ",Uncongenial work environment
+"Z566   ",Other physical and mental strain related to work
+"Z5681  ",Sexual harassment on the job
+"Z5682  ",Military deployment status
+"Z5689  ",Other problems related to employment
+"Z569   ",Unspecified problems related to employment
+"Z570   ",Occupational exposure to noise
+"Z571   ",Occupational exposure to radiation
+"Z572   ",Occupational exposure to dust
+"Z5731  ",Occupational exposure to environmental tobacco smoke
+"Z5739  ",Occupational exposure to other air contaminants
+"Z574   ",Occupational exposure to toxic agents in agriculture
+"Z575   ",Occupational exposure to toxic agents in other industries
+"Z576   ",Occupational exposure to extreme temperature
+"Z577   ",Occupational exposure to vibration
+"Z578   ",Occupational exposure to other risk factors
+"Z579   ",Occupational exposure to unspecified risk factor
+"Z590   ",Homelessness
+"Z591   ",Inadequate housing
+"Z592   ","Discord with neighbors, lodgers and landlord"
+"Z593   ",Problems related to living in residential institution
+"Z594   ",Lack of adequate food and safe drinking water
+"Z595   ",Extreme poverty
+"Z596   ",Low income
+"Z597   ",Insufficient social insurance and welfare support
+"Z598   ",Other problems related to housing and economic circumstances
+"Z599   ","Problem related to housing and economic circumstances, unspecified"
+"Z600   ",Problems of adjustment to life-cycle transitions
+"Z602   ",Problems related to living alone
+"Z603   ",Acculturation difficulty
+"Z604   ",Social exclusion and rejection
+"Z605   ",Target of (perceived) adverse discrimination and persecution
+"Z608   ",Other problems related to social environment
+"Z609   ","Problem related to social environment, unspecified"
+"Z620   ",Inadequate parental supervision and control
+"Z621   ",Parental overprotection
+"Z6221  ",Child in welfare custody
+"Z6222  ",Institutional upbringing
+"Z6229  ",Other upbringing away from parents
+"Z623   ",Hostility towards and scapegoating of child
+"Z626   ",Inappropriate (excessive) parental pressure
+"Z62810 ",Personal history of physical and sexual abuse in childhood
+"Z62811 ",Personal history of psychological abuse in childhood
+"Z62812 ",Personal history of neglect in childhood
+"Z62819 ",Personal history of unspecified abuse in childhood
+"Z62820 ",Parent-biological child conflict
+"Z62821 ",Parent-adopted child conflict
+"Z62822 ",Parent-foster child conflict
+"Z62890 ",Parent-child estrangement NEC
+"Z62891 ",Sibling rivalry
+"Z62898 ",Other specified problems related to upbringing
+"Z629   ","Problem related to upbringing, unspecified"
+"Z630   ",Problems in relationship with spouse or partner
+"Z631   ",Problems in relationship with in-laws
+"Z6331  ",Absence of family member due to military deployment
+"Z6332  ",Other absence of family member
+"Z634   ",Disappearance and death of family member
+"Z635   ",Disruption of family by separation and divorce
+"Z636   ",Dependent relative needing care at home
+"Z6371  ",Stress on family due to return of family member from military deployment
+"Z6372  ",Alcoholism and drug addiction in family
+"Z6379  ",Other stressful life events affecting family and household
+"Z638   ",Other specified problems related to primary support group
+"Z639   ","Problem related to primary support group, unspecified"
+"Z640   ",Problems related to unwanted pregnancy
+"Z641   ",Problems related to multiparity
+"Z644   ",Discord with counselors
+"Z650   ",Conviction in civil and criminal proceedings without imprisonment
+"Z651   ",Imprisonment and other incarceration
+"Z652   ",Problems related to release from prison
+"Z653   ",Problems related to other legal circumstances
+"Z654   ",Victim of crime and terrorism
+"Z655   ","Exposure to disaster, war and other hostilities"
+"Z658   ",Other specified problems related to psychosocial circumstances
+"Z659   ",Problem related to unspecified psychosocial circumstances
+"Z66    ",Do not resuscitate
+"Z6710  ","Type A blood, Rh positive"
+"Z6711  ","Type A blood, Rh negative"
+"Z6720  ","Type B blood, Rh positive"
+"Z6721  ","Type B blood, Rh negative"
+"Z6730  ","Type AB blood, Rh positive"
+"Z6731  ","Type AB blood, Rh negative"
+"Z6740  ","Type O blood, Rh positive"
+"Z6741  ","Type O blood, Rh negative"
+"Z6790  ","Unspecified blood type, Rh positive"
+"Z6791  ","Unspecified blood type, Rh negative"
+"Z681   ","Body mass index (BMI) 19 or less, adult"
+"Z6820  ","Body mass index (BMI) 20.0-20.9, adult"
+"Z6821  ","Body mass index (BMI) 21.0-21.9, adult"
+"Z6822  ","Body mass index (BMI) 22.0-22.9, adult"
+"Z6823  ","Body mass index (BMI) 23.0-23.9, adult"
+"Z6824  ","Body mass index (BMI) 24.0-24.9, adult"
+"Z6825  ","Body mass index (BMI) 25.0-25.9, adult"
+"Z6826  ","Body mass index (BMI) 26.0-26.9, adult"
+"Z6827  ","Body mass index (BMI) 27.0-27.9, adult"
+"Z6828  ","Body mass index (BMI) 28.0-28.9, adult"
+"Z6829  ","Body mass index (BMI) 29.0-29.9, adult"
+"Z6830  ","Body mass index (BMI) 30.0-30.9, adult"
+"Z6831  ","Body mass index (BMI) 31.0-31.9, adult"
+"Z6832  ","Body mass index (BMI) 32.0-32.9, adult"
+"Z6833  ","Body mass index (BMI) 33.0-33.9, adult"
+"Z6834  ","Body mass index (BMI) 34.0-34.9, adult"
+"Z6835  ","Body mass index (BMI) 35.0-35.9, adult"
+"Z6836  ","Body mass index (BMI) 36.0-36.9, adult"
+"Z6837  ","Body mass index (BMI) 37.0-37.9, adult"
+"Z6838  ","Body mass index (BMI) 38.0-38.9, adult"
+"Z6839  ","Body mass index (BMI) 39.0-39.9, adult"
+"Z684   ","Body mass index (BMI) 40 or greater, adult"
+"Z6851  ","Body mass index (BMI) pediatric, less than 5th percentile for age"
+"Z6852  ","Body mass index (BMI) pediatric, 5th percentile to less than 85th percentile for age"
+"Z6853  ","Body mass index (BMI) pediatric, 85th percentile to less than 95th percentile for age"
+"Z6854  ","Body mass index (BMI) pediatric, greater than or equal to 95th percentile for age"
+"Z69010 ",Encounter for mental health services for victim of parental child abuse
+"Z69011 ",Encounter for mental health services for perpetrator of parental child abuse
+"Z69020 ",Encounter for mental health services for victim of non-parental child abuse
+"Z69021 ",Encounter for mental health services for perpetrator of non-parental child abuse
+"Z6911  ",Encounter for mental health services for victim of spousal or partner abuse
+"Z6912  ",Encounter for mental health services for perpetrator of spousal or partner abuse
+"Z6981  ",Encounter for mental health services for victim of other abuse
+"Z6982  ",Encounter for mental health services for perpetrator of other abuse
+"Z700   ",Counseling related to sexual attitude
+"Z701   ",Counseling related to patient's sexual behavior and orientation
+"Z702   ",Counseling related to sexual behavior and orientation of third party
+"Z703   ","Counseling related to combined concerns regarding sexual attitude, behavior and orientation"
+"Z708   ",Other sex counseling
+"Z709   ","Sex counseling, unspecified"
+"Z710   ",Person encountering health services to consult on behalf of another person
+"Z711   ",Person with feared health complaint in whom no diagnosis is made
+"Z712   ",Person consulting for explanation of examination or test findings
+"Z713   ",Dietary counseling and surveillance
+"Z7141  ",Alcohol abuse counseling and surveillance of alcoholic
+"Z7142  ",Counseling for family member of alcoholic
+"Z7151  ",Drug abuse counseling and surveillance of drug abuser
+"Z7152  ",Counseling for family member of drug abuser
+"Z716   ",Tobacco abuse counseling
+"Z717   ",Human immunodeficiency virus [HIV] counseling
+"Z7181  ",Spiritual or religious counseling
+"Z7189  ",Other specified counseling
+"Z719   ","Counseling, unspecified"
+"Z720   ",Tobacco use
+"Z723   ",Lack of physical exercise
+"Z724   ",Inappropriate diet and eating habits
+"Z7251  ",High risk heterosexual behavior
+"Z7252  ",High risk homosexual behavior
+"Z7253  ",High risk bisexual behavior
+"Z726   ",Gambling and betting
+"Z72810 ",Child and adolescent antisocial behavior
+"Z72811 ",Adult antisocial behavior
+"Z72820 ",Sleep deprivation
+"Z72821 ",Inadequate sleep hygiene
+"Z7289  ",Other problems related to lifestyle
+"Z729   ","Problem related to lifestyle, unspecified"
+"Z730   ",Burn-out
+"Z731   ",Type A behavior pattern
+"Z732   ",Lack of relaxation and leisure
+"Z733   ","Stress, not elsewhere classified"
+"Z734   ","Inadequate social skills, not elsewhere classified"
+"Z735   ","Social role conflict, not elsewhere classified"
+"Z736   ",Limitation of activities due to disability
+"Z73810 ","Behavioral insomnia of childhood, sleep-onset association type"
+"Z73811 ","Behavioral insomnia of childhood, limit setting type"
+"Z73812 ","Behavioral insomnia of childhood, combined type"
+"Z73819 ","Behavioral insomnia of childhood, unspecified type"
+"Z7382  ",Dual sensory impairment
+"Z7389  ",Other problems related to life management difficulty
+"Z739   ","Problem related to life management difficulty, unspecified"
+"Z7401  ",Bed confinement status
+"Z7409  ",Other reduced mobility
+"Z741   ",Need for assistance with personal care
+"Z742   ",Need for assistance at home and no other household member able to render care
+"Z743   ",Need for continuous supervision
+"Z748   ",Other problems related to care provider dependency
+"Z749   ","Problem related to care provider dependency, unspecified"
+"Z750   ",Medical services not available in home
+"Z751   ",Person awaiting admission to adequate facility elsewhere
+"Z752   ",Other waiting period for investigation and treatment
+"Z753   ",Unavailability and inaccessibility of health-care facilities
+"Z754   ",Unavailability and inaccessibility of other helping agencies
+"Z755   ",Holiday relief care
+"Z758   ",Other problems related to medical facilities and other health care
+"Z759   ",Unspecified problem related to medical facilities and other health care
+"Z760   ",Encounter for issue of repeat prescription
+"Z761   ",Encounter for health supervision and care of foundling
+"Z762   ",Encounter for health supervision and care of other healthy infant and child
+"Z763   ",Healthy person accompanying sick person
+"Z764   ",Other boarder to healthcare facility
+"Z765   ",Malingerer [conscious simulation]
+"Z7681  ",Expectant parent(s) prebirth pediatrician visit
+"Z7682  ",Awaiting organ transplant status
+"Z7689  ",Persons encountering health services in other specified circumstances
+"Z77010 ",Contact with and (suspected) exposure to arsenic
+"Z77011 ",Contact with and (suspected) exposure to lead
+"Z77018 ",Contact with and (suspected) exposure to other hazardous metals
+"Z77020 ",Contact with and (suspected) exposure to aromatic amines
+"Z77021 ",Contact with and (suspected) exposure to benzene
+"Z77028 ",Contact with and (suspected) exposure to other hazardous aromatic compounds
+"Z77090 ",Contact with and (suspected) exposure to asbestos
+"Z77098 ","Contact with and (suspected) exposure to other hazardous, chiefly nonmedicinal, chemicals"
+"Z77110 ",Contact with and (suspected) exposure to air pollution
+"Z77111 ",Contact with and (suspected) exposure to water pollution
+"Z77112 ",Contact with and (suspected) exposure to soil pollution
+"Z77118 ",Contact with and (suspected) exposure to other environmental pollution
+"Z77120 ",Contact with and (suspected) exposure to mold (toxic)
+"Z77121 ",Contact with and (suspected) exposure to harmful algae and algae toxins
+"Z77122 ",Contact with and (suspected) exposure to noise
+"Z77123 ",Contact with and (suspected) exposure to radon and other naturally occuring radiation
+"Z77128 ",Contact with and (suspected) exposure to other hazards in the physical environment
+"Z7721  ",Contact with and (suspected) exposure to potentially hazardous body fluids
+"Z7722  ",Contact with and (suspected) exposure to environmental tobacco smoke (acute) (chronic)
+"Z7729  ",Contact with and (suspected ) exposure to other hazardous substances
+"Z779   ",Other contact with and (suspected) exposures hazardous to health
+"Z780   ",Asymptomatic menopausal state
+"Z789   ",Other specified health status
+"Z7901  ",Long term (current) use of anticoagulants
+"Z7902  ",Long term (current) use of antithrombotics/antiplatelets
+"Z791   ",Long term (current) use of non-steroidal anti-inflammatories (NSAID)
+"Z792   ",Long term (current) use of antibiotics
+"Z793   ",Long term (current) use of hormonal contraceptives
+"Z794   ",Long term (current) use of insulin
+"Z7951  ",Long term (current) use of inhaled steroids
+"Z7952  ",Long term (current) use of systemic steroids
+"Z79810 ",Long term (current) use of selective estrogen receptor modulators (SERMs)
+"Z79811 ",Long term (current) use of aromatase inhibitors
+"Z79818 ",Long term (current) use of other agents affecting estrogen receptors and estrogen levels
+"Z7982  ",Long term (current) use of aspirin
+"Z79890 ",Hormone replacement therapy (postmenopausal)
+"Z79891 ",Long term (current) use of opiate analgesic
+"Z79899 ",Other long term (current) drug therapy
+"Z800   ",Family history of malignant neoplasm of digestive organs
+"Z801   ","Family history of malignant neoplasm of trachea, bronchus and lung"
+"Z802   ",Family history of malignant neoplasm of other respiratory and intrathoracic organs
+"Z803   ",Family history of malignant neoplasm of breast
+"Z8041  ",Family history of malignant neoplasm of ovary
+"Z8042  ",Family history of malignant neoplasm of prostate
+"Z8043  ",Family history of malignant neoplasm of testis
+"Z8049  ",Family history of malignant neoplasm of other genital organs
+"Z8051  ",Family history of malignant neoplasm of kidney
+"Z8052  ",Family history of malignant neoplasm of bladder
+"Z8059  ",Family history of malignant neoplasm of other urinary tract organ
+"Z806   ",Family history of leukemia
+"Z807   ","Family history of other malignant neoplasms of lymphoid, hematopoietic and related tissues"
+"Z808   ",Family history of malignant neoplasm of other organs or systems
+"Z809   ","Family history of malignant neoplasm, unspecified"
+"Z810   ",Family history of mental retardation
+"Z811   ",Family history of alcohol abuse and dependence
+"Z812   ",Family history of tobacco abuse and dependence
+"Z813   ",Family history of other psychoactive substance abuse and dependence
+"Z814   ",Family history of other substance abuse and dependence
+"Z818   ",Family history of other mental and behavioral disorders
+"Z820   ",Family history of epilepsy and other diseases of the nervous system
+"Z821   ",Family history of blindness and visual loss
+"Z822   ",Family history of deafness and hearing loss
+"Z823   ",Family history of stroke
+"Z8241  ",Family history of sudden cardiac death
+"Z8249  ",Family history of ischemic heart disease and other diseases of the circulatory system
+"Z825   ",Family history of asthma and other chronic lower respiratory diseases
+"Z8261  ",Family history of arthritis
+"Z8262  ",Family history of osteoporosis
+"Z8269  ",Family history of other diseases of the musculoskeletal system and connective tissue
+"Z8271  ",Family history of polycystic kidney
+"Z8279  ","Family history of other congenital malformations, deformations and chromosomal abnormalities"
+"Z828   ","Family history of other disabilities and chronic diseases leading to disablement, not elsewhere classified"
+"Z830   ",Family history of human immunodeficiency virus [HIV] disease
+"Z831   ",Family history of other infectious and parasitic diseases
+"Z832   ",Family history of diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+"Z833   ",Family history of diabetes mellitus
+"Z8341  ",Family history of multiple endocrine neoplasia [MEN] syndrome
+"Z8349  ","Family history of other endocrine, nutritional and metabolic diseases"
+"Z835   ",Family history of eye and ear disorders
+"Z836   ",Family history of other diseases of the respiratory system
+"Z8371  ",Family history of colonic polyps
+"Z8379  ",Family history of other diseases of the digestive system
+"Z840   ",Family history of diseases of the skin and subcutaneous tissue
+"Z841   ",Family history of disorders of kidney and ureter
+"Z842   ",Family history of other diseases of the genitourinary system
+"Z843   ",Family history of consanguinity
+"Z8481  ",Family history of carrier of genetic disease
+"Z8489  ",Family history of other specified conditions
+"Z8500  ",Personal history of malignant neoplasm of unspecified digestive organ
+"Z8501  ",Personal history of malignant neoplasm of esophagus
+"Z85020 ",Personal history of malignant carcinoid tumor of stomach
+"Z85028 ",Personal history of other malignant neoplasm of stomach
+"Z85030 ",Personal history of malignant carcinoid tumor of large intestine
+"Z85038 ",Personal history of other malignant neoplasm of large intestine
+"Z85040 ",Personal history of malignant carcinoid tumor of rectum
+"Z85048 ","Personal history of other malignant neoplasm of rectum, rectosigmoid junction, and anus"
+"Z8505  ",Personal history of malignant neoplasm of liver
+"Z85060 ",Personal history of malignant carcinoid tumor of small intestine
+"Z85068 ",Personal history of other malignant neoplasm of small intestine
+"Z8507  ",Personal history of malignant neoplasm of pancreas
+"Z8509  ",Personal history of malignant neoplasm of other digestive organs
+"Z85110 ",Personal history of malignant carcinoid tumor of bronchus and lung
+"Z85118 ",Personal history of other malignant neoplasm of bronchus and lung
+"Z8512  ",Personal history of malignant neoplasm of trachea
+"Z8520  ",Personal history of malignant neoplasm of unspecified respiratory organ
+"Z8521  ",Personal history of malignant neoplasm of larynx
+"Z8522  ","Personal history of malignant neoplasm of nasal cavities, middle ear, and accessory sinuses"
+"Z85230 ",Personal history of malignant carcinoid tumor of thymus
+"Z85238 ",Personal history of malignant neoplasm of thymus
+"Z8529  ",Personal history of malignant neoplasm of other respiratory and intrathoracic organs
+"Z853   ",Personal history of malignant neoplasm of breast
+"Z8540  ",Personal history of malignant neoplasm of unspecified female genital organ
+"Z8541  ",Personal history of malignant neoplasm of cervix uteri
+"Z8542  ",Personal history of malignant neoplasm of other parts of uterus
+"Z8543  ",Personal history of malignant neoplasm of ovary
+"Z8544  ",Personal history of malignant neoplasm of other female genital organs
+"Z8545  ",Personal history of malignant neoplasm of unspecified male genital organ
+"Z8546  ",Personal history of malignant neoplasm of prostate
+"Z8547  ",Personal history of malignant neoplasm of testis
+"Z8548  ",Personal history of malignant neoplasm of epididymis
+"Z8549  ",Personal history of malignant neoplasm of other male genital organs
+"Z8550  ",Personal history of malignant neoplasm of unspecified urinary tract organ
+"Z8551  ",Personal history of malignant neoplasm of bladder
+"Z85520 ",Personal history of malignant carcinoid tumor of kidney
+"Z85528 ",Personal history of other malignant neoplasm of kidney
+"Z8553  ",Personal history of malignant neoplasm of renal pelvis
+"Z8559  ",Personal history of malignant neoplasm of other urinary tract organ
+"Z856   ",Personal history of leukemia
+"Z8571  ",Personal history of Hodgkin lymphoma
+"Z8572  ",Personal history of non-Hodgkin lymphomas
+"Z8579  ","Personal history of other malignant neoplasms of lymphoid, hematopoietic and related tissues"
+"Z85810 ",Personal history of malignant neoplasm of tongue
+"Z85818 ","Personal history of malignant neoplasm of other sites of lip, oral cavity, and pharynx"
+"Z85819 ","Personal history of malignant neoplasm of unspecified site of lip, oral cavity, and pharynx"
+"Z85820 ",Personal history of malignant melanoma of skin
+"Z85821 ",Personal history of Merkel cell carcinoma
+"Z85828 ",Personal history of other malignant neoplasm of skin
+"Z85830 ",Personal history of malignant neoplasm of bone
+"Z85831 ",Personal history of malignant neoplasm of soft tissue
+"Z85840 ",Personal history of malignant neoplasm of eye
+"Z85841 ",Personal history of malignant neoplasm of brain
+"Z85848 ",Personal history of malignant neoplasm of other parts of nervous tissue
+"Z85850 ",Personal history of malignant neoplasm of thyroid
+"Z85858 ",Personal history of malignant neoplasm of other endocrine glands
+"Z8589  ",Personal history of malignant neoplasm of other organs and systems
+"Z859   ","Personal history of malignant neoplasm, unspecified"
+"Z86000 ",Personal history of in-situ neoplasm of breast
+"Z86001 ",Personal history of in-situ neoplasm of cervix uteri
+"Z86008 ",Personal history of in-situ neoplasm of other site
+"Z86010 ",Personal history of colonic polyps
+"Z86011 ",Personal history of benign neoplasm of the brain
+"Z86012 ",Personal history of benign carcinoid tumor
+"Z86018 ",Personal history of other benign neoplasm
+"Z8603  ",Personal history of neoplasm of uncertain behavior
+"Z8611  ",Personal history of tuberculosis
+"Z8612  ",Personal history of poliomyelitis
+"Z8613  ",Personal history of malaria
+"Z8619  ",Personal history of other infectious and parasitic diseases
+"Z862   ",Personal history of diseases of the blood and blood-forming organs and certain disorders involving the immune mechanism
+"Z8631  ",Personal history of diabetic foot ulcer
+"Z8639  ","Personal history of other endocrine, nutritional and metabolic disease"
+"Z8661  ",Personal history of infections of the central nervous system
+"Z8669  ",Personal history of other diseases of the nervous system and sense organs
+"Z8671  ",Personal history of venous thrombosis and embolism
+"Z8672  ",Personal history of thrombophlebitis
+"Z8673  ","Personal history of transient ischemic attack (TIA), and cerebral infarction without residual deficits"
+"Z8674  ",Personal history of sudden cardiac arrest
+"Z8679  ",Personal history of other diseases of the circulatory system
+"Z8701  ",Personal history of pneumonia (recurrent)
+"Z8709  ",Personal history of other diseases of the respiratory system
+"Z8711  ",Personal history of peptic ulcer disease
+"Z8719  ",Personal history of other diseases of the digestive system
+"Z872   ",Personal history of diseases of the skin and subcutaneous tissue
+"Z87310 ",Personal history of (healed) osteoporosis fracture
+"Z87311 ",Personal history of (healed) other pathological fracture
+"Z87312 ",Personal history of (healed) stress fracture
+"Z8739  ",Personal history of other diseases of the musculoskeletal system and connective tissue
+"Z8741  ",Personal history of urinary (tract) infection(s)
+"Z8742  ",Personal history of nephrotic syndrome
+"Z8743  ",Personal history of urinary calculi
+"Z8744  ",Personal history of cervical dysplasia
+"Z8749  ",Personal history of other diseases of the genitourinary system
+"Z8751  ",Personal history of pre-term labor
+"Z8759  ","Personal history of other complications of pregnancy, childbirth and the puerperium"
+"Z8771  ",Personal history of hypospadias
+"Z8779  ",Personal history of other congenital malformations and deformations
+"Z8781  ",Personal history of (healed) traumatic fracture
+"Z87820 ",Personal history of traumatic brain injury
+"Z87828 ",Personal history of other (healed) physical injury and trauma
+"Z87890 ",Personal history of sex reassignment
+"Z87891 ",Personal history of nicotine dependence
+"Z87898 ",Personal history of other specified conditions
+"Z880   ",Allergy status to penicillin
+"Z881   ",Allergy status to other antibiotic agents status
+"Z882   ",Allergy status to sulfonamides status
+"Z883   ",Allergy status to other anti-infective agents status
+"Z884   ",Allergy status to anesthetic agent status
+"Z885   ",Allergy status to narcotic agent status
+"Z886   ",Allergy status to analgesic agent status
+"Z887   ",Allergy status to serum and vaccine status
+"Z888   ","Allergy status to other drugs, medicaments and biological substances status"
+"Z889   ","Allergy status to unspecified drugs, medicaments and biological substances status"
+"Z89011 ",Acquired absence of right thumb
+"Z89012 ",Acquired absence of left thumb
+"Z89019 ",Acquired absence of unspecified thumb
+"Z89021 ",Acquired absence of right finger(s)
+"Z89022 ",Acquired absence of left finger(s)
+"Z89029 ",Acquired absence of unspecified finger(s)
+"Z89111 ",Acquired absence of right hand
+"Z89112 ",Acquired absence of left hand
+"Z89119 ",Acquired absence of unspecified hand
+"Z89121 ",Acquired absence of right wrist
+"Z89122 ",Acquired absence of left wrist
+"Z89129 ",Acquired absence of unspecified wrist
+"Z89201 ","Acquired absence of right upper limb, unspecified level"
+"Z89202 ","Acquired absence of left upper limb, unspecified level"
+"Z89209 ","Acquired absence of unspecified upper limb, unspecified level"
+"Z89211 ",Acquired absence of right upper limb below elbow
+"Z89212 ",Acquired absence of left upper limb below elbow
+"Z89219 ",Acquired absence of unspecified upper limb below elbow
+"Z89221 ",Acquired absence of right upper limb above elbow
+"Z89222 ",Acquired absence of left upper limb above elbow
+"Z89229 ",Acquired absence of unspecified upper limb above elbow
+"Z89231 ",Acquired absence of right shoulder
+"Z89232 ",Acquired absence of left shoulder
+"Z89239 ",Acquired absence of unspecified shoulder
+"Z89411 ",Acquired absence of right great toe
+"Z89412 ",Acquired absence of left great toe
+"Z89419 ",Acquired absence of unspecified great toe
+"Z89421 ",Acquired absence of other right toe(s)
+"Z89422 ",Acquired absence of other left toe(s)
+"Z89429 ","Acquired absence of other toe(s), unspecified side"
+"Z89431 ",Acquired absence of right foot
+"Z89432 ",Acquired absence of left foot
+"Z89439 ",Acquired absence of unspecified foot
+"Z89441 ",Acquired absence of right ankle
+"Z89442 ",Acquired absence of left ankle
+"Z89449 ",Acquired absence of unspecified ankle
+"Z8950  ","Acquired absence of leg knee, unspecified side"
+"Z8951  ",Acquired absence of right leg below knee
+"Z8952  ",Acquired absence of left leg below knee
+"Z89611 ",Acquired absence of right leg above knee
+"Z89612 ",Acquired absence of left leg above knee
+"Z89619 ",Acquired absence of unspecified leg above knee
+"Z89621 ",Acquired absence of right hip
+"Z89622 ",Acquired absence of left hip
+"Z89629 ",Acquired absence of unspecified hip
+"Z899   ","Acquired absence of limb, unspecified"
+"Z9001  ",Acquired absence of eye
+"Z9002  ",Acquired absence of larynx
+"Z9009  ",Acquired absence of other part of head and neck
+"Z9010  ",Acquired absence of unspecified breast and nipple
+"Z9011  ",Acquired absence of right breast and nipple
+"Z9012  ",Acquired absence of left breast and nipple
+"Z9013  ",Acquired absence of bilateral breasts and nipples
+"Z902   ",Acquired absence of lung [part of]
+"Z903   ",Acquired absence of stomach [part of]
+"Z904   ",Acquired absence of other parts of digestive tract
+"Z905   ",Acquired absence of kidney
+"Z906   ",Acquired absence of other parts of urinary tract
+"Z90710 ",Acquired absence of both cervix and uterus
+"Z90711 ",Acquired absence of uterus with remaining cervical stump
+"Z90712 ",Acquired absence of cervix with remaining uterus
+"Z90721 ","Acquired absence of ovaries, unilateral"
+"Z90722 ","Acquired absence of ovaries, bilateral"
+"Z9079  ",Acquired absence of other genital organ(s)
+"Z9081  ",Acquired absence of spleen
+"Z9089  ",Acquired absence of other organs
+"Z91010 ",Allergy to peanuts
+"Z91011 ",Allergy to milk products
+"Z91012 ",Allergy to eggs
+"Z91013 ",Allergy to seafood
+"Z91018 ",Allergy to other foods
+"Z9102  ",Food additives allergy status
+"Z91030 ",Bee allergy status
+"Z91038 ",Other insect allergy status
+"Z91040 ",Latex allergy status
+"Z91041 ",Radiographic dye allergy status
+"Z91048 ",Other nonmedicinal substance allergy status
+"Z9109  ","Other allergy status, other than to drugs and biological substances"
+"Z9111  ",Patient's noncompliance with dietary regimen
+"Z91120 ",Patient's intentional underdosing of medication regimen due to financial hardship
+"Z91128 ",Patient's intentional underdosing of medication regimen for other reason
+"Z91130 ",Patient's unintentional underdosing of medication regimen due to age-related debility
+"Z91138 ",Patient's unintentional underdosing of medication regimen for other reason
+"Z9114  ",Patient's other noncompliance with medication regimen
+"Z9115  ",Patient's noncomplicance with renal dialysis
+"Z9119  ",Patient's noncompliance with other medical treatment and regimen
+"Z91410 ",Personal history of adult physical and sexual abuse
+"Z91411 ",Personal history of adult psychological abuse
+"Z91412 ",Personal history of adult neglect
+"Z91419 ",Personal history of unspecified adult abuse
+"Z9149  ","Other personal history of psychological trauma, not elsewhere classified"
+"Z915   ",Personal history of self-harm
+"Z9181  ",History of falling
+"Z9182  ",Personal history of military deployment
+"Z9189  ","Other specified personal risk factors, not elsewhere classified"
+"Z920   ",Personal history of contraception
+"Z9221  ",Personal history of antineoplastic chemotherapy
+"Z9222  ",Personal history of monoclonal drug therapy
+"Z9223  ",Personal history of estrogen therapy
+"Z92240 ",Personal history of inhaled steroid therapy
+"Z92241 ",Personal history of systemic steroid therapy
+"Z9225  ",Personal history of immunosupression therapy
+"Z9229  ",Personal history of other drug therapy
+"Z923   ",Personal history of irradiation
+"Z9281  ",Personal history of extracorporeal membrane oxygenation (ECMO)
+"Z9282  ",Status post administration of tPA (rtPA) in a different facility within the last 24 hours prior to admission to current facility
+"Z9283  ",Personal history of failed moderate sedation
+"Z9289  ",Personal history of other medical treatment
+"Z930   ",Tracheostomy status
+"Z931   ",Gastrostomy status
+"Z932   ",Ileostomy status
+"Z933   ",Colostomy status
+"Z934   ",Other artificial openings of gastrointestinal tract status
+"Z9350  ",Unspecified cystostomy status
+"Z9351  ",Cutaneous-vesicostomy status
+"Z9352  ",Appendico-vesicostomy status
+"Z9359  ",Other cystostomy status
+"Z936   ",Other artificial openings of urinary tract status
+"Z938   ",Other artificial opening status
+"Z939   ","Artificial opening status, unspecified"
+"Z940   ",Kidney transplant status
+"Z941   ",Heart transplant status
+"Z942   ",Lung transplant status
+"Z943   ",Heart and lungs transplant status
+"Z944   ",Liver transplant status
+"Z945   ",Skin transplant status
+"Z946   ",Bone transplant status
+"Z947   ",Corneal transplant status
+"Z9481  ",Bone marrow transplant status
+"Z9482  ",Intestine transplant status
+"Z9483  ",Pancreas transplant status
+"Z9484  ",Stem cells transplant status
+"Z9489  ",Other transplanted organ and tissue status
+"Z949   ","Transplanted organ and tissue status, unspecified"
+"Z950   ",Presence of cardiac pacemaker
+"Z951   ",Presence of aortocoronary bypass graft
+"Z952   ",Presence of prosthetic heart valve
+"Z953   ",Presence of xenogenic heart valve
+"Z954   ",Presence of other heart-valve replacement
+"Z955   ",Presence of coronary angioplasty implant and graft
+"Z95810 ",Presence of automatic (implantable) cardiac defibrillator
+"Z95811 ",Presence of heart assist device
+"Z95812 ",Presence of fully implantable artificial heart
+"Z95818 ",Presence of other cardiac implants and grafts
+"Z95820 ",Peripheral vascular angioplasty status with implants and grafts
+"Z95828 ",Presence of other vascular implants and grafts
+"Z959   ","Presence of cardiac and vascular implant and graft, unspecified"
+"Z960   ",Presence of urogenital implants
+"Z961   ",Presence of intraocular lens
+"Z9620  ","Presence of otological and audiological implant, unspecified"
+"Z9621  ",Cochlear implant status
+"Z9622  ",Myringotomy tube(s) status
+"Z9629  ",Presence of other otological and audiological implants
+"Z963   ",Presence of artificial larynx
+"Z9641  ",Presence of insulin pump (external) (internal)
+"Z9649  ",Presence of other endocrine implants
+"Z965   ",Presence of tooth-root and mandibular implants
+"Z9660  ",Presence of unspecified orthopedic joint implant
+"Z96611 ",Presence of right artificial shoulder joint
+"Z96612 ",Presence of left artificial shoulder joint
+"Z96619 ",Presence of unspecified artificial shoulder joint
+"Z96621 ",Presence of right artificial elbow joint
+"Z96622 ",Presence of left artificial elbow joint
+"Z96629 ",Presence of unspecified artificial elbow joint
+"Z96631 ",Presence of right artificial wrist joint
+"Z96632 ",Presence of left artificial wrist joint
+"Z96639 ",Presence of unspecified artificial wrist joint
+"Z96641 ",Presence of right artificial hip joint
+"Z96642 ",Presence of left artificial hip joint
+"Z96643 ","Presence of artificial hip joint, bilateral"
+"Z96649 ",Presence of unspecified artificial hip joint
+"Z96651 ",Presence of right artificial knee joint
+"Z96652 ",Presence of left artificial knee joint
+"Z96653 ","Presence of artificial knee joint, bilateral"
+"Z96659 ",Presence of unspecified artificial knee joint
+"Z96661 ",Presence of right artificial ankle joint
+"Z96662 ",Presence of left artificial ankle joint
+"Z96669 ",Presence of unspecified artificial ankle joint
+"Z96691 ",Finger-joint replacement of right hand
+"Z96692 ",Finger-joint replacement of left hand
+"Z96693 ","Finger-joint replacement, bilateral"
+"Z96698 ",Presence of other orthopedic joint implants
+"Z967   ",Presence of other bone and tendon implants
+"Z9681  ",Presence of artificial skin
+"Z9689  ",Presence of other specified functional implants
+"Z969   ","Presence of functional implant, unspecified"
+"Z970   ",Presence of artificial eye
+"Z9710  ","Presence of artificial limb (complete) (partial), unspecified"
+"Z9711  ",Presence of artificial right arm (complete) (partial)
+"Z9712  ",Presence of artificial left arm (complete) (partial)
+"Z9713  ",Presence of artificial right leg (complete) (partial)
+"Z9714  ",Presence of artificial left leg (complete) (partial)
+"Z9715  ","Presence of artificial arms, bilateral (complete) (partial)"
+"Z9716  ","Presence of artificial legs, bilateral (complete) (partial)"
+"Z972   ",Presence of dental prosthetic device (complete) (partial)
+"Z973   ",Presence of spectacles and contact lenses
+"Z974   ",Presence of external hearing-aid
+"Z975   ",Presence of (intrauterine) contraceptive device
+"Z978   ",Presence of other specified devices
+"Z980   ",Intestinal bypass and anastomosis status
+"Z981   ",Arthrodesis status
+"Z982   ",Presence of cerebrospinal fluid drainage device
+"Z983   ",Post therapeutic collapse of lung status
+"Z9841  ","Cataract extraction status, right eye"
+"Z9842  ","Cataract extraction status, left eye"
+"Z9849  ","Cataract extraction status, unspecified eye"
+"Z9851  ",Tubal ligation status
+"Z9852  ",Vasectomy status
+"Z9861  ",Coronary angioplasty status
+"Z9862  ",Peripheral vascular angioplasty status
+"Z98810 ",Dental sealant status
+"Z98811 ",Dental restoration status
+"Z98818 ",Other dental procedure status
+"Z9882  ",Breast implant status
+"Z9883  ",Filtering (vitreous) bleb after glaucoma surgery status
+"Z9884  ",Bariatric surgery status
+"Z9885  ",Transplanted organ removal status
+"Z9886  ",Personal history of breast implant removal
+"Z98870 ",Personal history of in utero procedure during pregnancy
+"Z98871 ",Personal history of in utero procedure while a fetus
+"Z9889  ",Other specified postprocedural states
+"Z990   ",Dependence on aspirator
+"Z9911  ",Dependence on respirator [ventilator] status
+"Z9912  ",Encounter for respirator [ventilator] dependence during power failure
+"Z992   ",Dependence on renal dialysis
+"Z993   ",Dependence on wheelchair
+"Z9981  ",Dependence on supplemental oxygen
+"Z9989  ",Dependence on other enabling machines and devices
