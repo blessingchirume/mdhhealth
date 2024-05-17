@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    .card-img-overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+</style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -18,56 +23,54 @@
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box">
-                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-pump-soap"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Patients</span>
-                        <span class="info-box-number">
-                            {{ $analytics['patients'] }}
-                        </span>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="{{ asset('/images/kef16.jpg') }}" style="height:186px;" alt="Card image">
+                    <div class="card-img-overlay text-center">
+                        <h2 class=" text-center"> {{ $analytics['patients'] }}</h2>
+                        <h5 class=" text-center">Patients</h5>
+                        <a href="#">
+                            <p class="card-text">More Info</p>
+                        </a>
                     </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-gas-pump"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Departments</span>
-                        <span class="info-box-number">{{ $analytics['departments'] }}</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="clearfix hidden-md-up"></div>
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Partners</span>
-                        <span class="info-box-number">{{ $analytics['partners'] }}</span>
-                    </div>
-
                 </div>
             </div>
-
-            <div class="col-12 col-sm-6 col-md-3">
-                <div class="info-box mb-3">
-                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-                    <div class="info-box-content">
-                        <span class="info-box-text">Users</span>
-                        <span class="info-box-number">{{ $analytics['users'] }}</span>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="{{ asset('/images/kef22.jpg') }}" style="height:186px;" alt="Card image">
+                    <div class="card-img-overlay text-center">
+                        <h2 class=" text-center"> {{ $analytics['departments'] }}</h2>
+                        <h5 class=" text-center">Departments</h5>
+                        <a href="#">
+                            <p class="card-text">More Info</p>
+                        </a>
                     </div>
-
                 </div>
-
             </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="{{ asset('/images/2.jpg') }}" style="height:186px;" alt="Card image">
+                    <div class="card-img-overlay text-center">
+                        <h2 class=" text-center"> {{ $analytics['partners'] }}</h2>
+                        <h5 class=" text-center">Partners</h5>
+                        <a href="#">
+                            <p class="card-text">More Info</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-dark text-white">
+                    <img class="card-img" src="{{ asset('/images/kef20.jpg') }}" style="height:186px;" alt="Card image">
+                    <div class="card-img-overlay text-center">
+                        <h2 class=" text-center"> {{ $analytics['users'] }}</h2>
+                        <h5 class=" text-center">System Users</h5>
+                        <a href="/all_users">
+                            <p class="card-text">More Info</p>
+                        </a>
+                    </div>
+                </div>
+            </div>        
 
         </div>
 

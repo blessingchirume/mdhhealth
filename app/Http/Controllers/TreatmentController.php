@@ -11,6 +11,7 @@ use App\Models\Treatment;
 use App\Models\Note;
 use App\Models\Icd10Code;
 use App\Models\Item;
+use App\Models\ItemGroup;
 use App\Models\TreatmentPlan;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
@@ -27,7 +28,6 @@ class TreatmentController extends Controller
      * Record a new treatment for a patient.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function recordTreatment(Request $request, Episode $episode)
     {
@@ -39,7 +39,9 @@ class TreatmentController extends Controller
         // Create a new treatment record
         $treatment = new ChargesheetItem();
         $treatment->charge_sheet_id = $chargeSheet->id;
-        $treatment->item_id = null;
+        $treatment->item_id = $request->input('treatment');
+        $treatment->quantity = $request->input('quantity');
+        $treatment->administration_mode = $request->input('administration');
         $treatment->save();
 
         if ($request->has('note')) {
@@ -49,8 +51,36 @@ class TreatmentController extends Controller
             $treatment->notes()->save($note);  // Assuming belongsTo relationship
         }
 
-        return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
+        return back()->with('success','Drug Administration Recorded Successfully');
+       // return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
     }
+
+    public function addSundries(Request $request, Episode $episode)
+    {
+
+        $patientId = $request->input('patient_id');
+        $treatmentDetails = $request->input('treatment_details');
+
+        $chargeSheet = ChargeSheet::where('episode_id', $episode->id)->first();
+        // Create a new treatment record
+        $treatment = new ChargesheetItem();
+        $treatment->charge_sheet_id = $chargeSheet->id;
+        $treatment->item_id = $request->input('item');
+        $treatment->quantity = $request->input('quantity');
+       // $treatment->administration_mode = $request->input('administration');
+        $treatment->save();
+
+        if ($request->has('note')) {
+            $note = new Note();
+            $note->content = $request->input('note');
+            // ...set other note attributes
+            $treatment->notes()->save($note);  // Assuming belongsTo relationship
+        }
+
+        return back()->with('success','Sundries Recorded Successfully');
+       // return response()->json(ChargesheetItem::where('charge_sheet_id', $chargeSheet->id)->get(), 200);
+    }
+
 
     public function show(Episode $episode)
     {
@@ -73,7 +103,7 @@ class TreatmentController extends Controller
         $icd10 = new Icd10Code;
         $icd10codes = $icd10->all();
 
-        $items = Item::all();
+        $items = Item::with('group')->get();
 
         return view('layouts.patients.visits.consultation', compact('items', 'patient', 'notes', 'episode', 'icd10codes'));
     }
@@ -89,13 +119,12 @@ class TreatmentController extends Controller
                 $dosages = $request->dosage;
                 $frequencies = $request->frequency;
                 $durations = $request->duration;
-// dd($selectedMeds);
                 foreach ($selectedMeds as $i => $medication) {
-                    // $item = Item::where('item_description', $medication)->first();
+                    $item = Item::where('item_description', $medication)->first();
                     $treatmentPlan = new TreatmentPlan();
                     $treatmentPlan->episode_id = $episode->id;
                     $treatmentPlan->medication = $medication;
-                    // $treatmentPlan->item_id = $item->id;
+                    $treatmentPlan->item_id = 3;
                     $treatmentPlan->dosage = $dosages[$i];
                     $treatmentPlan->frequency = $frequencies[$i];
                     $treatmentPlan->duration = $durations[$i];
@@ -103,8 +132,13 @@ class TreatmentController extends Controller
                     $treatmentPlan->save();
                 }
             } else {
+                $item = Item::where('item_description', $request->other_treatment)->first();
                 $treatment->medication = $request->other_treatment;
-                $treatment->instructions = $request->instructions;
+                $treatment->item_id = $item->id;
+                $treatment->dosage = 1;
+                $treatment->frequency = 1;
+                $treatment->duration = 1;
+                $treatment->instructions = $request->instructions[0];
                 $treatment->save();
             }
 

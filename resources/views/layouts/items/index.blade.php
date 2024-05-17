@@ -39,6 +39,7 @@
                                         <th>SI Unit</th>
                                         <th>Price Unit</th>
                                         <th>Base Price</th>
+                                        <th>Tariff Code</th>
                                         <th>
                                             <center>
                                                 Action
@@ -56,6 +57,7 @@
                                             <td>{{ $value->si_unit }}</td>
                                             <td>{{ $value->price_unit }}</td>
                                             <td>{{ $value->base_price }}</td>
+                                            <td>{{ $value->tariff_code }}</td>
                                             <td>
                                                 <center>
                                                     <a href="{{ route('item.show', $value) }}"><i
@@ -116,16 +118,22 @@
                             <input type="text" name="si_unit" class="form-control" />
                         </div>
                         <div class="row">
-                            <divc class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="price-unit">Price/Unit</label>
                                     <input type="text" name="price_unit" class="form-control" />
                                 </div>
-                            </divc>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="base-price">Base Price</label>
                                     <input type="text" name="base_price" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="tariff-code">Tariff Code</label>
+                                    <input type="text" name="tariff_code" class="form-control" />
                                 </div>
                             </div>
                         </div>

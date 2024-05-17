@@ -72,10 +72,16 @@
                                         <form id="update-partner-form" method="post" action="{{ route('medicalaid.update', $partner) }}">
                                             {{ csrf_field() }}
                                             <div class="row">
-                                                <div class="col-sm-6">
+                                                <div class="col-sm-3">
                                                     <div class="form-group">
                                                         <label for="code">Code</label>
                                                         <input class="form-control" name="code" type="text" placeholder="code" value="{{ $partner->code }}" required readonly/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <div class="form-group">
+                                                        <label for="acronym">Provider Acronym</label>
+                                                        <input class="form-control" name="acronym" type="text" placeholder="acronym" value="{{ $partner->acronym }}" required/>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">

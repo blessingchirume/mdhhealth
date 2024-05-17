@@ -51,4 +51,37 @@ class Episode extends Model
     public function theatreAdmissions() {
         return $this->hasMany(TheatreAdmissions::class, 'episode_id', 'id');
     }
+
+    public function prescriptions()
+    {
+        return $this->hasMany(Prescription::class, 'episode_id');
+    }
+
+    public function getTotalChargeSheetItems()
+    {
+        // Get all charge sheets associated with the episode
+        $chargeSheets = $this->chargesheet()->get();
+
+        // Initialize total amount
+        $totalAmount = 0;
+
+        // Loop through each charge sheet
+        foreach ($chargeSheets as $chargeSheet) {
+            // Get all charge sheet items for the current charge sheet
+            $chargeSheetItems = $chargeSheet->items;
+
+            // Loop through each charge sheet item and sum their quantities
+            foreach ($chargeSheetItems as $item) {
+                $totalAmount += $item->base_price;
+            }
+        }
+
+        return $totalAmount;
+    }
+
+    public function episode_total()
+    {
+        return $this->getTotalChargeSheetItems();
+    }
+
 }

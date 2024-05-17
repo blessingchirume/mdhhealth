@@ -13,6 +13,8 @@ class ChargesheetItem extends Model
         'item_id',
         'charge_sheet_id',
         'quantity',
+        'is_consultation_fee',
+        'status',
     ];
 
     public function item()

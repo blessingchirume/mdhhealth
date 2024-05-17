@@ -329,5 +329,36 @@ class MenuSeeder extends Seeder
             'order' => 1,
             'permission' => PermisionConstants::viewPatients
         ]);
+
+        Menu::create([
+            'name' => 'patients',
+            'display_name' => 'Patients',
+            'icon' => 'fa-circle',
+            'url' => 'patient.index',
+            'parent_id' => 3,
+            'order' => 1,
+            'permission' => PermisionConstants::viewPatients
+        ]);
+
+        Menu::create([
+            'name' => 'opd',
+            'display_name' => 'OPD',
+            'icon' => 'fa-circle',
+            'url' => null,
+            'parent_id' => 3,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+        Menu::create([
+            'name' => 'opd',
+            'display_name' => 'OPD Queue',
+            'icon' => 'fa-circle',
+            'url' => 'opd.index',
+            'parent_id' => 34,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
     }
 }
