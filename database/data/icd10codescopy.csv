@@ -1,0 +1,20 @@
+"A000   ","Cholera due to Vibrio cholerae 01, biovar cholerae"
+"A001   ","Cholera due to Vibrio cholerae 01, biovar eltor"
+"A009   ","Cholera, unspecified"
+"Z510   ",Encounter for antineoplastic radiation therapy
+"Z5111  ",Encounter for antineoplastic chemotherapy
+"Z5112  ",Encounter for antineoplastic immunotherapy
+"Z515   ",Encounter for palliative care
+"Z5181  ",Encounter for therapeutic drug level monitoring
+"Z5189  ",Encounter for other specified aftercare
+"Z52000 ","Unspecified donor, whole blood"
+"Z52001 ","Unspecified donor, stem cells"
+"Z52008 ","Unspecified donor, other blood"
+"Z52010 ","Autologous donor, whole blood"
+"Z52011 ","Autologous donor, stem cells"
+"Z52018 ","Autologous donor, other blood"
+"Z52090 ","Other blood donor, whole blood"
+"Z52091 ","Other blood donor, stem cells"
+"Z52098 ","Other blood donor, other blood"
+"Z5210  ","Skin donor, unspecified"
+"Z5211  ","Skin donor, autologous"

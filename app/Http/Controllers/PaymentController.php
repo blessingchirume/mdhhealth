@@ -125,32 +125,38 @@ class PaymentController extends Controller
 
     function makeAccountReceivableInvoice(Request $request)
     {
-        // dd($request->treatmentPlan);
+        // dd($request);
         $documentLines = [];
+        $docTotal = 0.0;
         // if ($request->treatmentPlan) {
         //     # code...
         // }
         foreach ($request->treatmentPlan as $value) {
             $item = Item::find($value["medication"]);
+            // $docTotal += number_format(((double)$value["price"] * (double)$value["quantity"]), 2);
+            $price = (float)$value["price"];
+            $quatinty = (float)$value["quantity"];
+            $docTotal += ($price * $quatinty);
+            // dd($docTotal);
             array_push($documentLines, [
-                "ItemCode" => "RMK001",
-                "ItemDescription" => "Crates White Yoghurt",
-                "Quantity" => 1,
-                // "Quantity" => (float)$value["Quantity"],
-                "Price" => 1,
-                // "Price" => (float)$value["Price"],
+                "ItemCode" => "LPGAS01",
+                "ItemDescription" => $value["medication"],
+                // "Quantity" => $request->quantity,
+                "Quantity" => (float)$value["quantity"],
+                // "Price" => 1,
+                "Price" => (float)$value["price"],
                 // "Currency" => 'USD',
                 "Currency" => $request->currency,
                 "DiscountPercent" => 0.0,
-                // "WarehouseCode" => "CMFS",
+                "WarehouseCode" => "WATERFLS",
                 // "Whse" => "MSASA",
                 "VatGroup" => "O1",
-                "LineTotal" => 1,
-                "AcountCode" => "_SYS00000001326",
+                "LineTotal" => number_format((float)$value["price"] * (float)$value["quantity"], 2),
+                "AcountCode" => "_SYS00000000114",
                 // "LineTotal" => (int)$value["Price"] * (float)$value["Quantity"],
                 // "RowTotalFC" => 0.0,
                 // "RowTotalSC" => 64.0,
-                "UnitPrice" => 1,
+                "UnitPrice" => (float)$value["price"],
                 // "UnitPrice" => (float)$value["Price"],
                 "TaxCode" => "O1"
             ]);
@@ -161,8 +167,8 @@ class PaymentController extends Controller
             "DocDueDate" => date('Y-m-d'),
             // "Whse" => "MSASA",
             // "WarehouseCode" => "MSASA",
-            "CardCode" => "CRA001",
-            "DocTotal" =>1,
+            "CardCode" => "WF000002",
+            "DocTotal" => $docTotal,
             "DocCurrency" => $request->currency,
             "DocRate" => 1.0,
             "JournalMemo" => "A/R Invoices - " . $request->narration,
@@ -170,49 +176,70 @@ class PaymentController extends Controller
             "DocumentLines" => $documentLines
 
         ];
-
+        // dd(json_encode($data));
         $response = $this->sapService->createSapInvoice($data);
+        // dd($response);
         $docEntry = $response['DocEntry'] ?? null;
 
-        return $response;
+        // return $response;
 
         if ($docEntry == null) {
             return response(['error' => 'something went wrong', 'success' => null], 500);
         }
 
-        $payment = $this->makeAccountReceivablePayment($request->cardCode, $request->currency, $request->total, $docEntry);
-        return $payment;
+        $payment = $this->makeAccountReceivablePayment($request->episode_id, "WF000002", $request->currency, $docTotal, $docEntry);
+        // return $payment;
         if ($payment->status() == 201) {
-            return response(['success' => $payment->body(), 'error' => null], 200);
-        }
-        else{
-            return response(['success' => null, 'error' => 'Your request could not be completed'. $payment], 500);
+            return back()->with('success', 'Payment successfully synced with SAP');
+        } else {
+            return back()->with('error', 'Your request could not be completed');
         }
     }
 
-    function makeAccountReceivablePayment($cardCode, $currency, $total, $docEntry)
+    function makeAccountReceivablePayment($episodeId, $cardCode, $currency, $total, $docEntry)
     {
         $data = [
             "DocType" => "rCustomer",
-            "DocDate" => date('Y-m-d'),
+            // "DocDate" => date('Y-m-d'),
             "CardCode" => $cardCode,
             "CashAccount" => "_SYS00000000702",
-            "DocCurrency" => $currency,
+            "DocCurrency" => "USD",
             "CashSum" => $total,
-            "LocalCurrency" => "tYES",
+            // "LocalCurrency" => "tYES",
             "Remarks" => "POS[S=>1][T=>3][TX=>1048][INV=>IN01001002][P=>FOR]",
             "JournalRemarks" => "POS Transaction - Payment [INV=>IN01001002]-FOR",
-            "ApplyVAT" => "tYES",
-            "DueDate" => date('Y-m-d'),
-            "ControlAccount" => "_SYS00000000042",
-            "AuthorizationStatus" => "pasWithout",
+            // "ApplyVAT" => "tYES",
+            // "DueDate" => date('Y-m-d'),
+            // "ControlAccount" => "_SYS00000000042",
+            // "AuthorizationStatus" => "pasWithout",
             "PaymentInvoices" => [
                 [
                     "DocEntry" => $docEntry,
-                    "SumApplied" => $total
+                    "SumApplied" => $total,
+                    "PaidSum" => $total
                 ]
             ]
         ];
+
+        // return $data;
+        $this->savePaymentToLocalDB($episodeId, $data);
         return $this->sapService->createSapIncomingPayment($data);
+    }
+
+    function savePaymentToLocalDB($episodeId, $data)
+    {
+        $payment = new Payment();
+        try {
+            $payment->create([
+                "episode_id" => $episodeId,
+                "narration" => "BILLING[S=>1][T=>3][TX=>1048][INV=>IN01001002][P=>FOR]",
+                'amount' => $data['CashSum'],
+                'balance' => 0,
+                'date' => date('Y-m-d')
+            ]);
+            return redirect()->back()->with('success', 'payment created successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 }
