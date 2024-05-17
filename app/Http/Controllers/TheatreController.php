@@ -104,6 +104,7 @@ class TheatreController extends Controller
 
 */
                 // Validate the incoming request data
+                // dd($request);
                 $validatedData = $request->validate([
                     'item.*' => 'required',
                     'quantity.*' => 'required',

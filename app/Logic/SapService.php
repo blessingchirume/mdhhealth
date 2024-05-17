@@ -7,15 +7,17 @@ use Illuminate\Support\Facades\Http;
 
 class SapService
 {
-    const BASE_url = "https://172.16.16.9:50000/b1s/v1/";
+    // const BASE_url = "https://192.168.1.100:50000/b1s/v1/";
 
-    // const BASE_url = "https://10.0.0.90:50000/b1s/v1/";
+    const BASE_url = "https://10.0.2.21:50000/b1s/v1/";
+
+    // const BASE_url = "https://172.16.16.9:50000/b1s/v1/";
 
     const MAKE_PAYMENT_URL = "/IncomingPayments";
 
     const MAKE_ACCOUNTS_RECEIVABLE_INVOICE_URL = "/Invoices";
 
-    const MAKE_INVENTORY_TRANSFER_URL = "/CreateIncomingPayment";
+    // const MAKE_INVENTORY_TRANSFER_URL = "/CreateIncomingPayment";
 
     // const BASE_url = "https://192.168.1.104:50000/b1s/v1/";
 
@@ -26,9 +28,9 @@ class SapService
     // const MAKE_INVENTORY_TRANSFER_URL = "/StockTransfers";
     private $sessionId;
 
-    const MAKE_INVENTORY_TRANSFER_REQUEST_URL = "/PurchaseInvoices";
+    // const MAKE_INVENTORY_TRANSFER_REQUEST_URL = "/PurchaseInvoices";
 
-    const GET_ITEMS_URL = "/Items?\$filter =U_ItemGroup ne 'None' and U_Active eq 'Yes'";
+    // const GET_ITEMS_URL = "/Items?\$filter =U_ItemGroup ne 'None' and U_Active eq 'Yes'";
 
     public function __construct()
     {
@@ -40,7 +42,7 @@ class SapService
         $response = Http::withHeaders(
             [
                 "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". $this->sessionId
+                "Cookie" => "B1SESSION=" . $this->sessionId
             ]
         )->post(self::BASE_url . self::MAKE_ACCOUNTS_RECEIVABLE_INVOICE_URL, $data);
 
@@ -76,7 +78,7 @@ class SapService
         $response = Http::withHeaders(
             [
                 "Content-Type" => "application/json",
-                "Cookie" => "B1SESSION=". $this->sessionId
+                "Cookie" => "B1SESSION=" . $this->sessionId
             ]
         )->post(self::BASE_url . self::MAKE_PAYMENT_URL, $data);
 
@@ -98,9 +100,9 @@ class SapService
     public function authenticate()
     {
         $response = Http::post(self::BASE_url . "/Login", [
-            "CompanyDB" => "KEFALOS_USD_NEW",
+            "CompanyDB" => "QG",
             "UserName" => "manager",
-            "Password" => "manager"
+            "Password" => "P@ss2020!"
         ]);
 
         // dd($response->json());
@@ -112,4 +114,3 @@ class SapService
         return $sessionId;
     }
 }
-
