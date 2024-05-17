@@ -95,10 +95,12 @@ class SapService
     public function authenticate()
     {
         $response = Http::post(self::BASE_url . "/Login", [
-            "CompanyDB" => "QG",
+            "CompanyDB" => "MDH_DB1",
             "UserName" => "manager",
             "Password" => "P@ssword1"
         ]);
+
+        // dd(($response->json()["SessionId"]));
 
         return ($response->json()["SessionId"]);
     }
