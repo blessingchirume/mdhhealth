@@ -48,6 +48,11 @@ class Episode extends Model
         return $this->hasMany(LabBooking::class,'episode_id');
     }
 
+    public function radiology()
+    {
+        return $this->hasMany(RadiologyBooking::class, 'episode_id', 'id');
+    }
+
     public function theatreAdmissions() {
         return $this->hasMany(TheatreAdmissions::class, 'episode_id', 'id');
     }

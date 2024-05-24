@@ -27,6 +27,8 @@ use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ICUAdmissionController;
 use App\Http\Controllers\BedController;
+use App\Http\Controllers\RadiologyController;
+use App\Http\Controllers\ScanCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -354,3 +356,13 @@ Route::prefix('/icu')->group(function () {
 Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
 Route::post('/upload/{episode}', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
 
+
+Route::prefix('/radiology')->group(function(){
+    Route::get('/',[RadiologyController::class,'index'])->name('radiology.index');
+    Route::get('/bookings',[RadiologyController::class,'bookings'])->name('radiology.bookings');
+    Route::get('/book/{episode}',[RadiologyController::class,'create'])->name('scan-booking');
+    Route::post('/scan-billing',[RadiologyController::class,'bill'])->name('scan.payment');
+    Route::post('/save-scan-booking/{episode}',[RadiologyController::class,'store'])->name('scan-booking.store');
+    Route::get('/create',[ScanCategoryController::class,'create'])->name('scan.create');
+    Route::post('/save-scan',[ScanCategoryController::class,'store'])->name('scan.store');
+});

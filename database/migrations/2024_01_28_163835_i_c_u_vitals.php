@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('i_c_u_vitals');
     }
 };

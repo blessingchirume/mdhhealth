@@ -76,26 +76,14 @@
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <table>
-        @foreach ($items as $item)
+    @foreach ($items as $item)
         @for($i = 0; $i < 10; $i++) 
         <tr>
             <td>&nbsp;&nbsp;&nbsp;{{ $item->item->tariff_code??'' }}</td>
-            </tr>
-            @endfor
-            @endforeach
+         </tr>
+        @endfor
+    @endforeach
     </table>
 
 
