@@ -12,7 +12,7 @@ class Menu
     public function handle(Request $request, Closure $next)
     {
         // dd(2);
-        $menuConfig = ModelsMenu::tree()->get()->toTree();
+        $menuConfig = ModelsMenu::tree()->where('hidden', false)->orderBy('order')->get()->toTree();
 
         Config::set('menu', $menuConfig);
         

@@ -14,6 +14,7 @@ use App\Models\patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PSpell\Config;
 
 class PaymentController extends Controller
 {
@@ -22,7 +23,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        $this->sapService = new SapService();
+        // $this->sapService = new SapService();
         $this->middleware('menu');
     }
 
@@ -38,6 +39,11 @@ class PaymentController extends Controller
     public function create()
     {
         return view('layouts.payments.create');
+    }
+
+    public function createConsultationPayment()
+    {
+        return view('layouts.payments.consultation-page');
     }
 
     public function store(StorePaymentRequest $request)
@@ -167,7 +173,7 @@ class PaymentController extends Controller
             "DocDueDate" => date('Y-m-d'),
             // "Whse" => "MSASA",
             // "WarehouseCode" => "MSASA",
-            "CardCode" => "WF000002",
+            "CardCode" => config('sap.card.code', 'WF000002'),
             "DocTotal" => $docTotal,
             "DocCurrency" => $request->currency,
             "DocRate" => 1.0,

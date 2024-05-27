@@ -24,11 +24,14 @@ class DatabaseSeeder extends Seeder
             // PaymentSeeder::class,
             VitalGroupSeeder::class,
             MenuSeeder::class,
-            // Icd10CodesSeeder::class,
+            Icd10CodesSeeder::class,
             InvoiceSeeder::class,
             TestsSeeder::class,
             TestCategorySeeder::class,
             PaymentOptionSeeder::class,
+            WardSeeder::class,
+            GroupSeeder::class,
+            CurrencyGroupSeeder::class
         ]);
     }
 }

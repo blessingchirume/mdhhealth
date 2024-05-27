@@ -156,6 +156,8 @@ Route::prefix('ward')->group(function () {
 Route::prefix('/payment')->group(function () {
     Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
     Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
+    Route::get('/create-consulltation', [PaymentController::class, 'createConsultationPayment'])->name('payment.create.consultation');
+    Route::get('/create-general-bill', [PaymentController::class, 'createGeneralBillPayment'])->name('payment.create.bill');    
     Route::post('/', [PaymentController::class, 'makeAccountReceivableInvoice'])->name('payment.store');
 });
 
