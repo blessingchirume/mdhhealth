@@ -27,6 +27,7 @@ use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ICUAdmissionController;
 use App\Http\Controllers\BedController;
+use App\Http\Controllers\MaternityController;
 use App\Http\Controllers\RadiologyController;
 use App\Http\Controllers\ScanCategoryController;
 
@@ -365,4 +366,19 @@ Route::prefix('/radiology')->group(function(){
     Route::post('/save-scan-booking/{episode}',[RadiologyController::class,'store'])->name('scan-booking.store');
     Route::get('/create',[ScanCategoryController::class,'create'])->name('scan.create');
     Route::post('/save-scan',[ScanCategoryController::class,'store'])->name('scan.store');
+});
+
+Route::prefix('/maternity')->group(function () {
+    Route::get('/', [App\Http\Controllers\MaternityController::class, 'index'])->name('maternity.index');
+    Route::get('/{patient}', [App\Http\Controllers\MaternityController::class, 'show'])->name('maternity.show');
+    Route::get('/bill/{episode}', [App\Http\Controllers\MaternityController::class, 'bill'])->name('maternity.bill');
+    Route::get('/consult/{episode}', [App\Http\Controllers\MaternityController::class, 'consult'])->name('maternity.consult');
+    Route::post('/gen-assessment/{episode}',[MaternityController::class,'recordGenAssessment'])->name('anc.assessment');
+    Route::get('/treatment/{episode}', [App\Http\Controllers\MaternityController::class, 'treatment'])->name('maternity.treatment');
+    Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
+    Route::get('/print/{episode}', [App\Http\Controllers\MaternityController::class, 'print'])->name('maternity.print');
+    Route::post('/add-sundries/{episode}', [TreatmentController::class, 'addSundries'])->name('treatment-sundries');
+    Route::post('/save-education-topics/{episode}',[MaternityController::class, 'saveTopics'])->name('save-education-topics');
+    Route::post('/save-maternity-remarks/{episode}',[MaternityController::class, 'saveRemarks'])->name('save-maternity-remarks');
+    Route::post('/obstestric-examination/{episode}',[MaternityController::class, 'saveObsExam'])->name('obs-examination');
 });

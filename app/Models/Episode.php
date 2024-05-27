@@ -62,6 +62,26 @@ class Episode extends Model
         return $this->hasMany(Prescription::class, 'episode_id');
     }
 
+    public function maternity_topics()
+    {
+        return $this->hasMany(MaternityEducation::class, 'episode_id');
+    }
+
+    public function maternity_remarks()
+    {
+        return $this->hasMany(MaternityRemarks::class, 'episode_id');
+    }
+
+    public function obs_examinations()
+    {
+        return $this->hasMany(ObsExamination::class, 'episode_id');
+    }
+
+    public function anc_record()
+    {
+        return $this->hasMany(AncRecord::class, 'episode_id');
+    }
+
     public function getTotalChargeSheetItems()
     {
         // Get all charge sheets associated with the episode
