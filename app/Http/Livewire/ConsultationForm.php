@@ -3,16 +3,21 @@
 namespace App\Http\Livewire;
 
 use App\Models\Currency;
+use App\Models\CurrencyGroup;
 use App\Models\Doctor;
 use App\Models\Episode;
+use App\Models\Group;
+use App\Models\Item;
 use App\Models\patient;
+use App\Models\PaymentOption;
 use App\Models\Prescription;
 use App\Models\TheatreRooms;
-use App\Models\TreatmentPlan;
 use Livewire\Component;
 
-class PatientPaymentSelector extends Component
+class ConsultationForm extends Component
 {
+
+
     public $selectedPatient;
     public $episodes;
     public $selectedEpisode;
@@ -20,10 +25,25 @@ class PatientPaymentSelector extends Component
     public $treatmentPlan;
     public $administeredMedication;
     public $currencies;
+    public $paymentOptions;
     public $selectedDoctor;
     public $date;
     public $time;
     public $designation;
+    public $billingGroups;
+    public $selectedBillingGroup;
+
+    public function render()
+    {
+        $patients = patient::all();
+        $episodes = Episode::all();
+        $theatres = TheatreRooms::all();
+        $this->currencies = Currency::all();
+        $this->paymentOptions = PaymentOption::all();
+        $this->billingGroups = Group::all();
+        $doctors = Doctor::getDoctors();
+        return view('livewire.payments.consultation-form', compact('patients', 'episodes', 'theatres', 'doctors'));
+    }
 
     public function mount()
     {
@@ -37,7 +57,15 @@ class PatientPaymentSelector extends Component
             $this->episodes = Episode::where('patient_id', $value)->get(); // Query episodes matching the selected patient's ID
         } else {
             $this->episodes = null; // Reset episodes when no patient is selected
+        }
+    }
 
+    public function updateSelectedBillingGroup($value)
+    {
+        if ($value) {
+            $item = Item::where('category', 'consultation')->first();
+        } else {
+            // $this->
         }
     }
 
@@ -66,16 +94,5 @@ class PatientPaymentSelector extends Component
     {
         unset($this->treatmentPlan[$index]);
         // $this->treatmentPlan = array_values($this->treatmentPlan);
-    }
-
-    public function render()
-    {
-        $patients = patient::all();
-        $episodes = Episode::all();
-        $theatres = TheatreRooms::all();
-        $this->currencies = Currency::all();
-        $doctors = Doctor::getDoctors();
-
-        return view('livewire.patient-payment-selector', compact('patients', 'episodes', 'theatres', 'doctors'));
     }
 }

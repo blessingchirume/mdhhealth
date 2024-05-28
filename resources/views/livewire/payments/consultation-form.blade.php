@@ -22,6 +22,27 @@
                 </select>
             </div>
         </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="patient">Payment Method:</label>
+                <select wire:model="selectedPatient" class="form-control" id="patient" name="patient" required>
+                    <option value="">--Select Option--</option>
+                    @foreach ($paymentOptions as $option)
+                    <option value="{{ $option->id }}">{{ $option->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="doctor">Billing Group</label>
+                <select class="form-control" id="currency" name="currency" required>
+                    <option>Select Curremcy</option>
+                    @foreach ($currencies as $value)
+                    <option value="{{ $value->name }}">{{ $value->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
         <br />
         @if($episodes)
         <div class="row">

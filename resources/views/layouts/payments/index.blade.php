@@ -40,7 +40,6 @@
                                     <th>Date</th>
                                     <th>Created</th>
                                     <th>Updated</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,9 +54,8 @@
                                     <td>{{ $value->date }}</td>
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
-                                    @can(App\constants\PermisionConstants::viewPayment)
-                                    <td>actions[view, edit, delete]</td>
-                                    @endcan
+                                    {{--@can(App\constants\PermisionConstants::viewPayment)
+                                    @endcan--}}
                                 </tr>
                                 @endforeach
                             </tbody>

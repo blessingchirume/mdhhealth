@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('url')->nullable();
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->string('order');
+            $table->boolean('hidden')->default(false);
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('menus')->onDelete('cascade');

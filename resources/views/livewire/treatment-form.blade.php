@@ -94,7 +94,7 @@
                 <!-- Iterate through selected procedures -->
                 @foreach ($procedures as $index => $procedure)
                 <tr>
-                    <td>{{ $procedure['procedure'] }}</td>
+                    <td>{{ $procedure['medication'] }}</td>
                     <td>
                         <!-- Button to remove procedure -->
                         <a wire:click.prevent="removeProcedure({{ $index }})" href="#" class="btn btn-danger">
