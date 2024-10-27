@@ -86,9 +86,21 @@ class TestsSeeder extends Seeder
                     ],
                     [
                         'category' => 2,
+                        'name' => 'Random Blood Sugar',
+                        'slug' => 'random-blood-sugar',
+                        'description' => 'Test for measuring random blood sugar levels'
+                    ],
+                    [
+                        'category' => 2,
                         'name' => 'Blood Type',
                         'slug' => 'blood-type',
                         'description' => 'Test for determining blood type'
+                    ],
+                    [
+                        'category' => 2,
+                        'name' => 'Blood Group',
+                        'slug' => 'blood-group',
+                        'description' => 'Test for determining blood group'
                     ],
                     [
                         'category' => 2,
@@ -119,6 +131,21 @@ class TestsSeeder extends Seeder
                         'name' => 'Kidney Function Tests (KFTs)',
                         'slug' => 'kfts',
                         'description' => 'Test for assessing kidney function'
+                    ],[
+                        'category' => 2,
+                        'name' => 'HIV(Self)',
+                        'slug' => 'hiv-self',
+                        'description' => 'Test for determining HIV Status'
+                    ],[
+                        'category' => 2,
+                        'name' => 'HIV(Partner)',
+                        'slug' => 'hiv-partner',
+                        'description' => 'Test for determining HIV Status'
+                    ],[
+                        'category' => 2,
+                        'name' => 'CD4 Count',
+                        'slug' => 'cd4-count',
+                        'description' => 'Test for determining CD4 Count'
                     ],
                     [
                         'category' => 2,
@@ -173,12 +200,22 @@ class TestsSeeder extends Seeder
                         'name' => 'Urine Ketones',
                         'slug' => 'urine-ketones',
                         'description' => 'Test for detecting ketones in urine'
+                    ],[
+                        'category' => 3,
+                        'name' => 'Urine Albumin',
+                        'slug' => 'urine-albumin',
+                        'description' => 'Test for detecting albumin in urine'
                     ],
                     [
                         'category' => 3,
                         'name' => 'Bilirubin',
                         'slug' => 'bilirubin',
                         'description' => 'Test for detecting bilirubin in urine'
+                    ],[
+                        'category' => 2,
+                        'name' => 'Syphilis',
+                        'slug' => 'syphilis',
+                        'description' => 'Test for syphilis'
                     ],
                 
             ]);

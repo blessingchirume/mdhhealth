@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('test_categories', function (Blueprint $table) {
+        Schema::create('anc_records', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->string('name')->nullable();
+            $table->string('value')->nullable();
+            $table->integer('episode_id');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_categories');
+        Schema::dropIfExists('anc_records');
     }
 };

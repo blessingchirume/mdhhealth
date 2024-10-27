@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('emergency_room_admimissions');
     }
 };

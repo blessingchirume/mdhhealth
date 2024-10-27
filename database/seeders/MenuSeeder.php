@@ -360,5 +360,56 @@ class MenuSeeder extends Seeder
             // 'permission' => PermisionConstants::viewIt
         ]);
 
+        Menu::create([
+            'name' => 'radiology',
+            'display_name' => 'Radiology',
+            'icon' => 'fa-circle',
+            'url' => 'radiology.index',
+            'parent_id' => 3,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+        Menu::create([
+            'name' => 'radiology_list',
+            'display_name' => 'Radiology Queue',
+            'icon' => 'fa-circle',
+            'url' => 'radiology.index',
+            'parent_id' => 36,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+        Menu::create([
+            'name' => 'radiology_add',
+            'display_name' => 'Add Items',
+            'icon' => 'fa-circle',
+            'url' => 'scan.create',
+            'parent_id' => 36,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+        Menu::create([
+            'name' => 'maternity',
+            'display_name' => 'Maternity',
+            'icon' => 'fa-circle',
+            'url' => 'maternity.index',
+            'parent_id' => 3,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+        Menu::create([
+            'name' => 'maternity_list',
+            'display_name' => 'Maternity Queue',
+            'icon' => 'fa-circle',
+            'url' => 'maternity.index',
+            'parent_id' => 39,
+            'order' => 1,
+            // 'permission' => PermisionConstants::viewIt
+        ]);
+
+
     }
 }

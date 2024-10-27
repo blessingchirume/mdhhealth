@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('test_categories', function (Blueprint $table) {
+        Schema::create('radiology_bookings', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
+            $table->integer('episode_id');
+            $table->integer('scan_category_id');
+            $table->enum('status',['Pending', 'In-Progress', 'Completed']);
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_categories');
+        Schema::dropIfExists('radiology_bookings');
     }
 };
