@@ -87,4 +87,16 @@ class PermisionConstants
 
     // Vital 
     const createVital = 'create patient vitals';
+    const viewVitals = 'view vitals';
+    const viewVitalsQueue = 'view vitals queue';
+    const viewIcu = 'view icu';
+    const viewEmergencyRoomAddmissions = 'view emegerncy room admissions';
+    const viewIcuAdmissions = 'view icu admissions';
+    const viewTheater = 'view theater';
+    const viewAppointments = 'view appointments';
+    const viewLaboratory = 'view laboratory';
+    const viewAppointmentsMaster = 'view appointment master';
+    const viewTestBooking = 'view laboratory tests booking';
+
+
 }

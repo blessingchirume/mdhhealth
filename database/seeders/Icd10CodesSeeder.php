@@ -17,14 +17,15 @@ class Icd10CodesSeeder extends Seeder
     {
         Icd10Code::truncate();
 
-        $csvFile = fopen(base_path("database/data/icd10codes.csv"), "r");
+        $csvFile = fopen(base_path("database/data/icd10codescopy.csv"), "r");
 
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 Icd10Code::create([
                     "code" => $data['0'],
-                    "description" => $data['1']
+                    "description" => $data['1'],
+                    "category" => 1
                 ]);
             }
             $firstline = false;

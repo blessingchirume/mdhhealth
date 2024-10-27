@@ -10,6 +10,10 @@ class Group extends Model
     use HasFactory;
 
     public function currencies() {
-        return $this->belongsToMany(Currency::class, 'currency_groups', 'group_id', 'currency_id')->withPivot('rate');
+        return $this->belongsToMany(Currency::class, 'currency_groups', 'group_id', 'currency_id')->withPivot('id', 'rate');
     }
+
+    // public function rate() {
+    //     return $this->belongsToMany(Currency::class, 'currency_groups', 'group_id', 'currency_id')->withPivot('id', 'rate');
+    // }
 }

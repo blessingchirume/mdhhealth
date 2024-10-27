@@ -23,7 +23,7 @@ class PatientController extends Controller
 
     public function index()
     {
-        $collection = Patient::all();
+        $collection = Patient::paginate();
         return view('layouts.patients.index', compact('collection'));
     }
 
@@ -31,6 +31,17 @@ class PatientController extends Controller
     {
         $packages = Package::all();
         return view('layouts.patients.create', compact('packages'));
+    }
+
+    public static function calculateAge($dob)
+    {
+        // Assuming $dob is the patient's date of birth
+        $dateOfBirth = Carbon::parse($dob);
+        $currentDate = Carbon::now();
+
+        $age = $dateOfBirth->diffInYears($currentDate);
+
+        return $age;
     }
 
     public function store(Request $request)
@@ -89,7 +100,7 @@ class PatientController extends Controller
 
             $guarantor['patient_id'] = $medicalAid['patient_id'];
             Gurantor::create($guarantor);
-           
+
             return redirect()->route('patient.index')->with('success', 'patient record created successfully!');
         } catch (\Throwable $th) {
 

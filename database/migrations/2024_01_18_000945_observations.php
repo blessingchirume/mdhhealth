@@ -18,10 +18,10 @@ return new class extends Migration
             $table->string('episode_id');
             $table->string('user_id');
             $table->string('origin');
-            $table->string('observation');
-            $table->string('complaints');
-            $table->string('complaints_history');
-            $table->string('notes');
+            $table->string('observation')->nullable();
+            $table->string('complaints')->nullable();;
+            $table->string('complaints_history')->nullable();;
+            $table->string('notes')->nullable();;
             $table->timestamps();
             });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('observations');
     }
 };

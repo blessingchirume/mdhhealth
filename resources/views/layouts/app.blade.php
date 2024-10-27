@@ -7,8 +7,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Select2 -->
@@ -18,11 +17,24 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"> -->
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/js/jquery-editable-poshytip.min.js"></script>
+<style>
+    /* Target the selected item in the dropdown */
+.select2-results__option[aria-selected=true] {
+    background-color: #09033a !important;
+}
+.select2-selection__choice {
+    background-color: #1c4a85 !important;
+    color: #ffffff !important; /* Optionally, you can also change the text color */
+}
+</style>
     @livewireStyles
     @yield('styles')
 </head>
 
-<body class="hold-transition">
+<body class="hold-transition sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -33,8 +45,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
             </a>
             @include('layouts.navigation')
@@ -79,6 +90,7 @@
             $('#icd10_codes').select2();
         });
     </script>
+
     <!-- <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" defer></script> -->
     <script type="module">
         $(function() {
@@ -94,6 +106,19 @@
                     [10, 20, 50, 100, 200, 300, 'All']
                 ],
             });
+        });
+    </script>
+    <script>
+        $.fn.editable.defaults.mode = "inline";
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+        });
+
+        $('.editable').editable({
+            url: '/currency/update',
+            type: 'text',
+            name: 'rate',
+            title: 'Enter exchange rate'
         });
     </script>
     @livewireScripts
