@@ -9,7 +9,7 @@ class SapService
 {
     // const BASE_url = "https://192.168.1.100:50000/b1s/v1/";
 
-    const BASE_url = "https://10.0.2.21:50000/b1s/v1/";
+    const BASE_url = "https://10.0.2.31:50000/b1s/v1/";
 
     // const BASE_url = "https://172.16.16.9:50000/b1s/v1/";
 

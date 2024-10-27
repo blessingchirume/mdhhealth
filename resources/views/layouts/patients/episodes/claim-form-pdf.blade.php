@@ -1,90 +1,106 @@
-<style type="text/css">
-    body {
-        font-size: 12;
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-    #t2 {
-        margin-right: -100;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prescription</title>
+    <style>
+        /* Define your CSS styles for the PDF here */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            font-size: 14px;
+        }
 
-    table {
-        margin-left: -9.6px;
-    }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-    table td {
+        h1 {
+            text-align: center;
+        }
 
-        font-size: 12;
-        padding: 0;
-        margin: 0;
-    }
+        .patient-info {
+            margin-bottom: 20px;
+        }
 
-</style>
+        .prescription-date {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
 <body>
+    <div class="container pt-0 mt-0">
 
+        <table class="table" width="100%">
+            <tr><th colspan="2"><h2>MDH - Prescription</h2></th></tr>
+            <tr>
+                <td width="50%"><strong style="color:black;">Prescription No.:</strong><br>00001</td>
+                <td><strong>Prescription Date:</strong><br>2024-05-28</td>
+            </tr>
+        </table>
+        <hr>
+        <table class="table " width="100%">
+            <tr>
+                <th colspan="2" style="text-align: left;">Patient Information</th>
+            </tr>
 
-    <table>
-        <tr>
-            <td>@if ($partner->acronym!='BANKMED' || $partner->acronym!='CIMAS' || $partner->acronym!='ENG' ||$partner->acronym!='GENHEALTH' || $partner->acronym!='MASCA' || $partner->acronym!='MUN.BYO.' || $partner->acronym!='MUN.HRE.' || $partner->acronym!="N'THERN" || $partner->acronym!='RAILMED')
-                <span style="margin-left:465px">X&nbsp;&nbsp;&nbsp;{{ $partner->acronym }}</span>
-                @endif</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $episode->id }}</strong></td>
-        </tr>
-        <tr>
-            <td><br></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $member->member_name }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $member->member_name }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $member->member_name }}</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;077200000</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Employer</td>
-            <td></td>
-        </tr>
-    </table>
-
-    <br>
-
-    <table id="t2">
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $patient->name.' '.$patient->surname }}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ 'relation' }}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $member->policy_number }}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $member->suffix_number }}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $patient->dob }}</td>
-        </tr>
-    </table>
-
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <table>
-    @foreach ($items as $item)
-        @for($i = 0; $i < 10; $i++) 
-        <tr>
-            <td>&nbsp;&nbsp;&nbsp;{{ $item->item->tariff_code??'' }}</td>
-         </tr>
-        @endfor
-    @endforeach
-    </table>
-
-
+            <tr>
+                <td width="50%"><strong>Name:</strong><br>Albert Ukama</td>
+                <td width="50%"><strong>Age:</strong><br>28 Years</td>
+            </tr>
+            <tr>
+                <td><strong>Phone Number:</strong><br>+263 78 702 9955</td>
+                <td><strong>D.O.B:</strong><br>26-06-1996</td>
+            </tr>
+            <tr>
+                <td><strong>Email:</strong><br>N/A</td>
+                <td><strong>Gender:</strong><br>Male</td>
+            </tr>
+            <tr>
+                <td><strong>Address:</strong><br>20385 Solomio Park Ruwa</td>
+                <td></td>
+            </tr>
+        </table>
+        <hr>
+        <table class="table table-striped" width="100%">
+            <tr>
+                <th colspan="2" style="text-align: left;">Prescribed Medication</th>
+            </tr>
+            <tr>
+                <th style="text-align: left;">Medication</th>
+                <th style="text-align: left;">Dosage</th>
+                <th style="text-align: left;">Frequency</th>
+                <th style="text-align: left;">Duration</th>
+            </tr>
+            {{--@foreach ($prescriptions as $prescription)
+                <tr class="row">
+                    <td width="40%" align="left">
+                        Paracetamol Influx Industries
+                    </td>
+                    <td width="25%" align="left">
+                        10mg
+                    </td>
+                    <td width="25%" align="left">
+                        twice a day
+                    </td>
+                    <td align="left">
+                        1 week
+                    </td>
+                </tr>
+            @endforeach--}}
+        </table>
+        <br/>
+        <table class="table mt-5" width="100%">
+            <tr>
+                <td><strong>Prescribed By:</strong><br>Blessing Chirume</td>
+            </tr>
+        </table>
+    </div>
 </body>
+
+</html>

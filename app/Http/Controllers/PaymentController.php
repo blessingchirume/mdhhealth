@@ -23,7 +23,7 @@ class PaymentController extends Controller
 
     public function __construct()
     {
-        // $this->sapService = new SapService();
+        $this->sapService = new SapService();
         $this->middleware('menu');
     }
 
@@ -44,6 +44,23 @@ class PaymentController extends Controller
     public function createConsultationPayment()
     {
         return view('layouts.payments.consultation-page');
+    }
+
+    public function storeConsultationPayment(Request $request, $episodeID)
+    {
+        $payment = new Payment();
+        try {
+            $payment->create([
+                "episode_id" => $episodeID,
+                "narration" => "BILLING[S=>1][T=>3][TX=>1048][INV=>IN01001002][P=>FOR]",
+                'amount' => $request->amount,
+                'balance' => 0,
+                'date' => date('Y-m-d')
+            ]);
+            return redirect()->back()->with('success', 'payment created successfully');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
     }
 
     public function store(StorePaymentRequest $request)
