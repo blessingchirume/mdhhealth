@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
             CurrencySeeder::class,
             RoleSeeder::class, 
             UserSeerder::class, 
-            BranchSeeder::class, 
+            // BranchSeeder::class, 
             TankSeeder::class,
             PartnerSeeder::class,
             PackageSeeder::class,
