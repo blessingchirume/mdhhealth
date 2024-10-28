@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right btn-group btn-group-sm">
-                            @can(App\constants\PermisionConstants::createPayment)
+                            @can(App\Constants\PermisionConstants::createPayment)
                             <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Ward
                             </button>
@@ -48,10 +48,10 @@
                                     <td>{{ $value->updated_at }}</td>
                                     <td>
                                         <center>
-                                            @can(App\constants\PermisionConstants::viewPatient)
+                                            @can(App\Constants\PermisionConstants::viewPatient)
                                             <a href="{{ route('designation.ward.show', $value)}}"><i class="fa fa-eye success mr-4"></i></a>
                                             @endcan
-                                            @can(App\constants\PermisionConstants::updatePatient)
+                                            @can(App\Constants\PermisionConstants::updatePatient)
                                             <a href="{{ route('designation.ward.edit', $value)}}"><i class="fa fa-edit success"></i></a>
                                             @endcan
                                         </center>

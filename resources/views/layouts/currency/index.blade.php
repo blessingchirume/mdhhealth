@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right btn-group btn-group-sm">
-                                @can(App\constants\PermisionConstants::createPatient)
+                                @can(App\Constants\PermisionConstants::createPatient)
                                 <a href="{{ route('patient.create') }}" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </a>

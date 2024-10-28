@@ -17,7 +17,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right btn-group btn-group-sm">
-                            @can(App\constants\PermisionConstants::createPayment)
+                            @can(App\Constants\PermisionConstants::createPayment)
                            {{-- <button data-toggle="modal" data-target="#add-payment-modal" type="button" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Generate
                             </button>--}}
@@ -54,7 +54,7 @@
                                     <td>{{ $value->date }}</td>
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
-                                    {{--@can(App\constants\PermisionConstants::viewPayment)
+                                    {{--@can(App\Constants\PermisionConstants::viewPayment)
                                     @endcan--}}
                                 </tr>
                                 @endforeach

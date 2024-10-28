@@ -9,7 +9,7 @@
             </p>
             </a>
             </li>
-            @can(App\constants\PermisionConstants::viewDepartments)
+            @can(App\Constants\PermisionConstants::viewDepartments)
             <li class="nav-item">
                 <a href="{{ route('designation.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-code-branch"></i>
@@ -28,7 +28,7 @@
                     </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
-                    @can(App\constants\PermisionConstants::viewPatients)
+                    @can(App\Constants\PermisionConstants::viewPatients)
                     <li class="nav-item">
                         <a href="{{ route('patient.index') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
@@ -50,7 +50,7 @@
                     </li>
                 </ul>
             </li>
-            @can(App\constants\PermisionConstants::viewPayments)
+            @can(App\Constants\PermisionConstants::viewPayments)
             <li class="nav-item">
                 <a href="{{ route('payment.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-money-bill-alt nav-icon"></i>
@@ -60,7 +60,7 @@
                 </a>
             </li>
             @endcan
-            @can(App\constants\PermisionConstants::viewProviders)
+            @can(App\Constants\PermisionConstants::viewProviders)
             <li class="nav-item">
                 <a href="/medicalaid" class="nav-link">
                     <i class="nav-icon fas fa-shuttle-van"></i>
@@ -93,7 +93,7 @@
                     </li>
                 </ul>
             </li>
-            @can(App\constants\PermisionConstants::viewUserMaster)
+            @can(App\Constants\PermisionConstants::viewUserMaster)
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-users"></i>

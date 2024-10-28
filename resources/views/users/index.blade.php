@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-right btn-group btn-group-sm">
-                            @can(App\constants\PermisionConstants::createUser)
+                            @can(App\Constants\PermisionConstants::createUser)
                             <a href="{{ route('users.create') }}" class="btn btn-primary">
                                 <i class="fa fa-plus"></i> Generate
                             </a>

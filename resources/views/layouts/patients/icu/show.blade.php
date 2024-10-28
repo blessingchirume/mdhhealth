@@ -29,7 +29,7 @@
                         <div class="card-header">
                             <h4 class="float-left">Vitals</h4>
                             <div class="float-right btn-group btn-group-sm">
-                                @can(App\constants\PermisionConstants::createVital)
+                                @can(App\Constants\PermisionConstants::createVital)
                                 <button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </button>
