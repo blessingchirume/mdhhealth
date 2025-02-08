@@ -182,7 +182,6 @@ class TreatmentForm extends Component
                     'duration' => $prescribed['duration'] ?? 1
                 ]);
 
-                dd($mdecation);
             }
             $this->emit('prescriptionAdded');
         } catch (Exception $e) {
