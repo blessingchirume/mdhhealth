@@ -27,8 +27,6 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        // dd(session()->get('menu'));
         $revenue = Episode::all()->sum('base_amount');
         $payment = Payment::all()->sum('amount');
         $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');

@@ -11,7 +11,7 @@ use App\Models\VitalGroup;
 use App\Models\ChargeSheet;
 use App\Models\ChargesheetItem;
 
-class ICUAdmissionController extends Controller
+class IcuAdmissionController extends Controller
 {
 
     public function index()

@@ -1,62 +1,106 @@
-@extends('layouts.guest')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-    <div class="card-body login-card-body">
-        <p class="login-box-msg">{{ __('Login') }}</p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agimedix Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F5F5F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-        <form action="{{ route('login') }}" method="post">
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background: #fff;
+            /* border: 1px solid #ddd; */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .login-card img {
+            width: 300px;
+            /* Increased size for better visibility */
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-custom {
+            background-color: #27477A;
+            color: white;
+            width: 100%;
+            border: none;
+            /* Removed rounded corners */
+            height: 45px;
+            text-transform: uppercase;
+        }
+
+        .btn-custom:hover {
+            background-color: #1A2F51;
+            color: white;
+        }
+
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            /* Removed rounded corners */
+            height: 45px;
+        }
+
+        .text-link {
+            color: #27477A;
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <img src="{{ asset('images/AGI_HMS_logo_trans.png') }}" alt="Agimedix Logo">
+        <div class="left">
+            <h5 class="mb-4 text-start" style="color: #27477A;">Login</h5>
+        </div>
+        <form method="POST" action="{{ route('login') }}">
             @csrf
-
-            <div class="input-group mb-3">
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ __('Email') }}" required autofocus>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
+            <div class="form-group mb-3">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" required autofocus>
                 @error('email')
                 <span class="error invalid-feedback">
                     {{ $message }}
                 </span>
                 @enderror
             </div>
-
-            <div class="input-group mb-3">
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ __('Password') }}" required>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                        <span class="fas fa-lock"></span>
-                    </div>
-                </div>
+            <div class="mb-3">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required>
                 @error('password')
                 <span class="error invalid-feedback">
                     {{ $message }}
                 </span>
                 @enderror
             </div>
-
-            <div class="row">
-                <div class="col-8">
-                    <div class="icheck-primary">
-                        <input type="checkbox" id="remember" name="remember">
-                        <label for="remember">
-                            {{ __('Remember Me') }}
-                        </label>
-                    </div>
-                </div>
-                <!-- /.col -->
-                <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
-                </div>
-                <!-- /.col -->
-            </div>
+            <button type="submit" class="btn btn-custom btn-block">Login</button>
         </form>
-
-        @if (Route::has('password.request'))
+        <div class="mt-3">
+            @if (Route::has('password.request'))
             <p class="mb-1">
-                <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+            <a href="{{ route('password.request') }}" class="text-link">Forgot Password?</a>
+
             </p>
         @endif
+        </div>
     </div>
-    <!-- /.login-card-body -->
-@endsection
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

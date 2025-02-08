@@ -15,9 +15,7 @@
     <div class="card">
         <form id="update-user-form" method="post" action="{{route('users.update', $user)}}">
             <div class="card-header">
-                <a href="{{ route('users.index') }}" type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    back
-                </a>
+                
             </div>
             <div class="card-body">
 

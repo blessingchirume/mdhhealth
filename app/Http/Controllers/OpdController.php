@@ -15,7 +15,7 @@ use App\Models\PrescriptionItem;
 use App\Models\User;
 use PDF;
 
-class OPDController extends Controller
+class OpdController extends Controller
 {
     public function index()
     {
@@ -103,7 +103,7 @@ public function generateClaimForm(Episode $episode)
 
         // Output the PDF to the browser
         return $pdf->stream($episode->episode_code . '-claim-form.pdf', array('Attachment' => false));
-   
+
 }
 
 }
