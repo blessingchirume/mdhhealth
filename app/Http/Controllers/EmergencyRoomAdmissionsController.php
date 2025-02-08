@@ -38,7 +38,7 @@ class EmergencyRoomAdmissionsController extends Controller
             $patient = Patient::create([
                 'name' => $name,
                 'surname' => $surname,
-                'patient_id' => 'MDHP' . rand(00000, 99999),
+                'patient_id' => 'AGHS' . rand(00000, 99999),
                 'national_id' => '',
                 'dob' => $age,
                 'phone' => '',

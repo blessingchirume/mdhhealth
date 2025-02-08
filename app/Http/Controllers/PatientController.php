@@ -87,7 +87,7 @@ class PatientController extends Controller
             'relationship' => $request->guarantor_relationship,
         ];
 
-        $data["patient_id"] = 'MDHP' . rand(00000, 99999);
+        $data["patient_id"] = 'AGHS' . rand(00000, 99999);
         try {
             Patient::create($data);
 
@@ -148,7 +148,7 @@ class PatientController extends Controller
             'next_of_keen_address' => 'required'
         ]);
 
-        $data["patient_id"] = 'MDHP' . rand(00000, 99999);
+        $data["patient_id"] = 'AGHS' . rand(00000, 99999);
 
         try {
             $patient->update($data);

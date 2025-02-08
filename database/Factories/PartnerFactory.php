@@ -17,7 +17,7 @@ class PartnerFactory extends Factory
     public function definition()
     {
         return [
-            'code' => 'MDHP'. rand(000000, 999999),
+            'code' => 'AGHS'. rand(000000, 999999),
             'name' => 'First Mutual Life Assurance'
         ];
     }

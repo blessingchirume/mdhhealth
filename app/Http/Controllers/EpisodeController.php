@@ -96,7 +96,7 @@ class EpisodeController extends Controller
             "checkin" => date('Y-m-d'),
         ]);
 
-        // $data["patient_id"] = 'MDHP' . rand(00000, 99999);
+        // $data["patient_id"] = 'AGHS' . rand(00000, 99999);
 
         // Patient::create($data);
 

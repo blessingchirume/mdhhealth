@@ -121,7 +121,9 @@
             <div class="form-group">
                 <label for="payment-mode">Payment Mode</label>
                 <select class="form-control" wire:model="paymentOption" id="payment-mode">
-                    <option value="1">Cash</option>
+                    @foreach($paymentOptions as $method)
+                        <option value="{{ $method->id }}">{{ $method->name }}</option>
+                    @endforeach
                     <option value="2">Medical Aid</option>
                 </select>
             </div>

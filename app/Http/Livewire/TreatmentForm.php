@@ -165,7 +165,6 @@ class TreatmentForm extends Component
             $prescription = Prescription::where('episode_id', $this->episode->id)->first();
         }
 
-        // dd($this->prescriptions);
         try {
 
             foreach ($this->prescriptions as $prescribed) {
