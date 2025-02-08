@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\branch;
+use App\Models\Branch;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class BranchPolicy
@@ -25,10 +25,10 @@ class BranchPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\branch  $branch
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, branch $branch)
+    public function view(User $user, Branch $branch)
     {
         //
     }
@@ -48,10 +48,10 @@ class BranchPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\branch  $branch
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, branch $branch)
+    public function update(User $user, Branch $branch)
     {
         //
     }
@@ -60,10 +60,10 @@ class BranchPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\branch  $branch
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, branch $branch)
+    public function delete(User $user, Branch $branch)
     {
         //
     }
@@ -72,10 +72,10 @@ class BranchPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\branch  $branch
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, branch $branch)
+    public function restore(User $user, Branch $branch)
     {
         //
     }
@@ -84,10 +84,10 @@ class BranchPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\branch  $branch
+     * @param  \App\Models\Branch  $branch
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, branch $branch)
+    public function forceDelete(User $user, Branch $branch)
     {
         //
     }

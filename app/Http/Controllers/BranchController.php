@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\branch;
+use App\Models\Branch;
 use App\Http\Requests\StorebranchRequest;
 use App\Http\Requests\UpdatebranchRequest;
 
@@ -11,7 +11,7 @@ class BranchController extends Controller
 
     public function index()
     {
-        $branches = branch::all();
+        $branches = Branch::all();
         return view('layouts.branches.index', compact('branches'));
     }
     public function create()
@@ -29,17 +29,17 @@ class BranchController extends Controller
         return view('layouts.branches.show');
     }
 
-    public function edit(branch $branch)
+    public function edit(Branch $branch)
     {
         //
     }
 
-    public function update(UpdatebranchRequest $request, branch $branch)
+    public function update(UpdatebranchRequest $request, Branch $branch)
     {
         //
     }
 
-    public function destroy(branch $branch)
+    public function destroy(Branch $branch)
     {
         //
     }

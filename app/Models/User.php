@@ -55,12 +55,12 @@ class User extends Authenticatable
     // }
 
     public function branch(){
-        return $this->belongsTo(branch::class);
+        return $this->belongsTo(Branch::class);
     }
 
     public function designation(){
         return $this->belongsTo(Designation::class);
     }
 
-   
+
 }
