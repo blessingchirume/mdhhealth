@@ -4,12 +4,12 @@
     <div class="card m-3">
         <div class="card-body">
             <h1>Patients List<div class="float-right"><a href="{{route('radiology.bookings')}}" class="btn btn-primary">Radiology Bookings</a></div></h1>
-            <p class="info">Click on the "Book Scan" button to book Patient For Radiology</p>
+            <p class="info">Click on the "Book Scan" button to book patient For Radiology</p>
             <table class="table table-bordered table-striped data-table">
                 <thead>
                     <tr>
                         <th>EpisodeCode</th>
-                        <th>Patient Name</th>
+                        <th>patient Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>

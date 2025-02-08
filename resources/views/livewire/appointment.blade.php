@@ -1,7 +1,7 @@
 <div>
-  
+
   <div class="row col-md-12">
-    <label for="Patient">Select Patient</label>
+    <label for="Patient">Select patient</label>
     <select wire:model="selectedPatientId" class="form-control" id="patientSearch" name='patient'>
       <option value="">Select a patient</option>
       @foreach ($patients as $patient)

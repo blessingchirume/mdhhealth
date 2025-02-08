@@ -3,7 +3,7 @@
 @section('content')
     <div class="card m-3">
         <div class="card-body">
-            <h1>Patient Details</h1>
+            <h1>patient Details</h1>
             <p>Name: {{ $episode->patient->name }}</p>
             <p>Date of Birth: {{ $episode->patient->date_of_birth }}</p>
             <p>Gender: {{ $episode->patient->gender }}</p>

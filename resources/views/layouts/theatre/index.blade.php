@@ -4,14 +4,14 @@
     <div class="container-fluid">
         <div class="card m-3">
             <div class="card-header">
-                <h2 class="card-title">Theatre Patient Bookings</h2>
-                <a href="{{ route('send_to_theatre') }}" class="btn btn-primary float-right">Add Patient to Theatre Queue</a>
+                <h2 class="card-title">Theatre patient Bookings</h2>
+                <a href="{{ route('send_to_theatre') }}" class="btn btn-primary float-right">Add patient to Theatre Queue</a>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Patient Name</th>
+                            <th>patient Name</th>
                             <th>Episode</th>
                             <th>Room</th>
                             <th>Status</th>
@@ -24,7 +24,7 @@
                         @foreach($admissions as $admission)
                         @foreach($admission->theatreAdmissions as $theatreAdmission)
                             <tr>
-                                <td>{{ $admission->patient->name ?? 'Unknown Patient' }}</td>
+                                <td>{{ $admission->patient->name ?? 'Unknown patient' }}</td>
                                 <td>{{ $admission->episode_code ?? 'No Details' }}</td>
                                 <td>{{ $theatreAdmission->theatreRoom->room ?? 'No Details' }}</td>
                                 <td>{{ $theatreAdmission->status ?? 'No Details' }}</td>

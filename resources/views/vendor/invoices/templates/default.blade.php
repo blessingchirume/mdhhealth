@@ -164,7 +164,7 @@
                     </th>
                     <th class="border-0" width="3%"></th>
                     <th class="border-0 pl-0 party-header">
-                        {{ __('Patient') }}
+                        {{ __('patient') }}
                     </th>
                 </tr>
             </thead>

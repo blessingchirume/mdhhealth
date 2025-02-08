@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\patient;
+use App\Models\Patient;
 use App\Http\Requests\StorepatientRequest;
 use App\Http\Requests\UpdatepatientRequest;
 use App\Models\Designation;
@@ -108,20 +108,20 @@ class PatientController extends Controller
         }
     }
 
-    public function show(patient $patient)
+    public function show(Patient $patient)
     {
         // dd(Config::get('menu'));
         $designations = Designation::all();
         return view('layouts.patients.show', compact('patient', 'designations'));
     }
 
-    public function edit(patient $patient)
+    public function edit(Patient $patient)
     {
         // dd($patient->medicalaid->package->partner);
         return view('layouts.patients.update', compact('patient'));
     }
 
-    public function update(UpdatepatientRequest $request, patient $patient)
+    public function update(UpdatepatientRequest $request, Patient $patient)
     {
         $data = $request->validate([
             'national_id' => 'required',
@@ -162,7 +162,7 @@ class PatientController extends Controller
         }
     }
 
-    public function destroy(patient $patient)
+    public function destroy(Patient $patient)
     {
         //
     }

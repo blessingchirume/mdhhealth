@@ -46,7 +46,7 @@
         <hr>
         <table class="table " width="100%">
             <tr>
-                <th colspan="2" style="text-align: left;">Patient Information</th>
+                <th colspan="2" style="text-align: left;">patient Information</th>
             </tr>
 
             <tr>

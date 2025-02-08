@@ -29,7 +29,7 @@
                             <table id="table1" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Patient ID</th>
+                                        <th>patient ID</th>
                                         <th>ID Number</th>
                                         <th>Name</th>
                                         <th>Surname</th>

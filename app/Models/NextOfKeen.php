@@ -21,6 +21,6 @@ class NextOfKeen extends Model
     ];
 
     public function patient() {
-        return $this->belongsTo(patient::class);
+        return $this->belongsTo(Patient::class);
     }
 }

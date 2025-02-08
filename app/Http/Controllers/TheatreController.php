@@ -96,7 +96,7 @@ class TheatreController extends Controller
                 $billAmount = $operatingRoomTimeInMinutes * $item->price_unit;
 
 
-                
+
 
 
                 $chargeSheetItem = ChargeSheetItem::firstOrCreate(['item_id' => $item->id, 'charge_sheet_id' => $chargeSheet->id]);

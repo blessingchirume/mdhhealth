@@ -6,10 +6,10 @@
             <h4 class="">View Test Results for Episode <span class='text-warning'>[{{ $booking->episode->episode_code }}]</span><div class="float-right"><a href="{{ route('laboratory.bookings') }}" class="btn btn-primary ">Back</a></div></h4>
         </div>
         <div class="card-body ">
-            <h4>Patient Information</h4>
+            <h4>patient Information</h4>
             <div class="row">
                 <div class="col-md-4">
-                    <span><strong>Patient: </strong></span>{{ $booking->episode->patient->name.' '.$booking->episode->patient->surname }}
+                    <span><strong>patient: </strong></span>{{ $booking->episode->patient->name.' '.$booking->episode->patient->surname }}
                 </div>
                 <div class="col-md-4">
                     <span><strong>Age: </strong></span>{{ $age }}

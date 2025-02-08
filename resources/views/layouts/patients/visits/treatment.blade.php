@@ -10,7 +10,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Patient Information</h3>
+                    <h3 class="card-title">patient Information</h3>
                 </div>
                 <div class="card-body">
                     <p><strong>Name:</strong> {{ $patient->name }}</p>

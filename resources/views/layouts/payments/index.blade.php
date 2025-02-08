@@ -25,14 +25,14 @@
                                 <i class="fa fa-plus"></i> Generate
                            </a>
                             @endcan
-                        </div>         
+                        </div>
                     </div>
                     <div class="card-body p-0">
                         <table id="table1" class="table data-table table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Patient</th>
+                                    <th>patient</th>
                                     <th>Episode</th>
                                     <th>Amount</th>
                                     <th>Balance</th>
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="name">Patient</label>
+                                <label for="name">patient</label>
                                 <select name="patient_id" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
                                     @foreach($patients as $index => $value)
                                     <option value="{{ $value->patient_id }}" selected="selected">{{ $value->name }} {{ $value->surname }}</option>
@@ -106,10 +106,10 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="name">Patient Group</label>
+                                <label for="name">patient Group</label>
                                 <select name="patient_type" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                    <option value="InPatient" selected="selected">In Patient</option>
-                                    <option value="OutPatient" selected="selected">Out Patient</option>
+                                    <option value="InPatient" selected="selected">In patient</option>
+                                    <option value="OutPatient" selected="selected">Out patient</option>
                                 </select>
                             </div>
                         </div>

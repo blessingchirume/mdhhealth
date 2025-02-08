@@ -1,7 +1,7 @@
 <!-- resources/views/livewire/patient-admission.blade.php -->
 
 <div>
-    <label for="patientName">Patient Name:</label>
+    <label for="patientName">patient Name:</label>
     <input type="text" id="patientName" wire:model.debounce.3000ms="patientName">
 
     <div wire:loading wire:target="searchPatient">
@@ -30,5 +30,5 @@
         </div>
     @endif
 
-    <button wire:click="addPatient">Add Patient</button>
+    <button wire:click="addPatient">Add patient</button>
 </div>

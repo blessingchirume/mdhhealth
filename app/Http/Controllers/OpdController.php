@@ -95,10 +95,6 @@ public function generateClaimForm(Episode $episode)
         // Load the view and generate the PDF
         $pdf = PDF::loadView('layouts.patients.episodes.claim-form-pdf', $data);
 
-        // Debugging: Dump the generated PDF content to check if it's empty
-        // dd($pdf->output());
-
-        // Render the PDF
         $pdf->render();
 
         // Output the PDF to the browser

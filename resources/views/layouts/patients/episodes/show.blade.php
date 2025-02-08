@@ -18,7 +18,7 @@
                     @endcan
 
                     <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-warning">
-                        <i class="fa fa-unlock"></i> Dischage Patient
+                        <i class="fa fa-unlock"></i> Dischage patient
                     </a>
                 </div>
             </div>
@@ -232,7 +232,7 @@
                                             <div class="timeline-body">
                                                 {{ $note->comment }}
                                             </div>
-                                            
+
                                             {{--<div class="timeline-footer">
                                                 <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                 <a href="#" class="btn btn-danger btn-sm">Delete</a>

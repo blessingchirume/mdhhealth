@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Patient &raquo; Create</h1>
+                <h1 class="m-0">patient &raquo; Create</h1>
             </div><!-- /.col -->
         </div><!-- /.row -->
     </div><!-- /.container-fluid -->
@@ -151,7 +151,7 @@
                                             <input class="form-control" name="guarantor_relationship" type="text" placeholder="Relationship" required>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

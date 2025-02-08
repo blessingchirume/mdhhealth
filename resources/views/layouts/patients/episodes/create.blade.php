@@ -50,10 +50,10 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label for="name">Patient Group</label>
+                                            <label for="name">patient Group</label>
                                             <select name="patient_type" class="form-control js-example-basic-single form-control multiple" style="padding: 6px 12px !important; width: 100% !important">
-                                                <option value="InPatient" selected="selected">In Patient</option>
-                                                <option value="OutPatient" selected="selected">Out Patient</option>
+                                                <option value="InPatient" selected="selected">In patient</option>
+                                                <option value="OutPatient" selected="selected">Out patient</option>
                                             </select>
                                         </div>
                                     </div>

@@ -33,7 +33,7 @@
                                         @foreach($currencies as $index => $currency)
                                         <th>{{ $currency->name }}</th>
                                         @endforeach
-                                        
+
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -5,7 +5,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\patient;
+use App\Models\Patient;
 
 class PatientAdmission extends Component
 {
@@ -34,7 +34,7 @@ class PatientAdmission extends Component
         $this->resetFields();
 
         if (!empty($this->patientName)) {
-            $this->patient = patient::where('name', 'like', '%' . $this->patientName . '%')->first();
+            $this->patient = Patient::where('name', 'like', '%' . $this->patientName . '%')->first();
         }
     }
 

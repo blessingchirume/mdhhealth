@@ -56,7 +56,7 @@
                                 <option value="{{ $item->id }}">{{ $item->item_description }}</option>
                                 @endforeach
                             </select>
-                            <input type="text" name="quantity[]" placeholder="Quantity Administered To Patient in {{ $item->si_unit }}" class="form-control" @if (count($category->items) == 0) value="0"
+                            <input type="text" name="quantity[]" placeholder="Quantity Administered To patient in {{ $item->si_unit }}" class="form-control" @if (count($category->items) == 0) value="0"
                             disabled @endif>
                         </div>
                         @endforeach

@@ -8,7 +8,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-                <span><strong>Patient: </strong></span>{{ $episode->patient->name.' '.$episode->patient->surname }}
+                <span><strong>patient: </strong></span>{{ $episode->patient->name.' '.$episode->patient->surname }}
             </div>
             <div class="col-md-1">
                 <span><strong>Age: </strong></span>{{ $age }}
@@ -33,9 +33,9 @@
             <h3 class="card-title">Select Tests</h3>
         </div>
         <div class="card-body">
-           
+
                 <div class="card">
-                   
+
                     <div class="card-body">
                             <div class="row">
                                 @foreach ($categories as $test)

@@ -52,7 +52,7 @@
                                                 <th>ID Number</th>
                                                 <th>Name</th>
                                                 <th>Surname</th>
-                                                <th>Patient Type</th>
+                                                <th>patient Type</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>

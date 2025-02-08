@@ -15,7 +15,7 @@
                         <h3>Post Partum Care <span class="float-right"><a href="{{ route('maternity.index') }}" class="btn btn-primary">Back</a></span></h3>
                     </div>
                     <div class="card-body">
-                    <legend>Patient Information</legend>
+                    <legend>patient Information</legend>
                         <div class="row">
                             <div class="col-md-4"><strong>Name:</strong> {{ $patient->name }}</div>
                             <div class="col-md-4"><strong>Surname:</strong> {{ $patient->surname }}</div>
@@ -36,11 +36,11 @@
                         <li class="nav-item">
                             <a class="nav-link" id="icd-10-codes-tab" data-toggle="pill" href="#icd-10-codes" role="tab" aria-controls="icd-10-codes" aria-selected="false">Infant</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" id="reviews-plan-tab" data-toggle="pill" href="#reviews-plan" role="tab" aria-controls="reviews-plan" aria-selected="false">Health Education Topic</a>
                         </li>
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" id="reviews-plan-tab" data-toggle="pill" href="#reviews-plan" role="tab" aria-controls="reviews-plan" aria-selected="false">Schedule Review</a>
                         </li>

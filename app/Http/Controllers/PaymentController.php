@@ -10,7 +10,7 @@ use App\Models\ChargeSheet;
 use App\Models\Designation;
 use App\Models\Episode;
 use App\Models\Item;
-use App\Models\patient;
+use App\Models\Patient;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +30,7 @@ class PaymentController extends Controller
     {
         $designations = Designation::all();
         $collection = Payment::all();
-        $patients = patient::all();
+        $patients = Patient::all();
         $attendees = User::all()->except(1);
         return view('layouts.payments.index', compact('collection', 'designations', 'patients', 'attendees'));
     }

@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Currency;
 use App\Models\Doctor;
 use App\Models\Episode;
-use App\Models\patient;
+use App\Models\Patient;
 use App\Models\Prescription;
 use App\Models\TheatreRooms;
 use App\Models\TreatmentPlan;
@@ -70,7 +70,7 @@ class PatientPaymentSelector extends Component
 
     public function render()
     {
-        $patients = patient::all();
+        $patients = Patient::all();
         $episodes = Episode::all();
         $theatres = TheatreRooms::all();
         $this->currencies = Currency::all();

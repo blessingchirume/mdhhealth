@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th>EpisodeCode</th>
-                        <th>Patient Name</th>
+                        <th>patient Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
