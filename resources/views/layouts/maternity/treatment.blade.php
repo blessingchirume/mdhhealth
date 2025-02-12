@@ -10,7 +10,7 @@
             <div class="col-md-4">
                 <div class="card mt-4">
                     <div class="card-header">
-                        <h3 class="card-title">Patient Information</h3>
+                        <h3 class="card-title">patient Information</h3>
                     </div>
                     <div class="card-body">
                         <p><strong>Name:</strong> {{ $patient->name }}</p>
@@ -51,7 +51,7 @@
                                             <td>{{ $item->start_dose }}</td>
                                             <td>Once</td>
                                             <td>Initial Dose</td>
-                                            
+
                                         </tr>
                                         @endif
                                         <tr>
@@ -59,7 +59,7 @@
                                             <td>{{ $item->dosage }}</td>
                                             <td>{{ $item->frequency }}</td>
                                             <td>{{ $item->duration }}</td>
-                                            
+
                                         </tr>
                                     @endforeach
                                 @endforeach
@@ -196,7 +196,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="col-sm-12 col-md-3">
                                                     <div class="form-group">
                                                         <label for="dosage">Quantity</label>

@@ -11,7 +11,7 @@ use App\Models\Gurantor;
 use App\Models\Item;
 use App\Models\NextOfKeen;
 use App\Models\Note;
-use App\Models\patient;
+use App\Models\Patient;
 use App\Models\PatientMedicalAidEntry;
 use App\Models\Payment;
 use App\Models\Vital;
@@ -35,12 +35,12 @@ class EpisodeController extends Controller
         return view('layouts.patients.episodes.index', compact('episodes'));
     }
 
-    public function create(patient $patient)
+    public function create(Patient $patient)
     {
         return view('layouts.patients.episodes.create', compact('patient'));
     }
 
-    public function store(Request $request, patient $patient)
+    public function store(Request $request, Patient $patient)
     {
 
         // dd($request);
@@ -96,7 +96,7 @@ class EpisodeController extends Controller
             "checkin" => date('Y-m-d'),
         ]);
 
-        // $data["patient_id"] = 'MDHP' . rand(00000, 99999);
+        // $data["patient_id"] = 'AGHS' . rand(00000, 99999);
 
         // Patient::create($data);
 

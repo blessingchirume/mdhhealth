@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\branch>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Partner>
  */
-class BranchFactory extends Factory
+class PartnerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class BranchFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->text(15),
+            'code' => 'AGHS'. rand(000000, 999999),
+            'name' => 'First Mutual Life Assurance'
         ];
     }
 }

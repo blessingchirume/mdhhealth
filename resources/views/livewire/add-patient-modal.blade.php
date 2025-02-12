@@ -1,7 +1,7 @@
 <div class="modal-body">
     <ul class="nav nav-tabs" style="cursor:disabled;">
         <li class="nav-item">
-            <a class="nav-link {{ $currentStage == 1 ? 'active' : '' }}">Patient Details</a>
+            <a class="nav-link {{ $currentStage == 1 ? 'active' : '' }}">patient Details</a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{ $currentStage == 2 ? 'active' : '' }}">Payment Method</a>
@@ -28,11 +28,11 @@
 
     <div class="tab-content mt-2">
         <div class="tab-pane fade {{ $currentStage == 1 ? 'show active' : '' }}" id="patient-details" role="tabpanel">
-            <!-- Patient Details Form Section -->
+            <!-- patient Details Form Section -->
             <form wire:submit.prevent="addPatient">
-                <!-- Patient Details Form Fields -->
+                <!-- patient Details Form Fields -->
                 <div class="form-group">
-                    <label for="search">Search Patient</label>
+                    <label for="search">Search patient</label>
                     <input type="text" class="form-control" wire:model.debounce.300ms="search" id="search">
                     <div class="mt-2">
                         @foreach ($existingPatients as $patient)
@@ -121,7 +121,9 @@
             <div class="form-group">
                 <label for="payment-mode">Payment Mode</label>
                 <select class="form-control" wire:model="paymentOption" id="payment-mode">
-                    <option value="1">Cash</option>
+                    @foreach($paymentOptions as $method)
+                        <option value="{{ $method->id }}">{{ $method->name }}</option>
+                    @endforeach
                     <option value="2">Medical Aid</option>
                 </select>
             </div>

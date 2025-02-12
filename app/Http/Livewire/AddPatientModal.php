@@ -188,7 +188,7 @@ class AddPatientModal extends Component
                     'phone' => $this->phone,
                     'email' => $this->email,
                     'national_id' => $this->national_id,
-                    'patient_id' => 'MDHP' . rand(00000, 99999),
+                    'patient_id' => 'AGHS' . rand(00000, 99999),
                 ]);
 
                 $this->selectedPatientId = $newPatient->id;

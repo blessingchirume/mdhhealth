@@ -25,7 +25,7 @@ use App\Http\Controllers\TheatreController;
 use App\Http\Controllers\SurgeryController;
 use App\Http\Controllers\NurseController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\ICUAdmissionController;
+use App\Http\Controllers\IcuAdmissionController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\MaternityController;
 use App\Http\Controllers\RadiologyController;
@@ -275,7 +275,7 @@ Route::prefix('/transfers')->group(function () {
     Route::post('/store', [App\Http\Controllers\TransferController::class, 'store'])->name('patient.transfer');
 });
 
-Route::get('/claim/{episode}', [App\Http\Controllers\OPDController::class, 'generateClaimForm'])->name('claim-form');
+Route::get('/claim/{episode}', [App\Http\Controllers\OpdController::class, 'generateClaimForm'])->name('claim-form');
 
 Route::prefix('/opd')->group(function () {
     Route::get('/', [App\Http\Controllers\OpdController::class, 'index'])->name('opd.index');
@@ -348,10 +348,10 @@ Route::prefix('/staff')->group(function () {
 });
 
 Route::prefix('/icu')->group(function () {
-    Route::get('/', [ICUAdmissionController::class, 'index'])->name('icu');
-    Route::get('/create', [ICUAdmissionController::class, 'create'])->name('icu.create');
-    Route::post('/', [ICUAdmissionController::class, 'store'])->name('icu.store');
-    Route::get('/admissions/{id}', [ICUAdmissionController::class, 'show'])->name('icu.show');
+    Route::get('/', [IcuAdmissionController::class, 'index'])->name('icu');
+    Route::get('/create', [IcuAdmissionController::class, 'create'])->name('icu.create');
+    Route::post('/', [IcuAdmissionController::class, 'store'])->name('icu.store');
+    Route::get('/admissions/{id}', [IcuAdmissionController::class, 'show'])->name('icu.show');
 });
 
 Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);

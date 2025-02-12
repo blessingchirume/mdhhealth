@@ -78,7 +78,7 @@
     <br>
     <table>
     @foreach ($items as $item)
-        @for($i = 0; $i < 10; $i++) 
+        @for($i = 0; $i < 10; $i++)
         <tr>
             <td>&nbsp;&nbsp;&nbsp;{{ $item->item->tariff_code??'' }}</td>
          </tr>

@@ -8,14 +8,14 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <input type="text" id="searchInput" class="form-control float-right" style="width: 25%"
-                        placeholder="Search by Episode Code/ Patient Name">
+                        placeholder="Search by Episode Code/ patient Name">
                 </div>
             </div>
             <table class="table table-bordered table-striped data-table" id="OPDtable">
                 <thead>
                     <tr>
                         <th width="14%">EpisodeCode</th>
-                        <th>Patient Name</th>
+                        <th>patient Name</th>
                         <th width="20%">Visit Type</th>
                         <th width="20%">Actions</th>
                     </tr>
@@ -45,22 +45,22 @@
                                     </a>&emsp;
                                     <a href="{{ route('opd.treatment', $episode->id) }}" title="Administer Treatment"><i
                                             class="fas fa-user-nurse"></i></a>
-                                
+
                                 &emsp;
-                                <a href="#" title="Transfer Patient" data-toggle="modal"
+                                <a href="#" title="Transfer patient" data-toggle="modal"
                                     data-target="#transferPatientModal{{ $episode->id }}"><i
                                         class="fas fa-ambulance"></i></a>
 
                                 &emsp;
                                 <a href="#" onclick="openAndPrint('{{ route('opd.print', $episode->id) }}')"
                                     title="Print" target="_blank"><i class="fa fa-print"></i></a>
-                                <!-- Transfer Patient Modal -->
+                                <!-- Transfer patient Modal -->
                                 <div class="modal fade" id="transferPatientModal{{ $episode->id }}" tabindex="-1"
                                     role="dialog" aria-labelledby="transferPatientModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="transferPatientModalLabel">Transfer Patient</h5>
+                                                <h5 class="modal-title" id="transferPatientModalLabel">Transfer patient</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- End Transfer Patient Modal -->
+                                <!-- End Transfer patient Modal -->
                             </td>
                         </tr>
                     @endforeach
@@ -96,7 +96,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addPatientModalLabel">Add New Patient to OPD Queue</h5>
+                    <h5 class="modal-title" id="addPatientModalLabel">Add New patient to OPD Queue</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -134,7 +134,7 @@
                             <label for="destination_id">Select Destination</label>
                             <select class="form-control" id="destination_id" name="destination_id">
                                 <option value="">-- Select Destination --</option>
-                                <option value="Discharge">Send Patient Home</option>
+                                <option value="Discharge">Send patient Home</option>
                                 @foreach ($designations as $destination)
                                     <option value="{{ $destination->name }}">{{ $destination->name }}</option>
                                 @endforeach

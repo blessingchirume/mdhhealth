@@ -14,7 +14,7 @@
       <p class="card-text">Start Time: {{ \Carbon\Carbon::parse($appointment->start_time)->format('H:i A') }}</p>
       <p class="card-text">End Time: {{ \Carbon\Carbon::parse($appointment->end_time)->format('H:i A') }}</p>
       <p class="card-text">Doctor: {{ $appointment->doctor->name }}</p>
-      <p class="card-text">Patient: {{ $appointment->patient->name .' '.$appointment->patient->surname}}</p>
+      <p class="card-text">patient: {{ $appointment->patient->name .' '.$appointment->patient->surname}}</p>
 <p class="card-text">Purpose Of Visit: {{$appointment->booking_comment}}</p>
     </div>
   </div>

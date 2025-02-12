@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css"> -->
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/jquery-editable/css/jquery-editable.css" rel="stylesheet" />
@@ -34,7 +36,7 @@
     @yield('styles')
 </head>
 
-<body class="hold-transition sidebar-mini sidebar-collapse">
+<body class="hold-transition sidebar-mini ">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -42,11 +44,11 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside style="background-color: #162137;" class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="/" class="brand-link">
-                <img src="{{ asset('images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">{{ config('app.name') }}</span>
+                <img src="{{ asset('images/AGI_HMS_logo_trans.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-0">
+                <!-- <span class="brand-text font-weight-light">{{ config('app.name') }}</span> -->
             </a>
             @include('layouts.navigation')
         </aside>
@@ -73,7 +75,7 @@
             <!-- To the right -->
 
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2019 - {{ date('Y') }} <a href="https://www.sohna.net">sohna.net</a>.</strong>
+            <strong>Copyright &copy; 2019 - {{ date('Y') }} <a href="https://www.agimedix.co.zw">Agimedix</a>.</strong>
             All rights reserved.
         </footer>
     </div>

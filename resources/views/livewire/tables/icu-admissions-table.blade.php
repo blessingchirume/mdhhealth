@@ -43,7 +43,7 @@
                     </a>
                     <a href="#" wire:click="sortBy('admission.name')"
                         class="btn btn-sm {{ $sort == 'admission.name' ? ($direction == 'asc' ? 'btn-primary' : 'btn-info') : 'btn-light' }}">
-                        Patient &nbsp;
+                        patient &nbsp;
                         @if ($sort == 'admission.name')
                             <i class="fas fa-sort-{{ $direction }}"></i>
                         @endif
@@ -79,7 +79,7 @@
                     <tr>
                         <th>#</th>
                         <th>Episode Code</th>
-                        <th>Patient</th>
+                        <th>patient</th>
                         <th>Admission Date</th>
                         <th>Discharge Date</th>
                         <th>Status</th>

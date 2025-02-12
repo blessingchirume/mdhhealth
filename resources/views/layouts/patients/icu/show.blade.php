@@ -9,7 +9,7 @@
                 <h1 class="m-0">{{ $episode->episode_code }}</h1>
                 <div class="float-right btn-group btn-group-sm">
                     <a href="{{ route('episode.create-chargesheet', $episode) }}" class="btn btn-warning">
-                        <i class="fa fa-unlock"></i> Dischage Patient
+                        <i class="fa fa-unlock"></i> Dischage patient
                     </a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                         <div class="card-header">
                             <h4 class="float-left">Vitals</h4>
                             <div class="float-right btn-group btn-group-sm">
-                                @can(App\constants\PermisionConstants::createVital)
+                                @can(App\Constants\PermisionConstants::createVital)
                                 <button data-toggle="modal" data-target="#add-vital-modal" type="button" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </button>
@@ -114,9 +114,9 @@
                                     <form method="post" action="">
                                         {{ csrf_field() }}
                                         <div class="row">
-                                            
+
                                         </div>
-                                       
+
                                     </form>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
             <div class="col-lg-4">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="float-left">Patient Details</h4>
+                        <h4 class="float-left">patient Details</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped">
@@ -137,7 +137,7 @@
                                     <td><strong>Name</strong></td>
                                     <td>{{ $episode->patient->name }}</td>
                                 </tr>
-                                
+
                                 <tr>
                                     <td><strong>Gender</strong></td>
                                     <td>{{ $episode->patient->gender }}</td>

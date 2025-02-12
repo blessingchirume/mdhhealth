@@ -15,7 +15,7 @@
                         <h3>ANC Record<span class="float-right"><a href="{{ route('maternity.index') }}" class="btn btn-primary">Back</a></span></h3>
                     </div>
                     <div class="card-body">
-                        <legend>Patient Information</legend>
+                        <legend>patient Information</legend>
                         <div class="row">
                             <div class="col-md-4"><strong>Name:</strong> {{ $patient->name }}</div>
                             <div class="col-md-4"><strong>Surname:</strong> {{ $patient->surname }}</div>

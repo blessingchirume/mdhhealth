@@ -2,9 +2,9 @@
     @if($patients)
         <div  class="row">
             <div class="col-md-6">
-                <label for="patient">Select Patient:</label>
+                <label for="patient">Select patient:</label>
                 <select wire:model="selectedPatient" class="form-control" id="patient" name="patient">
-                    <option value="">Select Patient</option>
+                    <option value="">Select patient</option>
                     @foreach ($patients as $patient)
                         <option value="{{ $patient->id }}">{{ $patient->name }}</option>
                     @endforeach

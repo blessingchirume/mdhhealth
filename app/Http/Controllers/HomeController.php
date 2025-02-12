@@ -6,7 +6,7 @@ use App\Models\Designation;
 use App\Models\Episode;
 use App\Models\Menu;
 use App\Models\Partner;
-use App\Models\patient;
+use App\Models\Patient;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,14 +27,12 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        // dd(session()->get('menu'));
         $revenue = Episode::all()->sum('base_amount');
         $payment = Payment::all()->sum('amount');
         $acruals = Episode::where('amount_due', '>', '0')->sum('amount_due');
 
         $analytics = [
-            'patients' => patient::all()->count(),
+            'patients' => Patient::all()->count(),
             'partners' => Partner::all()->count(),
             'departments' => Designation::all()->count(),
             'users' => User::all()->count(),

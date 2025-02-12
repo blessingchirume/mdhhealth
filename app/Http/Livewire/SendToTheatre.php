@@ -40,7 +40,7 @@ class SendToTheatre extends Component
 
     public function render()
     {
-        $patients = Patient::all(); 
+        $patients = Patient::all();
         $episodes = Episode::all();
         $theatres = TheatreRooms::all();
         $doctors = Doctor::getDoctors();

@@ -12,7 +12,7 @@
                     <tr>
                         <th>#</th>
                         <th>Episode Code</th>
-                        <th>Patient</th>
+                        <th>patient</th>
                         <th>Admission Date</th>
                         <th>Discharge Date</th>
                         <th>Status</th>

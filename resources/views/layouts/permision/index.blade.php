@@ -24,7 +24,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="{{ url()->previous() }}" class="btn btn-primary bg-gradient-secondary ">Back</a>
 
                         <button type="button" class="float-right btn btn-primary" data-toggle="modal" data-target="#modal-default">
                             <i class="fa fa-plus"></i> Generate
@@ -52,7 +51,7 @@
                                     <td>{{ $role->created_at }}</td>
                                     <td>{{ $role->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('role.show', $role)}}" type="button" class='btn btn-secondary btn-sm'>
+                                        <a href="{{ route('role.show', $role)}}" class=''>
                                             <i class="fas fa-eye"></i> view
                                         </a>
 

@@ -1,0 +1,56 @@
+.brand-link {
+
+}
+
+.brand-image {
+
+}
+
+.img-circle {
+    border-radius: 0px !important;
+
+}
+
+.brand-link img {
+    width: 200px !important;
+    /* height: auto !important; */
+}
+
+[class*=sidebar-dark] .brand-link {
+    border-bottom: 1px solid transparent !important;
+}
+
+.brand-link .brand-image {
+    max-height: 200px !important;
+
+}
+
+.btn-primary {
+    background-color: #E68244;
+    border-color: #E68244;
+    color: #FFFFFF !important;
+}
+
+.btn-primary:hover {
+    background-color: #DB5300;
+    border-color: #DB5300;
+    color: #FFFFFF !important;
+}
+
+a {
+    color: #162137 !important; 
+}
+
+.card-header {
+    background-color: #2C3F82;
+    color: #FFFFFF !important;
+}
+
+.main-footer {
+    /* background-color: #2C3F82; */
+    color: #DB5300;
+}
+
+.main-footer strong a {
+    color: #DB5300 !important;
+}

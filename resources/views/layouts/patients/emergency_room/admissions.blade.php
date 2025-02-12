@@ -30,11 +30,11 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="patcategory">In/Out Patient:</label>
+                        <label for="patcategory">In/Out patient:</label>
                         <select type="text" id="patcategory" name="patcategory" class="form-control">
                             <option value="">-- Select --</option>
-                            <option value="In-Patient">In-Patient</option>
-                            <option value="Out-Patient">Out-Patient</option>
+                            <option value="In-patient">In-patient</option>
+                            <option value="Out-patient">Out-patient</option>
                         </select>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-                <button type="submit" class="btn btn-primary">Admit Patient</button>
+                <button type="submit" class="btn btn-primary">Admit patient</button>
             </form>
         </div>
     </div>

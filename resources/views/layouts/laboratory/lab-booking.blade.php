@@ -8,7 +8,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-4">
-                <span><strong>Patient: </strong></span>{{ $episode->patient->name.' '.$episode->patient->surname }}
+                <span><strong>patient: </strong></span>{{ $episode->patient->name.' '.$episode->patient->surname }}
             </div>
             <div class="col-md-1">
                 <span><strong>Age: </strong></span>{{ $age }}

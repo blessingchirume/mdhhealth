@@ -50,10 +50,10 @@
 </head>
 <body onblur="window.close()">
     <div class="container">
-        <h1>Patient Episode Details</h1>
+        <h1>patient Episode Details</h1>
         <table class="table table-borderless">
             <tr>
-                <th width="20%">Patient Name:</th>
+                <th width="20%">patient Name:</th>
                 <td>{{ $episode->patient->name }} {{ $episode->patient->surname }}</td>
             </tr>
             <tr>

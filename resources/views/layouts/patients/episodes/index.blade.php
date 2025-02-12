@@ -6,7 +6,7 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Patient Name</th>
+          <th>patient Name</th>
           <th>Episodes</th>
         </tr>
       </thead>

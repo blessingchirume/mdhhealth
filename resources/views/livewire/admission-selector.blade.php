@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label for="admit_to">Send Patient To</label>
+                <label for="admit_to">Send patient To</label>
                 <select wire:model="admitedTo" class="form-control" id="admit_to" name='admit_to'>
                     <option>-- Select Option --</option>
                     @foreach ( $wards as $ward )
@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="origin">Short/ Brief Description:</label>
-                    <input type="text" id="reason" name="reason_for_admission" class="form-control" placeholder="e.g Accident Victim/ Transfer Patient">
+                    <input type="text" id="reason" name="reason_for_admission" class="form-control" placeholder="e.g Accident Victim/ Transfer patient">
                 </div>
             </div>
             @elseif ($selectedWard->name == 'Theatre')

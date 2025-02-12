@@ -18,7 +18,7 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="float-right btn-group btn-group-sm">
-                                @can(App\constants\PermisionConstants::createPatient)
+                                @can(App\Constants\PermisionConstants::createPatient)
                                 <a href="{{ route('patient.create') }}" class="btn btn-primary">
                                     <i class="fa fa-plus"></i> Generate
                                 </a>
@@ -29,7 +29,7 @@
                             <table id="table1" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>Patient ID</th>
+                                        <th>patient ID</th>
                                         <th>ID Number</th>
                                         <th>Name</th>
                                         <th>Surname</th>
@@ -57,10 +57,10 @@
                                         <td>{{ $value->address }}</td>
                                         <td>
                                             <center>
-                                                @can(App\constants\PermisionConstants::viewPatient)
+                                                @can(App\Constants\PermisionConstants::viewPatient)
                                                 <a href="{{ route('patient.show', $value)}}"><i class="fa fa-eye success mr-4"></i></a>
                                                 @endcan
-                                                @can(App\constants\PermisionConstants::updatePatient)
+                                                @can(App\Constants\PermisionConstants::updatePatient)
                                                 <a href="{{ route('patient.edit', $value)}}"><i class="fa fa-edit success"></i></a>
                                                 @endcan
                                             </center>
