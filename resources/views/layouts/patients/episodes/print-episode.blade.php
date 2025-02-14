@@ -78,7 +78,7 @@
             </tr>
         </table>
 
-        <table class="table table-striped table-bordered mt-5">
+        <table class="table  nowrap align-middle mt-5">
             <thead>
                 <tr>
                     <th>Item</th>

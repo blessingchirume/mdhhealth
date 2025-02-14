@@ -32,7 +32,7 @@
         }
 
         .btn-custom {
-            background-color: #27477A;
+            background-color: #2C3F82;
             color: white;
             width: 100%;
             border: none;

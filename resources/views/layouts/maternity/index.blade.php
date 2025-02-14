@@ -9,7 +9,7 @@
                 <input type="text" id="searchInput" class="form-control float-right" style="width: 25%" placeholder="Search by Episode Code/ patient Name">
             </div>
         </div>
-        <table class="table table-bordered table-striped data-table" id="MATERNITYtable">
+        <table class="table  nowrap align-middle data-table" id="MATERNITYtable">
             <thead>
                 <tr>
                     <th width="14%">EpisodeCode</th>

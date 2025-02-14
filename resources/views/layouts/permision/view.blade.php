@@ -32,7 +32,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example" class="table table-bordered table-striped">
+                        <table id="example" class="table  nowrap align-middle">
                             <tbody>
                                 <tr>
                                     <td>{{ $role->name }}</td>
@@ -67,7 +67,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="example1" class="table  nowrap align-middle">
                             <thead>
                                 <tr>
                                     <th>Id</th>

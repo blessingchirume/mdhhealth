@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table1" class="table table-striped table-bordered">
+                                    <table id="table1" class="table  nowrap align-middle">
                                         <thead>
                                             <tr>
                                                 <th>Episode Code</th>
@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table1" class="table table-striped table-bordered">
+                                    <table id="table1" class="table  nowrap align-middle">
                                         <thead>
                                             <tr>
                                                 <th>Episode Code</th>

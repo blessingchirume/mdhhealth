@@ -28,6 +28,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\IcuAdmissionController;
 use App\Http\Controllers\BedController;
 use App\Http\Controllers\MaternityController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\RadiologyController;
 use App\Http\Controllers\ScanCategoryController;
 
@@ -73,6 +74,12 @@ Route::middleware('auth')->group(function () {
     Route::post('store', [\App\Http\Controllers\UserController::class, 'store'])->name('users.store');
     Route::patch('update/{user}', [\App\Http\Controllers\UserController::class, 'update'])->name('users.update');
     Route::get('destroy/{user}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
+
+    Route::get('/menus', [MenuController::class, 'index'])->name('menus.index');
+    Route::post('/menus/{id}/update', [MenuController::class, 'update'])->name('menus.update');
+    Route::get('/menus/{id}/children', function ($id) {
+        return response()->json(App\Models\Menu::where('parent_id', $id)->pluck('id')->toArray());
+    });
 });
 
 Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
@@ -154,12 +161,11 @@ Route::prefix('ward')->group(function () {
     Route::post('/{ward}/delete', [WardController::class, 'destroy'])->name('ward.delete');
     Route::post('/{ward}/restore', [WardController::class, 'restore'])->name('ward.restore');
     Route::get('/{ward}/beds', [WardController::class, 'beds'])->name('ward.beds');
-
 });
 Route::prefix('/payment')->group(function () {
     Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
     Route::get('/create', [PaymentController::class, 'create'])->name('payment.create');
-    Route::post('/', [PaymentController::class, 'makeAccountReceivableInvoice'])->name('payment.store');
+    Route::post('/', [PaymentController::class, 'store'])->name('payment.store');
 });
 
 Route::prefix('/role')->group(function () {
@@ -258,7 +264,6 @@ Route::prefix('/vitals')->group(function () {
 Route::prefix('/treatment')->group(function () {
     Route::get('/show/{episode}', [TreatmentController::class, 'show'])->name('patient.treatments.view');
     Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
-
 });
 
 Route::prefix('/prescription')->group(function () {
@@ -354,18 +359,18 @@ Route::prefix('/icu')->group(function () {
     Route::get('/admissions/{id}', [IcuAdmissionController::class, 'show'])->name('icu.show');
 });
 
-Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
-Route::post('/upload/{episode}', [App\Http\Controllers\UploadController::class,'store'])->name('upload.store');
+Route::get('/upload', [App\Http\Controllers\UploadController::class, 'index']);
+Route::post('/upload/{episode}', [App\Http\Controllers\UploadController::class, 'store'])->name('upload.store');
 
 
-Route::prefix('/radiology')->group(function(){
-    Route::get('/',[RadiologyController::class,'index'])->name('radiology.index');
-    Route::get('/bookings',[RadiologyController::class,'bookings'])->name('radiology.bookings');
-    Route::get('/book/{episode}',[RadiologyController::class,'create'])->name('scan-booking');
-    Route::post('/scan-billing',[RadiologyController::class,'bill'])->name('scan.payment');
-    Route::post('/save-scan-booking/{episode}',[RadiologyController::class,'store'])->name('scan-booking.store');
-    Route::get('/create',[ScanCategoryController::class,'create'])->name('scan.create');
-    Route::post('/save-scan',[ScanCategoryController::class,'store'])->name('scan.store');
+Route::prefix('/radiology')->group(function () {
+    Route::get('/', [RadiologyController::class, 'index'])->name('radiology.index');
+    Route::get('/bookings', [RadiologyController::class, 'bookings'])->name('radiology.bookings');
+    Route::get('/book/{episode}', [RadiologyController::class, 'create'])->name('scan-booking');
+    Route::post('/scan-billing', [RadiologyController::class, 'bill'])->name('scan.payment');
+    Route::post('/save-scan-booking/{episode}', [RadiologyController::class, 'store'])->name('scan-booking.store');
+    Route::get('/create', [ScanCategoryController::class, 'create'])->name('scan.create');
+    Route::post('/save-scan', [ScanCategoryController::class, 'store'])->name('scan.store');
 });
 
 Route::prefix('/maternity')->group(function () {
@@ -373,12 +378,12 @@ Route::prefix('/maternity')->group(function () {
     Route::get('/{patient}', [App\Http\Controllers\MaternityController::class, 'show'])->name('maternity.show');
     Route::get('/bill/{episode}', [App\Http\Controllers\MaternityController::class, 'bill'])->name('maternity.bill');
     Route::get('/consult/{episode}', [App\Http\Controllers\MaternityController::class, 'consult'])->name('maternity.consult');
-    Route::post('/gen-assessment/{episode}',[MaternityController::class,'recordGenAssessment'])->name('anc.assessment');
+    Route::post('/gen-assessment/{episode}', [MaternityController::class, 'recordGenAssessment'])->name('anc.assessment');
     Route::get('/treatment/{episode}', [App\Http\Controllers\MaternityController::class, 'treatment'])->name('maternity.treatment');
     Route::post('/administer-treatment/{episode}', [TreatmentController::class, 'recordTreatment'])->name('administer-treatment');
     Route::get('/print/{episode}', [App\Http\Controllers\MaternityController::class, 'print'])->name('maternity.print');
     Route::post('/add-sundries/{episode}', [TreatmentController::class, 'addSundries'])->name('treatment-sundries');
-    Route::post('/save-education-topics/{episode}',[MaternityController::class, 'saveTopics'])->name('save-education-topics');
-    Route::post('/save-maternity-remarks/{episode}',[MaternityController::class, 'saveRemarks'])->name('save-maternity-remarks');
-    Route::post('/obstestric-examination/{episode}',[MaternityController::class, 'saveObsExam'])->name('obs-examination');
+    Route::post('/save-education-topics/{episode}', [MaternityController::class, 'saveTopics'])->name('save-education-topics');
+    Route::post('/save-maternity-remarks/{episode}', [MaternityController::class, 'saveRemarks'])->name('save-maternity-remarks');
+    Route::post('/obstestric-examination/{episode}', [MaternityController::class, 'saveObsExam'])->name('obs-examination');
 });

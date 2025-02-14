@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-bordered table-striped">
+    <table class="table  nowrap align-middle">
         <thead>
             <tr>
                 <th width="85%">Remarks / Treatment / Comment</th>

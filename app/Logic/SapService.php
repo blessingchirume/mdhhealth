@@ -9,7 +9,7 @@ class SapService
 {
     // const BASE_url = "https://192.168.1.100:50000/b1s/v1/";
 
-    const BASE_url = "https://10.0.2.21:50000/b1s/v1/";
+    const BASE_url = "http://161.97.141.124:8005/api/";
 
     // const BASE_url = "https://172.16.16.9:50000/b1s/v1/";
 
@@ -17,7 +17,7 @@ class SapService
 
     const MAKE_ACCOUNTS_RECEIVABLE_INVOICE_URL = "/Invoices";
 
-    // const MAKE_INVENTORY_TRANSFER_URL = "/CreateIncomingPayment";
+    const AUTH_URL = "auth/login";
 
     // const BASE_url = "https://192.168.1.104:50000/b1s/v1/";
 

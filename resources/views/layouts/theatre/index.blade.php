@@ -8,7 +8,7 @@
                 <a href="{{ route('send_to_theatre') }}" class="btn btn-primary float-right">Add patient to Theatre Queue</a>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-striped">
+                <table class="table  nowrap align-middle">
                     <thead>
                         <tr>
                             <th>patient Name</th>

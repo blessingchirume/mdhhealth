@@ -315,7 +315,7 @@ class AddPatientModal extends Component
             $data["patient_type"] = 'OutPatient';
             $data["payment_option_id"] = $this->paymentOption;
             $data['visit_purpose'] = ($this->visitPurpose != 'other') ? $this->visitPurpose : $this->otherVisitPurpose;
-            $data['ward'] = $this->ward;
+            $data['ward'] = $this->ward ?? "unspecified";
             $data['attendee'] = 'OPD';
             $data["date"] = date('Y-m-d');
 

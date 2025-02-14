@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('attendee');
             $table->double('base_amount')->default(0.00);
             $table->double('amount_due')->default(0.00);
-            $table->string('ward');
+            $table->string('ward')->nullable();
             $table->timestamps();
 
             $table->foreign('payment_option_id')->references('id')->on('payment_options')->onDelete('set null');

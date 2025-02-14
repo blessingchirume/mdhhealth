@@ -46,7 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table1" class="table table-striped table-bordered">
+                                    <table id="table1" class="table  nowrap align-middle">
                                         <thead>
                                             <tr>
                                                 <th>ID Number</th>
@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table1" class="table data-table table-bordered">
+                                    <table id="table1" class="table nowrap align-middle">
                                         <thead>
                                             <tr>
                                                 <th>Item Code</th>
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <table id="table1" class="table table-striped table-bordered">
+                                    <table id="table1" class="table  nowrap align-middle">
                                         <thead>
                                             <tr>
                                                 <th>Reading Number</th>

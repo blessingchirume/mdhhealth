@@ -54,3 +54,12 @@ a {
 .main-footer strong a {
     color: #DB5300 !important;
 }
+
+.dropdown-menu {
+    box-shadow: rgba(30, 32, 37, 0.12) 0px 5px 10px;
+    animation-name: DropDownSlide;
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+    position: absolute;
+    z-index: 1000;
+}

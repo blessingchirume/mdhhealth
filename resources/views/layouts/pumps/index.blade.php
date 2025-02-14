@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table id="table2" class="table table-striped table-bordered">
+                            <table id="table2" class="table  nowrap align-middle">
                                 <thead>
                                     <tr>
                                         <th>Pump Code</th>
