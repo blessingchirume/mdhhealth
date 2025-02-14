@@ -26,8 +26,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="card-body p-0">
-                        <table id="table1" class="table data-table table-bordered">
+                    <div class="card-body p-3">
+                        <table id="table1" class="table  nowrap align-middle">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -51,13 +51,22 @@
                                     <td>{{ $value->created_at }}</td>
                                     <td>{{ $value->updated_at }}</td>
                                     <td>
-                                        <a href="{{ route('designation.ward.index', $value->id) }}">
-                                            <i class="fas fa-bed"></i>
-                                        </a>
-
-                                        <a href="{{ route('designation.edit', $value->id) }}">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                    <center>
+                                            <div class="dropdown d-inline-block">
+                                                <button class="btn btn-soft-secondary btn-sm dropdown" type="button" data-toggle="dropdown" aria-expanded="false">
+                                                    <i class="fa fa-cog fa-lg m-2 align-middle"></i>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                    <li><a href="{{ route('designation.ward.index', $value->id) }}" class="dropdown-item"><i class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
+                                                    <li><a href="{{ route('designation.edit', $value->id) }}" class="dropdown-item edit-item-btn text-primary"><i class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a></li>
+                                                    <li>
+                                                        <a href="" class="dropdown-item remove-item-btn">
+                                                            <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </center>
                                     </td>
                                 </tr>
                                 @endforeach

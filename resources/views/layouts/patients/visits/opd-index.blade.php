@@ -11,7 +11,7 @@
                         placeholder="Search by Episode Code/ patient Name">
                 </div>
             </div>
-            <table class="table table-bordered table-striped data-table" id="OPDtable">
+            <table class="table  nowrap align-middle data-table" id="OPDtable">
                 <thead>
                     <tr>
                         <th width="14%">EpisodeCode</th>

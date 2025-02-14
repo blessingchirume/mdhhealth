@@ -5,7 +5,7 @@
         <div class="card-body">
             <h1>Patients List<div class="float-right"><a href="{{route('radiology.bookings')}}" class="btn btn-primary">Radiology Bookings</a></div></h1>
             <p class="info">Click on the "Book Scan" button to book patient For Radiology</p>
-            <table class="table table-bordered table-striped data-table">
+            <table class="table  nowrap align-middle data-table">
                 <thead>
                     <tr>
                         <th>EpisodeCode</th>

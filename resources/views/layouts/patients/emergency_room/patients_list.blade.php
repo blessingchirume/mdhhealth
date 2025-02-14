@@ -4,7 +4,7 @@
     <div class="card m-3">
         <div class="card-body">
             <h2>Patients in Emergency Room</h2>
-            <table class="table table-striped table-bordered">
+            <table class="table  nowrap align-middle">
                 <tr>
                     <th>Patients Name</th>
                     <th>Age</th>

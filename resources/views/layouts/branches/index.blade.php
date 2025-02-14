@@ -20,7 +20,7 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body p-0">
-                        <table id="table1" class="table data-table table-bordered">
+                        <table id="table1" class="table nowrap align-middle">
                             <thead>
                                 <tr>
                                     <th>Name</th>

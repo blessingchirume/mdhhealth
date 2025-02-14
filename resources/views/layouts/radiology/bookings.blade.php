@@ -9,7 +9,7 @@
                     <a href="{{ route('radiology.index') }}" class="btn btn-primary">Back</a>
                 </div>
             </h1>
-            <table class="table table-bordered table-striped data-table">
+            <table class="table  nowrap align-middle data-table">
                 <thead>
                     <tr>
                         <th>EpisodeCode</th>

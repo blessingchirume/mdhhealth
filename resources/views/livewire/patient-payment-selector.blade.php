@@ -108,7 +108,7 @@
         @endforeach
         <br />
         @endif--}}
-        <button type="submit" wire:click="sendToTheatre({{$selectedEpisode}})" class="btn btn-primary" id="sendToTheatreBtn">Confirm</button>
+        <button type="submit" class="btn btn-primary" id="sendToTheatreBtn">Confirm</button>
         @endif
         @endif
     </form>

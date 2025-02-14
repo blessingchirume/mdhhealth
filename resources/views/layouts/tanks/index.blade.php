@@ -28,7 +28,7 @@
                     </div>
                     <div class="card-body">
 
-                        <table id="table1" class="table table-bordered table-striped">
+                        <table id="table1" class="table  nowrap align-middle">
                             <thead>
                                 <tr>
                                     <th>Name</th>

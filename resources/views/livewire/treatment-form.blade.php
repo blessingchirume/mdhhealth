@@ -2,7 +2,7 @@
     <form wire:submit.prevent="submit">
         <h4>Medication</h4>
         <!-- Your medication form structure -->
-        <table class="table table-bordered table-striped">
+        <table class="table  nowrap align-middle">
             <!-- Table header -->
             <thead>
                 <!-- Header row -->
@@ -88,7 +88,7 @@
             </tbody>
         </table>
         <h4>Procedures / Services</h4>
-        <table class="table table-bordered table-striped">
+        <table class="table  nowrap align-middle">
             <!-- Selected procedures rows -->
             <tbody>
                 <!-- Iterate through selected procedures -->

@@ -8,7 +8,7 @@
                 <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addTheatreRoomModal">Add Theatre Room</button>
             </div>
             <div class="card-body">
-                <table class="table table-bordered table-striped">
+                <table class="table  nowrap align-middle">
                     <thead>
                         <tr>
                             <th>Room Name</th>
