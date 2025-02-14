@@ -53,7 +53,7 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $value->item_code }}</td>
                                     <td>{{ $value->item_description }}</td>
-                                    <td>{{ $value->group->name }}</td>
+                                    <td>{{ $value->group->name ?? '' }}</td>
                                     <td>{{ $value->si_unit }}</td>
                                     <td>{{ $value->price_unit }}</td>
                                     <td>{{ $value->base_price }}</td>

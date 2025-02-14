@@ -18,7 +18,7 @@
                     @foreach ($nurses as $nurse)
                      <tr>
                         <td>{{ $nurse->name .' '. $nurse->surname }}</td>
-                        <td>{{ $nurse->designations->name }}</td>
+                        <td>{{ $nurse->designations->name ?? '' }}</td>
                         <td>{{ $nurse->branch->name }}</td>
                     </tr>
                     @endforeach

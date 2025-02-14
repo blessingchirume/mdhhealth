@@ -18,7 +18,7 @@
                     @foreach ($doctors as $doctor)
                      <tr>
                         <td>{{ $doctor->name .' '. $doctor->surname }}</td>
-                        <td>{{ $doctor->designations->name }}</td>
+                        <td>{{ $doctor->designations->name ?? '' }}</td>
                         <td>{{ $doctor->branch->name }}</td>
                     </tr>
                     @endforeach
